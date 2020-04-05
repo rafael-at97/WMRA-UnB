@@ -1,0 +1,3 @@
+[submodule "software/robopy"]
+	path = software/robopy
+	url = https://github.com/rafael-at97/robopy
