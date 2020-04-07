@@ -1,0 +1,2 @@
+This is the model of the manipulator using the software SolidWords, the main Assembly is in the top page and sub-assemblies/parts are
+organized in sub-directories.
