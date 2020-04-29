@@ -1,10 +1,10 @@
-import sys
+#import sys
 
-import_path = "/home/rafael_at/Documents/Estudos/TG/Codes/robopy/robopy"
-sys.path.insert(0, import_path)
-print("Appending import path: " + import_path)
+#import_path = "/home/rafael_at/Documents/Estudos/TG/Codes/robopy/robopy"
+#sys.path.insert(0, import_path)
+#print("Appending import path: " + import_path)
 
-from robot.link import Revolute, Link, SerialLink
+from robopy.robot.link import Revolute, Link, SerialLink
 from math import pi
 
 ###            Denavit-Hartenberg parameters           ###
@@ -35,7 +35,7 @@ from math import pi
 
 if __name__ == "__main__":
     links = []
-    links.append(Revolute(alpha=0,     A=0,     D=0,                    mdh="Modified", m=0,     r=[-0.03, -0.057, 0.008], I=[[0.002, 0.001,   0.0],
+    links.append(Revolute(alpha=0,     A=0,     D=0,                    mdh="Modified", m=0.759, r=[-0.03, -0.057, 0.008], I=[[0.002, 0.001,   0.0],
                                                                                                                               [0.001, 0.002,   0.0],
                                                                                                                               [  0.0,   0.0, 0.003]]))
 
@@ -55,7 +55,7 @@ if __name__ == "__main__":
                                                                                                                               [  0.0, 0.0,   0.0],
                                                                                                                               [  0.0, 0.0, 0.002]]))
 
-    links.append(Revolute(alpha=-pi/2, A=0,     D=0.198,                mdh="Modified", m=0,     r=[0, 0, 0],              I=[[0, 0, 0],
+    links.append(Revolute(alpha=-pi/2, A=0,     D=0.198,                mdh="Modified", m=1.2,     r=[0, 0, 0],              I=[[0, 0, 0],
                                                                                                                               [0, 0, 0],
                                                                                                                               [0, 0, 0]]))
 
