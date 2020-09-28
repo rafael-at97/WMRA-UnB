@@ -1,4 +1,5 @@
 #include "robotic_arm.h"
+#include "joystick.h"
 
 #define R1  (0) 
 #define R2  (1)
@@ -14,6 +15,11 @@
 #define C5  (4)
 #define C6  (5)
 
+#define XY          (0)
+#define XZ          (1)
+#define ROT         (2)
+#define WORKSPACES  (3)
+
 float a2 = 0.2;
 float a3 = 0.3;
 float a4 = 0.4;
@@ -22,7 +28,12 @@ float d3 = 1.3;
 float d4 = 1.4;
 float d6 = 1.5;
 
+Joystick js(2, A0, A5);
 robotic_arm wmra;
+
+int workspace = XY;
+volatile unsigned long last_isr = 0;
+long debounce_time_ms = 500;
 
 /** Calculates inverse jacobian.
  *  
@@ -33,14 +44,14 @@ robotic_arm wmra;
  *                          - 47 Sums               (Subtractions included)
  *                          - 28 Auxiliar Variables (All 'float')
  *
+ *  Note: Column and Row indexes are inverted because the math is done based on cofactor values, and 
+ *        adjugate matrix calls for inversion.
+ * 
  *  \param invJacobian Local for result of caculations to be stored
  *  \param q           Value for joints displacement values
  */
 void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
-{
-    Serial.print("Start: ");
-    Serial.println(millis());
-    
+{   
     /** 
      * Inital calculations of most common used sines and cosines
      */
@@ -190,42 +201,116 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     invJacobian[C2][R5] = ( -s1*( C23_A4*temp0 - S5S234*C4_A4 ) + temp2*temp3 ) / detJ;
     invJacobian[C3][R5] = ( s1*( C2A3_C23A4*temp0 - S5S234*C34A3_C4A4 ) - temp2*temp4 ) / detJ;
     invJacobian[C4][R5] = - ( invJacobian[C2][R5] + invJacobian[C3][R5] ) - s5*invJacobian[C6][R5] - invJacobian[C1][R2]*A2c_c234c5d6;
-
-    Serial.print("End: ");
-    Serial.println(millis());
 }
 
-void calculate_speed(float invJacobian[DOF][DOF], float q[DOF])
+void calculate_speed(float invJacobian[DOF][DOF], float q[DOF], float qdot[DOF], float v[DOF])
 {
+    uint8_t i, j;
+    float sum;
+
     calcInverseJacobian(invJacobian, q);
+
+    for(i=0 ; i<DOF; i++)
+    {
+        sum = 0;
+        for(j=0 ; j<DOF; j++)
+        {
+            sum += invJacobian[i][j]*v[j];
+        }
+        qdot[i] = sum;
+    }
 }
 
 float read_joint_pot(uint8_t port, float qlim[2])
 {
-    return analogRead(port)*( (qlim[1]-qlim[0])/1024 ) + qlim[0];
+    return analogRead(port)*( (qlim[1]-qlim[0])/1023 ) + qlim[0];
+}
+
+void change_axis(void)
+{
+    if( millis() - last_isr < debounce_time_ms )
+        return;
+    
+    workspace = (workspace + 1) % WORKSPACES;
+    last_isr = millis();
+}
+
+void read_angles(float q[DOF])
+{
+    uint8_t i;
+
+    /* Joint 1 is stepper motor */
+
+    /* Joints 2 to 4 are normal DC motors */
+    for(i=2 ; i<=4 ; i++)
+    {
+        q[INDEX_COMPAT(i)] = wmra.read_angle(i);
+    }
+
+    /* Joints 5 and 6 also stepper motors */
+}
+
+void serial_send(float q[DOF])
+{
+    uint8_t i;
+    uint8_t *data;
+
+    if(Serial.available())
+    {
+        /* Flush in-stream */
+        while(Serial.read() != -1)
+        {
+            delay(1);
+        }
+
+        /* Send values */
+        for(i=0 ; i<DOF ; i++)
+        {
+            /* Convert to byte for sending */
+            data = (uint8_t*)&q[i];
+            Serial.write(data, 4);
+        }
+    }
 }
 
 void setup() {
     wmra.set_link(1,     0,     0,      0);
-    wmra.set_link_limits(1, -160, 160);
-    wmra.set_link_callbacks(1, NULL, read_joint_pot, A3);
     
     wmra.set_link(2,  PI/2, 0.014,      0);
+    wmra.set_link_limits(2, -45, 135);
+    wmra.set_link_callbacks(2, NULL, read_joint_pot, A3);
+
     wmra.set_link(3,     0,  0.35,  0.069);
     wmra.set_link(4,     0,  0.35, -0.069);
     wmra.set_link(5,  PI/2, 0.165,      0);
     wmra.set_link(6, -PI/2,     0,  0.198);
+
+    js.set_ISR(change_axis);
+    js.set_limits("xy", -15, 15);
+    js.calibrate();
     
-    Serial.begin(9600);
+    Serial.begin(115200);
 }
 
 void loop() {
     // put your main code here, to run repeatedly:
-    float invJacobian[DOF][DOF];
-    float q[DOF];
+    static float invJacobian[DOF][DOF];
+    static float q[DOF] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
-    Serial.print("Reading: ");
-    Serial.println(wmra.read_angle(1));
+    //read_angles(q);
 
-    //calculate_speed(invJacobian, q);
+    //Serial.println(wmra.read_angle(2));
+    
+    //serial_send(q);
+
+    //Serial.print("x: ");
+    //Serial.print(js.read('x'));
+    Serial.println(analogRead(A0));
+    //Serial.print(" y: ");
+    //Serial.println(js.read('y'));
+    //Serial.println(analogRead(A5));
+    //Serial.print(" Workspace: ");
+    //Serial.println(workspace);
+
+    //calculate_speed(invJacobian, q, qdot, v);
 }

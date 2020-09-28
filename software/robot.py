@@ -59,8 +59,20 @@ if __name__ == "__main__":
                                                                                                                               [0, 0, 0],
                                                                                                                               [0, 0, 0]]))
 
-    robot = SerialLink(links)
+    base = [[1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0.10],
+            [0, 0, 0, 1]]
+
+    robot = SerialLink(links, base=base)
 
     #robot.display()
 
-    print(robot.rne([0, 0, 0, 0, 0, 0]))
+    #print(robot.rne([0, 0, 0, 0, 0, 0]))
+
+    #robot.fkine([0, 0, 0, 0, 0, 0])
+
+    robot.plot([0, 0, 0, 0, 0, 0], optimize=True)
+    robot.plot([0, 0, 0, 0, 3.1415926535/2, 0])
+
+    input("end: ")
