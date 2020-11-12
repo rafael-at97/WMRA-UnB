@@ -5,7 +5,7 @@ robotic_arm::robotic_arm()
     /* Set option for variable number of DOFs */
 }
 
-void robotic_arm::set_link(uint8_t pos, float alpha, float a, float d)
+void robotic_arm::set_link(uint8_t pos, float alpha, float a, float d, Motor * motor = NULL)
 {
     pos = INDEX_COMPAT(pos);
 
@@ -13,47 +13,25 @@ void robotic_arm::set_link(uint8_t pos, float alpha, float a, float d)
     links[pos].a = a;
     links[pos].d = d;
     
-    links[pos].setup = NULL;
-    links[pos].read = NULL;
-}
-
-void robotic_arm::set_link_limits(uint8_t pos, float min, float max)
-{
-    pos = INDEX_COMPAT(pos);
-
-    links[pos].qlim[0] = min;
-    links[pos].qlim[1] = max;
-}
-
-void robotic_arm::set_link_callbacks(uint8_t pos, void (*setup)(), float (*read)(uint8_t, float[2]), uint8_t port)
-{
-    pos = INDEX_COMPAT(pos);
-
-    links[pos].setup = setup;
-    links[pos].read = read;
-    links[pos].port = port;
-}
-
-void robotic_arm::setup_link(uint8_t pos)
-{
-    if(links[INDEX_COMPAT(pos)].setup != NULL)
-    {
-        links[INDEX_COMPAT(pos)].setup();
-    }
+    links[pos].motor = motor;
 }
 
 float robotic_arm::read_angle(uint8_t pos)
 {
     pos = INDEX_COMPAT(pos);
-    
-    if(links[pos].read != NULL)
-    {
-        links[pos].theta = links[pos].read(links[pos].port, links[pos].qlim);
-    }
+
+    if(links[pos].motor != NULL)
+        links[pos].theta = (links[pos].motor)->get_angle();
     else
-    {
-        links[pos].theta = 0;
-    }
+        links[pos].theta = 0.0f;    
 
     return links[pos].theta;
+}
+
+void robotic_arm::set_speed(uint8_t pos, float qdot)
+{
+    pos = INDEX_COMPAT(pos);
+
+    if(links[pos].motor != NULL)
+        (links[pos].motor)->set_speed(qdot);    
 }

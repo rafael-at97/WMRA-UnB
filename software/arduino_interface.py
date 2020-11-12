@@ -8,13 +8,15 @@ import time
 arduino_ports = [
     p.device
     for p in serial.tools.list_ports.comports()
-    if 'Arduino' in p.description
+    #if 'Arduino' in p.description
 ]
 if not arduino_ports:
     raise IOError("No Arduino found")
 
 def main():
     try:
+        print("Trying on port ", end="")
+        print(arduino_ports[0])
         ser = serial.Serial(arduino_ports[0], 115200)
     except:
         raise IOError("Could not open arduino!")
@@ -31,7 +33,7 @@ def main():
     #trajectory[:, 4] = np.transpose(steps)
 
     # Timeout
-    timeout = 500
+    timeout = 1000
     last_send = int(round(time.time() * 1000))
 
     # Start communication
@@ -54,7 +56,7 @@ def main():
                 print(q)
 
                 # Convert to radians
-                q = (q*3.1415926535)/180
+                #q = (q*3.1415926535)/180
 
                 robot.plot(q, optimize="O0")
 
@@ -63,6 +65,7 @@ def main():
             elif n_read > 0:
                 ser.reset_input_buffer()
 
+            #print(n_read)
             time.sleep(0.1)
 
         except Exception as e:

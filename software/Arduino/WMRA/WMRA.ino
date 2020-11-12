@@ -1,6 +1,54 @@
 #include "robotic_arm.h"
+#include "motors.h"
 #include "joystick.h"
 
+#define SIMULATION 1
+
+/** Micro switches defines **/
+#define J1_S    (12)    
+#define J1_E    (11)
+#define J2_S    (21)
+#define J2_E    (20)
+#define J3_S    (19)
+#define J3_E    (18)
+#define J4_S    (10)
+#define J4_E    (50)
+#define J5_S    (51)
+#define J5_E    (52)
+#define J6_S    (53)
+
+#define N_SW        (11) /* Number of switches used */
+#define N_PC        (6)  /* Number of pin change interrupts */
+
+#define START_POS   (0)
+#define END_POS     (1)
+
+#define INT_NORMAL  (0x0)
+#define INT_PC      (0x1)
+
+/** Micro switches flags **/
+volatile bool uswitches[N_SW] = 
+{
+    false, false,
+    false, false,
+    false, false,
+    false, false,
+    false, false,
+    false,  
+};
+
+const uint8_t PC_TO_IDX[] = 
+{
+    10, /* J6_S to uswitches[10] */
+    9,  /* J5_E to uswitches[9]  */
+    8,  /* J5_S to uswitches[8]  */
+    7,  /* J4_E to uswitches[7]  */
+    6,  /* J4_S to uswitches[6]  */
+    1,  /* J1_E to uswitches[1]  */
+    0,  /* J1_S to uswitches[0]  */
+};
+
+/* MATRIXES defines */
 #define R1  (0) 
 #define R2  (1)
 #define R3  (2)
@@ -15,23 +63,32 @@
 #define C5  (4)
 #define C6  (5)
 
+/* Joystick planes of action */
 #define XY          (0)
 #define XZ          (1)
 #define ROT         (2)
 #define WORKSPACES  (3)
 
-float a2 = 0.2;
-float a3 = 0.3;
-float a4 = 0.4;
-float a5 = 0.5;
-float d3 = 1.3;
-float d4 = 1.4;
-float d6 = 1.5;
+float a2 = 0.014;
+float a3 = 0.35;
+float a4 = 0.35;
+float a5 = 0.165;
+float d3 = 0.069;
+float d4 = -0.069;
+float d6 = 0.198;
 
-Joystick js(2, A0, A5);
+/** Motors **/
+DCMotor *dc1;
+
+StepperMotor *stepper1;
+
+Joystick js(3, A3, A4);
 robotic_arm wmra;
 
+/** Joystick variables **/
 int workspace = XY;
+
+/** Joystick button debounce **/
 volatile unsigned long last_isr = 0;
 long debounce_time_ms = 500;
 
@@ -235,19 +292,40 @@ void change_axis(void)
     last_isr = millis();
 }
 
+#if SIMULATION
+
+unsigned long simu_interval_time, simu_last_time;
+
+void simulate_angles(float q[DOF], float qdot[DOF])
+{
+    uint8_t i;
+
+    simu_interval_time = (millis() - simu_last_time);
+
+    /* Joints 1 to 6 */
+    for(i=1 ; i<=6 ; i++)
+    {
+        /* Rough estimate -> d = v*t */
+        if(i==1)
+            q[INDEX_COMPAT(i)] = DEG_TO_RAD*wmra.read_angle(i);
+        else
+            q[INDEX_COMPAT(i)] += (qdot[INDEX_COMPAT(i)] * (float)simu_interval_time)/1000.0;
+    }
+
+    simu_last_time = millis();
+}
+
+#endif
+
 void read_angles(float q[DOF])
 {
     uint8_t i;
 
-    /* Joint 1 is stepper motor */
-
-    /* Joints 2 to 4 are normal DC motors */
-    for(i=2 ; i<=4 ; i++)
+    for(i=1 ; i<=DOF ; i++)
     {
-        q[INDEX_COMPAT(i)] = wmra.read_angle(i);
+        if(i==1 || i==2)
+            q[INDEX_COMPAT(i)] = DEG_TO_RAD*wmra.read_angle(i);
     }
-
-    /* Joints 5 and 6 also stepper motors */
 }
 
 void serial_send(float q[DOF])
@@ -273,44 +351,278 @@ void serial_send(float q[DOF])
     }
 }
 
-void setup() {
-    wmra.set_link(1,     0,     0,      0);
-    
-    wmra.set_link(2,  PI/2, 0.014,      0);
-    wmra.set_link_limits(2, -45, 135);
-    wmra.set_link_callbacks(2, NULL, read_joint_pot, A3);
+void joystick_to_speed(float v[DOF])
+{
+    /* Read joystick and convert to speed */
+    float js_x, js_y;
 
-    wmra.set_link(3,     0,  0.35,  0.069);
-    wmra.set_link(4,     0,  0.35, -0.069);
-    wmra.set_link(5,  PI/2, 0.165,      0);
-    wmra.set_link(6, -PI/2,     0,  0.198);
+    /* Read and convert to m/s */
+    js_x = js.read('x') / 100;
+    js_y = js.read('y') / 100;
+    
+    switch(workspace)
+    {
+        case XY:
+            v[0] = js_x;
+            v[1] = js_y;
+            v[2] = 0.0;
+            v[3] = 0.0;
+            v[4] = 0.0;
+            v[5] = 0.0;
+            break;
+
+        case XZ:
+            v[0] = js_x;
+            v[1] = 0.0;
+            v[2] = js_y;
+            v[3] = 0.0;
+            v[4] = 0.0;
+            v[5] = 0.0;
+            break;
+
+        case ROT:
+            v[0] = 0.0;
+            v[1] = 0.0;
+            v[2] = 0.0;
+            v[3] = 0.5*js_y;
+            v[4] = 0.5*js_y;
+            v[5] = js_x;        
+            break;
+
+        default:
+            break;
+    }
+}
+
+void set_speed(float qdot[DOF])
+{
+    uint8_t i = 0;
+    
+    /* Update reference for all*/
+    for(i=1 ; i<=DOF ; i++)
+    {
+        if( (qdot[INDEX_COMPAT(i)] >= 0.0f && !uswitches[(INDEX_COMPAT(i)<<1)+END_POS]  ) || /* Moving forward and not achieved end yet */
+            (qdot[INDEX_COMPAT(i)] <  0.0f && !uswitches[(INDEX_COMPAT(i)<<1)+START_POS]))   /* Moving backwards and not achieved start */
+            wmra.set_speed(i, qdot[INDEX_COMPAT(i)]);
+    }
+}
+
+/*************************
+ * Interrupts for motors *
+ *************************/
+
+/* Stepper 1 */
+ISR(TIMER5_COMPC_vect)
+{
+    stepper1->do_step();
+}
+
+/****************************
+ * Interrupts for uSwitches *
+ ****************************/
+
+volatile uint8_t int_pin;
+volatile uint8_t int_idx;
+volatile uint8_t int_pos;
+volatile uint8_t int_mode;
+
+void check_uswitch_common()
+{
+    uint8_t value;
+    uint8_t i = 0, idx;
+
+    if(int_mode == INT_NORMAL)
+    {
+        value = (uint8_t)digitalRead(int_pin);
+    
+        /* (joint_idx<<1 + int_pos) transform joint switch to flag idx */
+        idx = (INDEX_COMPAT(int_idx)<<1)+int_pos;
+    
+        if(value == HIGH)
+            uswitches[idx] = false;
+        else
+        {
+            wmra.set_speed(int_idx, 0.0f);
+            uswitches[idx] = true;
+        }
+    }
+    else
+    {
+        /* Get reading of whole port */
+        value = *portInputRegister(digitalPinToPort(int_pin));
+
+        /* Check 6 positions sequentially, if LOW, stop and set flag, if HIGH, reset flag */
+        for(i=0 ; i<N_PC ; i++)
+        {
+            idx = PC_TO_IDX[i];
+            
+            if(value & _BV(i))
+                uswitches[idx] = false;
+            else
+            {
+                wmra.set_speed((idx>>1) + 1, 0.0f);
+                uswitches[idx] = true;
+            }
+        }
+    }
+}
+
+void joint2_sw_s()
+{
+    int_pin = J2_S;
+    int_idx = 2;
+    int_pos = START_POS;
+    int_mode = INT_NORMAL;
+    
+    check_uswitch_common();   
+}
+
+void joint2_sw_e()
+{
+    int_pin = J2_E;
+    int_idx = 2;
+    int_pos = END_POS;
+    int_mode = INT_NORMAL;
+    
+    check_uswitch_common();
+}
+
+void joint3_sw_s()
+{
+    int_pin = J3_S;
+    int_idx = 3;
+    int_pos = START_POS;
+    int_mode = INT_NORMAL;
+    
+    check_uswitch_common();   
+}
+
+void joint3_sw_e()
+{
+    int_pin = J3_E;
+    int_idx = 3;
+    int_pos = END_POS;
+    int_mode = INT_NORMAL;
+    
+    check_uswitch_common();
+}
+
+ISR(PCINT0_vect)
+{
+    int_pin = J1_S; /* Any pin on the port will suffice */
+    int_mode = INT_PC;
+
+    check_uswitch_common();
+}
+
+/**************
+ * Main Setup *
+ **************/
+
+/* Testing */
+long loop_time;
+
+void setup() 
+{
+    /* Disable interrupts */
+    cli();
+
+    Serial.begin(115200);
+
+    /******************************
+     * Micro Switches preparation *
+     ******************************/
+    
+    pinMode(J2_S, INPUT_PULLUP); /* PULLUP for testing */
+    attachInterrupt(digitalPinToInterrupt(J2_S), joint2_sw_s, CHANGE);
+
+    pinMode(J2_E, INPUT_PULLUP); /* PULLUP for testing */
+    attachInterrupt(digitalPinToInterrupt(J2_E), joint2_sw_e, CHANGE);
+
+    pinMode(J3_S, INPUT_PULLUP); /* PULLUP for testing */
+    attachInterrupt(digitalPinToInterrupt(J3_S), joint3_sw_s, CHANGE);
+
+    pinMode(J3_E, INPUT_PULLUP); /* PULLUP for testing */
+    attachInterrupt(digitalPinToInterrupt(J3_E), joint3_sw_e, CHANGE);
+
+    /** Pin Change Interrupts **/
+    /* Set PB0 to PB6 as input */
+    DDRB = DDRB & B10000000;
+
+    /* Disable Pull-Up on Port B from 0 to 6 */
+    PORTB = PORTB & B10000000;
+    PORTB = PORTB | B01111101; /* Testing purposes, enable pullup on unused */
+
+    /* Set interrupt mask */
+    PCMSK0 = PCMSK0 | B01111111;
+    bitClear(PCMSK0, PCINT7); /* Make sure PCINT7 is disabled */
+
+    /* Activate interrupt PCIE0 */
+    bitSet(PCICR, PCIE0);
+
+    /**********
+     * Motors *
+     **********/
+    
+    /* Set timer frequency for steppers, 256 prescaler */
+    bitSet(TCCR5B, CS12);
+    bitClear(TCCR5B, CS11);
+    bitClear(TCCR5B, CS10);
+
+    dc1 = new DCMotor(9, 8);
+    dc1->set_limits(-45, 135);
+    dc1->set_angle_callbacks(A0, NULL, read_joint_pot);
+    
+    stepper1 = new StepperMotor(44, 40, 1, 1.8*DEG_TO_RAD);
+    stepper1->start(0.2, &uswitches[1], 90.0); /* Go with speed 0.2rad/s until hit uswitches[1](J1_E) and then assume 90.0 degrees */
+    
+    wmra.set_link(1,     0,     0,     0, stepper1);
+    wmra.set_link(2,  PI/2,    a2,     0,      dc1);
+    wmra.set_link(3,     0,    a3,    d3);
+    wmra.set_link(4,     0,    a4,    d4);
+    wmra.set_link(5,  PI/2,    a5,     0);
+    wmra.set_link(6, -PI/2,     0,    d6);
+
+    /************
+     * Joystick *
+     ************/
 
     js.set_ISR(change_axis);
     js.set_limits("xy", -15, 15);
     js.calibrate();
-    
-    Serial.begin(115200);
+
+    /* Enable interrupts */
+    sei();
 }
 
-void loop() {
-    // put your main code here, to run repeatedly:
+/*************
+ * Main Loop *
+ *************/
+
+void loop() 
+{
     static float invJacobian[DOF][DOF];
-    static float q[DOF] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    static float q[DOF] = {0.0, 0.785, -0.785, 0.785, 0.0, 0.0};
+    static float qdot[DOF] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    static float v[DOF] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
-    //read_angles(q);
+    //loop_time = millis();
 
-    //Serial.println(wmra.read_angle(2));
+    #if SIMULATION
+    simulate_angles(q, qdot);
+    #else
+    read_angles(q);
+    #endif
     
-    //serial_send(q);
+    serial_send(q);
 
-    //Serial.print("x: ");
-    //Serial.print(js.read('x'));
-    Serial.println(analogRead(A0));
-    //Serial.print(" y: ");
-    //Serial.println(js.read('y'));
-    //Serial.println(analogRead(A5));
-    //Serial.print(" Workspace: ");
-    //Serial.println(workspace);
+    joystick_to_speed(v);
 
-    //calculate_speed(invJacobian, q, qdot, v);
+    calculate_speed(invJacobian, q, qdot, v);
+
+    cli();
+    set_speed(qdot);
+    sei();
+
+    //Serial.println(millis() - loop_time);
 }
