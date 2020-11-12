@@ -1,0 +1,24 @@
+Op Amp nas leituras analógicas:
+
+Input offset: 
+ - Potenciometro 10 voltas: approx 1.4mV por grau, (5/(360*10))
+ - Um amp-op comum apresenta input offset de appox 10mV. -> Possível perda de 7 graus
+ - A porcentagem que 7 graus representa de fato depende da relação de engrenagens entre a junta e o sistema medidor
+
+Leitura dos potênciometros na placa principal:
+ - Utilizar Amp Ops rail-to-rail
+	Motivo: Com rail-to-rail a alimentação do Amp Op viria diretamente do arduino, assim, a tensão de saída nunca ultrapassaria o 
+		recomendado para o arduino.
+ - Utilizar Amp Ops de instrumentação
+	Motivo: Alta impedância de entrada e circuito próprio para entradas diferenciais permitiriam um bom desacoplamento dos sinais
+		de entrada e sinais de leitura no arduino.
+ - Utilizar configuração pseudo-diferencial:
+	Motivo: Caso Amp Ops de intrumentação não estejam disponível (preço e disponibilidade no Brasil), utilizar uma configuração 
+		pseudo-diferencial: Mantém-se a alta impedância de entrada e um certa desacoplamento do sinal de entrada com o sinal
+		que chega ao arduino. Seria necessário um Amp-Op por junta
+
+AD623 -> Instrumentação e rail-to-rail -> Caro e não encontrei no Brasil
+
+
+Por que não fazer um amplificador de instrumentação? Alta quantidade de componentes e variações nos valores dos componentes utilizados
+	pode não resultar no resultado esperado
