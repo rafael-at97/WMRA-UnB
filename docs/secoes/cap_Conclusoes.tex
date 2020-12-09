@@ -1,0 +1,72 @@
+\chapter{Conclusões}
+
+\label{CapConclusoes}
+
+Foram demonstrados durante o trabalho uma análise do projeto que serviu como base para este e os projetos
+de circuitos de atuação e sensoriamento para o manipulador robótico em questão. As diversas decisões de 
+projeto foram orientadas pelo custo de manufatura e montagem dos dispositivos, segurança aos equipamentos e ao 
+usuário e pela confiabilidade geral do circuito elétrico e sistema de controle, buscando desenvolver uma 
+solução que se mostrasse capaz de ser uma interface entre o usuário e seu ambiente.
+
+A análise do conjunto de atuadores pré-selecionado para o braço robótico e suas respectivas transmissões 
+através de engrenagens se mostrou insuficiente para a movimentação correta do sistema. Foi necessário 
+propor modificações em algumas juntas para que as necessidades de torque pudessem ser de fato atendidas.
+
+Os circuitos projetados e escolhidos para o sistema demonstraram bons resultados no uso com sensores e atuadores reais. 
+A escolha dos equipamentos levou em consideração um equilíbrio entre o custo e integridade 
+dos sinais envolvidos, fornecendo dados de leitura corretos mesmo para um protótipo construído com dispositivos e 
+condições não ideais. 
+
+Em relação ao sistema de controle, foram criados módulos generalizados e intuitivos, para permitir reúso em 
+outros projetos. A organização geral e uso de interrupções permitiu uma resposta rápida do sistema a modificações
+das variáveis lidas por sensores e uma simplicidade no fluxograma principal do código, resultando em um uso
+otimizado das funcionalidades oferecidas pelo controlador empregado. Esta decisão facilitou ainda a operação
+dos atuadores em paralelo, essencial no controle de um manipulador robótico.
+
+A técnica de obtenção das velocidades do robô através da jacobiana inversa facilitou a atualização das
+referências das velocidades dos motores com base nos dados do usuário. A otimização desta matriz 
+em sua forma de função ofereceu resultados satisfatórios, permitindo a operação de inversão desta matriz
+relativamente trabalhosa em um ambiente embarcado.
+
+O ambiente de simulação criado inicialmente como um meio de contornar a ausência da estrutura física do
+manipulador se mostrou como bom meio de visualizar e validar os equipamentos do mesmo. A comunicação
+entre o sistema embarcado e um computador gera uma pequena sobrecarga sobre o Arduino, mas esta é compensada pela capacidade
+de utilizar sistema computacional mais potente para realizar estudos avançados sobre a estrutura,
+como através das equações de Newton-Euler, já implementadas no módulo de animação, para estimar os torques agindo nos
+atuadores.
+
+Todo o material desenvolvido durante este trabalho, inclusive aqueles utilizados na construção deste 
+relatório, está agrupado em um repositório \textit{online}, para consultas e confirmação do que foi 
+dito e afirmado neste documento. Uma descrição do repositório pode ser vista no anexo \ref{Anexo-Repositorio}.
+
+\section{Perspectivas Futuras}
+
+% Cinemática inversa
+A atuação do manipulador foi comandada completamente pelo uso da geração de velocidades através da matriz
+jacobiana inversa. Para facilitar o uso pelo usuário, pensou-se na possibilidade de utilizar um meio de 
+salvar posições de maior uso pelo usuário, como posições de alimentação e captura de objetos em determinada 
+posição. Tendo em mente esta capacidade, foi realizada a cinemática inversa do manipulador, para direcionar
+trabalhos futuros na inclusão desta funcionalidade ao manipulador. A cinemática inversa pode ser vista no anexo
+\ref{Anexo-CinInv}.
+
+% Controle mais avançado
+O formato em que o controle dos motores DC foi projetado levou em consideração a possibilidade de uso de técnicas 
+de controle mais avançadas. A utilização de uma interrupção temporizada permite o emprego de sistemas de controle
+digital com período de atualização bem definido. Para maior confiabilidade na atuação dos motores DC pode ser 
+previsto o uso de um controlador adaptativo, resultando em um controlador geral, independente da influência dos 
+parâmetros construtivos do motor empregado. Levando em conta a segurança do usuário, poderia ser proposto ainda 
+para o sistema um método de implementação de um controle complacente, utilizando dados de torque nas juntas e no
+efetuador final a fim de evitar forças desnecessárias na atuação do robô.
+
+% Testes com diferentes efetuadores finais
+Em seu estado atual, o manipulador não conta com um efetuador final bem definido, mas sim com um ponto 
+de acoplamento. Seria interessante um estudo sobre a possibilidade de aplicação de diversas ferramentas 
+pelo sistema. Para interação com esse efetuador, foi deixado no circuito da placa principal um conector
+para ser empregado nesta comunicação, fornecendo um sinal com funcionalidade PWM, para uso com servo-motores 
+ou qualquer outro atuador que possa se beneficiar deste tipo de sinal.
+
+% Modificações na estrutura
+Se mostrando como uma das principais dificuldades encontradas durante o projeto, a estrutura mecânica do 
+manipulador poderia ser modificada para aproveitar ao máximo os diversos componentes empregados. A 
+modificação das juntas para incluir caixas de redução harmônicas permitiria o uso de motores de baixo 
+torque, garantindo uma melhor resposta do sistema, principalmente nas juntas 2, 3 e 4.

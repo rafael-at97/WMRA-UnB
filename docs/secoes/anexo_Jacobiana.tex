@@ -1,0 +1,1258 @@
+
+\chapter{Cálculos matriz Jacobiana}
+\label{AnexoJacobiana}
+
+\section{Pré-Jacobiana}
+\label{AnexoJacobiana-SecPre}
+
+\begin{equation}
+\begin{split}
+    ^4v_4 = \begin{bmatrix}
+        c\theta_4 & s\theta_4 & 0 \\
+        -s\theta_4 & c\theta_4 & 0 \\
+        0 & 0 & 1 \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        c(\theta_2 + \theta_3).\dot{\theta}_1(d_3 + d_4) + s\theta_3.\dot{\theta}_2a_3 \\ 
+        -s(\theta_2 + \theta_3).\dot{\theta}_1(d_3 + d_4) + \dot{\theta}_2(c\theta_3a_3 + a_4) + \dot{\theta}_3a_4\\ 
+        [-c(\theta_2 + \theta_3)a_4 - c\theta_2a_3 - a_2].\dot{\theta}_1
+    \end{bmatrix} = \\
+    \begin{bmatrix}
+        c(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_4a_4.\dot{\theta}_3 \\ 
+        -s(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [c(\theta_3+\theta_4)a_3 + c\theta_4a_4].\dot{\theta}_2 + c\theta_4a_4.\dot{\theta}_3 \\ 
+        [-c(\theta_2 + \theta_3)a_4 - c\theta_2a_3 - a_2].\dot{\theta}_1
+    \end{bmatrix}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+    ^5v_5 = \begin{bmatrix}
+        s\theta_5 & 0 & -c\theta_5 \\
+        c\theta_5 & 0 & s\theta_5 \\
+        0 & -1 & 0 \\
+    \end{bmatrix} \left( ^4v_4 + 
+    \begin{bmatrix}
+        0 \\ 
+        (\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4)a_5 \\ 
+        -c(\theta_2+\theta_3+\theta_4).\dot{\theta}_1a_5
+    \end{bmatrix} \right) = \\
+    ^5_4R
+    \begin{bmatrix}
+        c(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_4a_4.\dot{\theta}_3 \\ 
+        -s(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5].\dot{\theta}_2 + (c\theta_4a_4 + a_5).\dot{\theta}_3 + a_5.\dot{\theta_4} \\ 
+        [-c(\theta_2 + \theta_3 + \theta_4)a_5 - c(\theta_2 + \theta_3)a_4 - c\theta_2a_3 - a_2].\dot{\theta}_1
+    \end{bmatrix} = \\
+    \begin{bmatrix}
+        \left\{s\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) + c\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
+        + s\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_{45}a_4.\dot{\theta}_3 \\ 
+        \\
+        \left\{c\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) - s\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
+        + c\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + c\theta_5s\theta_4a_4.\dot{\theta}_3 \\ 
+        \\
+        s(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) - [c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5].\dot{\theta}_2 - (c\theta_4a_4 + a_5).\dot{\theta}_3 - a_5.\dot{\theta_4}
+    \end{bmatrix}
+\end{gathered}
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+    ^6v_6 = \begin{bmatrix}
+        c\theta_6 & 0 & -s\theta_6 \\
+        -s\theta_6 & 0 & -c\theta_6 \\
+        0 & 1 & 0 \\
+    \end{bmatrix} \left( ^5v_5 + 
+    \begin{bmatrix}
+        c(\theta_2 + \theta_3 + \theta_4)d_6.\dot{\theta}_1 - d_6\dot{\theta}_5 \\ 
+        0 \\ 
+        s\theta_5s(\theta_2 + \theta_3 + \theta_4)d_6.\dot{\theta}_1 - c\theta_5d_6(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4)
+    \end{bmatrix} \right) = \\
+    ^6_5R
+    \begin{bmatrix}
+        \{c(\theta_2 + \theta_3 + \theta_4)[s\theta_5(d_3+d_4) + d_6] + c\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + \\ 
+        + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\}.\dot{\theta}_1 + \\
+        + s\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_{45}a_4.\dot{\theta}_3 -d_6\dot{\theta}_5\\ 
+        \\
+        \left\{c\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) - s\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
+        + c\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + c\theta_5s\theta_4a_4.\dot{\theta}_3 \\ 
+        \\
+        s(\theta_2 + \theta_3 + \theta_4)[(d_3+d_4) + s\theta_5d_6].\dot{\theta}_1 - [c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5 + c\theta_5d_6].\dot{\theta}_2 - \\
+        -(c\theta_4a_4 + a_5 + c\theta_5d_6).\dot{\theta}_3 - (a_5 + c\theta_5d_6).\dot{\theta_4}
+    \end{bmatrix} = \\
+    \begin{bmatrix}
+        \{c\theta_6c(\theta_2 + \theta_3 + \theta_4)[s\theta_5(d_3+d_4) + d_6] - s\theta_6s(\theta_2 + \theta_3 + \theta_4)[(d_3+d_4) + s\theta_5d_6] + \\
+        +c\theta_{56}[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\}.\dot{\theta}_1 + \\
+        +\{c\theta_6s\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4] + s\theta_6[c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5 + c\theta_5d_6]\}.\dot{\theta}_2 + \\
+        +[c\theta_6s\theta_{45}a_4 + s\theta_6(c\theta_4a_4 + a_5 + c\theta_5d_6)].\dot{\theta}_3 + s\theta_6(a_5 + c\theta_5d_6).\dot{\theta}_4 + c\theta_6d_6\dot{\theta}_5 \\ 
+        \\
+        \{-s\theta_6c(\theta_2 + \theta_3 + \theta_4)[s\theta_5(d_3+d_4) + d_6] - c\theta_6s(\theta_2 + \theta_3 + \theta_4)[(d_3+d_4) + s\theta_5d_6] - \\
+        -s\theta_6c\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\}.\dot{\theta}_1 + \\
+        +\{-s\theta_{56}[s(\theta_3+\theta_4)a_3 + s\theta_4a_4] + c\theta_6[c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5 + c\theta_5d_6]\}.\dot{\theta}_2 + \\
+        +[-s\theta_{456}a_4 + c\theta_6(c\theta_4a_4 + a_5 + c\theta_5d_6)].\dot{\theta}_3 + c\theta_6(a_5 + c\theta_5d_6).\dot{\theta}_4 - s\theta_6d_6\dot{\theta}_5 \\ 
+        \\
+        \left\{c\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) - s\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
+        + c\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + c\theta_5s\theta_4a_4.\dot{\theta}_3 \\ 
+    \end{bmatrix}
+\end{gathered}
+\end{equation}
+
+\section{Termos Jacobiana}
+\label{AnexoJacobiana-SecTermos}
+
+A jacobiana é definida como:
+
+\begin{equation}
+    ^0J(\Theta) = 
+    \begin{bmatrix}
+        j_{11} & j_{12} & j_{13} & j_{14} & j_{15} & 0 \\
+        j_{21} & j_{22} & j_{23} & j_{24} & j_{25} & 0 \\
+        0 & j_{32} & j_{33} & j_{34} & j_{35} & 0 \\
+        0 &  s_1 &  s_1 &  s_1 & j_{45} & j_{46} \\
+        0 & -c_1 & -c_1 & -c_1 & j_{55} & j_{56} \\
+        1 &   0  &   0  &   0  & j_{65} & j_{66} \\    
+    \end{bmatrix}
+\end{equation}
+
+\begin{align*}
+    j_{11} &= c_1(d_3 + d_4 + s_5d_6) - s_1[a_2 + c_2a_3 + c(\theta_2 + \theta_3)a_4 + c(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6)] \\
+    j_{12} &= - c_1[s_2a_3 + s(\theta_2 + \theta_3)a_4 + s(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6)] \\
+    j_{13} &= - c_1[s(\theta_2+\theta_3)a_4 + s(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6)] \\
+    j_{14} &= - c_1s(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6) \\
+    j_{15} &= [c_1s_5c(\theta_2+\theta_3+\theta_4) - s_1c_5]d_6 \\
+    j_{21} &= s_1(d_3 + d_4 + s_5d_6) + c_1[a_2 + c_2a_3 + c(\theta_2 + \theta_3)a_4 + c(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6)] \\
+    j_{22} &= - s_1[s_2a_3 + s(\theta_2 + \theta_3)a_4 + s(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6)] \\
+    j_{23} &= - s_1[s(\theta_2+\theta_3)a_4 + s(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6)] \\
+    j_{24} &= - s_1s(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6) \\
+    j_{25} &= [s_{15}c(\theta_2+\theta_3+\theta_4) + c_{15}]d_6 \\
+    j_{32} &= c_2a_3 + c(\theta_2 + \theta_3)a_4 + c(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6) \\
+    j_{33} &= c(\theta_2+\theta_3)a_4 + c(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6) \\
+    j_{34} &= c(\theta_2+\theta_3+\theta_4)(a_5 + c_5d_6) \\
+    j_{35} &= s_5s(\theta_2+\theta_3+\theta_4)d_6 \\
+    j_{45} &= c_1s(\theta_2+\theta_3+\theta_4) \\
+    j_{46} &= [c_{15}c(\theta_2+\theta_3+\theta_4) + s_{15}] \\
+    j_{55} &= s_1s(\theta_2+\theta_3+\theta_4) \\
+    j_{56} &= [s_1c_5c(\theta_2+\theta_3+\theta_4) - c_1s_5] \\
+    j_{65} &= -c(\theta_2+\theta_3+\theta_4) \\
+    j_{66} &= c_5s(\theta_2+\theta_3+\theta_4)
+\end{align*}
+
+\section{Determinante Jacobiana}
+\label{AnexoJacobiana-SecDeterminante}
+
+Usando a última linha da matriz para calcular o determinante:
+
+\begin{equation}
+\begin{gathered}
+    |J| = (-1)^{6+1}.D_{61} + (-1)^{6+5}j_{65}.D_{65} + (-1)^{6+6}j_{66}.D_{66} \\
+    = -D_{61} - j_{65}.D_{65} + j_{66}.D_{66}
+\end{gathered}
+\end{equation}
+
+Expandindo as matrizes D, também através dos cofatores:
+
+\begin{equation}
+\begin{gathered}
+    |J| = -(-j_{46}.\begin{vmatrix}
+        j_{12} & j_{13} & j_{14} & j_{15} \\
+        j_{22} & j_{23} & j_{24} & j_{25} \\
+        j_{32} & j_{33} & j_{34} & j_{35} \\
+        -c_1 & -c_1 & -c_1 & j_{55} \\
+    \end{vmatrix} + j_{56}.\begin{vmatrix}
+        j_{12} & j_{13} & j_{14} & j_{15} \\
+        j_{22} & j_{23} & j_{24} & j_{25} \\
+        j_{32} & j_{33} & j_{34} & j_{35} \\
+        s_1 & s_1 & s_1 & j_{45} \\
+    \end{vmatrix}) \\
+    - j_{65}(-j_{46}.\begin{vmatrix}
+        j_{11} & j_{12} & j_{13} & j_{14} \\
+        j_{21} & j_{22} & j_{23} & j_{24} \\
+           0   & j_{32} & j_{33} & j_{34} \\
+           0   & -c_1 & -c_1 & -c_1 \\        
+    \end{vmatrix} + j_{56}.\begin{vmatrix}
+        j_{11} & j_{12} & j_{13} & j_{14} \\
+        j_{21} & j_{22} & j_{23} & j_{24} \\
+           0   & j_{32} & j_{33} & j_{34} \\
+           0   & s_1 & s_1 & s_1 \\                
+    \end{vmatrix}) \\
+    + j_{66}(j_{11}.\begin{vmatrix}
+        j_{22} & j_{23} & j_{24} & j_{25} \\
+        j_{32} & j_{33} & j_{34} & j_{35} \\
+          s_1  &   s_1  &   s_1  & j_{45} \\
+         -c_1  &  -c_1  &  -c_1  & j_{55} \\        
+    \end{vmatrix} - j_{21}.\begin{vmatrix}
+        j_{12} & j_{13} & j_{14} & j_{15} \\
+        j_{32} & j_{33} & j_{34} & j_{35} \\
+          s_1  &   s_1  &   s_1  & j_{45} \\
+         -c_1  &  -c_1  &  -c_1  & j_{55} \\               
+    \end{vmatrix}) \\
+\end{gathered}    
+\end{equation}
+
+Dando continuidade:
+
+\begin{align*}
+    |J| =    j_{46}[c_1&(j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+                   -c_1&(j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+                   +c_1&(j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33}) \\
+                +j_{55}&(j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33})] \\
+            +j_{56}[s_1&(j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+                   -s_1&(j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+                   +s_1&(j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33}) \\
+                -j_{45}&(j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33})] \\  
+    -j_{65}\{j_{46}[c_1&(j_{11}j_{23}j_{34}+j_{14}j_{21}j_{33}-j_{13}j_{21}j_{34}-j_{11}j_{24}j_{33}) \\
+                   -c_1&(j_{11}j_{22}j_{34}+j_{14}j_{21}j_{32}-j_{12}j_{21}j_{34}-j_{11}j_{24}j_{32}) \\
+                   +c_1&(j_{11}j_{22}j_{33}+j_{13}j_{21}j_{32}-j_{12}j_{21}j_{33}-j_{11}j_{23}j_{32}) ] \\
+            +j_{56}[s_1&(j_{11}j_{23}j_{34}+j_{14}j_{21}j_{32}-j_{13}j_{21}j_{34}-j_{11}j_{24}j_{33}) \\
+                   -s_1&(j_{11}j_{22}j_{34}+j_{14}j_{21}j_{33}-j_{12}j_{21}j_{34}-j_{11}j_{24}j_{32}) \\
+                   +s_1&(j_{11}j_{22}j_{33}+j_{13}j_{21}j_{32}-j_{12}j_{21}j_{33}-j_{11}j_{23}j_{32})] \, \} \\   
+    +j_{66}\{j_{11}[c_1&(j_{23}j_{34}j_{45}+s_1j_{24}j_{35}+s_1j_{25}j_{33}-s_1j_{25}j_{34}-j_{24}j_{33}j_{45}-s_1j_{23}j_{35}) \\
+                   -c_1&(j_{22}j_{34}j_{45}+s_1j_{24}j_{35}+s_1j_{25}j_{32}-s_1j_{25}j_{34}-j_{24}j_{32}j_{45}-s_1j_{22}j_{35}) \\
+                   +c_1&(j_{22}j_{33}j_{45}+s_1j_{23}j_{35}+s_1j_{25}j_{32}-s_1j_{25}j_{33}-j_{23}j_{32}j_{45}-s_1j_{22}j_{35}) \\
+                +j_{55}s_1&(j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})] \\
+            -j_{21}[c_1&(j_{13}j_{34}j_{45}+s_1j_{14}j_{35}+s_1j_{15}j_{33}-s_1j_{15}j_{34}-j_{14}j_{33}j_{45}-s_1j_{13}j_{35}) \\
+                   -c_1&(j_{12}j_{34}j_{45}+s_1j_{14}j_{35}+s_1j_{15}j_{32}-s_1j_{15}j_{34}-j_{14}j_{32}j_{45}-s_1j_{12}j_{35}) \\
+                   +c_1&(j_{12}j_{33}j_{45}+s_1j_{13}j_{35}+s_1j_{15}j_{32}-s_1j_{15}j_{33}-j_{13}j_{32}j_{45}-s_1j_{12}j_{35}) \\
+                +j_{55}s_1&(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})]\}                 
+\end{align*}
+
+Utilizando as seguintes substituições:
+
+\begin{align*}
+    c_1j_{46}+s_1j_{56} &= c_1^2c_5c(\theta_2+\theta_3+\theta_4)+c_1s_1s_5+s_1^2c_5c(\theta_2+\theta_3+\theta_4)-c_1s_1s_5 \\
+                        &= c_5c(\theta_2+\theta_3+\theta_4)
+\end{align*}
+
+\begin{align*}
+    j_{46}j_{55}-j_{45}j_{56} = \, &s_1^2s_5s(\theta_2+\theta_3+\theta_4)+c_1^2s_5s(\theta_2+\theta_3+\theta_4) \\
+                                  +&s_1c_1c_5s(\theta_2+\theta_3+\theta_4)c(\theta_2+\theta_3+\theta_4)-s_1c_1c_5s(\theta_2+\theta_3+\theta_4)c(\theta_2+\theta_3+\theta_4)\\
+                              = \, &s_5s(\theta_2+\theta_3+\theta_4)
+\end{align*}
+
+e reagrupando alguns termos, o determinante passa a ser:
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)[&(j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+                                          -&(j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+                                          +&(j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33})] \\
+          +s_5s(\theta_2+\theta_3+\theta_4)&[j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33}] \\
+    -j_{65}c_5c(\theta_2+\theta_3+\theta_4)[&(j_{11}j_{23}j_{34}+j_{14}j_{21}j_{33}-j_{13}j_{21}j_{34}-j_{11}j_{24}j_{33}) \\
+                                          -&(j_{11}j_{22}j_{34}+j_{14}j_{21}j_{32}-j_{12}j_{21}j_{34}-j_{11}j_{24}j_{32}) \\
+                                          +&(j_{11}j_{22}j_{33}+j_{13}j_{21}j_{32}-j_{12}j_{21}j_{33}-j_{11}j_{23}j_{32})] \\ 
+    +j_{66}\{j_{11}\{c_1&[j_{34}j_{45}(j_{23}-j_{22})+s_1j_{25}(j_{33}-j_{32})-j_{24}j_{45}(j_{33}-j_{32})-s_1j_{35}(j_{23}-j_{22}) \\
+                        &+j_{45}(j_{22}j_{33}-j_{23}j_{32}) + s_1(j_{23}j_{35}-j_{25}j_{33}) + s_1(j_{25}j_{32}-j_{22}j_{35})] \\
+                +j_{55}s_1&(j_{22}j_{33}-j_{23}j_{32}+j_{23}j_{34}-j_{24}j_{33}+j_{24}j_{32}-j_{22}j_{34})\} \\
+            -j_{21}\{c_1&[j_{34}j_{45}(j_{13}-j_{12})+s_1j_{15}(j_{33}-j_{32})-j_{14}j_{45}(j_{33}-j_{32})-s_1j_{35}(j_{13}-j_{12}) \\
+                        &+j_{45}(j_{12}j_{33}-j_{13}j_{32}) + s_1(j_{13}j_{35}-j_{15}j_{33}) + s_1(j_{15}j_{32}-j_{12}j_{35})] \\
+                +j_{55}s_1&(j_{12}j_{33}-j_{13}j_{32}+j_{13}j_{34}-j_{14}j_{33}+j_{14}j_{32}-j_{12}j_{34})\} \\            
+\end{align*}
+
+Rearranjando elementos:
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)[&j_{24}j_{35}(j_{13}-j_{12})+j_{14}j_{25}(j_{33}-j_{32})+j_{15}j_{34}(j_{23}-j_{22}) \\
+                                          -&j_{15}j_{24}(j_{33}-j_{32})-j_{14}j_{35}(j_{23}-j_{22})-j_{25}j_{34}(j_{13}-j_{12}) \\
+                                          +&j_{12}(j_{23}j_{35}-j_{25}j_{33})+j_{13}(j_{25}j_{32}-j_{22}j_{35})+j_{15}(j_{22}j_{33}-j_{23}j_{32})] \\
+         +s_5s(\theta_2+\theta_3+\theta_4)[&j_{12}(j_{23}j_{34}-j_{24}j_{33})+j_{13}(j_{24}j_{32}-j_{22}j_{34})+j_{14}(j_{22}j_{33}-j_{23}j_{32})] \\
+    -j_{65}c_5c(\theta_2+\theta_3+\theta_4)[&j_{11}j_{34}(j_{23}-j_{22})+j_{14}j_{21}(j_{33}-j_{32})-j_{21}j_{34}(j_{13}-j_{12})-j_{11}j_{24}(j_{33}-j_{32}) \\
+                                          +&j_{11}(j_{22}j_{33}-j_{23}j_{32})+j_{21}(j_{13}j_{32}-j_{12}j_{33})] \\ 
+    +j_{66}\{j_{11}\{c_1[&j_{34}j_{45}(j_{23}-j_{22})+s_1j_{25}(j_{33}-j_{32})-j_{24}j_{45}(j_{33}-j_{32})-s_1j_{35}(j_{23}-j_{22}) \\
+                        +&j_{45}(j_{22}j_{33}-j_{23}j_{32}) + s_1(j_{23}j_{35}-j_{25}j_{33}) + s_1(j_{25}j_{32}-j_{22}j_{35})] \\
+                +j_{55}s_1(&j_{22}j_{33}-j_{23}j_{32}+j_{23}j_{34}-j_{24}j_{33}+j_{24}j_{32}-j_{22}j_{34})\} \\
+            -j_{21}\{c_1[&j_{34}j_{45}(j_{13}-j_{12})+s_1j_{15}(j_{33}-j_{32})-j_{14}j_{45}(j_{33}-j_{32})-s_1j_{35}(j_{13}-j_{12}) \\
+                        +&j_{45}(j_{12}j_{33}-j_{13}j_{32}) + s_1(j_{13}j_{35}-j_{15}j_{33}) + s_1(j_{15}j_{32}-j_{12}j_{35})] \\
+                +j_{55}s_1(&j_{12}j_{33}-j_{13}j_{32}+j_{13}j_{34}-j_{14}j_{33}+j_{14}j_{32}-j_{12}j_{34})\} \\            
+\end{align*}
+
+E ainda:
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)[&(j_{24}j_{35}-j_{25}j_{34})(j_{13}-j_{12})+(j_{14}j_{25}-j_{15}j_{24})(j_{33}-j_{32})+(j_{15}j_{34}-j_{14}j_{35})(j_{23}-j_{22}) \\
+                                          +&j_{12}(j_{23}j_{35}-j_{25}j_{33})+j_{13}(j_{25}j_{32}-j_{22}j_{35})+j_{15}(j_{22}j_{33}-j_{23}j_{32})] \\
+         +s_5s(\theta_2+\theta_3+\theta_4)[&j_{12}(j_{23}j_{34}-j_{24}j_{33})+j_{13}(j_{24}j_{32}-j_{22}j_{34})+j_{14}(j_{22}j_{33}-j_{23}j_{32})] \\
+    -j_{65}c_5c(\theta_2+\theta_3+\theta_4)[&j_{11}j_{34}(j_{23}-j_{22})+(j_{14}j_{21}-j_{11}j_{24})(j_{33}-j_{32})-j_{21}j_{34}(j_{13}-j_{12}) \\
+                                          +&j_{11}(j_{22}j_{33}-j_{23}j_{32})-j_{21}(j_{12}j_{33}-j_{13}j_{32})] \\ 
+    +j_{66}\{j_{11}\{c_1[&(j_{34}j_{45}-s_1j_{35})(j_{23}-j_{22})+(s_1j_{25}-j_{24}j_{45})(j_{33}-j_{32}) \\
+                        +&j_{45}(j_{22}j_{33}-j_{23}j_{32}) + s_1(j_{23}j_{35}-j_{25}j_{33}+j_{25}j_{32}-j_{22}j_{35})] \\
+                +j_{55}s_1(&j_{22}j_{33}-j_{23}j_{32}+j_{23}j_{34}-j_{24}j_{33}+j_{24}j_{32}-j_{22}j_{34})\} \\
+            -j_{21}\{c_1[&(j_{34}j_{45}-s_1j_{35})(j_{13}-j_{12})+(s_1j_{15}-j_{14}j_{45})(j_{33}-j_{32}) \\
+                        +&j_{45}(j_{12}j_{33}-j_{13}j_{32}) + s_1(j_{13}j_{35}-j_{15}j_{33}) + s_1(j_{15}j_{32}-j_{12}j_{35})] \\
+                +j_{55}s_1(&j_{12}j_{33}-j_{13}j_{32}+j_{13}j_{34}-j_{14}j_{33}+j_{14}j_{32}-j_{12}j_{34})\} \\            
+\end{align*}
+
+Calculando alguns dos termos entre parênteses:
+
+\begin{align*}
+    j_{13} - j_{12} &= c_1s_2a_3 \\
+    j_{23} - j_{22} &= s_1s_2a_3 \\
+    j_{33} - j_{32} &= -c_2a_3 \\
+    j_{14}j_{25} - j_{15}j_{24} &= -s_1s_5c_1c(\theta_2+\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) - c_1^2c_5s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) \\
+                                &  +s_1c_1s_5c(\theta_2+\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) - s_1^2c_5s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) \\
+                                &= -c_5s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6)\\
+    j_{15}j_{34} - j_{14}j_{35} &= c_1s_5c^2(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) -s_1c_5c(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) \\
+                                &  +c_1s_5s^2(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) \\
+                                &= [c_1s_5-s_1c_5c(\theta_2+\theta_3+\theta_4)]d_6(a_5+c_5d_6) \\
+    j_{22}j_{33} - j_{23}j_{32} &= (j_{23}-s_1s_2a_3)(j_{32}-c_2a_3) - j_{23}j_{32}\\
+                                & s_1c_2a_3[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+s_1s_2c_2a_3^2\\
+                                & -s_1s_2a_3[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+                                &= s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\\
+    j_{23}j_{35} - j_{25}j_{33} &= -s_1s_5s(\theta_2+\theta_3+\theta_4)d_6[s(\theta_2+\theta_3)a_4 + s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                &  -[s_1s_5c(\theta_2+\theta_3+\theta_4) + c_1c_5]d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                &= -s_1s_5d_6[c_4a_4+(a_5+c_5d_6)] - c_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+    j_{24}j_{35} - j_{25}j_{34} &= -s_1s_5s^2(\theta_1+\theta_2+\theta_3)d_6(a_5+c_5d_6) - s_1s_5c^2(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) \\
+                                &  -c_1c_5c(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6) \\
+                                &= -[s_1s_5+c_1c_5c(\theta_2+\theta_3+\theta_4)]d_6(a_5+c_5d_6) \\
+\end{align*}
+
+\begin{align*}
+    j_{25}j_{32} - j_{22}j_{35} &= [s_1s_5c(\theta_2+\theta_3+\theta_4)+c_1c_5]d_6[c_2a_3 + c(\theta_2+\theta_3)a_5 + c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                & +s_1s_5s(\theta_2+\theta_3+\theta_4)d_6[s_2a_3+s(\theta_2+\theta_3)a_4 + s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                &= s_1s_5d_6[c(\theta_3+\theta_4)a_3 + c_4a_4 + (a_5+c_5d_6)]\\
+                                &+c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+    j_{12}j_{33} - j_{13}j_{32} &= (j_{13}-c_1s_2a_3)(j_{32}-c_2a_3) - j_{13}j_{32} \\
+                                & -j_{13}c_2a_3 - j_{32}c_1s_2a_3 +c_1c_2s_2a_3^2 \\
+                                &= c_1c_2a_3[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                & -c_1s_2a_3[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] + c_1c_2s_2a_3^2 \\
+                                &= c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\\
+    j_{13}j_{34} - j_{14}j_{33} &= (j_{14} - c_1s(\theta_2+\theta_3)a_4)(j_{33} - c(\theta_2+\theta_3)a_4) - j_{14}j_{33} \\
+                                & -j_{14}c(\theta_2+\theta_3)a_4 - j_{33}c_1s(\theta_2+\theta_3)a_4 + c_1c(\theta_2+\theta_3)s(\theta_2+\theta_3)a_4^2 \\
+                                &= c_1[s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]c(\theta_2+\theta_3)a_4 +c_1c(\theta_2+\theta_3)s(\theta_2+\theta_3)a_4^2 \\
+                                & -c_1[c(\theta_2+\theta_3)a_4 + c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]s(\theta_2+\theta_3)a_4 \\
+                                &= c_1[s_4a_4(a_5+c_5d_6)]\\        
+    j_{13}j_{35} - j_{15}j_{33} &= -c_1s_5s(\theta_2+\theta_3+\theta_4)d_6[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                & -[c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                &= -c_1s_5d_6[c_4a_4+(a_5+c_5d_6)] + s_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+    j_{14}j_{21} - j_{11}j_{24} &= -c_1s_1(d_3+d_4+s_5d_6)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\\
+                                & -c_1^2s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                & +c_1s_1(d_3+d_4+s_5d_6)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\\
+                                & -s_1^2s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                &= -s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+    j_{14}j_{32} - j_{12}j_{34} &= -c_1[s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)][c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                & +c_1[c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)][s_2a_3+s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                &= -c_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]\\
+    j_{15}j_{32} - j_{12}j_{35} &= [c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]d_6[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                & +c_1s_5s(\theta_2+\theta_3+\theta_4)d_6[s_2a_3+s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                &= c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4+(a_5+c_5d_6)]\\
+                                &-s_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+    j_{23}j_{34} - j_{24}j_{33} &= -s_1c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+                                & +s_1s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                &= s_1(a_5+c_5d_6)s_4a_4\\
+    j_{24}j_{32} - j_{22}j_{34} &= -s_1s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+                                & +s_1c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[s_2a_3+s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+                                &= -s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3 + s_4a_4]\\
+\end{align*}
+
+E por fim:
+
+\vspace*{-5mm}
+
+\begin{align*}
+    j_{34}j_{45} - s_1j_{35} &= c_1c(\theta_2+\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6) - s_1s_5s(\theta_2+\theta_3+\theta_4)d_6\\
+    s_1j_{15} - j_{14}j_{45} &= s_1[c_1s_5c(\theta_2+\theta_3+\theta_4) - s_1c_5]d_6 + c_1^2s^2(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\\
+    s_1j_{25} - j_{24}j_{45} &= s_1[s_1s_5c(\theta_2+\theta_3+\theta_4)+c_1c_5]d_6 + c_1s_1s^2(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\\
+\end{align*}
+
+\vspace*{-5mm}
+
+Realizando as devidas substituições, o determinante passa a ser:
+
+\vspace*{-5mm}
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)\{&-c_1s_2a_3[s_1s_5+c_1c_5c(\theta_2+\theta_3+\theta_4)]d_6(a_5+c_5d_6)+\\
+                                          +&s_1s_2a_3[c_1s_5-s_1c_5c(\theta_2+\theta_3+\theta_4)]d_6(a_5+c_5d_6)+c_2c_5a_3s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6)-\\
+                                          -&j_{12}\{s_1s_5d_6[c_4a_4+(a_5+c_5d_6)] + c_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\}+\\
+                                          +&j_{13}\{s_1s_5d_6[c(\theta_3+\theta_4)a_3 + c_4a_4 + (a_5+c_5d_6)]+\\
+                                          +&        c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\}+\\
+                                          +&j_{15}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\
+         +s_5s(\theta_2+\theta_3+\theta_4)\{&j_{12}[s_1(a_5+c_5d_6)s_4a_4]-j_{13}\{s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3 + s_4a_4]\}+\\
+                                          +&j_{14}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\
+    -j_{65}c_5c(\theta_2+\theta_3+\theta_4)\{&j_{11}j_{34}(s_1s_2a_3)-j_{21}j_{34}(c_1s_2a_3)+ \\
+                                          +&c_2a_3s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+ \\
+                                          +&j_{11}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}-j_{21}\{c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\ 
+                      +j_{66}\{j_{11}\{c_1\{&s_1s_2a_3[c_1c(\theta_2+\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6) - s_1s_5s(\theta_2+\theta_3+\theta_4)d_6]-\\
+                                           -&c_2a_3\{s_1[s_1s_5c(\theta_2+\theta_3+\theta_4)+c_1c_5]d_6 + c_1s_1s^2(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\} \\
+                                           +&j_{45}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\} +\\
+                                           +&s_1\{-s_1s_5d_6[c_4a_4+(a_5+c_5d_6)] - c_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+\\
+                                           +&s_1s_5d_6[c(\theta_3+\theta_4)a_3 + c_4a_4 + (a_5+c_5d_6)]+\\
+                                           +&c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\
+                                +j_{55}s_1\{&s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]+s_1(a_5+c_5d_6)s_4a_4-\\
+                                           -&s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3 + s_4a_4]\}\} \\
+                               -j_{21}\{c_1\{&c_1s_2a_3\{c_1c(\theta_2+\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6) - s_1s_5s(\theta_2+\theta_3+\theta_4)d_6\}+\\
+                                           -&c_2a_3\{s_1[c_1s_5c(\theta_2+\theta_3+\theta_4) - s_1c_5]d_6 + c_1^2s^2(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\} \\
+                                           +&j_{45}\{c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\} + s_1\{-c_1s_5d_6[c_4a_4+(a_5+c_5d_6)] +\\
+                                           +&s_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] + \\
+                                           +&c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4+(a_5+c_5d_6)] -\\
+                                           -&s_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\
+                                +j_{55}s_1\{&c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]+c_1[s_4a_4(a_5+c_5d_6)]-\\
+                                           -&c_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]\}\}\} \\            
+\end{align*}
+
+Reagrupando mais uma vez os termos da equação e eliminando termos de sinais opostos:
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)\{&c_5a_3[-s_2c(\theta_2+\theta_3+\theta_4)+c_2s(\theta_2+\theta_3+\theta_4)]d_6(a_5+c_5d_6)+\\
+                                          +&(j_{13}-j_{12})\{s_1s_5d_6[c_4a_4+(a_5+c_5d_6)]+\\
+                                          +&c_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+                                          +&j_{13}\{s_1s_5d_6[c(\theta_3+\theta_4)a_3]+c_1c_5d_6[c_2a_3]\}+\\
+                                          +&j_{15}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\
+         +s_5s(\theta_2+\theta_3+\theta_4)\{&(j_{12}-j_{13})[s_1(a_5+c_5d_6)s_4a_4]+(j_{14}-j_{13})\{s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3]\}+\\
+                                          +&j_{14}s_1s_3a_3a_4\} \\
+    -j_{65}c_5c(\theta_2+\theta_3+\theta_4)\{&s_2a_3j_{34}(j_{11}s_1-j_{21}c_1)+ \\
+                                          +&c_2a_3s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+ \\
+                                          +&(j_{11}s_1-j_{21}c_1)\{a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\ 
+                      +j_{66}\{j_{11}\{c_1\{&s_1s_2a_3[c_1c(\theta_2+\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6) - s_1s_5s(\theta_2+\theta_3+\theta_4)d_6]-\\
+                                           -&s_1c_2a_3[c_1s^2(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)+s_1s_5c(\theta_2+\theta_3+\theta_4)d_6] - s_1c_1c_2c_5a_3d_6 \\
+                                           +&j_{45}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}+s_1d_6a_3[s_1s_5c(\theta_3+\theta_4)+c_1c_2c_5]\} \\
+                                +j_{55}s_1\{&s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-s_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3\}\} \\
+                               -j_{21}\{c_1\{&c_1s_2a_3\{c_1c(\theta_2+\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6) - s_1s_5s(\theta_2+\theta_3+\theta_4)d_6\}+\\
+                                           -&c_1c_2a_3\{ c_1s^2(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)+s_1s_5c(\theta_2+\theta_3+\theta_4)d_6\} + s_1^2c_2c_5a_3d_6\\
+                                           +&j_{45}\{c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\} + s_1d_6a_3[c_1s_5c(\theta_3+\theta_4) - s_1c_2c_5]\} \\
+                                +j_{55}s_1\{&c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-c_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3\}\} \\            
+\end{align*}
+
+Fazendo uso de propriedades trigonométricas, substituindo termos já calculados e eliminando valores de sinais opostos:
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)\{&c_5a_3s(\theta_3+\theta_4)d_6(a_5+c_5d_6)+c_1s_2a_3\{s_1s_5d_6[c_4a_4+(a_5+c_5d_6)]+\\
+                                          +&c_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+                                          +&j_{13}\{s_1s_5d_6c(\theta_3+\theta_4)a_3+c_1c_2c_5d_6a_3\}+j_{15}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\
+         +s_5s(\theta_2+\theta_3+\theta_4)\{&-c_1s_2a_3s_1(a_5+c_5d_6)s_4a_4+(j_{14}-j_{13})[s_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3]+\\
+                                          +&j_{14}s_1s_3a_3a_4\} \\
+    -j_{65}c_5c(\theta_2+\theta_3+\theta_4)\{&s_2a_3j_{34}(j_{11}s_1-j_{21}c_1)+ \\
+                                          +&c_2a_3s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+ \\
+                                          +&(j_{11}s_1-j_{21}c_1)\{a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\ 
+                      +j_{66}\{j_{11}\{c_1\{-&s_1a_3[c_1s(\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)+s_1s_5c(\theta_3+\theta_4)d_6] +\\
+                                           +&j_{45}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}+s_1^2s_5c(\theta_3+\theta_4)d_6a_3\} \\
+                                +j_{55}s_1\{&s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-s_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3\}\} \\
+                               -j_{21}\{c_1\{-&c_1a_3\{c_1s(\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)+s_1s_5c(\theta_3+\theta_4)d_6\} +\\
+                                           +&j_{45}\{c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\} + c_1s_1s_5c(\theta_3+\theta_4)d_6a_3\} \\
+                                +j_{55}s_1\{&c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-c_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3\}\} \\            
+\end{align*}
+
+Através de uma mudança na ordem de alguns termos obtém-se:
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)\{&c_5a_3s(\theta_3+\theta_4)d_6(a_5+c_5d_6)+c_1s_2a_3\{s_1s_5d_6[c_4a_4+(a_5+c_5d_6)]+\\
+                                          +&c_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+                                          +&j_{13}\{s_1s_5d_6c(\theta_3+\theta_4)a_3+c_1c_2c_5d_6a_3\}+j_{15}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\
+         +s_5s(\theta_2+\theta_3+\theta_4)\{&-c_1s_2a_3s_1(a_5+c_5d_6)s_4a_4+(j_{14}-j_{13})[s_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3]+\\
+                                          +&j_{14}s_1s_3a_3a_4\} \\
+    -j_{65}c_5c(\theta_2+\theta_3+\theta_4)\{&s_2a_3j_{34}(j_{11}s_1-j_{21}c_1)+ \\
+                                          +&c_2a_3s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+ \\
+                                          +&(j_{11}s_1-j_{21}c_1)\{a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}\} \\ 
+          +j_{66}\{(j_{11}s_1-j_{21}c_1)\{-&c_1a_3[c_1s(\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)+s_1s_5c(\theta_3+\theta_4)d_6] +\\
+                                          +&j_{45}\{c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}+c_1s_1s_5c(\theta_3+\theta_4)d_6a_3 + \\
+                                          +&j_{55}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-s_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3\}\} \\           
+\end{align*}
+
+Calculando os seguintes termos:
+
+\begin{align*}
+    j_{14} - j_{13} &= c_1s(\theta_2+\theta_3)a_4 \\
+    j_{11}s_1 - j_{21}c_1 &= s_1c_1(d_3+d_4+s_5d_6)-s_1^2[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                          &- s_1c_1(d_3+d_4+s_5d_6)-c_1^2[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                          &= -[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+\end{align*}
+
+e substituindo os resultados, juntamente com os valores de $j_{13}$, $j_{14}$, $j_{15}$, $j_{34}$, $j_{45}$ e $j_{55}$, chega-se em:
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)\{&c_5a_3s(\theta_3+\theta_4)d_6(a_5+c_5d_6)+c_1s_2a_3\{s_1s_5d_6[c_4a_4+(a_5+c_5d_6)]+\\
+                                          +&c_1c_5d_6[c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+                                          -&c_1[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)][s_1s_5d_6c(\theta_3+\theta_4)a_3+c_1c_2c_5d_6a_3]+\\
+                                          +&[c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]d_6s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+         +s_5s(\theta_2+\theta_3+\theta_4)\{&-c_1s_2a_3s_1(a_5+c_5d_6)s_4a_4+c_1s(\theta_2+\theta_3)a_4[s_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3]-\\
+                                          -&c_1s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)s_1s_3a_3a_4\} \\
+    -j_{65}c_5c(\theta_2+\theta_3+\theta_4)\{-&s_2a_3c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+ \\
+                                          +&c_2a_3s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]- \\
+                                          -&s(\theta_3+\theta_4)a_3(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+                                          -&s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+                                 -j_{66}\{&[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\{\\
+                                          -&c_1a_3[c_1s(\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)+s_1s_5c(\theta_3+\theta_4)d_6] +\\
+                                          +&c_1s(\theta_2+\theta_3+\theta_4)\{c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]\}+c_1s_1s_5c(\theta_3+\theta_4)d_6a_3 + \\
+                                          +&s_1s(\theta_2+\theta_3+\theta_4)\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-s_1(a_5+c_5d_6)s(\theta_3+\theta_4)a_3\}\} \\           
+\end{align*}
+
+Através de propriedades trigonométricas e matemáticas:
+
+\begin{align*}
+    |J| = c_5c(\theta_2+\theta_3+\theta_4)\{&c_1s_1s_5d_6a_3a_4[c_4s_2-c(\theta_3+\theta_4)s(\theta_2+\theta_3)+s_3c(\theta_2+\theta_3+\theta_4)]-\\
+                                          -&c_5s_3d_6a_3a_4\}\\
+         +s_5s(\theta_2+\theta_3+\theta_4)\{&c_1s_1a_3a_4(a_5+c_5d_6)[s(\theta_2+\theta_3)s(\theta_3+\theta_4)-s_2s_4-s_3s(\theta_2+\theta_3+\theta_4)]\} \\
+    +j_{65}c_5c(\theta_2+\theta_3+\theta_4)\{&s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+       -j_{66}s(\theta_2+\theta_3+\theta_4)\{&s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\          
+\end{align*}
+
+Substituindo os valores de $j_{65}$ e $j_{66}$:
+
+\begin{align*}
+    |J| =  c_5c(\theta_2+\theta_3+\theta_4)\{&c_1s_1s_5d_6a_3a_4[s_2c_4-s(\theta_2+\theta_3)c(\theta_3+\theta_4)+s_3c(\theta_2+\theta_3+\theta_4)]\}\\
+          +s_5s(\theta_2+\theta_3+\theta_4)\{&c_1s_1c_5d_6a_3a_4[-s_2s_4+s(\theta_2+\theta_3)s(\theta_3+\theta_4)-s_3s(\theta_2+\theta_3+\theta_4)] \\
+                                             &c_1s_1a_3a_4a_5[-s_2s_4+s(\theta_2+\theta_3)s(\theta_3+\theta_4)-s_3s(\theta_2+\theta_3+\theta_4)]\} \\
+                                       -c_5\{&s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]\} \\       
+\end{align*}
+
+Aplicando propriedades trigonométricas na primeira linha:
+
+\begin{align*}
+    |J| =                               c_5\{&c_1s_1s_5d_6a_3a_4[s_2c(\theta_2+\theta_3)-c_2s(\theta_2+\theta_3)+s_3]\} \\
+          -s_5s(\theta_2+\theta_3+\theta_4)\{&c_1s_1c_5d_6a_3a_4[s_2s_4-s(\theta_2+\theta_3)s(\theta_3+\theta_4)+s_3s(\theta_2+\theta_3+\theta_4)]\}\\
+          +s_5s(\theta_2+\theta_3+\theta_4)\{&c_1s_1c_5d_6a_3a_4[-s_2s_4+s(\theta_2+\theta_3)s(\theta_3+\theta_4)-s_3s(\theta_2+\theta_3+\theta_4)] \\
+                                             &c_1s_1a_3a_4a_5[-s_2s_4+s(\theta_2+\theta_3)s(\theta_3+\theta_4)-s_3s(\theta_2+\theta_3+\theta_4)]\} \\
+                                       -c_5\{&s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]\} \\       
+\end{align*}
+
+Resumindo o determinante do seguinte modo:
+
+\begin{align*}
+    |J| = -c_1s_1&s_5s(\theta_2+\theta_3+\theta_4)a_3a_4[s_2s_4-s(\theta_2+\theta_3)s(\theta_3+\theta_4)+s_3s(\theta_2+\theta_3+\theta_4)](a_5+2c_5d_6) \\
+                -&c_5s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)] \\       
+\end{align*}
+
+E por fim:
+
+\begin{align*}
+    |J| = -c_5s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]    
+\end{align*}
+
+\section{Calculos Cofatores}
+\label{AnexoJacobiana-SecCalcCofatores}
+
+%\begin{align*}
+%    Cof(j_{11}) = +j_{65}\{&-j_{46}c_1\{j_{22}j_{33} + j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34}\}\\
+%                           &-j_{56}s_1\{j_{22}j_{33} + j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34}\}\} \\
+%                  +j_{66}\{&c_1\{(j_{23}j_{34}j_{45}+s_1j_{24}j_{35}+s_1j_{25}j_{33}-s_1j_{25}j_{34}-j_{24}j_{33}j_{45}-s_1j_{23}j_{35}) \\
+%                           &-(j_{22}j_{34}j_{45}+s_1j_{24}j_{35}+s_1j_{25}j_{32}-s_1j_{25}j_{34}-j_{24}j_{32}j_{45}-s_1j_{22}j_{35}) \\
+%                           &+(j_{22}j_{33}j_{45}+s_1j_{23}j_{35}+s_1j_{25}j_{32}-s_1j_{25}j_{33}-j_{23}j_{32}j_{45}-s_1j_{22}j_{35})\} \\
+%                           &j_{55}s_1\{(j_{22}j_{33} + j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})\} \} \\
+%                = [-j_{65}&(j_{46}c_1+j_{56}s_1) + j_{66}(j_{45}c_1+j_{55}s_1)][j_{22}j_{33} + j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34}]\\
+%                = \;[c_5c^2&(\theta_2+\theta_3+\theta_4)+c_5s^2(\theta_2+\theta_3+\theta_4)][j_{22}j_{33} + j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34}]\\
+%                = \;\:c_5s_1&s_3a_3a_4&\\    
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{12}) = \: -j_{21}[&-j_{65}(s_1j_{33}j_{56} - c_1j_{34}j_{46} - s_1j_{34}j_{56} + c_1j_{33}j_{46})\\
+%                          &+j_{66}(s_1j_{33}j_{55} - c_1j_{34}j_{45} - s_1j_{34}j_{55} + c_1j_{33}j_{45})] \\
+%                        -[&-j_{46}(j_{23}j_{34}j_{55}-c_1j_{24}j_{35}-c_1j_{25}j_{33}+c_1j_{25}j_{34}-j_{24}j_{33}j_{55}+c_1j_{23}j_{35}) \\
+%                          &+j_{56}(j_{23}j_{34}j_{45}+s_1j_{24}j_{35}+s_1j_{25}j_{33}-s_1j_{25}j_{34}-j_{24}j_{33}j_{45}-s_1j_{23}j_{35})] \\
+%                = -j_{21}\{&[s_1c_5 - c_1s_5c(\theta_2+\theta_3+\theta_4)](s_1j_{33}-s_1j_{34}) \\
+%                          -&[c_1c_5 + s_1s_5c(\theta_2+\theta_3+\theta_4)](c_1j_{34}-c_1j_{33})\}\\
+%                        -\{&-s_5s(\theta_2+\theta_3+\theta_4)(j_{23}j_{34}-j_{24}j_{33}) \\
+%                           &+c_5c(\theta_2+\theta_3+\theta_4)(j_{24}j_{35}+j_{25}j_{33}-j_{25}j_{34}-j_{23}j_{35})\} \\
+%                =  -j_{21}[&c_5c(\theta_2+\theta_3)a_4] \\
+%                        -\{&-s_5s(\theta_2+\theta_3+\theta_4)s_1(a_5+c_5d_6)s_4a_4 + c_5c(\theta_2+\theta_3+\theta_4)[s_1s_5c_4d_6a_4+c_1c_5c(\theta_2+\theta_3)d_6a_4]\}\\
+%                =    \{-s_1&(d_3+d_4+2s_5d_6)-c_1[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]\}c_5c(\theta_2+\theta_3)a_4 \\
+%                        +\{&s_1s(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)s_5s_4a_4\}\\     
+%\end{align*}
+%
+%Terceiro termo:
+%
+%\begin{align*}
+%    Cof(j_{13}) = j_{21}[-j_{65}(&s_1j_{32}j_{56} - c_1j_{34}j_{46} - s_1j_{34}j_{56} + c_1j_{32}j_{46})\\
+%                          +j_{66}(&s_1j_{32}j_{55} - c_1j_{34}j_{45} - s_1j_{34}j_{55} + c_1j_{32}j_{45})] \\
+%                        +[-j_{46}(&j_{22}j_{34}j_{55}-c_1j_{24}j_{35}-c_1j_{25}j_{32}+c_1j_{25}j_{34}-j_{24}j_{32}j_{55}+c_1j_{22}j_{35}) \\
+%                          +j_{56}(&j_{22}j_{34}j_{45}+s_1j_{24}j_{35}+s_1j_{25}j_{32}-s_1j_{25}j_{34}-j_{24}j_{32}j_{45}-s_1j_{22}j_{35})]
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{13}) =  j_{21}\{&[s_1c_5 - c_1s_5c(\theta_2+\theta_3+\theta_4)](s_1j_{32}-s_1j_{34}) \\
+%                          +&[c_1c_5 + s_1s_5c(\theta_2+\theta_3+\theta_4)](c_1j_{32}-c_1j_{34})\}\\
+%                        +\{&[-s_5s(\theta_2+\theta_3+\theta_4)][j_{22}j_{34}-j_{24}j_{32}] \\
+%                          +&[c_5c(\theta_2+\theta_3+\theta_4)][j_{24}j_{35}+j_{25}j_{32}-j_{25}j_{34}-j_{22}j_{35}]\} \\
+%                =  +j_{21}&c_5[c_2a_3+c(\theta_2+\theta_3)a_4] \\
+%                        +\{&-s_5s(\theta_2+\theta_3+\theta_4)s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4] +\\
+%                        +  &c_5c(\theta_2+\theta_3+\theta_4)\{s_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]+c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4] \} \}\\
+%                =   \{s_1&(d_3+d_4+2s_5d_6)+c_1[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]\}.\\
+%                         &c_5[c_2a_3+c(\theta_2+\theta_3)a_4] - s_1s(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)s_5[s(\theta_3+\theta_4)a_3+s_4a_4]     
+%\end{align*}
+%
+%4º Termo:
+%
+%\begin{align*}
+%    Cof(j_{14}) = -j_{21}[-j_{65}(&s_1j_{32}j_{56} - c_1j_{33}j_{46} - s_1j_{33}j_{56} + c_1j_{32}j_{46})\\
+%                          +j_{66}(&s_1j_{32}j_{55} - c_1j_{33}j_{45} - s_1j_{33}j_{55} + c_1j_{32}j_{45})] \\
+%                        -[-j_{46}(&j_{22}j_{33}j_{55}-c_1j_{23}j_{35}-c_1j_{25}j_{32}+c_1j_{25}j_{33}-j_{23}j_{32}j_{55}+c_1j_{22}j_{35}) \\
+%                          +j_{56}(&j_{22}j_{33}j_{45}+s_1j_{23}j_{35}+s_1j_{25}j_{32}-s_1j_{25}j_{33}-j_{23}j_{32}j_{45}-s_1j_{22}j_{35})]
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{14}) = -j_{21}\{&[s_1c_5 - c_1s_5c(\theta_2+\theta_3+\theta_4)](s_1j_{32}-s_1j_{33}) \\
+%                          +&[c_1c_5 + s_1s_5c(\theta_2+\theta_3+\theta_4)](c_1j_{32}-c_1j_{33})\}\\
+%                        -\{&[-s_5s(\theta_2+\theta_3+\theta_4)][j_{22}j_{33}-j_{23}j_{32}] \\
+%                          +&[c_5c(\theta_2+\theta_3+\theta_4)][j_{23}j_{35}+j_{25}j_{32}-j_{25}j_{33}-j_{22}j_{35}]\} \\
+%                =-&\{s_1(d_3+d_4+s_5d_6)+c_1[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\}c_5c_2a_3 \\
+%                 +&s_5s(\theta_2+\theta_3+\theta_4)s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)] +\\
+%                 -&c_5c(\theta_2+\theta_3+\theta_4)[s_1s_5d_6c(\theta_3+\theta_4)a_3+c_1c_5d_6c_2a_3]\\
+%                =-&\{s_1(d_3+d_4+2s_5d_6)+c_1[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]\}c_5c_2a_3\\
+%                 +&s_1[s_3a_4+s(\theta_3+\theta_4)(a_5+2c_5d_6)]s_5s(\theta_2+\theta_3+\theta_4)a_3
+%\end{align*}
+%
+%Continuando com o 5º Termo:
+%
+%\begin{align*}
+%    Cof(j_{15}) =   [-&j_{46}(-c_1j_{22}j_{33}-c_1j_{23}j_{34}-c_1j_{24}j_{32}+c_1j_{24}j_{33}+c_1j_{23}j_{32}+c_1j_{22}j_{34}) \\
+%                     +&j_{56}(s_1j_{22}j_{33}+s_1j_{23}j_{34}+s_1j_{24}j_{32}-s_1j_{24}j_{33}-s_1j_{23}j_{32}-s_1j_{22}j_{34})] \\
+%                =  c_5&c(\theta_2+\theta_3+\theta_4)[j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34}] \\  
+%                =  c_5&c(\theta_2+\theta_3+\theta_4)s_1s_3a_3a_4
+%\end{align*}
+%
+%O último termo da 1ª linha:
+%
+%\begin{align*}
+%    Cof(j_{16}) = -\{&c_1[(j_{23}j_{34}j_{45}+s_1j_{24}j_{35}+s_1j_{25}j_{33}-s_1j_{25}j_{34}-j_{24}j_{33}j_{45}-s_1j_{23}j_{35}) \\
+%                   -(&j_{22}j_{34}j_{45}+s_1j_{24}j_{35}+s_1j_{25}j_{32}-s_1j_{25}j_{34}-j_{24}j_{32}j_{45}-s_1j_{22}j_{35}) \\
+%                    (&j_{22}j_{33}j_{45}+s_1j_{23}j_{35}+s_1j_{25}j_{32}-s_1j_{25}j_{33}-j_{23}j_{32}j_{45}-s_1j_{22}j_{35})] \\
+%                    +&j_{55}s_1(j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})\} \\
+%                = -&c_1j_{45}(j_{23}j_{34}-j_{24}j_{33}+j_{24}j_{32}-j_{22}j_{34}+j_{22}j_{33}-j_{23}j_{32}) \\
+%                  -&j_{55}s_1(j_{23}j_{34}-j_{24}j_{33}+j_{24}j_{32}-j_{22}j_{34}+j_{22}j_{33}-j_{23}j_{32}) \\
+%                = \;\;\; -&s(\theta_2+\theta_3+\theta_4)s_1s_3a_3a_4
+%\end{align*}
+%
+%Começando então a segunda linha:
+%
+%\begin{align*}
+%    Cof(j_{21}) = +j_{65}[j_{46}c_1(&j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})\\
+%                         +j_{56}s_1(&j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})] \\
+%                  -j_{66}\{c_1\{&(j_{13}j_{34}j_{45}+s_1j_{14}j_{35}+s_1j_{15}j_{33}-s_1j_{15}j_{34}-j_{14}j_{33}j_{45}-s_1j_{13}j_{35}) \\
+%                               -&(j_{12}j_{34}j_{45}+s_1j_{14}j_{35}+s_1j_{15}j_{32}-s_1j_{15}j_{34}-j_{14}j_{32}j_{45}-s_1j_{12}j_{35}) \\
+%                               +&(j_{12}j_{33}j_{45}+s_1j_{13}j_{35}+s_1j_{15}j_{32}-s_1j_{15}j_{33}-j_{13}j_{32}j_{45}-s_1j_{12}j_{35})\} \\
+%                    +j_{55}s_1\{&(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})\} \} \\
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{21}) &= [j_{65}(j_{46}c_1+j_{56}s_1) - j_{66}(j_{45}c_1+j_{55}s_1)][j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34}]\\
+%                &= [-c_5c^2(\theta_2+\theta_3+\theta_4)-c_5s^2(\theta_2+\theta_3+\theta_4)][j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34}]\\
+%                &= -c_5c_1s_3a_3a_4\\
+%\end{align*}
+%
+%Próximo:
+%
+%\begin{align*}
+%    Cof(j_{22}) = j_{11}[-j_{65}(&s_1j_{33}j_{56} - c_1j_{34}j_{46} - s_1j_{34}j_{56} + c_1j_{33}j_{46})\\
+%                         +j_{66}(&s_1j_{33}j_{55} - c_1j_{34}j_{45} - s_1j_{34}j_{55} + c_1j_{33}j_{45})] \\
+%                       +[-j_{46}(&j_{13}j_{34}j_{55}-c_1j_{14}j_{35}-c_1j_{15}j_{33}+c_1j_{15}j_{34}-j_{14}j_{33}j_{55}+c_1j_{13}j_{35}) \\
+%                         +j_{56}(&j_{13}j_{34}j_{45}+s_1j_{14}j_{35}+s_1j_{15}j_{33}-s_1j_{15}j_{34}-j_{14}j_{33}j_{45}-s_1j_{13}j_{35})]
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{22}) = j_{11}\{&[s_1c_5 - c_1s_5c(\theta_2+\theta_3+\theta_4)](s_1j_{33}-s_1j_{34}) \\
+%                         +&[c_1c_5 + s_1s_5c(\theta_2+\theta_3+\theta_4)](c_1j_{33}-c_1j_{34})\}\\
+%                       +\{&[-s_5s(\theta_2+\theta_3+\theta_4)][j_{13}j_{34}-j_{14}j_{33}] \\
+%                         +&[c_5c(\theta_2+\theta_3+\theta_4)][j_{14}j_{35}+j_{15}j_{33}-j_{15}j_{34}-j_{13}j_{35}]\} \\
+%                = j_{11}[&c_5c(\theta_2+\theta_3)a_4] \\
+%                        -&s_5s(\theta_2+\theta_3+\theta_4)c_1(a_5+c_5d_6)s_4a_4 + c_5c(\theta_2+\theta_3+\theta_4)[c_1s_5c_4d_6a_4-s_1c_5c(\theta_2+\theta_3)d_6a_4]\\
+%                =   \{c_1&(d_3+d_4+2s_5d_6)-s_1[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]\}c_5c(\theta_2+\theta_3)a_4 \\
+%                        -&c_1s(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)s_5s_4a_4\}\\     
+%\end{align*}
+%
+%And another one bites the dust:
+%
+%\begin{align*}
+%    Cof(j_{23}) = -j_{11}[-j_{65}(&s_1j_{32}j_{56} - c_1j_{34}j_{46} - s_1j_{34}j_{56} + c_1j_{32}j_{46})\\
+%                          +j_{66}(&s_1j_{32}j_{55} - c_1j_{34}j_{45} - s_1j_{34}j_{55} + c_1j_{32}j_{45})] \\
+%                        -[-j_{46}(&j_{12}j_{34}j_{55}-c_1j_{14}j_{35}-c_1j_{15}j_{32}+c_1j_{15}j_{34}-j_{14}j_{32}j_{55}+c_1j_{12}j_{35}) \\
+%                          +j_{56}(&j_{12}j_{34}j_{45}+s_1j_{14}j_{35}+s_1j_{15}j_{32}-s_1j_{15}j_{34}-j_{14}j_{32}j_{45}-s_1j_{12}j_{35})]
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{23}) = -j_{11}\{&[s_1c_5 - c_1s_5c(\theta_2+\theta_3+\theta_4)](s_1j_{32}-s_1j_{34}) \\
+%                          +&[c_1c_5 + s_1s_5c(\theta_2+\theta_3+\theta_4)](c_1j_{32}-c_1j_{34})\}\\
+%                        -\{&[-s_5s(\theta_2+\theta_3+\theta_4)][j_{12}j_{34}-j_{14}j_{32}] \\
+%                          +&[c_5c(\theta_2+\theta_3+\theta_4)][j_{14}j_{35}+j_{15}j_{32}-j_{15}j_{34}-j_{12}j_{35}]\} \\
+%                = -j_{11}&c_5[c_2a_3+c(\theta_2+\theta_3)a_4] \\
+%                        +&s_5s(\theta_2+\theta_3+\theta_4)c_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4] +\\
+%                        -&c_5c(\theta_2+\theta_3+\theta_4)\{c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-s_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\} \\
+%                =  \{-c_1&(d_3+d_4+2s_5d_6)+s_1[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]\}.\\
+%                         &c_5[c_2a_3+c(\theta_2+\theta_3)a_4]+s_5s(\theta_2+\theta_3+\theta_4)c_1(a_5+2c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]                           
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{24}) = j_{11}[-j_{65}(&s_1j_{32}j_{56} - c_1j_{33}j_{46} - s_1j_{33}j_{56} + c_1j_{32}j_{46})\\
+%                         +j_{66}(&s_1j_{32}j_{55} - c_1j_{33}j_{45} - s_1j_{33}j_{55} + c_1j_{32}j_{45})] \\
+%                        +[-j_{46}(&j_{12}j_{33}j_{55}-c_1j_{13}j_{35}-c_1j_{15}j_{32}+c_1j_{15}j_{33}-j_{13}j_{32}j_{55}+c_1j_{12}j_{35}) \\
+%                          +j_{56}(&j_{12}j_{33}j_{45}+s_1j_{13}j_{35}+s_1j_{15}j_{32}-s_1j_{15}j_{33}-j_{13}j_{32}j_{45}-s_1j_{12}j_{35})]
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{24}) = j_{11}\{&[s_1c_5 - c_1s_5c(\theta_2+\theta_3+\theta_4)](s_1j_{32}-s_1j_{33}) \\
+%                         +&[c_1c_5 + s_1s_5c(\theta_2+\theta_3+\theta_4)](c_1j_{32}-c_1j_{33})\}\\
+%                        +\{&[-s_5s(\theta_2+\theta_3+\theta_4)][j_{12}j_{33}-j_{13}j_{32}] \\
+%                          +&[c_5c(\theta_2+\theta_3+\theta_4)][j_{13}j_{35}+j_{15}j_{32}-j_{15}j_{33}-j_{12}j_{35}]\} \\
+%                = \{c_1&(d_3+d_4+s_5d_6)-s_1[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\}c_5c_2a_3 \\
+%                 -&s_5s(\theta_2+\theta_3+\theta_4)c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)] +\\
+%                 +&c_5c(\theta_2+\theta_3+\theta_4)[c_1s_5d_6c(\theta_3+\theta_4)a_3-s_1c_5d_6c_2a_3]\\
+%                = \{c_1&(d_3+d_4+2s_5d_6)-s_1[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)]\}c_5c_2a_3\\
+%                 -&c_1[s_3a_4+s(\theta_3+\theta_4)(a_5+2c_5d_6)]s_5s(\theta_2+\theta_3+\theta_4)a_3
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{25}) = &[j_{46}(-c_1j_{12}j_{33}-c_1j_{13}j_{34}-c_1j_{14}j_{32}+c_1j_{14}j_{33}+c_1j_{13}j_{32}+c_1j_{12}j_{34}) \\
+%                  &-j_{56}(s_1j_{12}j_{33}+s_1j_{13}j_{34}+s_1j_{14}j_{32}-s_1j_{14}j_{33}-s_1j_{13}j_{32}-s_1j_{12}j_{34})] \\
+%                = &-c_5c(\theta_2+\theta_3+\theta_4)[j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34}] \\  
+%                = &-c_5c(\theta_2+\theta_3+\theta_4)c_1s_3a_3a_4
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{26}) =  \{c_1[(&j_{13}j_{34}j_{45}+s_1j_{14}j_{35}+s_1j_{15}j_{33}-s_1j_{15}j_{34}-j_{14}j_{33}j_{45}-s_1j_{13}j_{35}) \\
+%                   -(&j_{12}j_{34}j_{45}+s_1j_{14}j_{35}+s_1j_{15}j_{32}-s_1j_{15}j_{34}-j_{14}j_{32}j_{45}-s_1j_{12}j_{35}) \\
+%                    (&j_{12}j_{33}j_{45}+s_1j_{13}j_{35}+s_1j_{15}j_{32}-s_1j_{15}j_{33}-j_{13}j_{32}j_{45}-s_1j_{12}j_{35})] \\
+%                    +&j_{55}s_1(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})\} \\
+%                =  c_1j_{45}&(j_{13}j_{34}-j_{14}j_{33}+j_{14}j_{32}-j_{12}j_{34}+j_{12}j_{33}-j_{13}j_{32}) \\
+%                  +j_{55}s_1&(j_{13}j_{34}-j_{14}j_{33}+j_{14}j_{32}-j_{12}j_{34}+j_{12}j_{33}-j_{13}j_{32}) \\
+%                =  s(\theta_2&+\theta_3+\theta_4)c_1s_3a_3a_4
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{31}) = -j_{65}[j_{46}c_1(&j_{12}j_{23}+j_{13}j_{24}+j_{14}j_{22}-j_{14}j_{23}-j_{13}j_{22}-j_{12}j_{24})\\
+%                         +j_{56}s_1(&j_{12}j_{23}+j_{13}j_{24}+j_{14}j_{22}-j_{14}j_{23}-j_{13}j_{22}-j_{12}j_{24})] \\
+%                  +j_{66}\{c_1[(&j_{13}j_{24}j_{45}+s_1j_{14}j_{25}+s_1j_{15}j_{23}-s_1j_{15}j_{24}-j_{14}j_{23}j_{45}-s_1j_{13}j_{25}) \\
+%                              -(&j_{12}j_{24}j_{45}+s_1j_{14}j_{25}+s_1j_{15}j_{22}-s_1j_{15}j_{24}-j_{14}j_{22}j_{45}-s_1j_{12}j_{25}) \\
+%                              +(&j_{12}j_{23}j_{45}+s_1j_{13}j_{25}+s_1j_{15}j_{22}-s_1j_{15}j_{23}-j_{13}j_{22}j_{45}-s_1j_{12}j_{25})] \\
+%                   +j_{55}s_1(&j_{12}j_{23}+j_{13}j_{24}+j_{14}j_{22}-j_{14}j_{23}-j_{13}j_{22}-j_{12}j_{24}) \} \\
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{31}) &= [-j_{65}(j_{46}c_1+j_{56}s_1) + j_{66}(j_{45}c_1+j_{55}s_1)](j_{12}j_{23}+j_{13}j_{24}+j_{14}j_{22}-j_{14}j_{23}-j_{13}j_{22}-j_{12}j_{24})\\
+%                &= [c_5c^2(\theta_2+\theta_3+\theta_4)+c_5s^2(\theta_2+\theta_3+\theta_4)][j_{12}j_{23}+j_{13}j_{24}+j_{14}j_{22}-j_{14}j_{23}-j_{13}j_{22}-j_{12}j_{24}]\\
+%                &= 0\\
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{32}) = -j_{11}[-j_{65}(&s_1j_{23}j_{56} - c_1j_{24}j_{46} - s_1j_{24}j_{56} + c_1j_{23}j_{46})\\
+%                          +j_{66}(&s_1j_{23}j_{55} - c_1j_{24}j_{45} - s_1j_{24}j_{55} + c_1j_{23}j_{45})] \\
+%                  +j_{21}[-j_{65}(&s_1j_{13}j_{56} - c_1j_{14}j_{46} - s_1j_{14}j_{56} + c_1j_{13}j_{46})\\
+%                          +j_{66}(&s_1j_{13}j_{55} - c_1j_{14}j_{45} - s_1j_{14}j_{55} + c_1j_{13}j_{45})] \\
+%                        -[-j_{46}(&j_{13}j_{24}j_{55}-c_1j_{14}j_{25}-c_1j_{15}j_{23}+c_1j_{15}j_{24}-j_{14}j_{23}j_{55}+c_1j_{13}j_{25}) \\
+%                          +j_{56}(&j_{13}j_{24}j_{45}+s_1j_{14}j_{25}+s_1j_{15}j_{23}-s_1j_{15}j_{24}-j_{14}j_{23}j_{45}-s_1j_{13}j_{25})]
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{32}) = -j_{11}&c_5(j_{23}-j_{24})+j_{21}c_5(j_{13}-j_{14}) \\
+%                     +s_5&s(\theta_2+\theta_3+\theta_4)[j_{13}j_{24}-j_{14}j_{23}] \\
+%                     -c_5&c(\theta_2+\theta_3+\theta_4)[j_{14}j_{25}+j_{15}j_{23}-j_{15}j_{24}-j_{13}j_{25}] \\
+%                = +j_{11}&c_5s_1s(\theta_2+\theta_3)a_4-j_{21}c_5c_1s(\theta_2+\theta_3)a_4 \\
+%                     -c_5&c(\theta_2+\theta_3+\theta_4)c_5d_6[s(\theta_2+\theta_3)a_4]\\
+%                = -c_5&s(\theta_2+\theta_3)a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)] \\ 
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{33}) = j_{11}[-j_{65}(&s_1j_{22}j_{56} - c_1j_{24}j_{46} - s_1j_{24}j_{56} + c_1j_{22}j_{46})\\
+%                         +j_{66}(&s_1j_{22}j_{55} - c_1j_{24}j_{45} - s_1j_{24}j_{55} + c_1j_{22}j_{45})] \\
+%                 -j_{21}[-j_{65}(&s_1j_{12}j_{56} - c_1j_{14}j_{46} - s_1j_{14}j_{56} + c_1j_{12}j_{46})\\
+%                         +j_{66}(&s_1j_{12}j_{55} - c_1j_{14}j_{45} - s_1j_{14}j_{55} + c_1j_{12}j_{45})] \\       
+%                       +[-j_{46}(&j_{12}j_{24}j_{55}-c_1j_{14}j_{25}-c_1j_{15}j_{22}+c_1j_{15}j_{24}-j_{14}j_{22}j_{55}+c_1j_{12}j_{25}) \\
+%                         +j_{56}(&j_{12}j_{24}j_{45}+s_1j_{14}j_{25}+s_1j_{15}j_{22}-s_1j_{15}j_{24}-j_{14}j_{22}j_{45}-s_1j_{12}j_{25})]
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{33}) = j_{11}&c_5(j_{22}-j_{24}) - j_{21}c_5(j_{12}-j_{14}) \\
+%                       -&s_5s(\theta_2+\theta_3+\theta_4)[j_{12}j_{24}-j_{14}j_{22}] \\
+%                       +&c_5c(\theta_2+\theta_3+\theta_4)[j_{14}j_{25}+j_{15}j_{22}-j_{15}j_{24}-j_{12}j_{25}]\} \\
+%                = -j_{11}&c_5s_1[s_2a_3+s(\theta_2+\theta_3)a_4] + j_{21}c_5c_1[s_2a_3+s(\theta_2+\theta_3)a_4] \\
+%                        +&c_5c(\theta_2+\theta_3+\theta_4)c_5d_6[s_2a_3+s(\theta_2+\theta_3)a_4] \\
+%                = c_5&[s_2a_3+s(\theta_2+\theta_3)a_4][a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)] \\                           
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{34}) = -j_{11}[-j_{65}(&s_1j_{22}j_{56} - c_1j_{23}j_{46} - s_1j_{23}j_{56} + c_1j_{22}j_{46})\\
+%                          +j_{66}(&s_1j_{22}j_{55} - c_1j_{23}j_{45} - s_1j_{23}j_{55} + c_1j_{22}j_{45})] \\
+%                  +j_{21}[-j_{65}(&s_1j_{12}j_{56} - c_1j_{13}j_{46} - s_1j_{13}j_{56} + c_1j_{12}j_{46})\\
+%                          +j_{66}(&s_1j_{12}j_{55} - c_1j_{13}j_{45} - s_1j_{13}j_{55} + c_1j_{12}j_{45})] \\
+%                        -[-j_{46}(&j_{12}j_{23}j_{55}-c_1j_{13}j_{25}-c_1j_{15}j_{22}+c_1j_{15}j_{23}-j_{13}j_{22}j_{55}+c_1j_{12}j_{25}) \\
+%                          +j_{56}(&j_{12}j_{23}j_{45}+s_1j_{13}j_{25}+s_1j_{15}j_{22}-s_1j_{15}j_{23}-j_{13}j_{22}j_{45}-s_1j_{12}j_{25})]
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{34}) = -j_{11}&c_5(j_{22}-j_{23}) + j_{21}c_5(j_{12}-j_{13}) \\
+%                        +&s_5s(\theta_2+\theta_3+\theta_4)[j_{12}j_{23}-j_{13}j_{22}] \\
+%                        -&c_5c(\theta_2+\theta_3+\theta_4)[j_{13}j_{25}+j_{15}j_{22}-j_{15}j_{23}-j_{12}j_{25}]\} \\
+%                = j_{11}c_5&s_1s_2a_3 - j_{21}c_5c_1s_2a_3 - c_5c(\theta_2+\theta_3+\theta_4)c_5d_6s_2a_3\\
+%                = \;\, -c_5&s_2a_3[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)] \\
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{35}) = \; &-j_{46}(-c_1j_{12}j_{23}-c_1j_{13}j_{24}-c_1j_{14}j_{22}+c_1j_{14}j_{23}+c_1j_{13}j_{22}+c_1j_{12}j_{24}) \\
+%                  &+j_{56}(s_1j_{12}j_{23}+s_1j_{13}j_{24}+s_1j_{14}j_{22}-s_1j_{14}j_{23}-s_1j_{13}j_{22}-s_1j_{12}j_{24}) \\
+%                = \; &c_5c(\theta_2+\theta_3+\theta_4)[j_{12}j_{23}+j_{13}j_{24}+j_{14}j_{22}-j_{14}j_{23}-j_{13}j_{22}-j_{12}j_{24}] \\  
+%                = \; &0
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{36}) = \; &-\{c_1[(j_{13}j_{24}j_{45}+s_1j_{14}j_{25}+s_1j_{15}j_{23}-s_1j_{15}j_{24}-j_{14}j_{23}j_{45}-s_1j_{13}j_{25}) \\
+%                  \;       &-(j_{12}j_{24}j_{45}+s_1j_{14}j_{25}+s_1j_{15}j_{22}-s_1j_{15}j_{24}-j_{14}j_{22}j_{45}-s_1j_{12}j_{25}) \\
+%                  \;       &+(j_{12}j_{23}j_{45}+s_1j_{13}j_{25}+s_1j_{15}j_{22}-s_1j_{15}j_{23}-j_{13}j_{22}j_{45}-s_1j_{12}j_{25})] \\
+%                  \;       &+j_{55}s_1(j_{12}j_{23}+j_{13}j_{24}+j_{14}j_{22}-j_{14}j_{23}-j_{13}j_{22}-j_{12}j_{24})\} \\
+%                = \; &c_1j_{45}(j_{13}j_{24}-j_{14}j_{23}+j_{14}j_{22}-j_{12}j_{24}+j_{12}j_{23}-j_{13}j_{22}) \\
+%                = \; & 0
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{41}) =  j_{65}[j_{56}(&j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33})\\
+%                  -j_{66}\{c_1[(&j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+%                              -(&j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+%                              +(&j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33})] \\
+%                        +j_{55}(&j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33}) \} \\
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{41}) = -j_{66}c_1(&j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{13}j_{25}j_{34} \\
+%                             -&j_{14}j_{25}j_{32}-j_{15}j_{22}j_{34}+j_{15}j_{24}j_{32}+j_{12}j_{25}j_{34} \\
+%                             +&j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{12}j_{25}j_{33}) \\
+%                = -j_{66}c_1[&j_{32}(j_{15}j_{24}-j_{14}j_{25}+j_{13}j_{25}-j_{15}j_{23}) \\
+%                            +&j_{33}(j_{14}j_{25}-j_{15}j_{24}+j_{15}j_{22}-j_{12}j_{25}) \\
+%                            +&j_{34}(j_{15}j_{23}-j_{13}j_{25}+j_{12}j_{25}-j_{15}j_{22})] \\
+%                = -j_{66}c_1\{&j_{32}(-c_5d_6s(\theta_2+\theta_3)a_4)+j_{33}\{c_5d_6[s_2a_3+s(\theta_2+\theta_3)a_4]\}+j_{34}(-c_5d_6s_2a_3) \} \\
+%                = c_1c_5^2s_3s&(\theta_2+\theta_3+\theta_4)d_6a_3a_4
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{42}) = j_{11}[-j_{65}(&j_{23}j_{34}j_{56} - j_{24}j_{33}j_{56})\\
+%                         +j_{66}(&j_{23}j_{34}j_{55} - c_1j_{24}j_{35} - c_1j_{25}j_{33} + c_1j_{25}j_{34} - j_{24}j_{33}j_{55} + c_1j_{23}j_{35})] \\
+%                 -j_{21}[-j_{65}(&j_{13}j_{34}j_{56} - j_{14}j_{33}j_{56})\\
+%                         +j_{66}(&j_{13}j_{34}j_{55} - c_1j_{14}j_{35} - c_1j_{15}j_{33} + c_1j_{15}j_{34} - j_{14}j_{33}j_{55} + c_1j_{13}j_{35})] \\
+%                         +j_{56}(&j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{42}) = j_{11}&\{[j_{66}j_{55}-j_{65}j_{56}](j_{23}j_{34}-j_{24}j_{33})+j_{66}c_1(j_{25}j_{34}-j_{24}j_{35}+j_{23}j_{35}-j_{25}j_{33})\} \\
+%                 -j_{21}&\{[j_{66}j_{55}-j_{65}j_{56}](j_{13}j_{34}-j_{14}j_{33})+j_{66}c_1(j_{15}j_{34}-j_{14}j_{35}+j_{13}j_{35}-j_{15}j_{33})\} \\     
+%                 +j_{56}&[j_{33}(j_{14}j_{25}-j_{15}j_{24})+j_{34}(j_{15}j_{23}-j_{13}j_{25})] \\
+%                = j_{11}&\{[j_{66}j_{55}-j_{65}j_{56}]s_1(a_5+c_5d_6)s_4a_4-c_1c_5s(\theta_2+\theta_3+\theta_4)[s_1s_5d_6c_4a_4+c_1c_5d_6c(\theta_2+\theta_3)a_4]\} \\
+%                 -j_{21}&\{[j_{66}j_{55}-j_{65}j_{56}]c_1(a_5+c_5d_6)s_4a_4-c_1c_5s(\theta_2+\theta_3+\theta_4)[c_1s_5d_6c_4a_4-s_1c_5d_6c(\theta_2+\theta_3)a_4]\} \\
+%                 +j_{56}&\{-j_{33}c_5d_6s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)+j_{34}c_5d_6[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+%                = (s_1&j_{11}-c_1j_{21})[(j_{66}j_{55}-j_{65}j_{56})(a_5+c_5d_6)s_4a_4 - c_1c_5s(\theta_2+\theta_3+\theta_4)s_5d_6c_4a_4] \\
+%                 +(c_1&j_{11}+s_1j_{21})[-c_1c_5s(\theta_2+\theta_3+\theta_4)c_5d_6c(\theta_2+\theta_3)a_4] \\
+%                 +j_{56}&\{j_{34}c_5d_6s(\theta_2+\theta_3)a_4 + (j_{34}-j_{33})c_5d_6s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\} \\
+%                = (s_1&j_{11}-c_1j_{21})\{[s_1c_5-c_1s_5c(\theta_2+\theta_3+\theta_4)](a_5+c_5d_6)s_4a_4 - c_1c_5s(\theta_2+\theta_3+\theta_4)s_5d_6c_4a_4]\} \\
+%                 +(d_3&+d_4+s_5d_6)[-c_1c_5s(\theta_2+\theta_3+\theta_4)c_5d_6c(\theta_2+\theta_3)a_4] \\
+%                 +[s_1&c_5c(\theta_2+\theta_3+\theta_4)-c_1s_5]\{c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)c_5d_6s(\theta_2+\theta_3)a_4 -\\
+%                 -c(&\theta_2+\theta_3)a_4c_5d_6s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\} \\
+%                = -A_2^c&\{s_1c_5(a_5+c_5d_6)s_4a_4-c_1s_5c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)s_4a_4 - c_1c_5s(\theta_2+\theta_3+\theta_4)s_5d_6c_4a_4]\} \\
+%                 -(d_3&+d_4+s_5d_6)c_1c_5c_5d_6a_4s(\theta_2+\theta_3+\theta_4)c(\theta_2+\theta_3) \\
+%                 -[s_1&c_5c(\theta_2+\theta_3+\theta_4)-c_1s_5](a_5+c_5d_6)c_5d_6s_4a_4 \\               
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{43}) = j_{56}[&-(j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34})\\
+%                        +&j_{65}(j_{11}j_{22}j_{34}+j_{14}j_{21}j_{32}-j_{12}j_{21}j_{34}-j_{11}j_{24}j_{32})] \\
+%                 -j_{66}[&j_{11}(j_{22}j_{34}j_{55}-c_1j_{24}j_{35}-c_1j_{25}j_{32}+c_1j_{25}j_{34}-j_{24}j_{32}j_{55}+c_1j_{22}j_{35})\\
+%                        -&j_{21}(j_{12}j_{34}j_{55}-c_1j_{14}j_{35}-c_1j_{15}j_{32}+c_1j_{15}j_{34}-j_{14}j_{32}j_{55}+c_1j_{12}j_{35})] \\
+%                = j_{56}[&-j_{32}(j_{14}j_{25}-j_{15}j_{24})-j_{34}(j_{15}j_{22}-j_{12}j_{25})\\
+%                        +&j_{65}j_{32}(j_{14}j_{21}-j_{11}j_{24})+j_{65}j_{34}(j_{11}j_{22}-j_{12}j_{21})] \\
+%                 -j_{66}[&j_{11}j_{55}(j_{22}j_{34}-j_{24}j_{32})+j_{11}c_1(j_{25}j_{34}+j_{22}j_{35}-j_{24}j_{35}-j_{25}j_{32})\\
+%                        -&j_{21}j_{55}(j_{12}j_{34}-j_{14}j_{32})-j_{21}c_1(j_{15}j_{34}+j_{12}j_{35}-j_{14}j_{35}-j_{15}j_{32})] \\                         
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{43}) = j_{56}\{&j_{32}c_5s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6)-\\
+%                        -&j_{34}c_5d_6[s_2a_3+s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                        -&j_{65}j_{32}s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+%                        +&j_{65}j_{34}(j_{11}j_{22}-j_{12}j_{21})\} \\
+%                 -j_{66}\{&j_{11}j_{55}s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-\\
+%                        -&j_{11}c_1\{s_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]+c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\}\\
+%                        -&j_{21}j_{55}c_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]+\\
+%                        +&j_{21}c_1\{c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-s_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\}\} \\  
+%                = j_{56}\{&-j_{34}c_5d_6[s_2a_3+s(\theta_2+\theta_3)a_4]+(j_{32}-j_{34})c_5d_6s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6) \\
+%                        -&j_{65}j_{32}s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+%                        +&j_{65}j_{34}[s_2a_3+s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)].\\
+%                         &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+%                 -j_{66}\{&(j_{11}s_1-j_{21}c_1)j_{55}(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-\\
+%                        -&(j_{11}s_1-j_{21}c_1)c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]\\
+%                        -&(j_{11}c_1+j_{21}s_1)c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\}\\
+%                = j_{56}\{&-j_{34}c_5d_6[s_2a_3+s(\theta_2+\theta_3)a_4]+(j_{32}-j_{34})c_5d_6s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6) \\
+%                        +&j_{65}\{j_{34}[s_2a_3+s(\theta_2+\theta_3)a_4]+(j_{34}-j_{32})s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\}.\\
+%                         &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\
+%                 -j_{66}\{&(j_{11}s_1-j_{21}c_1)\{j_{55}(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]\}\\
+%                        -&(j_{11}c_1+j_{21}s_1)c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\}\\
+%                = j_{56}\{&j_{34}(j_{65}A_2^c-c_5d_6)[s_2a_3+s(\theta_2+\theta_3)a_4]-(j_{65}A_2^c-c_5d_6)(j_{32}-j_{34})s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)\} \\
+%                 -j_{66}\{&-A_2^c\{j_{55}(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]\}\\
+%                        -&(D)c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\}\\             
+%                = [-j_{56}&(j_{65}A_2^c-c_5d_6)+j_{66}A_2^cj_{55}](a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4] \\
+%                 -&c_1s_5s(\theta_2+\theta_3+\theta_4)c_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]A_2^c + c_1c^2_5s(\theta_2+\theta_3+\theta_4)d_6[c_2a_3+c(\theta_2+\theta_3)a_4]D\\ 
+%                = A_2^c\{[&s_1c_5s^2(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)-s_1c_5c^2(\theta_2+\theta_3+\theta_4)\\
+%                 +&c_1s_5c(\theta_2+\theta_3+\theta_4)][s(\theta_3+\theta_4)a_3+s_4a_4]+c_1s_5c(\theta_2+\theta_3+\theta_4)c_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]\} \\
+%                 +&(d_3+d_4+s_5d_6)c_1c^2_5c(\theta_2+\theta_3+\theta_4)d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\\    
+%                 -&[s_1c_5c(\theta_2+\theta_3+\theta_4)-c_1s_5]c_5d_6[s(\theta_3+\theta_4)a_3+s_4a_4]                                                                                                                                        
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{44}) = -j_{56}[&-(j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33})\\
+%                         +&j_{65}(j_{11}j_{22}j_{33}+j_{13}j_{21}j_{32}-j_{12}j_{21}j_{33}-j_{11}j_{23}j_{32})] \\
+%                  +j_{66}[&j_{11}(j_{22}j_{33}j_{55}-c_1j_{23}j_{35}-c_1j_{25}j_{32}+c_1j_{25}j_{33}-j_{23}j_{32}j_{55}+c_1j_{22}j_{35})\\
+%                         -&j_{21}(j_{12}j_{33}j_{55}-c_1j_{13}j_{35}-c_1j_{15}j_{32}+c_1j_{15}j_{33}-j_{13}j_{32}j_{55}+c_1j_{12}j_{35})] \\     
+%                = -j_{56}\{&-j_{32}(j_{13}j_{25}-j_{15}j_{23})-j_{33}(j_{15}j_{22}-j_{12}j_{25})\\
+%                          +&j_{65}[j_{32}(j_{13}j_{21}-j_{11}j_{23})+j_{33}(j_{11}j_{22}-j_{12}j_{21})]\} \\
+%                  +j_{66}\{&j_{11}[j_{55}(j_{22}j_{33}-j_{23}j_{32})-c_1(j_{23}j_{35}+j_{25}j_{32}-j_{25}j_{33}-j_{22}j_{35})]\\
+%                          -&j_{21}[j_{55}(j_{12}j_{33}-j_{13}j_{32})-c_1(j_{13}j_{35}+j_{15}j_{32}-j_{15}j_{33}-j_{12}j_{35})]\} \\  
+%                = -j_{56}\{&(j_{32}-j_{33})c_5d_6[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]-j_{33}c_5d_6s_2a_3\\
+%                          +j_{65}[&j_{32}(j_{13}j_{21}-j_{11}j_{23})+\\
+%                                 +&j_{33}(j_{11}j_{22}-j_{12}j_{21})]\} \\
+%                  +j_{66}\{&j_{11}\{j_{55}s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-c_1[s_1s_5d_6c(\theta_3+\theta_4)a_3+c_1c_5d_6c_2a_3]\}\\
+%                          -&j_{21}\{j_{55}c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-c_1[c_1s_5d_6c(\theta_3+\theta_4)a_3-s_1c_5d_6c_2a_3]\}\} \\                                                                                                                                                                                 
+%                = -j_{56}\{&(j_{32}-j_{33})c_5d_6[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]-j_{33}c_5d_6s_2a_3\\
+%                          +j_{65}[&(j_{33}-j_{32})[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]A_2^c+j_{33}s_2a_3A_2^c\} \\
+%                  +j_{66}\{&-j_{55}a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]A_2^c+c_1s_5d_6c(\theta_3+\theta_4)a_3A_2^c-c_1c_5d_6c_2a_3D\}\\
+%                = -&j_{56}(c_5d_6-j_{65}A_2^c)(j_{32}-j_{33})[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+\\
+%                  +&j_{56}(c_5d_6-j_{65}A_2^c)j_{33}s_2a_3\\
+%                  +j_{66}\{&-j_{55}a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]A_2^c+c_1s_5d_6c(\theta_3+\theta_4)a_3A_2^c-c_1c_5d_6c_2a_3D\}\\    
+%                = -&(j_{56}c_5d_6+j_{65}A_2^c+j_{66}j_{55}A_2^c)a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]+\\
+%                  +j_{66}\{&c_1s_5d_6c(\theta_3+\theta_4)a_3A_2^c-c_1c_5d_6c_2a_3D\}\\
+%                = -&[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)].\{\\
+%                   &(j_{65}+j_{66}j_{55})a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-j_{66}c_1s_5d_6c(\theta_3+\theta_4)a_3\}\\
+%                  -&j_{56}c_5d_6a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-(d_3+d_4+s_5d_6)j_{66}c_1c_5d_6c_2a_3\\
+%                = -&[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)].\{\\
+%                  &[-c(\theta_2+\theta_3+\theta_4)+s_1c_5s^2(\theta_2+\theta_3+\theta_4)]a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-\\
+%                 -&c_1c_5s_5s(\theta_2+\theta_3+\theta_4)d_6c(\theta_3+\theta_4)a_3\}\\
+%                 -&[s_1c_5c(\theta_2+\theta_3+\theta_4)-c_1s_5]c_5d_6a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]-\\
+%                 -&(d_3+d_4+s_5d_6)c_1c^2_5d_6c_2s(\theta_2+\theta_3+\theta_4)a_3\\                  
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{45}) = j_{56}[&-(j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33})]\\
+%                 -j_{66}[&-c_1j_{11}(j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})\\
+%                         &+c_1j_{21}(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})] \\
+%                = j_{66}c_1[&j_{11}(s_1a_3s_3a_4)-j_{21}(c_1a_3s_3a_4)] \\   
+%                = -c_1c_5&s_3s(\theta_2+\theta_3+\theta_4)a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]                                                                                                                                           
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{46}) =       c_1[(&j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+%                           -(&j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+%                           +(&j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33})]\\
+%                    +j_{55}(&j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33}) \\
+%                   +j_{65}[&-c_1j_{11}(j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})\\
+%                           &+c_1j_{21}(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})] \\  
+%                = c_1[&j_{14}(j_{25}j_{33}-j_{25}j_{32})+j_{13}(j_{25}j_{32}-j_{25}j_{34})+j_{12}(j_{25}j_{34}-j_{25}j_{33})\\
+%                     +&j_{15}(j_{22}j_{33}-j_{23}j_{32}+j_{23}j_{34}-j_{24}j_{33}+j_{24}j_{32}-j_{22}j_{34})] \\
+%                     +&j_{65}[-c_1j_{11}(s_1a_3s_3a_4)+c_1j_{21}(c_1a_3s_3a_4)] \\   
+%                = c_1[&j_{14}j_{25}(-c_2a_3)+j_{13}j_{25}[c_2a_3+c(\theta_2+\theta_3)a_4]+j_{12}j_{25}[-c(\theta_2+\theta_3)a_4]\\
+%                     +&j_{15}(s_1a_3s_3a_4)] \\
+%                     +&j_{65}(c_1a_3s_3a_4)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\  
+%                =  c_1&j_{25}[-c_1c_2s(\theta_2+\theta_3)a_3a_4+c_1s_2c(\theta_2+\theta_3)a_3a_4]\\
+%                     +&[c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]s_1d_6(c_1a_3s_3a_4) \\
+%                     -&c(\theta_2+\theta_3+\theta_4)(c_1a_3s_3a_4)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\ 
+%                =    -&[s_1s_5c(\theta_2+\theta_3+\theta_4)+c_1c_5]c_1d_6(c_1s_3a_3a_4)\\
+%                     +&[c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]s_1d_6(c_1a_3s_3a_4) \\
+%                     -&c(\theta_2+\theta_3+\theta_4)(c_1a_3s_3a_4)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                = -&(c_1a_3s_3a_4)\{c_5d_6+c(\theta_2+\theta_3+\theta_4)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\                                                                                                                                                                                                                                                                          
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{51}) = -j_{65}[j_{46}(&j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33})\\
+%                  +j_{66}\{-s_1[(&j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+%                              -(&j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+%                              +(&j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33})] \\
+%                        +j_{45}(&j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33}) \} \\
+%                = -j_{66}s_1(&j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{13}j_{25}j_{34} \\
+%                            -&j_{14}j_{25}j_{32}-j_{15}j_{22}j_{34}+j_{15}j_{24}j_{32}+j_{12}j_{25}j_{34} \\
+%                            +&j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{12}j_{25}j_{33}) \\
+%                = -j_{66}s_1[&j_{32}(j_{15}j_{24}-j_{14}j_{25}+j_{13}j_{25}-j_{15}j_{23}) \\
+%                            +&j_{33}(j_{14}j_{25}-j_{15}j_{24}+j_{15}j_{22}-j_{12}j_{25}) \\
+%                            +&j_{34}(j_{15}j_{23}-j_{13}j_{25}+j_{12}j_{25}-j_{15}j_{22})] \\
+%                = -j_{66}s_1\{&j_{32}(-c_5d_6s(\theta_2+\theta_3)a_4)+j_{33}\{c_5d_6[s_2a_3+s(\theta_2+\theta_3)a_4]\}+j_{34}(-c_5d_6s_2a_3) \} \\
+%                = -j_{66}s_1\{&-c_2a_3[c_5d_6s(\theta_2+\theta_3)a_4]+c(\theta_2+\theta_3)a_4c_5d_6s_2a_3 \} \\
+%                = s_1c_5^2s_3s&(\theta_2+\theta_3+\theta_4)d_6a_3a_4                      
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{52}) = -j_{46}(&j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+%                   +j_{65}&j_{46}(j_{11}j_{23}j_{34}+j_{14}j_{21}j_{33}-j_{13}j_{21}j_{34}-j_{11}j_{24}j_{33}) \\
+%                  -j_{66}\{&j_{11}[(j_{23}j_{34}-j_{24}j_{33})j_{45}+s_1(j_{24}j_{35}+j_{25}j_{33}-j_{25}j_{34}-j_{23}j_{35})]-\\
+%                          -&j_{21}[(j_{13}j_{34}-j_{14}j_{33})j_{45}+s_1(j_{14}j_{35}+j_{15}j_{33}-j_{15}j_{34}-j_{13}j_{35})]\} \\  
+%                = -j_{46}[&(j_{14}j_{25}-j_{15}j_{24})j_{33}+(j_{15}j_{23}-j_{13}j_{25})j_{34}] \\
+%                   +j_{65}&j_{46}[(j_{11}j_{23}-j_{13}j_{21})j_{34}+(j_{14}j_{21}-j_{11}j_{24})j_{33}] \\
+%                  -j_{66}\{&j_{11}[s_1s_4a_4(a_5+c_5d_6)j_{45}+s_1(s_1s_5d_6c_4a_4+c_1c_5d_6c(\theta_2+\theta_3)a_4)]-\\
+%                          -&j_{21}[c_1s_4a_4(a_5+c_5d_6)j_{45}+s_1(c_1s_5d_6c_4a_4-s_1c_5d_6c(\theta_2+\theta_3)a_4)]\} \\
+%                = -j_{46}[&c_5s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6)(j_{34}-j_{33})+c_5d_6s(\theta_2+\theta_3)a_4j_{34}] \\
+%                   +j_{65}&j_{46}[s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)A_2^c(j_{34}-j_{33})+s(\theta_2+\theta_3)a_4A_2^cj_{34}] \\
+%                 -j_{66}\{&j_{11}[s_1s_4a_4(a_5+c_5d_6)j_{45}+s_1(s_1s_5d_6c_4a_4+c_1c_5d_6c(\theta_2+\theta_3)a_4)]-\\
+%                         -&j_{21}[c_1s_4a_4(a_5+c_5d_6)j_{45}+s_1(c_1s_5d_6c_4a_4-s_1c_5d_6c(\theta_2+\theta_3)a_4)]\} \\  
+%                = -j_{46}[&-c_5d_6s_4a_4(a_5+c_5d_6)]\\
+%                   +j_{65}&j_{46}[-s_4a_4(a_5+c_5d_6)A_2^c]\\
+%                  -j_{66}[&-j_{45}s_4a_4(a_5+c_5d_6)A_2^c-s_1s_5d_6c_4a_4A_2^c+s_1c_5d_6c(\theta_2+\theta_3)a_4)D]\\ 
+%                = [c_1&c_5c(\theta_2+\theta_3+\theta_4)+s_1s_5][c_5d_6s_4a_4(a_5+c_5d_6)]\\
+%                  +[c_1&c_5c(\theta_2+\theta_3+\theta_4)+s_1s_5][s_4a_4c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)A_2^c]\\
+%                  +c_1&c_5s^2(\theta_2+\theta_3+\theta_4)s_4a_4(a_5+c_5d_6)A_2^c+s_1s(\theta_2+\theta_3+\theta_4)s_5c_5d_6c_4a_4A_2^c-\\
+%                  -s_1&c^2_5d_6s(\theta_2+\theta_3)c(\theta_2+\theta_3+\theta_4)a_4)D\\
+%                = &\\                                                                                                   
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{53}) = j_{46}(&j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+%                  -j_{65}&j_{46}(j_{11}j_{22}j_{34}+j_{14}j_{21}j_{32}-j_{12}j_{21}j_{34}-j_{11}j_{24}j_{32}) \\
+%                  +j_{66}\{&j_{11}[(j_{22}j_{34}-j_{24}j_{32})j_{45}+s_1(j_{24}j_{35}+j_{25}j_{32}-j_{25}j_{34}-j_{22}j_{35})]-\\
+%                          -&j_{21}[(j_{12}j_{34}-j_{14}j_{32})j_{45}+s_1(j_{14}j_{35}+j_{15}j_{32}-j_{15}j_{34}-j_{12}j_{35})]\} \\  
+%                = j_{46}[&(j_{14}j_{25}-j_{15}j_{24})j_{32}+(j_{15}j_{22}-j_{12}j_{25})j_{34}] \\
+%                  -j_{65}&j_{46}[(j_{11}j_{22}-j_{12}j_{21})j_{34}+(j_{14}j_{21}-j_{11}j_{24})j_{32}] \\
+%                  +j_{66}\{&j_{11}[s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]j_{45}+s_1s_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]+\\
+%                    +s_1c_1&c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4)]]-\\
+%                          -&j_{21}[c_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]j_{45}+s_1c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-\\
+%                    -s_1s_1&c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4)]]\} \\
+%                = j_{46}\{&c_5s(\theta_2+\theta_3+\theta_4)d_6(a_5+c_5d_6)(j_{34}-j_{32})+c_5d_6[s_2a_3+s(\theta_2+\theta_3)a_4]j_{34}\} \\
+%                   -j_{65}&j_{46}\{s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)A_2^c(j_{34}-j_{32})+[s_2a_3+s(\theta_2+\theta_3)a_4]A_2^cj_{34}\} \\
+%                   +j_{66}&\{-\{(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]j_{45}+s_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]\}.\\
+%                          &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\\
+%                      +s_1&c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4](d_3+d_4+s_5d_6)\} \\          
+%                = -[c_1&c_5c(\theta_2+\theta_3+\theta_4)+s_1s_5]c_5d_6(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-\\
+%                  -[c_1&c_5c(\theta_2+\theta_3+\theta_4)+s_1s_5]c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)A_2^c[s(\theta_3+\theta_4)a_3+s_4a_4]\\
+%                   -c_1&c_5s^2(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)A_2^c[s(\theta_3+\theta_4)a_3+s_4a_4]+\\
+%                   -s_1&s_5d_6c_5A_2^cs(\theta_2+\theta_3+\theta_4)[c(\theta_3+\theta_4)a_3+c_4a_4]\\
+%                   +s_1&c_5d_6c_5s(\theta_2+\theta_3+\theta_4)[c_2a_3+c(\theta_2+\theta_3)a_4](d_3+d_4+s_5d_6) \\
+%                = +c_5&s(\theta_2+\theta_3+\theta_4)[c_2a_3+c(\theta_2+\theta_3)a_4][s_1c_5d_6](d_3+d_4+s_5d_6)- \\
+%                  -c_5&c_1[c(\theta_2+\theta_3+\theta_4)c_5d_6+A_2^c](a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-\\
+%                  -s_1&s_5[c_5d_6+c(\theta_2+\theta_3+\theta_4)A_2^c](a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-\\
+%                  -s_1&s_5s(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6[c(\theta_3+\theta_4)a_3 + c_4a_4] \\                  
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{54}) = -j_{46}(&j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33}) \\
+%                  +j_{65}&j_{46}(j_{11}j_{22}j_{33}+j_{13}j_{21}j_{32}-j_{12}j_{21}j_{33}-j_{11}j_{23}j_{32}) \\
+%                  -j_{66}\{&j_{11}[(j_{22}j_{33}-j_{23}j_{32})j_{45}+s_1(j_{23}j_{35}+j_{25}j_{32}-j_{25}j_{33}-j_{22}j_{35})]-\\
+%                          -&j_{21}[(j_{12}j_{33}-j_{13}j_{32})j_{45}+s_1(j_{13}j_{35}+j_{15}j_{32}-j_{15}j_{33}-j_{12}j_{35})]\} \\  
+%                = -j_{46}[&(j_{13}j_{25}-j_{15}j_{23})j_{32}+(j_{15}j_{22}-j_{12}j_{25})j_{33}] \\
+%                  +j_{65}&j_{46}[(j_{11}j_{22}-j_{12}j_{21})j_{33}+(j_{13}j_{21}-j_{11}j_{23})j_{32}] \\
+%                  -j_{66}\{&j_{11}[s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{45}+s_1s_1s_5d_6c(\theta_3+\theta_4)a_3+\\
+%                    +s_1c_1&c_5d_6c_2a_3]-\\
+%                          -&j_{21}[c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{45}+s_1c_1s_5d_6c(\theta_3+\theta_4)a_3-\\
+%                    -s_1s_1&c_5d_6c_2a_3]\} \\
+%                = -j_{46}\{&c_5d_6[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)](j_{33}-j_{32})+c_5d_6s_2a_3j_{33}\} \\
+%                   +j_{65}&j_{46}\{[s(\theta_2+\theta_3)a_4+s(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]A_2^c(j_{33}-j_{32})+s_2a_3A_2^cj_{33}\} \\
+%                   -j_{66}&\{-\{a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{45}+s_1s_5d_6c(\theta_3+\theta_4)a_3\}A_2^c\\
+%                      +s_1&c_5d_6c_2a_3(d_3+d_4+s_5d_6)\} \\          
+%                = [c_1&c_5c(\theta_2+\theta_3+\theta_4)+s_1s_5]c_5d_6[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]a_3\\
+%                 +[c_1&c_5c(\theta_2+\theta_3+\theta_4)+s_1s_5]c(\theta_2+\theta_3+\theta_4)[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]a_3A_2^c\\
+%                  +c_1&c_5s(\theta_2+\theta_3+\theta_4)s(\theta_2+\theta_3+\theta_4)[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]a_3A_2^c\\
+%                  +s_1&c_5s(\theta_2+\theta_3+\theta_4)s_5d_6c(\theta_3+\theta_4)a_3A_2^c\\
+%                  -s_1&c_5s(\theta_2+\theta_3+\theta_4)c_5d_6c_2a_3(d_3+d_4+s_5d_6)\\             
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{55}) = -j_{46}[&-(j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33})]\\
+%                  +j_{66}[&s_1j_{11}(j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})\\
+%                         -&s_1j_{21}(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})] \\
+%                = j_{66}s_1[&j_{11}(s_1a_3s_3a_4)-j_{21}(c_1a_3s_3a_4)] \\   
+%                = -s_1c_5&s_3s(\theta_2+\theta_3+\theta_4)a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]                                                                                                                                           
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{56}) =       s_1[(&j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+%                           -(&j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+%                           +(&j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33})]\\
+%                    -j_{45}(&j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33}) \\
+%                    -j_{65}[&s_1j_{11}(j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})\\
+%                           -&s_1j_{21}(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})] \\  
+%                = s_1[&j_{14}(j_{25}j_{33}-j_{25}j_{32})+j_{13}(j_{25}j_{32}-j_{25}j_{34})+j_{12}(j_{25}j_{34}-j_{25}j_{33})\\
+%                     +&j_{15}(j_{22}j_{33}-j_{23}j_{32}+j_{23}j_{34}-j_{24}j_{33}+j_{24}j_{32}-j_{22}j_{34})] \\
+%                     -&j_{65}[s_1j_{11}(s_1a_3s_3a_4)-s_1j_{21}(c_1a_3s_3a_4)] \\   
+%                = s_1[&j_{14}j_{25}(-c_2a_3)+j_{13}j_{25}[c_2a_3+c(\theta_2+\theta_3)a_4]+j_{12}j_{25}[-c(\theta_2+\theta_3)a_4]\\
+%                     +&j_{15}(s_1a_3s_3a_4)] \\
+%                     +&j_{65}(s_1a_3s_3a_4)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\  
+%                =  s_1&j_{25}[-c_1c_2s(\theta_2+\theta_3)a_3a_4+c_1s_2c(\theta_2+\theta_3)a_3a_4]\\
+%                     +&[c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]s_1d_6(s_1a_3s_3a_4) \\
+%                     -&c(\theta_2+\theta_3+\theta_4)(s_1a_3s_3a_4)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\ 
+%                =    -&[s_1s_5c(\theta_2+\theta_3+\theta_4)+c_1c_5]c_1d_6(s_1s_3a_3a_4)\\
+%                     +&[c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]s_1d_6(s_1a_3s_3a_4) \\
+%                     -&c(\theta_2+\theta_3+\theta_4)(s_1a_3s_3a_4)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                = -&(s_1a_3s_3a_4)\{c_5d_6+c(\theta_2+\theta_3+\theta_4)[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]\} \\                                                                                                                                                                                                                                                                          
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{61}) =  j_{46}\{c_1[(&j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+%                              -(&j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+%                              +(&j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33})]\\
+%                        +j_{55}(&j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33})\}\\       
+%                  -j_{56}\{-s_1[(&j_{13}j_{24}j_{35}+j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{14}j_{23}j_{35}-j_{13}j_{25}j_{34}) \\
+%                              -(&j_{12}j_{24}j_{35}+j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{14}j_{22}j_{35}-j_{12}j_{25}j_{34}) \\
+%                              +(&j_{12}j_{23}j_{35}+j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{13}j_{22}j_{35}-j_{12}j_{25}j_{33})] \\
+%                        +j_{45}(&j_{12}j_{23}j_{34}+j_{13}j_{24}j_{32}+j_{14}j_{22}j_{33}-j_{14}j_{23}j_{32}-j_{13}j_{22}j_{34}-j_{12}j_{24}j_{33}) \} \\
+%                =  j_{46}c_1[(&j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{13}j_{25}j_{34}) \\
+%                            -(&j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{12}j_{25}j_{34}) \\
+%                            +(&j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{12}j_{25}j_{33})]\\      
+%                  +j_{56}s_1[(&j_{14}j_{25}j_{33}+j_{15}j_{23}j_{34}-j_{15}j_{24}j_{33}-j_{13}j_{25}j_{34}) \\
+%                            -(&j_{14}j_{25}j_{32}+j_{15}j_{22}j_{34}-j_{15}j_{24}j_{32}-j_{12}j_{25}j_{34}) \\
+%                            +(&j_{13}j_{25}j_{32}+j_{15}j_{22}j_{33}-j_{15}j_{23}j_{32}-j_{12}j_{25}j_{33})] \\    
+%                =  c_5c(\theta_2&+\theta_3+\theta_4)[(j_{14}-j_{12})j_{25}j_{33}+(j_{13}-j_{14})j_{25}j_{32}+(j_{12}-j_{13})j_{25}j_{34} \\
+%                             +&j_{15}(j_{23}j_{34}+j_{22}j_{33}+j_{24}j_{32}-j_{23}j_{32}-j_{22}j_{34}-j_{24}j_{33})]\\
+%                =  c_5c(\theta_2&+\theta_3+\theta_4)\{j_{25}[c_1s_2a_3c(\theta_2+\theta_3)a_4-c_1s(\theta_2+\theta_3)a_4c_2a_3] \\
+%                             +&[c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]d_6s_1s_3a_3a_4\}\\
+%                =  c_5c(\theta_2&+\theta_3+\theta_4)\{-[s_1s_5c(\theta_2+\theta_3+\theta_4)+c_1c_5]d_6c_1s_3a_4a_3 \\
+%                             +&[c_1s_5c(\theta_2+\theta_3+\theta_4)-s_1c_5]d_6s_1s_3a_3a_4\}\\ 
+%                =  -c_5c(&\theta_2+\theta_3+\theta_4)c_5d_6s_3a_3a_4                                                                                                                         
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{62}) = -j_{46}\{&j_{11}[(j_{23}j_{34}-j_{24}j_{33})j_{55}-c_1(j_{24}j_{35}-j_{25}j_{34}+j_{25}j_{33}-j_{23}j_{35})] -\\
+%                          -&j_{21}[(j_{13}j_{34}-j_{14}j_{33})j_{55}-c_1(j_{14}j_{35}-j_{15}j_{34}+j_{15}j_{33}-j_{13}j_{35})]\} \\      
+%                  +j_{56}\{&j_{11}[(j_{23}j_{34}-j_{24}j_{33})j_{45}+s_1(j_{24}j_{35}-j_{25}j_{34}+j_{25}j_{33}-j_{23}j_{35})] -\\
+%                          -&j_{21}[(j_{13}j_{34}-j_{14}j_{33})j_{45}+s_1(j_{14}j_{35}-j_{15}j_{34}+j_{15}j_{33}-j_{13}j_{35})]\} \\
+%                = -j_{46}\{&j_{11}[s_1s_4a_4(a_5+c_5d_6)j_{55}-c_1s_1s_5d_6c_4a_4-c_1c_1c_5d_6c(\theta_2+\theta_3)a_4] -\\
+%                          -&j_{21}[c_1s_4a_4(a_5+c_5d_6)j_{55}-c_1c_1s_5d_6c_4a_4+c_1s_1c_5d_6c(\theta_2+\theta_3)a_4]\} \\    
+%                  +j_{56}\{&j_{11}[s_1s_4a_4(a_5+c_5d_6)j_{45}+s_1s_1s_5d_6c_4a_4+s_1c_1c_5d_6c(\theta_2+\theta_3)a_4] -\\
+%                          -&j_{21}[c_1s_4a_4(a_5+c_5d_6)j_{45}+s_1c_1s_5d_6c_4a_4-s_1s_1c_5d_6c(\theta_2+\theta_3)a_4]\} \\
+%                = -j_{46}\{&[c_1s_5d_6c_4a_4-s_4a_4(a_5+c_5d_6)j_{55}][a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                          -&c_1c_5d_6c(\theta_2+\theta_3)a_4(d_3+d_4+s_5d_6) \} \\ 
+%                  +j_{56}\{&[-s_1s_5d_6c_4a_4-s_4a_4(a_5+c_5d_6)j_{45}][a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+\\
+%                          +&s_1c_5d_6c(\theta_2+\theta_3)a_4(d_3+d_4+s_5d_6) \} \\  
+%                = [-c_5c(&\theta_2+\theta_3+\theta_4)s_5d_6c_4a_4+s_4a_4(a_5+c_5d_6)s_5s(\theta_2+\theta_3+\theta_4)].\\
+%                         &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                         &c_5c(\theta_2+\theta_3+\theta_4)c_5d_6c(\theta_2+\theta_3)a_4(d_3+d_4+s_5d_6) \\
+%                = [s_5(a_5&+c_5d_6)c(\theta_2+\theta_3)a_4 - s_5c(\theta_2+\theta_3+\theta_4)(a_5+2c_5d_6)c_4a_4].\\
+%                         &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                         &c_5c(\theta_2+\theta_3+\theta_4)c_5d_6c(\theta_2+\theta_3)a_4(d_3+d_4+s_5d_6) \\                                                                                                                                        
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{63}) =  j_{46}\{&j_{11}[(j_{22}j_{34}-j_{24}j_{32})j_{55}-c_1(j_{24}j_{35}-j_{25}j_{34}+j_{25}j_{32}-j_{22}j_{35})] -\\
+%                          -&j_{21}[(j_{12}j_{34}-j_{14}j_{32})j_{55}-c_1(j_{14}j_{35}-j_{15}j_{34}+j_{15}j_{32}-j_{12}j_{35})]\} \\      
+%                  -j_{56}\{&j_{11}[(j_{22}j_{34}-j_{24}j_{32})j_{45}+s_1(j_{24}j_{35}-j_{25}j_{34}+j_{25}j_{32}-j_{22}j_{35})] -\\
+%                          -&j_{21}[(j_{12}j_{34}-j_{14}j_{32})j_{45}+s_1(j_{14}j_{35}-j_{15}j_{34}+j_{15}j_{32}-j_{12}j_{35})]\} \\
+%                = j_{46}\{&j_{11}\{s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]j_{55}-c_1s_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-\\
+%                          -&c_1c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\} -\\
+%                          -&j_{21}\{c_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]j_{55}-c_1c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]+\\
+%                          +&c_1s_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\}\} \\    
+%                  -j_{56}\{&j_{11}\{s_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]j_{45}+s_1s_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]+\\
+%                          +&s_1c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\} -\\
+%                          -&j_{21}\{c_1(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]j_{45}+s_1c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-\\
+%                          -&s_1s_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]\}\} \\
+%                = j_{46}\{&[c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-[s(\theta_3+\theta_4)a_3+s_4a_4](a_5+c_5d_6)j_{55}].\\
+%                           &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                          -&c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4](d_3+d_4+s_5d_6) \} \\ 
+%                  -j_{56}\{&[-s_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-[s(\theta_3+\theta_4)a_3+s_4a_4](a_5+c_5d_6)j_{45}].\\
+%                           &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+\\
+%                          +&s_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4](d_3+d_4+s_5d_6) \} \\  
+%                = [c_5c(&\theta_2+\theta_3+\theta_4)s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-\\
+%                        -&[s(\theta_3+\theta_4)a_3+s_4a_4](a_5+c_5d_6)s_5s(\theta_2+\theta_3+\theta_4)].\\
+%                         &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                        -&c_5c(\theta_2+\theta_3+\theta_4)c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4](d_3+d_4+s_5d_6) \\                                                                                                                                    
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{64}) = -j_{46}\{&j_{11}[(j_{22}j_{33}-j_{23}j_{32})j_{55}-c_1(j_{23}j_{35}-j_{25}j_{33}+j_{25}j_{32}-j_{22}j_{35})] -\\
+%                          -&j_{21}[(j_{12}j_{33}-j_{13}j_{32})j_{55}-c_1(j_{13}j_{35}-j_{15}j_{33}+j_{15}j_{32}-j_{12}j_{35})]\} \\      
+%                  +j_{56}\{&j_{11}[(j_{22}j_{33}-j_{23}j_{32})j_{45}+s_1(j_{23}j_{35}-j_{25}j_{33}+j_{25}j_{32}-j_{22}j_{35})] -\\
+%                          -&j_{21}[(j_{12}j_{33}-j_{13}j_{32})j_{45}+s_1(j_{13}j_{35}-j_{15}j_{33}+j_{15}j_{32}-j_{12}j_{35})]\} \\
+%                = -j_{46}\{&j_{11}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{55}-c_1s_1s_5d_6c(\theta_3+\theta_4)a_3-\\
+%                          -&c_1c_1c_5d_6c_2a_3\} -\\
+%                          -&j_{21}\{c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{55}-c_1c_1s_5d_6c(\theta_3+\theta_4)a_3+\\
+%                          +&c_1s_1c_5d_6c_2a_3\}\} \\    
+%                  +j_{56}\{&j_{11}\{s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{45}+s_1s_1s_5d_6c(\theta_3+\theta_4)a_3+\\
+%                          +&s_1c_1c_5d_6c_2a_3\} -\\
+%                          -&j_{21}\{c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{45}+s_1c_1s_5d_6c(\theta_3+\theta_4)a_3-\\
+%                          -&s_1s_1c_5d_6c_2a_3\}\} \\
+%                = -j_{46}\{&[c_1s_5d_6c(\theta_3+\theta_4)a_3-a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{55}].\\
+%                           &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                          -&c_1c_5d_6c_2a_3(d_3+d_4+s_5d_6) \} \\ 
+%                  +j_{56}\{&[-s_1s_5d_6c(\theta_3+\theta_4)a_3-a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{45}].\\
+%                           &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]+\\
+%                          +&s_1c_5d_6c_2a_3(d_3+d_4+s_5d_6) \} \\  
+%                = [-c_5c(&\theta_2+\theta_3+\theta_4)s_5d_6c(\theta_3+\theta_4)a_3+\\
+%                        +&a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]s_5s(\theta_2+\theta_3+\theta_4)].\\
+%                         &[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\
+%                        +&c_5c(\theta_2+\theta_3+\theta_4)c_5d_6c_2a_3(d_3+d_4+s_5d_6) \\                                                                                                                                    
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{65}) =  j_{46}[-&j_{11}c_1(j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34}) \\
+%                          +&j_{21}c_1(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})]\\
+%                  +j_{56}[-&j_{11}s_1(j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})\\
+%                          +&j_{21}s_1(j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})] \\
+%                = c_5c(&\theta_2+\theta_3+\theta_4)[-j_{11}(s_1a_3s_3a_4)+j_{21}(c_1a_3s_3a_4)] \\   
+%                = c_5c(&\theta_2+\theta_3+\theta_4)s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)]  \\                                                                                                                                         
+%\end{align*}
+%
+%\begin{align*}
+%    Cof(j_{66}) = j_{11}\{c_1[&(j_{23}j_{34}-j_{24}j_{33})j_{45}+s_1(j_{24}j_{35}+j_{25}j_{33}-j_{25}j_{34}-j_{23}j_{35}) \\
+%                             -&(j_{22}j_{34}-j_{24}j_{32})j_{45}-s_1(j_{24}j_{35}+j_{25}j_{32}-j_{25}j_{34}-j_{22}j_{35}) \\
+%                             +&(j_{22}j_{33}-j_{23}j_{32})j_{45}+s_1(j_{23}j_{35}+j_{25}j_{32}-j_{25}j_{33}-j_{22}j_{35})]\\
+%                   +j_{55}s_1(&j_{22}j_{33}+j_{23}j_{34}+j_{24}j_{32}-j_{24}j_{33}-j_{23}j_{32}-j_{22}j_{34})\}\\
+%                 -j_{21}\{c_1[&(j_{13}j_{34}-j_{14}j_{33})j_{45}+s_1(j_{14}j_{35}+j_{15}j_{33}-j_{15}j_{34}-j_{13}j_{35}) \\
+%                             -&(j_{12}j_{34}-j_{14}j_{32})j_{45}-s_1(j_{14}j_{35}+j_{15}j_{32}-j_{15}j_{34}-j_{12}j_{35}) \\
+%                             +&(j_{12}j_{33}-j_{13}j_{32})j_{45}+s_1(j_{13}j_{35}+j_{15}j_{32}-j_{15}j_{33}-j_{12}j_{35})]\\
+%                   +j_{55}s_1(&j_{12}j_{33}+j_{13}j_{34}+j_{14}j_{32}-j_{14}j_{33}-j_{13}j_{32}-j_{12}j_{34})\}\\   
+%                = j_{11}\{c_1[&s_1s_4a_4(a_5+c_5d_6)j_{45}+s_1[s_1s_5d_6c_4a_4+c_1c_5d_6c(\theta_2+\theta_3)a_4] \\
+%                             -&s_1[s(\theta_3+\theta_4)a_3+s_4a_4](a_5+c_5d_6)j_{45}-s_1s_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]-\\
+%                             -&s_1c_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4] \\
+%                             +&s_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{45}+s_1s_1s_5d_6c(\theta_3+\theta_4)a_3+s_1c_1c_5d_6c_2a_3]\\
+%                   +j_{55}s_1(&s_1s_3a_3a_4)\}\\
+%                 -j_{21}\{c_1[&c_1s_4a_4(a_5+c_5d_6)j_{45}+s_1[c_1s_5d_6c_4a_4-s_1c_5d_6c(\theta_2+\theta_3)a_4] \\
+%                             -&c_1[s(\theta_3+\theta_4)a_3+s_4a_4](a_5+c_5d_6)j_{45}-s_1c_1s_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4]+\\
+%                             +&s_1s_1c_5d_6[c_2a_3+c(\theta_2+\theta_3)a_4]) \\
+%                             +&c_1a_3[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]j_{45}+s_1c_1s_5d_6c(\theta_3+\theta_4)a_3-s_1s_1c_5d_6c_2a_3]\\
+%                   +j_{55}s_1(&c_1s_3a_3a_4)\}\\  
+%                = j_{11}[j_{45}&c_1s_1s_3a_3a_4+j_{55}s_1s_1s_3a_3a_4]-j_{21}[j_{45}c_1c_1s_3a_3a_4+j_{55}s_1c_1s_3a_3a_4]\\ 
+%                = -s(\theta_2+&\theta_3+\theta_4)s_3a_3a_4[a_2+c_2a_3+c(\theta_2+\theta_3)a_4+c(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)] \\                                                                                                                                                                                                                                                                                                                        
+%\end{align*}
+
+\vfill
+
+\section{Cofatores}
+\label{AnexoJacobiana-SecCofatores}
+
+\begin{align*}
+    Cof(j_{11}) &= s_1s_3a_3a_4c_5 \\    
+    Cof(j_{12}) &= -c_5c(\theta_2+\theta_3)a_4\{c_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]+s_1(d_3+d_4+2s_5d_6)\}+ \\
+                   & \;\;\;\; +\!s_1s_5s(\theta_2+\theta_3+\theta_4)(a5+2c_5d_6)s_4a_4 \\
+    Cof(j_{13}) &= c_5[c_2a_3+c(\theta_2+\theta_3)a_4]\{c_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]+s_1(d_3+d_4+2s_5d_6)\}- \\
+                   & \;\;\;\; -s_1s_5s(\theta_2+\theta_3+\theta_4)(a5+2c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4] \\
+    Cof(j_{14}) &= -c_5c_2a_3\{c_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]+s_1(d_3+d_4+2s_5d_6)\}+ \\
+                   & \;\;\;\; +\!s_1s_5s(\theta_2+\theta_3+\theta_4)[s_3a_4+s(\theta_3+\theta_4)(a_5+2c_5d_6)]a_3 \\
+    Cof(j_{15}) &= s_1s_3a_3a_4c_5c(\theta_2+\theta_3+\theta_4) \\ 
+    Cof(j_{16}) &= -s_1s_3a_3a_4s(\theta_2+\theta_3+\theta_4) \\
+    Cof(j_{21}) &= -c_1s_3a_3a_4c_5 \\    
+    Cof(j_{22}) &= -c_5c(\theta_2+\theta_3)a_4\{s_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]-c_1(d_3+d_4+2s_5d_6)\}- \\
+                   & \;\;\;\; -\!c_1s_5s(\theta_2+\theta_3+\theta_4)(a5+2c_5d_6)s_4a_4 \\
+    Cof(j_{23}) &= c_5[c_2a_3+c(\theta_2+\theta_3)a_4]\{s_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]-c_1(d_3+d_4+2s_5d_6)\}+ \\
+                   & \;\;\;\; +c_1s_5s(\theta_2+\theta_3+\theta_4)(a5+2c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4] \\
+    Cof(j_{24}) &= -c_5c_2a_3\{s_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]-c_1(d_3+d_4+2s_5d_6)\}- \\
+                   & \;\;\;\; -\!c_1s_5s(\theta_2+\theta_3+\theta_4)[s_3a_4+s(\theta_3+\theta_4)(a_5+2c_5d_6)]a_3 \\
+    Cof(j_{25}) &= -c_1s_3a_3a_4c_5c(\theta_2+\theta_3+\theta_4) \\ 
+    Cof(j_{26}) &= c_1s_3a_3a_4s(\theta_2+\theta_3+\theta_4) \\  
+    Cof(j_{31}) &= 0 \\   
+    Cof(j_{32}) &= -c_5s(\theta_2+\theta_3)a_4[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6] \\
+    Cof(j_{33}) &= c_5[s_2a_3+s(\theta_2+\theta_3)a_4][A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6] \\
+    Cof(j_{34}) &= -c_5s_2a_3[[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]] \\
+    Cof(j_{35}) &= 0 \\
+    Cof(j_{36}) &= 0 \\
+    Cof(j_{41}) &= c_1s_3a_3a_4c_5s(\theta_2+\theta_3+\theta_4)c_5d_6 \\
+    Cof(j_{42}) &= -c_5c(\theta_2+\theta_3)a_4c_1c_5d_6s(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)- \\
+                    & \;\;\;\; -\!\{c_5s_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]-c_1s_5[A_2^cc(\theta_2+\theta_3+\theta_4)+c_5d_6]\}(a_5+c_5d_6)s_4a_4+\\
+                    & \;\;\;\; +\!c_1s_5s(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6c_4a_4 \\
+    Cof(j_{43}) &= c_5[c_2a_3+c(\theta_2+\theta_3)a_4]c_1c_5d_6s(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)+ \\
+                    & \;\;\;\; +\!\{c_5s_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]-\\
+                    & \;\;\;\; -\!c_1s_5[A_2^cc(\theta_2+\theta_3+\theta_4)+c_5d_6]\}(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-\\
+                    & \;\;\;\; -\!c_1s_5s(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4] \\    
+\end{align*}
+
+\begin{align*}                
+    Cof(j_{44}) &= -c_5c_2a_3c_1c_5d_6s(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)- \\
+                    & \;\;\;\; -\!\{c_5s_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]-\\
+                    & \;\;\;\; -\!c_1s_5[A_2^cc(\theta_2+\theta_3+\theta_4)+c_5d_6]\}[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]a_3+\\
+                    & \;\;\;\; +\!c_1s_5s(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6c(\theta_3+\theta_4)a_3 \\   
+    Cof(j_{45}) &= -c_1s_3a_3a_4c_5s(\theta_2+\theta_3+\theta_4)A_2^c \\
+    Cof(j_{46}) &= -c_1s_3a_3a_4[c_5d_6+c(\theta_2+\theta_3+\theta_4)A_2^c] \\                
+    Cof(j_{51}) &= s_1s_3a_3a_4c_5s(\theta_2+\theta_3+\theta_4)c_5d_6 \\    
+    Cof(j_{52}) &= -c_5c(\theta_2+\theta_3)a_4s_1c_5d_6s(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)+ \\
+                    & \;\;\;\; +\!\{c_5c_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]+s_1s_5[A_2^cc(\theta_2+\theta_3+\theta_4)+c_5d_6]\}(a_5+c_5d_6)s_4a_4+\\
+                    & \;\;\;\; +\!s_1s_5s(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6c_4a_4 \\    
+    Cof(j_{53}) &= c_5[c_2a_3+c(\theta_2+\theta_3)a_4]s_1c_5d_6s(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)- \\
+                    & \;\;\;\; -\!\{c_5c_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]+\\
+                    & \;\;\;\; +\!s_1s_5[A_2^cc(\theta_2+\theta_3+\theta_4)+c_5d_6]\}(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4]-\\
+                    & \;\;\;\; -\!s_1s_5s(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4] \\        
+    Cof(j_{54}) &= -c_5c_2a_3s_1c_5d_6s(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)+ \\
+                    & \;\;\;\; +\!\{c_5c_1[A_2^c+c(\theta_2+\theta_3+\theta_4)c_5d_6]+\\
+                    & \;\;\;\; +\!s_1s_5[A_2^cc(\theta_2+\theta_3+\theta_4)+c_5d_6]\}[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]a_3+\\
+                    & \;\;\;\; +\!s_1s_5s(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6c(\theta_3+\theta_4)a_3 \\   
+    Cof(j_{55}) &= -s_1s_3a_3a_4c_5s(\theta_2+\theta_3+\theta_4)A_2^c \\
+    Cof(j_{56}) &= -s_1s_3a_3a_4[c_5d_6+c(\theta_2+\theta_3+\theta_4)A_2^c] \\    
+    Cof(j_{61}) &= -s_3a_3a_4c_5c(\theta_2+\theta_3+\theta_4)c_5d_6 \\
+    Cof(j_{62}) &= c_5c(\theta_2+\theta_3)a_4c_5d_6c(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)+ \\
+                    & \;\;\;\; +\!s_5A_2^cs(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)s_4a_4 - s_5c(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6c_4a_4 \\
+    Cof(j_{63}) &= -c_5[c_2a_3+c(\theta_2+\theta_3)a_4]c_5d_6c(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)- \\
+                    & \;\;\;\; -\!s_5A_2^cs(\theta_2+\theta_3+\theta_4)(a_5+c_5d_6)[s(\theta_3+\theta_4)a_3+s_4a_4] + \\
+                    & \;\;\;\; +\!s_5c(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6[c(\theta_3+\theta_4)a_3+c_4a_4] \\     
+    Cof(j_{64}) &= c_5c_2a_3c_5d_6c(\theta_2+\theta_3+\theta_4)(d_3+d_4+s_5d_6)+ \\
+                    & \;\;\;\; +\!s_5A_2^cs(\theta_2+\theta_3+\theta_4)[s_3a_4+s(\theta_3+\theta_4)(a_5+c_5d_6)]a_3 - \\
+                    & \;\;\;\; -\!s_5c(\theta_2+\theta_3+\theta_4)A_2^cc_5d_6c(\theta_3+\theta_4)a_3 \\       
+    Cof(j_{65}) &= s_3a_3a_4c_5c(\theta_2+\theta_3+\theta_4)A_2^c \\
+    Cof(j_{66}) &= -s_3a_3a_4s(\theta_2+\theta_3+\theta_4)A_2^c \\                                                         
+\end{align*}

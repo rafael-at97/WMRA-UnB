@@ -1,0 +1,231 @@
+\chapter{Cinemática Inversa para o Manipulador}
+\label{Anexo-CinInv}
+
+%\chapter{Matrizes auxiliares calculadas para a análise cinemática do manipulador}
+%\label{AnexoCinematica}
+
+\section{Transformações}
+\label{AnexoJacobiana-Transformacoes}
+
+Inicialmente, agrupando as duas últimas transformações.
+
+\begin{equation}
+    ^4_6T = ^4_5T*^5_6T =   \begin{bmatrix}
+                                s\theta_5'c\theta_6 & -s\theta_5's\theta_6 & c\theta_5' & c\theta_5'd_6 + a_4 \\
+                                s\theta_6 & c\theta_6 & 0 & 0 \\
+                                -c\theta_5'c\theta_6 & c\theta_5's\theta_6 & s\theta_5' & s\theta_5'd_6 \\
+                                0 & 0 & 0 & 1 \\
+                            \end{bmatrix}
+\end{equation}
+
+Incluindo a transformação $^3_4T$:
+
+\begin{equation}
+    ^3_6T = ^3_4T*^4_6T =   \begin{bmatrix}
+                                c\theta_4s\theta_5'c\theta_6 - s\theta_4s\theta_6 & -c\theta_4s\theta_5's\theta_6 - s\theta_4c\theta_6 & c\theta_4c\theta_5' & c\theta_4c\theta_5'd_6 + c\theta_4a_4 + a_3 \\
+                                s\theta_4s\theta_5'c\theta_6 + c\theta_4s\theta_6 & -s\theta_4s\theta_5's\theta_6 + c\theta_4c\theta_6 & s\theta_4c\theta_5' & s\theta_4(c\theta_5'd_6 + a_4) \\
+                                -c\theta_5'c\theta_6 & c\theta_5's\theta_6 & s\theta_5' & s\theta_5'd_6 \\
+                                0 & 0 & 0 & 1 \\
+                            \end{bmatrix}
+\end{equation}
+
+Próximo passo:
+
+\begin{equation}
+    ^2_6T = \begin{bmatrix}
+        s_5c_6c(\theta_3+\theta_4) & -s_{56}c(\theta_3+\theta_4) & c_5c(\theta_3+\theta_4) & (c_5d_6 + a_5)c(\theta_3+\theta_4) \\
+        -s_6s(\theta_3+\theta_4) & -c_6s(\theta_3+\theta_4) & &  + c_3a_4 + a_3\\
+        \\
+        s_5c_6s(\theta_3+\theta_4) & -s_{56}s(\theta_3+\theta_4) & c_5s(\theta_3+\theta_4) & (c_5d_6 + a_5)s(\theta_3+\theta_4) \\
+        +s_6c(\theta_3+\theta_4) & + c_6c(\theta_3+\theta_4) & & +s_3a_4 \\
+        \\
+        -c_{56} & c_5s_6 & s_5 & s_5d_6 + d_3 + d_4 \\
+        \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    ^1_6T = \begin{bmatrix}
+        s_5c_6c(\theta_2+\theta_3+\theta_4) & -s_{56}c(\theta_2+\theta_3+\theta_4) & c_5c(\theta_2+\theta_3+\theta_4) & (c_5d_6 + a_5)c(\theta_2+\theta_3+\theta_4) \\
+        -s_6s(\theta_2+\theta_3+\theta_4) & -c_6s(\theta_2+\theta_3+\theta_4) & &  + c(\theta_2+\theta_3)a_4 + c_2a_3 + a_2\\
+        \\
+        c_{56} & -c_5s_6 & -s_5 & -(s_5d_6 + d_3 + d_4) \\
+        \\
+        s_5c_6s(\theta_2+\theta_3+\theta_4) & -s_{56}s(\theta_2+\theta_3+\theta_4) & c_5s(\theta_2+\theta_3+\theta_4) & (c_5d_6 + a_5)s(\theta_2+\theta_3+\theta_4) \\
+        +s_6c(\theta_2+\theta_3+\theta_4) & + c_6c(\theta_2+\theta_3+\theta_4) & & +s(\theta_2+\theta_3)a_4 + s_2a_3 \\
+        \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \label{eq:0T6}
+    ^0_6T = \begin{bmatrix}
+        s_5c_{16}c(\theta_2+\theta_3+\theta_4) & -s_{56}c_1c(\theta_2+\theta_3+\theta_4) & c_{15}c(\theta_2+\theta_3+\theta_4) & c_1[(c_5d_6 + a_5)c(\theta_2+\theta_3+\theta_4) \\
+        -s_6c_1s(\theta_2+\theta_3+\theta_4) & -c_{16}s(\theta_2+\theta_3+\theta_4) & +s_{15} &  + c(\theta_2+\theta_3)a_4 + c_2a_3 + a_2]\\
+        -s_1c_{56} & +s_{16}c_5 & & +s_1(s_5d_6 + d_3 + d_4)\\
+        \\
+        s_{15}c_6c(\theta_2+\theta_3+\theta_4) & -s_{156}c(\theta_2+\theta_3+\theta_4) & s_1c_5c(\theta_2+\theta_3+\theta_4) & s_1[(c_5d_6 + a_5)c(\theta_2+\theta_3+\theta_4) \\
+        -s_{16}s(\theta_2+\theta_3+\theta_4) & -s_1c_6s(\theta_2+\theta_3+\theta_4) & -c_1s_5 &  + c(\theta_2+\theta_3)a_4 + c_2a_3 + a_2]\\
+        +c_{156} & -c_{15}s_6 & & -c_1(s_5d_6 + d_3 + d_4)\\
+        \\
+        s_5c_6s(\theta_2+\theta_3+\theta_4) & -s_{56}s(\theta_2+\theta_3+\theta_4) & c_5s(\theta_2+\theta_3+\theta_4) & (c_5d_6 + a_5)s(\theta_2+\theta_3+\theta_4) \\
+        +s_6c(\theta_2+\theta_3+\theta_4) & + c_6c(\theta_2+\theta_3+\theta_4) & & +s(\theta_2+\theta_3)a_4 + s_2a_3 \\
+        \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+
+\section{Velocidades}
+
+\begin{equation}
+    ^1\omega_1 = \begin{bmatrix}
+        0 \\ 0 \\ \dot{\theta}_1
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    ^1v_1 = \begin{bmatrix}
+        0 \\ 0 \\ 0
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    ^2\omega_2 = \begin{bmatrix}
+        s\theta_2.\dot{\theta}_1 \\ c\theta_2.\dot{\theta}_1 \\ \dot{\theta}_2
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    ^2v_2 = \begin{bmatrix}
+        c\theta_2 & 0 & s\theta_2 \\
+        -s\theta_2 & 0 & c\theta_2 \\
+        0 & -1 & 0 \\
+    \end{bmatrix} 
+    \begin{bmatrix}
+        0 \\ a_2\dot{\theta}_1 \\ 0
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        0 \\ 0 \\ -a_2\dot{\theta}_1
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    ^3\omega_3 = \begin{bmatrix}
+        c\theta_3 & s\theta_3 & 0 \\
+        -s\theta_3 & c\theta_3 & 0 \\
+        0 & 0 & 1 \\
+    \end{bmatrix} \, ^2\omega_2 + 
+    \begin{bmatrix}
+        0 \\ 0 \\ \dot{\theta}_3
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        s(\theta_2+\theta_3).\dot{\theta}_1 \\
+        c(\theta_2+\theta_3).\dot{\theta}_1 \\ 
+        \dot{\theta}_2 + \dot{\theta}_3
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    ^3v_3 = \begin{bmatrix}
+        c\theta_3 & s\theta_3 & 0 \\
+        -s\theta_3 & c\theta_3 & 0 \\
+        0 & 0 & 1 \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        c\theta_2.\dot{\theta}_1d_3 \\ 
+        -s\theta_2.\dot{\theta}_1d_3 + \dot{\theta}_2a_3 \\ 
+        -c\theta_2.\dot{\theta}_1a_3 - \dot{\theta}_1a_2
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        c(\theta_2 + \theta_3).\dot{\theta}_1d_3 + s\theta_3.\dot{\theta}_2a_3 \\ 
+        -s(\theta_2 + \theta_3).\dot{\theta}_1d_3 + c\theta_3.\dot{\theta}_2a_3\\ 
+        -c\theta_2.\dot{\theta}_1a_3 - \dot{\theta}_1a_2
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    ^4\omega_4 = \begin{bmatrix}
+        c\theta_4 & s\theta_4 & 0 \\
+        -s\theta_4 & c\theta_4 & 0 \\
+        0 & 0 & 1 \\
+    \end{bmatrix} \, ^3\omega_3 + 
+    \begin{bmatrix}
+        0 \\ 0 \\ \dot{\theta}_4
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 \\
+        c(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 \\ 
+        \dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+    ^4v_4 = \begin{bmatrix}
+        c(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_4a_4.\dot{\theta}_3 \\ 
+        -s(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [c(\theta_3+\theta_4)a_3 + c\theta_4a_4].\dot{\theta}_2 + c\theta_4a_4.\dot{\theta}_3 \\ 
+        [-c(\theta_2 + \theta_3)a_4 - c\theta_2a_3 - a_2].\dot{\theta}_1
+    \end{bmatrix}
+\end{split}
+\end{equation}
+
+\begin{equation}
+    ^5\omega_5 = \begin{bmatrix}
+        s\theta_5 & 0 & -c\theta_5 \\
+        c\theta_5 & 0 & s\theta_5 \\
+        0 & -1 & 0 \\
+    \end{bmatrix} \, ^4\omega_4 + 
+    \begin{bmatrix}
+        0 \\ 0 \\ \dot{\theta}_5
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        s\theta_5s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 - c\theta_5(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) \\
+        c\theta_5s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + s\theta_5(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) \\ 
+        -c(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + \dot{\theta_5}
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+    ^5v_5 = \begin{bmatrix}
+        \left\{s\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) + c\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
+        + s\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_{45}a_4.\dot{\theta}_3 \\ 
+        \\
+        \left\{c\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) - s\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
+        + c\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + c\theta_5s\theta_4a_4.\dot{\theta}_3 \\ 
+        \\
+        s(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) - [c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5].\dot{\theta}_2 - (c\theta_4a_4 + a_5).\dot{\theta}_3 - a_5.\dot{\theta_4}
+    \end{bmatrix}
+\end{gathered}
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+    ^6\omega_6 = \begin{bmatrix}
+        [c\theta_6s\theta_5s(\theta_2+\theta_3+\theta_4) + s\theta_6c(\theta_2+\theta_3+\theta_4)].\dot{\theta}_1 - c\theta_{56}(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) - s\theta_6\dot{\theta}_5 \\
+        [-s\theta_{56}s(\theta_2+\theta_3+\theta_4) + c\theta_6c(\theta_2+\theta_3+\theta_4)].\dot{\theta}_1 + s\theta_6c\theta_5(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) - c\theta_6\dot{\theta}_5 \\ 
+        c\theta_5s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + s\theta_5(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) + \dot{\theta}_6
+    \end{bmatrix}
+\end{gathered}
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+    ^6v_6 = \begin{bmatrix}
+        \{c\theta_6c(\theta_2 + \theta_3 + \theta_4)[s\theta_5(d_3+d_4) + d_6] - s\theta_6s(\theta_2 + \theta_3 + \theta_4)[(d_3+d_4) + s\theta_5d_6] + \\
+        +c\theta_{56}[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\}.\dot{\theta}_1 + \\
+        +\{c\theta_6s\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4] + s\theta_6[c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5 + c\theta_5d_6]\}.\dot{\theta}_2 + \\
+        +[c\theta_6s\theta_{45}a_4 + s\theta_6(c\theta_4a_4 + a_5 + c\theta_5d_6)].\dot{\theta}_3 + s\theta_6(a_5 + c\theta_5d_6).\dot{\theta}_4 + c\theta_6d_6\dot{\theta}_5 \\ 
+        \\
+        \{-s\theta_6c(\theta_2 + \theta_3 + \theta_4)[s\theta_5(d_3+d_4) + d_6] - c\theta_6s(\theta_2 + \theta_3 + \theta_4)[(d_3+d_4) + s\theta_5d_6] - \\
+        -s\theta_6c\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\}.\dot{\theta}_1 + \\
+        +\{-s\theta_{56}[s(\theta_3+\theta_4)a_3 + s\theta_4a_4] + c\theta_6[c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5 + c\theta_5d_6]\}.\dot{\theta}_2 + \\
+        +[-s\theta_{456}a_4 + c\theta_6(c\theta_4a_4 + a_5 + c\theta_5d_6)].\dot{\theta}_3 + c\theta_6(a_5 + c\theta_5d_6).\dot{\theta}_4 - s\theta_6d_6\dot{\theta}_5 \\ 
+        \\
+        \left\{c\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) - s\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
+        + c\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + c\theta_5s\theta_4a_4.\dot{\theta}_3 \\ 
+    \end{bmatrix}
+\end{gathered}
+\end{equation}

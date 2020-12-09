@@ -15,6 +15,12 @@ void BTS7960::setSpeed(uint8_t pwm)
 {
     if(dir == BTS7960_CW)
     {
-        
+        analogWrite(this->L_PWM, 0);
+        analogWrite(this->R_PWM, pwm);
+    }
+    else
+    {
+        analogWrite(this->R_PWM, 0);
+        analogWrite(this->L_PWM, pwm);
     }
 }

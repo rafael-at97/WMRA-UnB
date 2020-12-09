@@ -4,6 +4,7 @@ import serial
 import serial.tools.list_ports
 import struct
 import time
+import matplotlib.pyplot as plt
 
 arduino_ports = [
     p.device
@@ -22,15 +23,6 @@ def main():
         raise IOError("Could not open arduino!")
 
     robot = robot_rt.robot
-
-    #steps = np.arange(0, 3.1415/2, 0.01)
-    #steps = np.append(steps, np.arange(3.1415/2, -3.1415/2, -0.01))
-    #steps = np.append(steps, np.arange(-3.1415/2, 0, 0.01))
-
-    #print(steps)
-
-    #trajectory = np.zeros((len(steps), 6))
-    #trajectory[:, 4] = np.transpose(steps)
 
     # Timeout
     timeout = 1000
@@ -69,13 +61,14 @@ def main():
             time.sleep(0.1)
 
         except Exception as e:
+            print("Angulos: ")
+            print(angles)
+
+            #f.close()
+
             print(e)
             print("Exiting simulation!")
-            break
-
-    #    i = i+1
-    #    if i == len(trajectory):
-    #        i = 0        
+            break    
 
 if __name__ == "__main__":
     main()

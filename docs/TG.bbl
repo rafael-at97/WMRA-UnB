@@ -1,0 +1,184 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.42.2.1 }
+
+\bibitem{fernando2019assistivo}
+\abntrefinfo{Neto}{NETO}{2019}
+{NETO, L.~F. Desenvolvimento de um manipulador robótico para aplicações
+  assistivas.
+2019.}
+
+\bibitem{wattylas2015didatico}
+\abntrefinfo{Reis}{REIS}{2015}
+{REIS, W. F.~D. \emph{Desenvolvimento de um Robô Manipulador Didático}.
+  [S.l.]: Faculdade de Tecnologia, Univesidade de Brasília, Brasília, DF,
+  88p, 2015.}
+
+\bibitem{kevin2005WMRA}
+\abntrefinfo{Edwards}{EDWARDS}{2005}
+{EDWARDS, K.~D. \emph{Design, construction and testing of a wheelchair-mounted
+  robotic arm}. [S.l.]: University of South Florida, 2005.}
+
+\bibitem{constituicao}
+\abntrefinfo{Brasil\ldots}{BRASIL\ldots}{}
+{BRASIL, Constitui{\c{c}}{\~a}o. (1988). Título II Capítulo I.}
+
+\bibitem{bersch2008introduccao}
+\abntrefinfo{Bersch}{BERSCH}{2008}
+{BERSCH, R. Introdu{\c{c}}{\~a}o {\`a} tecnologia assistiva.
+\emph{Porto Alegre: CEDI}, v.~21, 2008.}
+
+\bibitem{estatutodef}
+\abntrefinfo{Brasil\ldots}{BRASIL\ldots}{}
+{BRASIL, Estatuto da Pessoa com Deficiência. Lei Nº 13.146 (2015). Livro I
+  Título I Capítulo I Art. 3º.}
+
+\bibitem{capille2010kinematic}
+\abntrefinfo{Jr}{JR}{2010}
+{JR, J.~W. C. Kinematic and experimental evaluation of commercial
+  wheelchair-mounted robotic arms.
+2010.}
+
+\bibitem{world2011world}
+\abntrefinfo{Organization et al.}{ORGANIZATION et al.}{2011}
+{ORGANIZATION, W.~H. et al. \emph{World report on disability 2011}. [S.l.]:
+  World Health Organization, 2011.}
+
+\bibitem{un2030agenda}
+\abntrefinfo{Assembly}{ASSEMBLY}{2015}
+{ASSEMBLY, U. N.~G. \emph{Transforming our World: The 2030 Agenda for
+  Sustainable Development}. 2015.
+Retrieved from United Nations General Assembly:
+  https://sustainabledevelopment.un.org/post2015/transformingourworld.}
+
+\bibitem{vidal2010desenvolvimento}
+\abntrefinfo{Filho et al.}{FILHO et al.}{2010}
+{FILHO, W. V. et al. Desenvolvimento de kit para automa{\c{c}}{\~a}o de cadeira
+  de rodas convencional. In:  \emph{IN: VI CONGRESSO NACIONAL DE ENGENHARIA
+  MEC{\^A}NICA. CAMPINA GRANDE, PARA{\'I}BA}. [S.l.: s.n.], 2010.}
+
+\bibitem{francisco2019interface}
+\abntrefinfo{Oliveira}{OLIVEIRA}{2018}
+{OLIVEIRA, F. M.~P. \emph{Estudo e desenvolvimento de uma interface de comando
+  de cadeira de rodas motorizada para pessoas tetraplégicas}. [S.l.]:
+  Faculdade de Tecnologia, Univesidade de Brasília, Brasília, DF, 91p, 2018.}
+
+\bibitem{marconi2016didatico}
+\abntrefinfo{Mello}{MELLO}{2016}
+{MELLO, M. S.~V. de. \emph{Análise de Desempenho e Melhorias em Robô
+  Manipulador}. [S.l.]: Faculdade de Tecnologia, Univesidade de Brasília,
+  Brasília, DF, 2016.}
+
+\bibitem{ktistakis2015survey}
+\abntrefinfo{Ktistakis e Bourbakis}{KTISTAKIS; BOURBAKIS}{2015}
+{KTISTAKIS, I.~P.; BOURBAKIS, N.~G. A survey on robotic wheelchairs mounted
+  with robotic arms. In:  IEEE. \emph{2015 National Aerospace and Electronics
+  Conference (NAECON)}. [S.l.], 2015. p. 258--262.}
+
+\bibitem{hunter1991comparative}
+\abntrefinfo{Hunter, Hollerbach e Ballantyne}{HUNTER; HOLLERBACH;
+  BALLANTYNE}{1991}
+{HUNTER, I.~W.; HOLLERBACH, J.~M.; BALLANTYNE, J. A comparative analysis of
+  actuator technologies for robotics.
+\emph{Robotics Review}, MIT press, v.~2, p. 299--342, 1991.}
+
+\bibitem{chapman2005electric}
+\abntrefinfo{Chapman}{CHAPMAN}{2005}
+{CHAPMAN, S. \emph{Electric machinery fundamentals}. [S.l.]: Tata McGraw-Hill
+  Education, 2005.}
+
+\bibitem{bajd2010robotics}
+\abntrefinfo{Bajd et al.}{BAJD et al.}{2010}
+{BAJD, T. et al. \emph{Robotics}. [S.l.]: Springer Science \& Business Media,
+  2010.}
+
+\bibitem{bentley2005principles}
+\abntrefinfo{Bentley}{BENTLEY}{2005}
+{BENTLEY, J.~P. \emph{Principles of measurement systems}. [S.l.]: Pearson
+  education, 2005.}
+
+\bibitem{doebelin2007measurement}
+\abntrefinfo{Doebelin e Manik}{DOEBELIN; MANIK}{2007}
+{DOEBELIN, E.~O.; MANIK, D.~N. Measurement systems: application and design.
+2007.}
+
+\bibitem{bogatin2010signal}
+\abntrefinfo{Bogatin}{BOGATIN}{2010}
+{BOGATIN, E. \emph{Signal and power integrity--simplified}. [S.l.]: Pearson
+  Education, 2010.}
+
+\bibitem{irwin2010basic}
+\abntrefinfo{Irwin e Nelms}{IRWIN; NELMS}{2010}
+{IRWIN, J.~D.; NELMS, R.~M. \emph{Basic engineering circuit analysis}. [S.l.]:
+  John Wiley \& Sons, 2010.}
+
+\bibitem{ganssle2004guide}
+\abntrefinfo{Ganssle}{GANSSLE}{2004}
+{GANSSLE, J.~G. A guide to debouncing.
+\emph{Guide to Debouncing, Ganssle Group, Baltimore, MD, US}, p. 1--22, 2004.}
+
+\bibitem{sedra1998microelectronic}
+\abntrefinfo{Sedra et al.}{SEDRA et al.}{1998}
+{SEDRA, A.~S. et al. \emph{Microelectronic circuits}. [S.l.]: New York: Oxford
+  University Press, 1998.}
+
+\bibitem{kitchin2006designer}
+\abntrefinfo{Kitchin e Counts}{KITCHIN; COUNTS}{2006}
+{KITCHIN, C.; COUNTS, L. \emph{A designer's guide to instrumentation
+  amplifiers}. [S.l.]: Analog Devices Norwood, MA, 2006.}
+
+\bibitem{mancini2003op}
+\abntrefinfo{Mancini}{MANCINI}{2003}
+{MANCINI, R. \emph{Op amps for everyone: design reference}. [S.l.]: Newnes,
+  2003.}
+
+\bibitem{temis1996optocouplers}
+\abntrefinfo{Optocouplers\ldots}{OPTOCOUPLERS\ldots}{1996}
+{OPTOCOUPLERS Data Book. 1996.
+TEMIC Semiconductors,
+  \url{https://pe2bz.philpem.me.uk/pdf%20on%20typenumber/A-C/COUPLE96.pdf}.}
+
+\bibitem{bishop2001understand}
+\abntrefinfo{Bishop}{BISHOP}{2001}
+{BISHOP, O. \emph{Understand electronics}. [S.l.]: Elsevier, 2001.}
+
+\bibitem{nise2011control}
+\abntrefinfo{Nise}{NISE}{2011}
+{NISE, N.~S. Control system engineering, john wiley \& sons.
+\emph{Inc, New York}, 2011.}
+
+\bibitem{krishnan2001electric}
+\abntrefinfo{Krishnan}{KRISHNAN}{2001}
+{KRISHNAN, R. \emph{Electric motor drives: modeling, analysis and control}.
+  [S.l.]: Prentice Hall, 2001.}
+
+\bibitem{maheriya2016review}
+\abntrefinfo{Maheriya e Parikh}{MAHERIYA; PARIKH}{2016}
+{MAHERIYA, S.; PARIKH, P. A review: Modelling of brushed dc motor and various
+  type of control methods.
+\emph{Journal for Research}, v.~1, 2016.}
+
+\bibitem{rashid2017power}
+\abntrefinfo{Rashid}{RASHID}{2017}
+{RASHID, M.~H. \emph{Power electronics handbook}. [S.l.]:
+  Butterworth-Heinemann, 2017.}
+
+\bibitem{barr2001pulse}
+\abntrefinfo{Barr}{BARR}{2001}
+{BARR, M. Pulse width modulation.
+\emph{Embedded Systems Programming}, v.~14, n.~10, p. 103--104, 2001.}
+
+\bibitem{atmel2006stepper}
+\abntrefinfo{Atmel}{ATMEL}{2006}
+{ATMEL. \emph{AVR446: Linear speed control of stepper motor}. 2006.
+\url{http://ww1.microchip.com/downloads/en/appnotes/doc8017.pdf}.}
+
+\bibitem{craig2009introduction}
+\abntrefinfo{Craig}{CRAIG}{2009}
+{CRAIG, J.~J. \emph{Introduction to robotics: mechanics and control, 3/E}.
+  [S.l.]: Pearson Education India, 2009.}
+
+\end{thebibliography}

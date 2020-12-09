@@ -43,6 +43,11 @@ class DCMotor : public Motor
 
         float (*angle_read)(uint8_t, float[2]);
 
+        /* Variables for control */
+        float r;
+        float k;
+        int pwm_deadzone;
+
     public:
         /** Constructor for using BTS7960
          */
@@ -57,6 +62,8 @@ class DCMotor : public Motor
         void set_angle_callbacks(uint8_t pin, void (*setup)(uint8_t), float (*read)(uint8_t, float[2]));
 
         void set_speed(float speed);
+        void control_update();
+        
         void set_dir(bool dir);
 
         float get_angle()

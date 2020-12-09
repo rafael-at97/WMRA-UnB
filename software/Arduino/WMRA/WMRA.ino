@@ -17,7 +17,7 @@
 #define J5_E    (52)
 #define J6_S    (53)
 
-#define N_SW        (11) /* Number of switches used */
+#define N_SW        (12) /* Number of switches used, 11 are actually used, the 12th is there for compatibility */
 #define N_PC        (6)  /* Number of pin change interrupts */
 
 #define START_POS   (0)
@@ -34,7 +34,7 @@ volatile bool uswitches[N_SW] =
     false, false,
     false, false,
     false, false,
-    false,  
+    false, false, 
 };
 
 const uint8_t PC_TO_IDX[] = 
@@ -66,17 +66,19 @@ const uint8_t PC_TO_IDX[] =
 /* Joystick planes of action */
 #define XY          (0)
 #define XZ          (1)
-#define ROT         (2)
-#define WORKSPACES  (3)
+#define ROT         (2) /* For bitwise check of any rotation */
+#define ROT_XZ      (2)
+#define ROT_YZ      (3)
+#define WORKSPACES  (4)
+
+#define MAX_JS      (100)
 
 float a2 = 0.014;
 float a3 = 0.35;
 float a4 = 0.35;
 float a5 = 0.165;
-float d3 = 0.069;
-float d4 = -0.069;
 float d6 = 0.198;
-
+        
 /** Motors **/
 DCMotor *dc1;
 
@@ -85,19 +87,48 @@ StepperMotor *stepper1;
 Joystick js(3, A3, A4);
 robotic_arm wmra;
 
+/* General maximum speed */
+#define MAX_V   (0.15)  /* Linear  = m/s */
+#define MAX_W   (0.80)  /* Angular = rad/s */
+
+/* Maximum speed per joint, (rad/s) */
+float max_speed[] = 
+{
+    //0.14,
+    //0.14,
+    //0.21,
+    //0.41,
+    //0.76,
+    //0.79
+    1.571,
+    1.571,
+    1.571,
+    1.571,
+    1.571,
+    1.571
+};
+
 /** Joystick variables **/
-int workspace = XY;
+uint8_t workspace = XY;
 
 /** Joystick button debounce **/
 volatile unsigned long last_isr = 0;
 long debounce_time_ms = 500;
+
+float not_zero(float val)
+{
+    if(fabs(val) < 1e-3)
+        val = 1e-3;
+
+    return val;
+}
 
 /** Calculates inverse jacobian.
  *  
  *  The values which appear too often on the calculations are left in form of variables, seeking to reduce the number of math operations
  *  needed in exchange for a little spent memory. 
  *  In total, this function uses:
- *                          - 137 Multiplications   (Divisions included)
+ *                          - 126 Multiplications   (Divisions included)
  *                          - 47 Sums               (Subtractions included)
  *                          - 28 Auxiliar Variables (All 'float')
  *
@@ -122,7 +153,7 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     /********************************/ 
     /* Calculations for determinant */
     /********************************/ 
-    float S3_A3_A4      = sin(q[2])*a3*a4;
+    float S3_A3_A4      = not_zero(sin(q[2])*a3*a4);
 
     float C23_A4        = cos(q[1]+q[2])*a4;         
     float C2A3_C23A4    = cos(q[1])*a3 + C23_A4;
@@ -131,14 +162,13 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     float A5_C5D6       = a5 + C5_D6;
 
     float A2c           = a2 + C2A3_C23A4 + c234*( A5_C5D6 );
-    float A2c_c234c5d6  = A2c + c234*C5_D6;
+    float A2c_c234c5d6  = not_zero(A2c + c234*C5_D6);
 
-    float temp0         = s5*d6;
-    float D3s           = d3 + d4 + temp0;
-    
-    temp0               = D3s + temp0;
-    
-    float detJ          = -c5*S3_A3_A4*A2c_c234c5d6;  
+    float S5_D6         = s5*d6;
+    float temp0         = S5_D6 + S5_D6;
+
+    float detJ_sing     = not_zero(-c5*A2c_c234c5d6); /* Without S3 term that causes singularity */
+    float detJ          = not_zero(-c5*S3_A3_A4*A2c_c234c5d6);  
 
     /**************************/
     /* Third row calculations */
@@ -147,25 +177,22 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     /*S23_A4 = s23*a4; <- Original name of variable */
     float temp1 = sin(q[1]+q[2])*a4;
 
-    invJacobian[C1][R3] = invJacobian[C5][R3] = invJacobian[C6][R3] = 0;
-    invJacobian[C2][R3] = ( -c5*temp1*A2c_c234c5d6 ) / detJ;
-    invJacobian[C3][R3] = ( c5*( sin(q[1])*a3 + temp1 )*A2c_c234c5d6 ) / detJ;
+    invJacobian[C1][R3] = invJacobian[C5][R3] = invJacobian[C6][R3] = 0.0f;
+    invJacobian[C2][R3] = ( temp1 ) / S3_A3_A4;
+    invJacobian[C3][R3] = ( -( sin(q[1])*a3 + temp1 ) ) / S3_A3_A4;
     invJacobian[C4][R3] = - ( invJacobian[C2][R3] + invJacobian[C3][R3] );
 
     /*************************/
     /* Some terms of 6th row */
     /*************************/
-
-    /*C5C234 = c5*c234; <- Original name of variable */
-    temp1 = c5*c234;
     
-    invJacobian[C6][R6] = ( -S3_A3_A4*s234*A2c ) / detJ;
-    invJacobian[C5][R6] = ( S3_A3_A4*temp1*A2c ) / detJ;
+    invJacobian[C6][R6] = ( -s234*A2c ) / detJ_sing;
+    invJacobian[C5][R6] = ( -c234*A2c ) / A2c_c234c5d6;
 
-    /*C5D6_C5C234 = C5_D6*C5C234 <- Original name of variable */
-    temp1 = C5_D6*temp1;
+    /*C5D6_C5C234 = C5_D6*C234 <- Original name of variable */
+    temp1 = C5_D6*c234;
 
-    invJacobian[C1][R6] = ( -S3_A3_A4*temp1 ) / detJ;
+    invJacobian[C1][R6] = ( temp1 ) / A2c_c234c5d6;
 
     /********************/ 
     /* 1st and 2nd rows */
@@ -173,27 +200,24 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     float S4_A4      = sin(q[3])*a4;
     float S34A3_S4A4 = sin(q[2]+q[3])*a3+S4_A4;
 
-    float S1_S3_A3_A4 = s1*S3_A3_A4;
-    float C1_S3_A3_A4 = c1*S3_A3_A4;
-
     float S5S234     = s5*s234;       
 
     float temp2 = c5*(s1*temp0 + c1*A2c_c234c5d6);
     float temp3 = S5S234*(A5_C5D6 + C5_D6)*S4_A4;
     float temp4 = S5S234*(A5_C5D6 + C5_D6)*S34A3_S4A4;
 
-    invJacobian[C1][R1] = ( S1_S3_A3_A4*c5 ) / detJ;
+    invJacobian[C1][R1] = ( -s1 ) / A2c_c234c5d6;
     invJacobian[C5][R1] = invJacobian[C1][R1]*c234;
-    invJacobian[C6][R1] = ( -S1_S3_A3_A4*s234 ) / detJ;
+    invJacobian[C6][R1] = ( -s1*s234 ) / detJ_sing;
     invJacobian[C2][R1] = ( -C23_A4*temp2 + s1*temp3 ) / detJ;
     invJacobian[C3][R1] = ( C2A3_C23A4*temp2 - s1*temp4 ) / detJ;
     invJacobian[C4][R1] = - ( invJacobian[C2][R1] + invJacobian[C3][R1] ) - invJacobian[C6][R1]*s5;
     
     temp2 = c5*(c1*temp0 - s1*A2c_c234c5d6);
 
-    invJacobian[C1][R2] = ( -C1_S3_A3_A4*c5 ) / detJ;
+    invJacobian[C1][R2] = ( c1 ) / A2c_c234c5d6;
     invJacobian[C5][R2] = invJacobian[C1][R2]*c234;
-    invJacobian[C6][R2] = ( C1_S3_A3_A4*s234 ) / detJ;
+    invJacobian[C6][R2] = ( c1*s234 ) / detJ_sing;
     invJacobian[C2][R2] = ( C23_A4*temp2 - c1*temp3 ) / detJ;
     invJacobian[C3][R2] = ( -C2A3_C23A4*temp2 + c1*temp4 ) / detJ;
     invJacobian[C4][R2] = - ( invJacobian[C2][R2] + invJacobian[C3][R2] ) - invJacobian[C6][R2]*s5;
@@ -209,8 +233,8 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     temp3 = A5_C5D6*S4_A4;
     temp4 = A5_C5D6*S34A3_S4A4;
 
-    /*C5D6_C5C234_D3s = C5D6_C5C234*D3s; <- Original name of variable */
-    temp1 = temp1*D3s;
+    /*C5D6_C5C234_S5D6 = C5D6_C5C234*S5_D6; <- Original name of variable */
+    temp1 = temp1*c5*S5_D6;
 
     /*C5D6_S5C234_A2c = C5_D6*s5*c234*A2c; <- Original name of variable */
     temp0 = C5_D6*s5*c234*A2c;
@@ -223,29 +247,27 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     /* Rows 4 and 5 */
     /****************/
     float A2cc234_c5d6 = A2c*c234 + C5_D6;
-
-    /*C5S234 = c5*s234; <- Original name of variable */
-    temp1 = c5*s234;
-    /*C5D6_C5S234 = C5_D6*temp1; <- Original name of variable */
-    temp0 = C5_D6*temp1;
     
-    invJacobian[C6][R4] = ( -C1_S3_A3_A4*A2cc234_c5d6 ) / detJ;
-    invJacobian[C6][R5] = ( -S1_S3_A3_A4*A2cc234_c5d6 ) / detJ;
+    invJacobian[C6][R4] = ( -c1*A2cc234_c5d6 ) / detJ_sing;
+    invJacobian[C6][R5] = ( -s1*A2cc234_c5d6 ) / detJ_sing;
 
     /*C5S234_A2c = C5S234*A2c; <- Original name of variable */
-    temp1 = temp1*A2c;
+    temp1 = s234*A2c;
+
+    /*C5D6_C5S234 = C5_D6*temp1; <- Original name of variable */
+    temp0 = C5_D6*s234;
     
-    invJacobian[C5][R4] = ( -C1_S3_A3_A4*temp1 ) / detJ;
-    invJacobian[C5][R5] = ( -S1_S3_A3_A4*temp1 ) / detJ;
+    invJacobian[C5][R4] = ( c1*temp1 ) / A2c_c234c5d6;
+    invJacobian[C5][R5] = ( s1*temp1 ) / A2c_c234c5d6;
     
-    invJacobian[C1][R4] = ( C1_S3_A3_A4*temp0 ) / detJ;
-    invJacobian[C1][R5] = ( S1_S3_A3_A4*temp0 ) / detJ;
+    invJacobian[C1][R4] = ( -c1*temp0 ) / A2c_c234c5d6;
+    invJacobian[C1][R5] = ( -s1*temp0 ) / A2c_c234c5d6;
 
     /*C5D6_S5S234 <- Original name of variable */
     S5S234 = C5_D6*S5S234;
 
-    /*C5D6_C5S234_D3s = temp0*D3s; <- Original name of variable */
-    temp0 = temp0*D3s;
+    /*C5D6_C5S234_S5D6 = temp0*S5_D6; <- Original name of variable */
+    temp0 = temp0*c5*S5_D6;
     
     temp2 = c5*s1*A2c_c234c5d6 - s5*c1*A2cc234_c5d6;
     
@@ -274,6 +296,11 @@ void calculate_speed(float invJacobian[DOF][DOF], float q[DOF], float qdot[DOF],
         {
             sum += invJacobian[i][j]*v[j];
         }
+
+        /* Speed limit */
+        if(fabs(sum) > max_speed[i])
+            sum = max_speed[i] * (fabs(sum)/sum); /* Maintain sign */
+        
         qdot[i] = sum;
     }
 }
@@ -306,10 +333,10 @@ void simulate_angles(float q[DOF], float qdot[DOF])
     for(i=1 ; i<=6 ; i++)
     {
         /* Rough estimate -> d = v*t */
-        if(i==1)
+        if(i==1 || i==2)
             q[INDEX_COMPAT(i)] = DEG_TO_RAD*wmra.read_angle(i);
         else
-            q[INDEX_COMPAT(i)] += (qdot[INDEX_COMPAT(i)] * (float)simu_interval_time)/1000.0;
+        q[INDEX_COMPAT(i)] += (qdot[INDEX_COMPAT(i)] * (float)simu_interval_time)/1000.0;
     }
 
     simu_last_time = millis();
@@ -351,47 +378,114 @@ void serial_send(float q[DOF])
     }
 }
 
-void joystick_to_speed(float v[DOF])
+void wrist_to_base(float q[DOF], float v[3])
+{
+    static float T[3][3];
+    float new_v[3] = {0.0f, 0.0f, 0.0f};
+
+    uint8_t i;
+
+    /** 
+     * Inital calculations of most common used sines and cosines
+     */
+    float c1    = cos(q[0]);
+    float s1    = sin(q[0]);
+    float c5    = cos(q[4]);
+    float s5    = sin(q[4]);
+    float c234  = cos(q[1]+q[2]+q[3]);
+    float s234  = sin(q[1]+q[2]+q[3]);
+
+    float aux = s5*c234;
+
+    T[R1][C1] = c1*aux - s1*c5;
+    T[R2][C1] = s1*aux + c1*c5;
+    T[R3][C1] = s5*s234;
+    
+    aux = c5*c234;
+
+    T[R1][C2] = c1*aux + s1*s5;
+    T[R2][C2] = s1*aux - c1*s5;
+    T[R3][C2] = c5*s234;
+
+    T[R1][C3] = c1*s234;
+    T[R2][C3] = s1*s234;
+    T[R3][C3] = -c234;
+
+    for(i=0 ; i<=C3 ; i++)
+    {
+        new_v[i] = T[i][C1]*v[R1] + T[i][C2]*v[R2] + T[i][C3]*v[R3];
+    }
+
+    v[0] = new_v[0];
+    v[1] = new_v[1];
+    v[2] = new_v[2];
+}
+
+void joystick_to_speed(float q[DOF], float v[DOF])
 {
     /* Read joystick and convert to speed */
-    float js_x, js_y;
+    float js_xy[N_AXIS];
+    
+    js.read(js_xy);
 
-    /* Read and convert to m/s */
-    js_x = js.read('x') / 100;
-    js_y = js.read('y') / 100;
+    /* If rotation, convert max_value to rad/s */
+    if(workspace & ROT)
+    {
+        js_xy[0] = js_xy[0] * (MAX_W / MAX_JS);
+        js_xy[1] = js_xy[1] * (MAX_W / MAX_JS);   
+    }
+    else
+    {
+        /* m/s */
+        js_xy[0] = js_xy[0] * (MAX_V / MAX_JS);
+        js_xy[1] = js_xy[1] * (MAX_V / MAX_JS);        
+    }
     
     switch(workspace)
     {
         case XY:
-            v[0] = js_x;
-            v[1] = js_y;
-            v[2] = 0.0;
-            v[3] = 0.0;
-            v[4] = 0.0;
-            v[5] = 0.0;
+            v[0] = js_xy[0];
+            v[1] = js_xy[1];
+            v[2] = 0.0f;
+            v[3] = 0.0f;
+            v[4] = 0.0f;
+            v[5] = 0.0f;
             break;
 
         case XZ:
-            v[0] = js_x;
-            v[1] = 0.0;
-            v[2] = js_y;
-            v[3] = 0.0;
-            v[4] = 0.0;
-            v[5] = 0.0;
+            v[0] = js_xy[0];
+            v[1] = 0.0f;
+            v[2] = js_xy[1];
+            v[3] = 0.0f;
+            v[4] = 0.0f;
+            v[5] = 0.0f;
             break;
 
-        case ROT:
-            v[0] = 0.0;
-            v[1] = 0.0;
-            v[2] = 0.0;
-            v[3] = 0.5*js_y;
-            v[4] = 0.5*js_y;
-            v[5] = js_x;        
+        case ROT_XZ:
+            v[0] = 0.0f;
+            v[1] = 0.0f;
+            v[2] = 0.0f;
+            v[3] = 0.0f;
+            v[4] = js_xy[0];
+            v[5] = js_xy[1];        
+            break;
+
+        case ROT_YZ:
+            v[0] = 0.0f;
+            v[1] = 0.0f;
+            v[2] = 0.0f;
+            v[3] = js_xy[1];
+            v[4] = js_xy[0];
+            v[5] = 0.0f;        
             break;
 
         default:
             break;
     }
+
+    /* If rotation, treat as specification of wrist speed */
+    if(workspace & ROT)
+        wrist_to_base(q, v+3); /* 3 -> Displacement to start on angular speeds */ 
 }
 
 void set_speed(float qdot[DOF])
@@ -400,9 +494,10 @@ void set_speed(float qdot[DOF])
     
     /* Update reference for all*/
     for(i=1 ; i<=DOF ; i++)
-    {
-        if( (qdot[INDEX_COMPAT(i)] >= 0.0f && !uswitches[(INDEX_COMPAT(i)<<1)+END_POS]  ) || /* Moving forward and not achieved end yet */
-            (qdot[INDEX_COMPAT(i)] <  0.0f && !uswitches[(INDEX_COMPAT(i)<<1)+START_POS]))   /* Moving backwards and not achieved start */
+    {   
+        if( (qdot[INDEX_COMPAT(i)] >= 1e-3 && !uswitches[(INDEX_COMPAT(i)<<1)+END_POS]  ) || /* Moving forward and not achieved end yet */
+            (qdot[INDEX_COMPAT(i)] < -1e-3 && !uswitches[(INDEX_COMPAT(i)<<1)+START_POS]) || /* Moving backwards and not achieved start */
+            (fabs(qdot[INDEX_COMPAT(i)]) < 1e-3) )      /* Always set speed to shutdown */
             wmra.set_speed(i, qdot[INDEX_COMPAT(i)]);
     }
 }
@@ -415,6 +510,15 @@ void set_speed(float qdot[DOF])
 ISR(TIMER5_COMPC_vect)
 {
     stepper1->do_step();
+}
+
+/* DC Motors */
+ISR(TIMER3_COMPC_vect)
+{
+    dc1->control_update();
+    
+    /* Set new counter to 20ms forward */
+    OCR3C = TCNT3 + 1250; /* 0.020*(16Mhz/256 prescaler) */
 }
 
 /****************************
@@ -563,6 +667,27 @@ void setup()
     /**********
      * Motors *
      **********/
+
+    /* Set timer frequency for DC, 256 prescaler */
+    bitSet(TCCR3B, CS12);
+    bitClear(TCCR3B, CS11);
+    bitClear(TCCR3B, CS10);
+
+    /* Normal mode on timer */
+    bitClear(TCCR3B, WGM33);
+    bitClear(TCCR3B, WGM32);
+    bitClear(TCCR3A, WGM31);
+    bitClear(TCCR3A, WGM30);
+
+    /* Disconnect output */
+    bitClear(TCCR3A, COM3C0);
+    bitClear(TCCR3A, COM3C1);
+
+    /* Start timer on 0 */
+    OCR3C = 0x0;
+
+    /* Set interrupt */
+    bitSet(TIMSK3, OCIE3C);
     
     /* Set timer frequency for steppers, 256 prescaler */
     bitSet(TCCR5B, CS12);
@@ -574,12 +699,16 @@ void setup()
     dc1->set_angle_callbacks(A0, NULL, read_joint_pot);
     
     stepper1 = new StepperMotor(44, 40, 1, 1.8*DEG_TO_RAD);
+
+    /* Steppers calibration */
+    //#if !SIMULATION
     stepper1->start(0.2, &uswitches[1], 90.0); /* Go with speed 0.2rad/s until hit uswitches[1](J1_E) and then assume 90.0 degrees */
+    //#endif
     
     wmra.set_link(1,     0,     0,     0, stepper1);
     wmra.set_link(2,  PI/2,    a2,     0,      dc1);
-    wmra.set_link(3,     0,    a3,    d3);
-    wmra.set_link(4,     0,    a4,    d4);
+    wmra.set_link(3,     0,    a3,     0);
+    wmra.set_link(4,     0,    a4,     0);
     wmra.set_link(5,  PI/2,    a5,     0);
     wmra.set_link(6, -PI/2,     0,    d6);
 
@@ -588,7 +717,7 @@ void setup()
      ************/
 
     js.set_ISR(change_axis);
-    js.set_limits("xy", -15, 15);
+    js.set_limits(0, MAX_JS);   /* Between 0 and 100, like percentage */
     js.calibrate();
 
     /* Enable interrupts */
@@ -602,9 +731,9 @@ void setup()
 void loop() 
 {
     static float invJacobian[DOF][DOF];
-    static float q[DOF] = {0.0, 0.785, -0.785, 0.785, 0.0, 0.0};
-    static float qdot[DOF] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-    static float v[DOF] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    static float q[DOF] = {1.571, 0.0f, 0.0f, 0.0f, -1.571, 0.0f};
+    static float qdot[DOF] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+    static float v[DOF] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
     //loop_time = millis();
 
@@ -616,7 +745,7 @@ void loop()
     
     serial_send(q);
 
-    joystick_to_speed(v);
+    joystick_to_speed(q, v);
 
     calculate_speed(invJacobian, q, qdot, v);
 

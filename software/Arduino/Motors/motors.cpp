@@ -7,6 +7,9 @@
 DCMotor::DCMotor(uint8_t L_PWM, uint8_t R_PWM)
 {
     driver.btsdriver = new BTS7960(L_PWM, R_PWM);
+
+    k = 12.5;
+    pwm_deadzone = 30;
 }
 
 DCMotor::~DCMotor()
@@ -39,12 +42,33 @@ void DCMotor::set_angle_callbacks(uint8_t pin, void (*setup)(uint8_t), float (*r
 
 void DCMotor::set_speed(float speed)
 {
-    return;
+    if(speed >= 0.0f)
+    {
+        set_dir(BTS7960_CW);
+        r = speed;
+    }
+    else
+    {
+        set_dir(BTS7960_CCW);
+        r = -speed;
+    }
+}
+
+void DCMotor::control_update()
+{
+    int pwm;
+
+    pwm = r*k;
+
+    if(pwm < pwm_deadzone && pwm != 0)
+        pwm = pwm_deadzone;
+
+    driver.btsdriver->setSpeed(pwm);
 }
 
 void DCMotor::set_dir(bool dir)
 {
-    return;
+    driver.btsdriver->setDirection(dir);
 }
 
 /*********************
