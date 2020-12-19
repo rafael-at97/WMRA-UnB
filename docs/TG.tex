@@ -219,18 +219,16 @@ Comando para criar a página de agradecimentos
 
 \resumo{resumo}{
 
-Este trabalho tem como finalidade apresentar o projeto de circuitos de instrumentação e acionamento, bem como de um sistema 
+Este trabalho apresenta o projeto de circuitos de instrumentação e acionamento, bem como de um sistema 
 central, para comando de um braço robótico montado em uma cadeira de rodas, a ser utilizado por pessoas com deficiências motoras.
 O projeto de circuitos conta com a escolha de todos os dispositivos relacionados a serem inseridos na estrutura do manipulador,
 visando garantir uma boa integridade dos sinais transmistidos e boa resposta de atuação.
-Os circuitos de acionamento, processamento e controle são em sua totalidade baseados em modelos comerciais, que já
-possuem uma grande confiabilidade e baixo custo no mercado.
-O sistema de comando do robô foi desenvolvido de modo a transformar velocidades informadas por um usuário através de um \textit{joystick}
-em velocidades a serem impostas nas juntas, controlando simultanemante todos os atuadores do sistema.
+O sistema de comando do robô foi desenvolvido de modo a utilizar uma matriz jacobina
+para transformar velocidades cartesianas informadas pelo usuário através de um \textit{joystick} 
+em velocidades a serem impostas nas juntas, controlando simultanemante todos os atuadores do sistema. 
 Foi criado um ambiente de simulação para facilitar a visualização da posição e orientação do manipulador, que realiza
-uma animação do robô na tela com base em dados obtidos pelo microcontrolador empregado, e, através deste, foi possível 
-validar o funcionamento dos circuitos e do sistema de controle propostos.
-
+uma animação do robô na tela com base em dados obtidos pelo microcontrolador empregado.
+Os sistemas foram validados através de protótipos em conjunto com o simulador.
 \medskip{}
 
 Palavras Chave: Braço Robótico Montado Sobre Cadeira de Rodas, Tecnologias Assistivas, Manipulador Robótico, Sensoriamento Robótico.
@@ -241,19 +239,19 @@ Palavras Chave: Braço Robótico Montado Sobre Cadeira de Rodas, Tecnologias Ass
 
 \resumo{Abstract}{
 
-This work has as purpose the presentation of instrumentation and driver circuits design, as well as the design of a central system, for
-controlling a weelchair mounter robotic arm, to be used by people with motor impairments.
-The circuits design takes in consideration the choice of all the related devices to be inserted in the manipulator structure,
-aiming to guarantee a good signal integrity for the transmitted signals and a good actuation response.
-The driver, processing and control circuits are entirely based on commercial models, which already show a great reliability and
-low cost in the market.
-The robot's control system was developed in a way to transform speeds informed by the user through a joystick into speeds to be
-imposed on the joints, controlling all the system's motors simultaneously.
-A simulation environment was created to facilitate the visualization of the manipulator position and orientation. The environment
-performs the robot's animation based on data obtained by the microcontroller employed, and, through this mean, it was possible
-to validate the proposed circuits and control system operations.
+This paper describes the design of instrumentation and driver
+circuits, along with a central system, to command a wheelchair
+mounted robotic arm, concerning the use by people with motor impairments.
+The circuit design exposes the selection of all devices to be inserted in the manipulator structure,
+in order to achieve a good signal integrity and actuation response.
+The robot's command system employs a jacobian matrix to perform a transformation
+between cartesian speeds informed by the user through a joystick into joint speed, controlling all the 
+system's motors simultaneously.
+A simulation environment was created to aid in observing the manipulator position and 
+orientation, updating an animation based on data sent by the underlying microcontroller. 
+The systems were verified through prototypes connected to the simulator.
 
-\medskip{}
+\medskip{}  
 
 
 Keywords: Wheelchair Mounted Robotic Arm, Assitive Technologies, Robotic Manipulator, Robot Sensing.

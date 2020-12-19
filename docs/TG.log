@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.5.6)  19 DEC 2020 06:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.12.19)  19 DEC 2020 09:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/rtorres/Documents/TG/Relatorio/TG.tex
-(/home/rtorres/Documents/TG/Relatorio/TG.tex
+**/tmp/TG/WMRA-UnB/docs/TG.tex
+(/tmp/TG/WMRA-UnB/docs/TG.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+Babel <3.18> and hyphenation patterns for 4 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/bk11.clo
@@ -848,7 +848,7 @@ Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 ) (/usr/share/texlive/texmf-dist/tex/latex/import/import.sty
 Package: import 2009/03/23  v 5.1
-) (/home/rtorres/Documents/TG/Relatorio/template-FT-UnB/ft2unb.sty
+) (/tmp/TG/WMRA-UnB/docs/template-FT-UnB/ft2unb.sty
 
 LaTeX Warning: You have requested package `template-FT-UnB/ft2unb',
                but the package provides `ft2unb'.
@@ -939,7 +939,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 
 
 Writing index file TG.idx
-(/home/rtorres/Documents/TG/Relatorio/TG.aux (/home/rtorres/Documents/TG/Relatorio/secoes/simbolos.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Introducao.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Fundamentos.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_ProjetoEletroEletronico.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_ProjetoEletroControle.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Resultados.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Conclusoes.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Repositorio.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_datasheets.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Cinematica.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Jacobiana.aux))
+(/tmp/TG/WMRA-UnB/docs/TG.aux (/tmp/TG/WMRA-UnB/docs/secoes/simbolos.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_Introducao.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_Fundamentos.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_ProjetoEletroEletronico.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_ProjetoEletroControle.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_Resultados.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_Conclusoes.aux) (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Repositorio.aux) (/tmp/TG/WMRA-UnB/docs/secoes/anexo_datasheets.aux) (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Cinematica.aux) (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Jacobiana.aux))
 \openout1 = `TG.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
@@ -1085,7 +1085,7 @@ Package pdftex.def Info: template-FT-UnB/logotipos/capa_fundo.pdf  used on input
 [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/rtorres/Documents/TG/Relatorio/template-FT-UnB/logotipos/capa_fundo.pdf>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </tmp/TG/WMRA-UnB/docs/template-FT-UnB/logotipos/capa_fundo.pdf>]
 Overfull \hbox (7.26704pt too wide) in paragraph at lines 139--139
  [][] 
  []
@@ -1105,7 +1105,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--139
 
 ] [1
 
-] [2] (/home/rtorres/Documents/TG/Relatorio/TG.toc
+] [2] (/tmp/TG/WMRA-UnB/docs/TG.toc
 
 LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 (Font)              using `T1/lmr/bx/n' instead on input line 2.
@@ -1116,13 +1116,13 @@ LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 \tf@toc=\write5
 \openout5 = `TG.toc'.
 
- [4] (/home/rtorres/Documents/TG/Relatorio/TG.lof [5
+ [4] (/tmp/TG/WMRA-UnB/docs/TG.lof [5
 
 ])
 \tf@lof=\write6
 \openout6 = `TG.lof'.
 
- [6] (/home/rtorres/Documents/TG/Relatorio/TG.lot)
+ [6] (/tmp/TG/WMRA-UnB/docs/TG.lot)
 \tf@lot=\write7
 \openout7 = `TG.lot'.
 
@@ -1131,13 +1131,13 @@ LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 ]
 \openout2 = `secoes/simbolos.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/simbolos.tex [8
+ (/tmp/TG/WMRA-UnB/docs/secoes/simbolos.tex [8
 
 
 ]) [9]
 \openout2 = `secoes/cap_Introducao.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Introducao.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/cap_Introducao.tex
 Cap\'{\i }tulo 1.
 LaTeX Font Info:    Try loading font information for TS1+lmr on input line 10.
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
@@ -1153,10 +1153,10 @@ File: images/intro/manipulador-base.png Graphic file (type png)
 <use images/intro/manipulador-base.png>
 Package pdftex.def Info: images/intro/manipulador-base.png  used on input line 80.
 (pdftex.def)             Requested size: 417.91142pt x 287.46143pt.
- [3 </home/rtorres/Documents/TG/Relatorio/images/intro/manipulador-base.png>]) [4]
+ [3 </tmp/TG/WMRA-UnB/docs/images/intro/manipulador-base.png>]) [4]
 \openout2 = `secoes/cap_Fundamentos.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Fundamentos.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/cap_Fundamentos.tex
 Cap\'{\i }tulo 2.
 [5
 
@@ -1173,19 +1173,19 @@ File: images/fundamentos/wmra-usf.png Graphic file (type png)
 <use images/fundamentos/wmra-usf.png>
 Package pdftex.def Info: images/fundamentos/wmra-usf.png  used on input line 79.
 (pdftex.def)             Requested size: 232.17459pt x 309.88377pt.
- [6 </home/rtorres/Documents/TG/Relatorio/images/fundamentos/manipulador-didatico.png>] [7 </home/rtorres/Documents/TG/Relatorio/images/fundamentos/wmra-usf.png>] [8] [9]
+ [6 </tmp/TG/WMRA-UnB/docs/images/fundamentos/manipulador-didatico.png>] [7 </tmp/TG/WMRA-UnB/docs/images/fundamentos/wmra-usf.png>] [8] [9]
 <images/fundamentos/Interferencia.png, id=103, 634.37pt x 432.61626pt>
 File: images/fundamentos/Interferencia.png Graphic file (type png)
 <use images/fundamentos/Interferencia.png>
 Package pdftex.def Info: images/fundamentos/Interferencia.png  used on input line 224.
 (pdftex.def)             Requested size: 325.043pt x 221.67436pt.
- [10 </home/rtorres/Documents/TG/Relatorio/images/fundamentos/Interferencia.png>]
+ [10 </tmp/TG/WMRA-UnB/docs/images/fundamentos/Interferencia.png>]
 <images/fundamentos/RCFilter.png, id=108, 272.01625pt x 274.02374pt>
 File: images/fundamentos/RCFilter.png Graphic file (type png)
 <use images/fundamentos/RCFilter.png>
 Package pdftex.def Info: images/fundamentos/RCFilter.png  used on input line 275.
 (pdftex.def)             Requested size: 139.30617pt x 140.33981pt.
- [11 </home/rtorres/Documents/TG/Relatorio/images/fundamentos/RCFilter.png>]
+ [11 </tmp/TG/WMRA-UnB/docs/images/fundamentos/RCFilter.png>]
 <images/fundamentos/AmpOps.png, id=113, 636.3775pt x 252.945pt>
 File: images/fundamentos/AmpOps.png Graphic file (type png)
 <use images/fundamentos/AmpOps.png>
@@ -1205,7 +1205,7 @@ Package pdftex.def Info: images/fundamentos/Optocoupler.png  used on input line 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13 </home/rtorres/Documents/TG/Relatorio/images/fundamentos/AmpOps.png>]
+[13 </tmp/TG/WMRA-UnB/docs/images/fundamentos/AmpOps.png>]
 <images/fundamentos/excontrole.png, id=125, 724.7075pt x 402.50375pt>
 File: images/fundamentos/excontrole.png Graphic file (type png)
 <use images/fundamentos/excontrole.png>
@@ -1215,22 +1215,22 @@ Package pdftex.def Info: images/fundamentos/excontrole.png  used on input line 4
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[14 </home/rtorres/Documents/TG/Relatorio/images/fundamentos/Optocoupler.png>]
+[14 </tmp/TG/WMRA-UnB/docs/images/fundamentos/Optocoupler.png>]
 <images/fundamentos/MotorDC.png, id=131, 507.8975pt x 227.85126pt>
 File: images/fundamentos/MotorDC.png Graphic file (type png)
 <use images/fundamentos/MotorDC.png>
 Package pdftex.def Info: images/fundamentos/MotorDC.png  used on input line 460.
 (pdftex.def)             Requested size: 278.61234pt x 124.99524pt.
- [15 </home/rtorres/Documents/TG/Relatorio/images/fundamentos/excontrole.png> </home/rtorres/Documents/TG/Relatorio/images/fundamentos/MotorDC.png>] [16]
+ [15 </tmp/TG/WMRA-UnB/docs/images/fundamentos/excontrole.png> </tmp/TG/WMRA-UnB/docs/images/fundamentos/MotorDC.png>] [16]
 <images/fundamentos/StepperSpeed.png, id=140, 321.2pt x 197.73875pt>
 File: images/fundamentos/StepperSpeed.png Graphic file (type png)
 <use images/fundamentos/StepperSpeed.png>
 Package pdftex.def Info: images/fundamentos/StepperSpeed.png  used on input line 571.
 (pdftex.def)             Requested size: 232.17459pt x 142.936pt.
- [17 </home/rtorres/Documents/TG/Relatorio/images/fundamentos/StepperSpeed.png>] [18]) [19]
+ [17 </tmp/TG/WMRA-UnB/docs/images/fundamentos/StepperSpeed.png>] [18]) [19]
 \openout2 = `secoes/cap_ProjetoEletroEletronico.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/cap_ProjetoEletroEletronico.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/cap_ProjetoEletroEletronico.tex
 Cap\'{\i }tulo 3.
 [20
 
@@ -1253,7 +1253,7 @@ File: images/arm/RefFrames.png Graphic file (type png)
 <use images/arm/RefFrames.png>
 Package pdftex.def Info: images/arm/RefFrames.png  used on input line 175.
 (pdftex.def)             Requested size: 371.48076pt x 161.00835pt.
- [22 </home/rtorres/Documents/TG/Relatorio/images/arm/render.jpg> </home/rtorres/Documents/TG/Relatorio/images/arm/Refframes-original.png>]
+ [22 </tmp/TG/WMRA-UnB/docs/images/arm/render.jpg> </tmp/TG/WMRA-UnB/docs/images/arm/Refframes-original.png>]
 <images/arm/joint1-mass-cropped.jpg, id=166, 1051.93pt x 671.50874pt>
 File: images/arm/joint1-mass-cropped.jpg Graphic file (type jpg)
 <use images/arm/joint1-mass-cropped.jpg>
@@ -1283,11 +1283,11 @@ Package pdftex.def Info: images/arm/joint5-mass-cropped.jpg  used on input line 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[23 </home/rtorres/Documents/TG/Relatorio/images/arm/RefFrames.png>] [24]
+[23 </tmp/TG/WMRA-UnB/docs/images/arm/RefFrames.png>] [24]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[25 </home/rtorres/Documents/TG/Relatorio/images/arm/joint1-mass-cropped.jpg> </home/rtorres/Documents/TG/Relatorio/images/arm/joint2-mass-cropped.jpg> </home/rtorres/Documents/TG/Relatorio/images/arm/joint3-mass-cropped.jpg> </home/rtorres/Documents/TG/Relatorio/images/arm/joint4-mass-cropped.jpg> </home/rtorres/Documents/TG/Relatorio/images/arm/joint5-mass-cropped.jpg>]
+[25 </tmp/TG/WMRA-UnB/docs/images/arm/joint1-mass-cropped.jpg> </tmp/TG/WMRA-UnB/docs/images/arm/joint2-mass-cropped.jpg> </tmp/TG/WMRA-UnB/docs/images/arm/joint3-mass-cropped.jpg> </tmp/TG/WMRA-UnB/docs/images/arm/joint4-mass-cropped.jpg> </tmp/TG/WMRA-UnB/docs/images/arm/joint5-mass-cropped.jpg>]
 Overfull \hbox (4.42911pt too wide) in paragraph at lines 465--474
  [][] 
  []
@@ -1302,13 +1302,13 @@ Package pdftex.def Info: images/arm/spring-cropped.jpg  used on input line 584.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[27] [28 </home/rtorres/Documents/TG/Relatorio/images/arm/spring-cropped.jpg>] [29]
+[27] [28 </tmp/TG/WMRA-UnB/docs/images/arm/spring-cropped.jpg>] [29]
 <images/sensors/TestePot.png, id=195, 207.77625pt x 260.975pt>
 File: images/sensors/TestePot.png Graphic file (type png)
 <use images/sensors/TestePot.png>
 Package pdftex.def Info: images/sensors/TestePot.png  used on input line 678.
 (pdftex.def)             Requested size: 139.30617pt x 174.97977pt.
- [30 </home/rtorres/Documents/TG/Relatorio/images/sensors/TestePot.png>] [31]
+ [30 </tmp/TG/WMRA-UnB/docs/images/sensors/TestePot.png>] [31]
 <images/pcbs/SensorPCB-SizeConstraints2.png, id=203, 411.33675pt x 379.4175pt>
 File: images/pcbs/SensorPCB-SizeConstraints2.png Graphic file (type png)
 <use images/pcbs/SensorPCB-SizeConstraints2.png>
@@ -1333,7 +1333,7 @@ Package pdftex.def Info: images/pcbs/SensorPCB-SizeConstraints1.png  used on inp
 
 LaTeX Warning: Text page 33 contains only floats.
 
-[33 </home/rtorres/Documents/TG/Relatorio/images/pcbs/SensorPCB-SizeConstraints2.png> </home/rtorres/Documents/TG/Relatorio/images/pcbs/SensorPCB-SizeConstraints3.png> </home/rtorres/Documents/TG/Relatorio/images/pcbs/SensorPCB-SizeConstraints1.png>]
+[33 </tmp/TG/WMRA-UnB/docs/images/pcbs/SensorPCB-SizeConstraints2.png> </tmp/TG/WMRA-UnB/docs/images/pcbs/SensorPCB-SizeConstraints3.png> </tmp/TG/WMRA-UnB/docs/images/pcbs/SensorPCB-SizeConstraints1.png>]
 <images/pcbs/SensorPCB-Regulator.png, id=213, 464.33475pt x 252.945pt>
 File: images/pcbs/SensorPCB-Regulator.png Graphic file (type png)
 <use images/pcbs/SensorPCB-Regulator.png>
@@ -1344,7 +1344,7 @@ File: images/pcbs/SensorPCB-Pot.png Graphic file (type png)
 <use images/pcbs/SensorPCB-Pot.png>
 Package pdftex.def Info: images/pcbs/SensorPCB-Pot.png  used on input line 901.
 (pdftex.def)             Requested size: 348.26189pt x 212.25189pt.
- [34 </home/rtorres/Documents/TG/Relatorio/images/pcbs/SensorPCB-Regulator.png> </home/rtorres/Documents/TG/Relatorio/images/pcbs/SensorPCB-Pot.png>] [35]
+ [34 </tmp/TG/WMRA-UnB/docs/images/pcbs/SensorPCB-Regulator.png> </tmp/TG/WMRA-UnB/docs/images/pcbs/SensorPCB-Pot.png>] [35]
 <images/pcbs/SensorPCB-Switch.png, id=222, 816.651pt x 371.58826pt>
 File: images/pcbs/SensorPCB-Switch.png Graphic file (type png)
 <use images/pcbs/SensorPCB-Switch.png>
@@ -1355,13 +1355,13 @@ File: images/pcbs/SensorPCB-Board.png Graphic file (type png)
 <use images/pcbs/SensorPCB-Board.png>
 Package pdftex.def Info: images/pcbs/SensorPCB-Board.png  used on input line 1014.
 (pdftex.def)             Requested size: 208.9557pt x 139.37053pt.
- [36 </home/rtorres/Documents/TG/Relatorio/images/pcbs/SensorPCB-Switch.png> </home/rtorres/Documents/TG/Relatorio/images/pcbs/SensorPCB-Board.png>]
+ [36 </tmp/TG/WMRA-UnB/docs/images/pcbs/SensorPCB-Switch.png> </tmp/TG/WMRA-UnB/docs/images/pcbs/SensorPCB-Board.png>]
 <images/pcbs/MainPCB-Dimensoes.png, id=227, 579.3645pt x 456.5055pt>
 File: images/pcbs/MainPCB-Dimensoes.png Graphic file (type png)
 <use images/pcbs/MainPCB-Dimensoes.png>
 Package pdftex.def Info: images/pcbs/MainPCB-Dimensoes.png  used on input line 1036.
 (pdftex.def)             Requested size: 325.043pt x 256.12196pt.
- [37 </home/rtorres/Documents/TG/Relatorio/images/pcbs/MainPCB-Dimensoes.png>]
+ [37 </tmp/TG/WMRA-UnB/docs/images/pcbs/MainPCB-Dimensoes.png>]
 <images/pcbs/MainPCB-Opto.png, id=231, 365.56575pt x 166.82326pt>
 File: images/pcbs/MainPCB-Opto.png Graphic file (type png)
 <use images/pcbs/MainPCB-Opto.png>
@@ -1372,13 +1372,13 @@ File: images/pcbs/opto-CTR.png Graphic file (type png)
 <use images/pcbs/opto-CTR.png>
 Package pdftex.def Info: images/pcbs/opto-CTR.png  used on input line 1103.
 (pdftex.def)             Requested size: 232.17459pt x 218.03865pt.
- [38 </home/rtorres/Documents/TG/Relatorio/images/pcbs/MainPCB-Opto.png> </home/rtorres/Documents/TG/Relatorio/images/pcbs/opto-CTR.png>]
+ [38 </tmp/TG/WMRA-UnB/docs/images/pcbs/MainPCB-Opto.png> </tmp/TG/WMRA-UnB/docs/images/pcbs/opto-CTR.png>]
 <images/pcbs/MainPCB-Pot.png, id=238, 322.806pt x 183.084pt>
 File: images/pcbs/MainPCB-Pot.png Graphic file (type png)
 <use images/pcbs/MainPCB-Pot.png>
 Package pdftex.def Info: images/pcbs/MainPCB-Pot.png  used on input line 1142.
 (pdftex.def)             Requested size: 278.61234pt x 158.03023pt.
- [39 </home/rtorres/Documents/TG/Relatorio/images/pcbs/MainPCB-Pot.png>]
+ [39 </tmp/TG/WMRA-UnB/docs/images/pcbs/MainPCB-Pot.png>]
 <images/pcbs/MainPCB-DCmotor.png, id=242, 201.75375pt x 247.92625pt>
 File: images/pcbs/MainPCB-DCmotor.png Graphic file (type png)
 <use images/pcbs/MainPCB-DCmotor.png>
@@ -1397,7 +1397,7 @@ Overfull \hbox (24.59996pt too wide) detected at line 1200
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[40 </home/rtorres/Documents/TG/Relatorio/images/pcbs/MainPCB-DCmotor.png> </home/rtorres/Documents/TG/Relatorio/images/pcbs/MainPCB-Steppermotor.png>]
+[40 </tmp/TG/WMRA-UnB/docs/images/pcbs/MainPCB-DCmotor.png> </tmp/TG/WMRA-UnB/docs/images/pcbs/MainPCB-Steppermotor.png>]
 <images/pcbs/MainPCB-Board.png, id=247, 604.05675pt x 433.01775pt>
 File: images/pcbs/MainPCB-Board.png Graphic file (type png)
 <use images/pcbs/MainPCB-Board.png>
@@ -1407,10 +1407,10 @@ Package pdftex.def Info: images/pcbs/MainPCB-Board.png  used on input line 1337.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [41] [42 </home/rtorres/Documents/TG/Relatorio/images/pcbs/MainPCB-Board.png>]
+) [41] [42 </tmp/TG/WMRA-UnB/docs/images/pcbs/MainPCB-Board.png>]
 \openout2 = `secoes/cap_ProjetoEletroControle.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/cap_ProjetoEletroControle.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/cap_ProjetoEletroControle.tex
 Cap\'{\i }tulo 4.
 [43
 
@@ -1426,22 +1426,22 @@ Package pdftex.def Info: images/controle/fluxo.png  used on input line 380.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[48] [49 </home/rtorres/Documents/TG/Relatorio/images/controle/fluxo.png>]
+[48] [49 </tmp/TG/WMRA-UnB/docs/images/controle/fluxo.png>]
 <images/controle/fluxo2.png, id=278, 613.29124pt x 601.24625pt>
 File: images/controle/fluxo2.png Graphic file (type png)
 <use images/controle/fluxo2.png>
 Package pdftex.def Info: images/controle/fluxo2.png  used on input line 442.
 (pdftex.def)             Requested size: 325.043pt x 318.65898pt.
- [50 </home/rtorres/Documents/TG/Relatorio/images/controle/fluxo2.png>]
+ [50 </tmp/TG/WMRA-UnB/docs/images/controle/fluxo2.png>]
 <images/controle/simu-puma.png, id=284, 462.528pt x 346.896pt>
 File: images/controle/simu-puma.png Graphic file (type png)
 <use images/controle/simu-puma.png>
 Package pdftex.def Info: images/controle/simu-puma.png  used on input line 462.
 (pdftex.def)             Requested size: 371.48076pt x 278.62344pt.
-) [51 </home/rtorres/Documents/TG/Relatorio/images/controle/simu-puma.png>]
+) [51 </tmp/TG/WMRA-UnB/docs/images/controle/simu-puma.png>]
 \openout2 = `secoes/cap_Resultados.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Resultados.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/cap_Resultados.tex
 Cap\'{\i }tulo 5.
 <images/resultados/resolution.jpg, id=289, 644.4075pt x 861.2175pt>
 File: images/resultados/resolution.jpg Graphic file (type jpg)
@@ -1452,25 +1452,25 @@ Package pdftex.def Info: images/resultados/resolution.jpg  used on input line 16
 
 
 
- </home/rtorres/Documents/TG/Relatorio/images/resultados/resolution.jpg>]
+ </tmp/TG/WMRA-UnB/docs/images/resultados/resolution.jpg>]
 <images/resultados/proto-sensor.jpeg, id=293, 1284.8pt x 964.60374pt>
 File: images/resultados/proto-sensor.jpeg Graphic file (type jpg)
 <use images/resultados/proto-sensor.jpeg>
 Package pdftex.def Info: images/resultados/proto-sensor.jpeg  used on input line 54.
 (pdftex.def)             Requested size: 348.26189pt x 261.46208pt.
- [53 </home/rtorres/Documents/TG/Relatorio/images/resultados/proto-sensor.jpeg>]
+ [53 </tmp/TG/WMRA-UnB/docs/images/resultados/proto-sensor.jpeg>]
 <images/resultados/Test-vel.png, id=297, 462.72874pt x 172.645pt>
 File: images/resultados/Test-vel.png Graphic file (type png)
 <use images/resultados/Test-vel.png>
 Package pdftex.def Info: images/resultados/Test-vel.png  used on input line 94.
 (pdftex.def)             Requested size: 278.61234pt x 103.95132pt.
- [54 </home/rtorres/Documents/TG/Relatorio/images/resultados/Test-vel.png>]
+ [54 </tmp/TG/WMRA-UnB/docs/images/resultados/Test-vel.png>]
 <images/resultados/proto-main.jpeg, id=302, 1163.34625pt x 714.67pt>
 File: images/resultados/proto-main.jpeg Graphic file (type jpg)
 <use images/resultados/proto-main.jpeg>
 Package pdftex.def Info: images/resultados/proto-main.jpeg  used on input line 167.
 (pdftex.def)             Requested size: 464.34918pt x 285.26315pt.
- [55] [56 </home/rtorres/Documents/TG/Relatorio/images/resultados/proto-main.jpeg>]
+ [55] [56 </tmp/TG/WMRA-UnB/docs/images/resultados/proto-main.jpeg>]
 <images/resultados/pos_inicial.png, id=310, 462.528pt x 346.896pt>
 File: images/resultados/pos_inicial.png Graphic file (type png)
 <use images/resultados/pos_inicial.png>
@@ -1485,7 +1485,7 @@ Package pdftex.def Info: images/resultados/pos_zero.png  used on input line 233.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[57 </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_inicial.png>]
+[57 </tmp/TG/WMRA-UnB/docs/images/resultados/pos_inicial.png>]
 <images/resultados/pos_z.png, id=316, 462.528pt x 346.896pt>
 File: images/resultados/pos_z.png Graphic file (type png)
 <use images/resultados/pos_z.png>
@@ -1542,7 +1542,7 @@ Package pdftex.def Info: images/resultados/pos_stepperfinal.png  used on input l
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[58 </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_zero.png>] [59 </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_z.png> </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_alimento.png> </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_pegar1.png> </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_pegar2.png> </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_singularidade.png>]
+[58 </tmp/TG/WMRA-UnB/docs/images/resultados/pos_zero.png>] [59 </tmp/TG/WMRA-UnB/docs/images/resultados/pos_z.png> </tmp/TG/WMRA-UnB/docs/images/resultados/pos_alimento.png> </tmp/TG/WMRA-UnB/docs/images/resultados/pos_pegar1.png> </tmp/TG/WMRA-UnB/docs/images/resultados/pos_pegar2.png> </tmp/TG/WMRA-UnB/docs/images/resultados/pos_singularidade.png>]
 <images/resultados/teste-dc.jpeg, id=336, 726.715pt x 249.93375pt>
 File: images/resultados/teste-dc.jpeg Graphic file (type jpg)
 <use images/resultados/teste-dc.jpeg>
@@ -1552,7 +1552,7 @@ Package pdftex.def Info: images/resultados/teste-dc.jpeg  used on input line 357
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[60 </home/rtorres/Documents/TG/Relatorio/images/resultados/stepper1.jpeg> </home/rtorres/Documents/TG/Relatorio/images/resultados/stepper2.jpeg> </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_stepperfinal.png>]
+[60 </tmp/TG/WMRA-UnB/docs/images/resultados/stepper1.jpeg> </tmp/TG/WMRA-UnB/docs/images/resultados/stepper2.jpeg> </tmp/TG/WMRA-UnB/docs/images/resultados/pos_stepperfinal.png>]
 <images/resultados/dc-real1.jpeg, id=341, 310.15875pt x 257.96375pt>
 File: images/resultados/dc-real1.jpeg Graphic file (type jpg)
 <use images/resultados/dc-real1.jpeg>
@@ -1578,22 +1578,22 @@ Overfull \hbox (24.59998pt too wide) detected at line 399
  [] 
  []
 
-[61 </home/rtorres/Documents/TG/Relatorio/images/resultados/teste-dc.jpeg> </home/rtorres/Documents/TG/Relatorio/images/resultados/dc-real1.jpeg> </home/rtorres/Documents/TG/Relatorio/images/resultados/dc-real2.jpeg> </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_dc_inicial.png> </home/rtorres/Documents/TG/Relatorio/images/resultados/pos_dc_final.png>]
+[61 </tmp/TG/WMRA-UnB/docs/images/resultados/teste-dc.jpeg> </tmp/TG/WMRA-UnB/docs/images/resultados/dc-real1.jpeg> </tmp/TG/WMRA-UnB/docs/images/resultados/dc-real2.jpeg> </tmp/TG/WMRA-UnB/docs/images/resultados/pos_dc_inicial.png> </tmp/TG/WMRA-UnB/docs/images/resultados/pos_dc_final.png>]
 <images/resultados/pos-dois.png, id=350, 462.528pt x 346.896pt>
 File: images/resultados/pos-dois.png Graphic file (type png)
 <use images/resultados/pos-dois.png>
 Package pdftex.def Info: images/resultados/pos-dois.png  used on input line 426.
 (pdftex.def)             Requested size: 371.48076pt x 278.62344pt.
-) [62 </home/rtorres/Documents/TG/Relatorio/images/resultados/pos-dois.png>]
+) [62 </tmp/TG/WMRA-UnB/docs/images/resultados/pos-dois.png>]
 \openout2 = `secoes/cap_Conclusoes.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Conclusoes.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/cap_Conclusoes.tex
 Cap\'{\i }tulo 6.
 [63
 
 
 
-]) [64] (/home/rtorres/Documents/TG/Relatorio/TG.bbl [65
+]) [64] (/tmp/TG/WMRA-UnB/docs/TG.bbl [65
 
 
 ]
@@ -1608,7 +1608,7 @@ Underfull \hbox (badness 2617) in paragraph at lines 108--110
 ]
 \openout2 = `secoes/anexo_Repositorio.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Repositorio.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Repositorio.tex
 ANEXO I.
 <images/anexo/repositorio.png, id=375, 237.88875pt x 393.47pt>
 File: images/anexo/repositorio.png Graphic file (type png)
@@ -1618,10 +1618,10 @@ Package pdftex.def Info: images/anexo/repositorio.png  used on input line 14.
 ) [69
 
 
- </home/rtorres/Documents/TG/Relatorio/images/anexo/repositorio.png>]
+ </tmp/TG/WMRA-UnB/docs/images/anexo/repositorio.png>]
 \openout2 = `secoes/anexo_datasheets.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_datasheets.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/anexo_datasheets.tex
 ANEXO II.
 <datasheets/mabuchi.pdf, id=380, 597.50786pt x 845.04686pt>
 File: datasheets/mabuchi.pdf Graphic file (type pdf)
@@ -1632,38 +1632,38 @@ Package pdftex.def Info: datasheets/mabuchi.pdf  used on input line 9.
 
 
 
- </home/rtorres/Documents/TG/Relatorio/datasheets/mabuchi.pdf>]
+ </tmp/TG/WMRA-UnB/docs/datasheets/mabuchi.pdf>]
 
-pdfTeX warning: pdflatex (file /home/rtorres/Documents/TG/Relatorio/datasheets/ht23-397.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
+pdfTeX warning: pdflatex (file /tmp/TG/WMRA-UnB/docs/datasheets/ht23-397.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
 <datasheets/ht23-397.pdf, id=440, 597.23125pt x 845.1575pt>
 File: datasheets/ht23-397.pdf Graphic file (type pdf)
 <use datasheets/ht23-397.pdf>
 Package pdftex.def Info: datasheets/ht23-397.pdf  used on input line 21.
 (pdftex.def)             Requested size: 371.48076pt x 525.69452pt.
-[71 </home/rtorres/Documents/TG/Relatorio/datasheets/ht23-397.pdf>]
+[71 </tmp/TG/WMRA-UnB/docs/datasheets/ht23-397.pdf>]
 <datasheets/ht23-397-p2.pdf, id=471, 597.50786pt x 845.04686pt>
 File: datasheets/ht23-397-p2.pdf Graphic file (type pdf)
 <use datasheets/ht23-397-p2.pdf>
 Package pdftex.def Info: datasheets/ht23-397-p2.pdf  used on input line 29.
 (pdftex.def)             Requested size: 371.48076pt x 525.3807pt.
- [72 </home/rtorres/Documents/TG/Relatorio/datasheets/ht23-397-p2.pdf>]
+ [72 </tmp/TG/WMRA-UnB/docs/datasheets/ht23-397-p2.pdf>]
 <datasheets/jk42.pdf, id=516, 597.23125pt x 845.1575pt>
 File: datasheets/jk42.pdf Graphic file (type pdf)
 <use datasheets/jk42.pdf>
 Package pdftex.def Info: datasheets/jk42.pdf  used on input line 41.
 (pdftex.def)             Requested size: 376.12169pt x 532.2586pt.
- [73 </home/rtorres/Documents/TG/Relatorio/datasheets/jk42.pdf>]
+ [73 </tmp/TG/WMRA-UnB/docs/datasheets/jk42.pdf>]
 
-pdfTeX warning: pdflatex (file /home/rtorres/Documents/TG/Relatorio/datasheets/bournspot.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
+pdfTeX warning: pdflatex (file /tmp/TG/WMRA-UnB/docs/datasheets/bournspot.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
 <datasheets/bournspot.pdf, id=537, 596.2275pt x 794.97pt>
 File: datasheets/bournspot.pdf Graphic file (type pdf)
 <use datasheets/bournspot.pdf>
 Package pdftex.def Info: datasheets/bournspot.pdf  used on input line 53.
 (pdftex.def)             Requested size: 394.69963pt x 526.27089pt.
-) [74 </home/rtorres/Documents/TG/Relatorio/datasheets/bournspot.pdf>]
+) [74 </tmp/TG/WMRA-UnB/docs/datasheets/bournspot.pdf>]
 \openout2 = `secoes/anexo_Cinematica.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Cinematica.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Cinematica.tex
 ANEXO III.
 [75
 
@@ -1672,7 +1672,7 @@ ANEXO III.
 ] [76] [77] [78] [79] [80]) [81]
 \openout2 = `secoes/anexo_Jacobiana.aux'.
 
- (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Jacobiana.tex
+ (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Jacobiana.tex
 ANEXO IV.
 [82
 
@@ -1695,21 +1695,21 @@ Overfull \vbox (21.78392pt too high) has occurred while \output is active []
 \tf@thm=\write8
 \openout8 = `TG.thm'.
 
- (/home/rtorres/Documents/TG/Relatorio/TG.aux (/home/rtorres/Documents/TG/Relatorio/secoes/simbolos.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Introducao.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Fundamentos.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_ProjetoEletroEletronico.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_ProjetoEletroControle.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Resultados.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/cap_Conclusoes.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Repositorio.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_datasheets.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Cinematica.aux) (/home/rtorres/Documents/TG/Relatorio/secoes/anexo_Jacobiana.aux))
+ (/tmp/TG/WMRA-UnB/docs/TG.aux (/tmp/TG/WMRA-UnB/docs/secoes/simbolos.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_Introducao.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_Fundamentos.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_ProjetoEletroEletronico.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_ProjetoEletroControle.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_Resultados.aux) (/tmp/TG/WMRA-UnB/docs/secoes/cap_Conclusoes.aux) (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Repositorio.aux) (/tmp/TG/WMRA-UnB/docs/secoes/anexo_datasheets.aux) (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Cinematica.aux) (/tmp/TG/WMRA-UnB/docs/secoes/anexo_Jacobiana.aux))
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 9092 strings out of 492982
- 140081 string characters out of 6134897
- 238839 words of memory out of 5000000
- 12243 multiletter control sequences out of 15000+600000
+ 9092 strings out of 494903
+ 138776 string characters out of 6179960
+ 233962 words of memory out of 5000000
+ 11999 multiletter control sequences out of 15000+600000
  97117 words of font info for 69 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 44i,23n,53p,531b,560s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 16 hyphenation exceptions out of 8191
+ 44i,23n,53p,516b,560s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb>
-Output written on /home/rtorres/Documents/TG/Relatorio/TG.pdf (97 pages, 7780676 bytes).
+Output written on /tmp/TG/WMRA-UnB/docs/TG.pdf (97 pages, 7780191 bytes).
 PDF statistics:
  696 PDF objects out of 1000 (max. 8388607)
  404 compressed objects within 5 object streams
