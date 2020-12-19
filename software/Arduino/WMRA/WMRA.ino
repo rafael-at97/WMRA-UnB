@@ -73,10 +73,10 @@ const uint8_t PC_TO_IDX[] =
 
 #define MAX_JS      (100)
 
-float a2 = 0.014;
+float a1 = 0.014;
+float a2 = 0.35;
 float a3 = 0.35;
-float a4 = 0.35;
-float a5 = 0.165;
+float a4 = 0.165;
 float d6 = 0.198;
         
 /** Motors **/
@@ -153,115 +153,115 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     /********************************/ 
     /* Calculations for determinant */
     /********************************/ 
-    float S3_A3_A4      = not_zero(sin(q[2])*a3*a4);
+    float S3_A2_A3      = not_zero(sin(q[2])*a2*a3);
 
-    float C23_A4        = cos(q[1]+q[2])*a4;         
-    float C2A3_C23A4    = cos(q[1])*a3 + C23_A4;
+    float C23_A3        = cos(q[1]+q[2])*a3;         
+    float C2A2_C23A3    = cos(q[1])*a2 + C23_A3;
 
     float C5_D6         = c5*d6;                              
-    float A5_C5D6       = a5 + C5_D6;
+    float A4_C5D6       = a4 + C5_D6;
 
-    float A2c           = a2 + C2A3_C23A4 + c234*( A5_C5D6 );
-    float A2c_c234c5d6  = not_zero(A2c + c234*C5_D6);
+    float A1c           = a1 + C2A2_C23A3 + c234*( A4_C5D6 );
+    float A1c_c234c5d6  = not_zero(A1c + c234*C5_D6);
 
     float S5_D6         = s5*d6;
     float temp0         = S5_D6 + S5_D6;
 
-    float detJ_sing     = not_zero(-c5*A2c_c234c5d6); /* Without S3 term that causes singularity */
-    float detJ          = not_zero(-c5*S3_A3_A4*A2c_c234c5d6);  
+    float detJ_sing     = not_zero(-c5*A1c_c234c5d6); /* Without S3 term that causes singularity */
+    float detJ          = not_zero(-c5*S3_A2_A3*A1c_c234c5d6);  
 
     /**************************/
     /* Third row calculations */
     /**************************/
 
-    /*S23_A4 = s23*a4; <- Original name of variable */
-    float temp1 = sin(q[1]+q[2])*a4;
+    /*S23_A3 = s23*a3; <- Original name of variable */
+    float temp1 = sin(q[1]+q[2])*a3;
 
     invJacobian[C1][R3] = invJacobian[C5][R3] = invJacobian[C6][R3] = 0.0f;
-    invJacobian[C2][R3] = ( temp1 ) / S3_A3_A4;
-    invJacobian[C3][R3] = ( -( sin(q[1])*a3 + temp1 ) ) / S3_A3_A4;
+    invJacobian[C2][R3] = ( temp1 ) / S3_A2_A3;
+    invJacobian[C3][R3] = ( -( sin(q[1])*a2 + temp1 ) ) / S3_A2_A3;
     invJacobian[C4][R3] = - ( invJacobian[C2][R3] + invJacobian[C3][R3] );
 
     /*************************/
     /* Some terms of 6th row */
     /*************************/
     
-    invJacobian[C6][R6] = ( -s234*A2c ) / detJ_sing;
-    invJacobian[C5][R6] = ( -c234*A2c ) / A2c_c234c5d6;
+    invJacobian[C6][R6] = ( -s234*A1c ) / detJ_sing;
+    invJacobian[C5][R6] = ( -c234*A1c ) / A1c_c234c5d6;
 
     /*C5D6_C5C234 = C5_D6*C234 <- Original name of variable */
     temp1 = C5_D6*c234;
 
-    invJacobian[C1][R6] = ( temp1 ) / A2c_c234c5d6;
+    invJacobian[C1][R6] = ( temp1 ) / A1c_c234c5d6;
 
     /********************/ 
     /* 1st and 2nd rows */
     /********************/
-    float S4_A4      = sin(q[3])*a4;
-    float S34A3_S4A4 = sin(q[2]+q[3])*a3+S4_A4;
+    float S4_A3      = sin(q[3])*a3;
+    float S34A2_S4A3 = sin(q[2]+q[3])*a2+S4_A3;
 
     float S5S234     = s5*s234;       
 
-    float temp2 = c5*(s1*temp0 + c1*A2c_c234c5d6);
-    float temp3 = S5S234*(A5_C5D6 + C5_D6)*S4_A4;
-    float temp4 = S5S234*(A5_C5D6 + C5_D6)*S34A3_S4A4;
+    float temp2 = c5*(s1*temp0 + c1*A1c_c234c5d6);
+    float temp3 = S5S234*(A4_C5D6 + C5_D6)*S4_A3;
+    float temp4 = S5S234*(A4_C5D6 + C5_D6)*S34A2_S4A3;
 
-    invJacobian[C1][R1] = ( -s1 ) / A2c_c234c5d6;
+    invJacobian[C1][R1] = ( -s1 ) / A1c_c234c5d6;
     invJacobian[C5][R1] = invJacobian[C1][R1]*c234;
     invJacobian[C6][R1] = ( -s1*s234 ) / detJ_sing;
-    invJacobian[C2][R1] = ( -C23_A4*temp2 + s1*temp3 ) / detJ;
-    invJacobian[C3][R1] = ( C2A3_C23A4*temp2 - s1*temp4 ) / detJ;
+    invJacobian[C2][R1] = ( -C23_A3*temp2 + s1*temp3 ) / detJ;
+    invJacobian[C3][R1] = ( C2A2_C23A3*temp2 - s1*temp4 ) / detJ;
     invJacobian[C4][R1] = - ( invJacobian[C2][R1] + invJacobian[C3][R1] ) - invJacobian[C6][R1]*s5;
     
-    temp2 = c5*(c1*temp0 - s1*A2c_c234c5d6);
+    temp2 = c5*(c1*temp0 - s1*A1c_c234c5d6);
 
-    invJacobian[C1][R2] = ( c1 ) / A2c_c234c5d6;
+    invJacobian[C1][R2] = ( c1 ) / A1c_c234c5d6;
     invJacobian[C5][R2] = invJacobian[C1][R2]*c234;
     invJacobian[C6][R2] = ( c1*s234 ) / detJ_sing;
-    invJacobian[C2][R2] = ( C23_A4*temp2 - c1*temp3 ) / detJ;
-    invJacobian[C3][R2] = ( -C2A3_C23A4*temp2 + c1*temp4 ) / detJ;
+    invJacobian[C2][R2] = ( C23_A3*temp2 - c1*temp3 ) / detJ;
+    invJacobian[C3][R2] = ( -C2A2_C23A3*temp2 + c1*temp4 ) / detJ;
     invJacobian[C4][R2] = - ( invJacobian[C2][R2] + invJacobian[C3][R2] ) - invJacobian[C6][R2]*s5;
 
     /**************************/
     /* Final terms of 6th row */
     /**************************/
-    float C4_A4      = cos(q[3])*a4;
-    float C34A3_C4A4 = cos(q[2]+q[3])*a3+C4_A4;
+    float C4_A3      = cos(q[3])*a3;
+    float C34A2_C4A3 = cos(q[2]+q[3])*a2+C4_A3;
 
-    S5S234 = S5S234*A2c;
+    S5S234 = S5S234*A1c;
     
-    temp3 = A5_C5D6*S4_A4;
-    temp4 = A5_C5D6*S34A3_S4A4;
+    temp3 = A4_C5D6*S4_A3;
+    temp4 = A4_C5D6*S34A2_S4A3;
 
     /*C5D6_C5C234_S5D6 = C5D6_C5C234*S5_D6; <- Original name of variable */
     temp1 = temp1*c5*S5_D6;
 
-    /*C5D6_S5C234_A2c = C5_D6*s5*c234*A2c; <- Original name of variable */
-    temp0 = C5_D6*s5*c234*A2c;
+    /*C5D6_S5C234_A1c = C5_D6*s5*c234*A1c; <- Original name of variable */
+    temp0 = C5_D6*s5*c234*A1c;
 
-    invJacobian[C2][R6] = ( C23_A4*temp1 - temp0*C4_A4 + S5S234*temp3 ) / detJ;
-    invJacobian[C3][R6] = ( -C2A3_C23A4*temp1 + temp0*C34A3_C4A4 - S5S234*temp4 ) / detJ;
+    invJacobian[C2][R6] = ( C23_A3*temp1 - temp0*C4_A3 + S5S234*temp3 ) / detJ;
+    invJacobian[C3][R6] = ( -C2A2_C23A3*temp1 + temp0*C34A2_C4A3 - S5S234*temp4 ) / detJ;
     invJacobian[C4][R6] = - ( invJacobian[C2][R6] + invJacobian[C3][R6] ) - s5*invJacobian[C6][R6];
 
     /****************/
     /* Rows 4 and 5 */
     /****************/
-    float A2cc234_c5d6 = A2c*c234 + C5_D6;
+    float A1cc234_c5d6 = A1c*c234 + C5_D6;
     
-    invJacobian[C6][R4] = ( -c1*A2cc234_c5d6 ) / detJ_sing;
-    invJacobian[C6][R5] = ( -s1*A2cc234_c5d6 ) / detJ_sing;
+    invJacobian[C6][R4] = ( -c1*A1cc234_c5d6 ) / detJ_sing;
+    invJacobian[C6][R5] = ( -s1*A1cc234_c5d6 ) / detJ_sing;
 
-    /*C5S234_A2c = C5S234*A2c; <- Original name of variable */
-    temp1 = s234*A2c;
+    /*C5S234_A1c = C5S234*A1c; <- Original name of variable */
+    temp1 = s234*A1c;
 
     /*C5D6_C5S234 = C5_D6*temp1; <- Original name of variable */
     temp0 = C5_D6*s234;
     
-    invJacobian[C5][R4] = ( c1*temp1 ) / A2c_c234c5d6;
-    invJacobian[C5][R5] = ( s1*temp1 ) / A2c_c234c5d6;
+    invJacobian[C5][R4] = ( c1*temp1 ) / A1c_c234c5d6;
+    invJacobian[C5][R5] = ( s1*temp1 ) / A1c_c234c5d6;
     
-    invJacobian[C1][R4] = ( -c1*temp0 ) / A2c_c234c5d6;
-    invJacobian[C1][R5] = ( -s1*temp0 ) / A2c_c234c5d6;
+    invJacobian[C1][R4] = ( -c1*temp0 ) / A1c_c234c5d6;
+    invJacobian[C1][R5] = ( -s1*temp0 ) / A1c_c234c5d6;
 
     /*C5D6_S5S234 <- Original name of variable */
     S5S234 = C5_D6*S5S234;
@@ -269,17 +269,17 @@ void calcInverseJacobian(float invJacobian[DOF][DOF], float q[DOF])
     /*C5D6_C5S234_S5D6 = temp0*S5_D6; <- Original name of variable */
     temp0 = temp0*c5*S5_D6;
     
-    temp2 = c5*s1*A2c_c234c5d6 - s5*c1*A2cc234_c5d6;
+    temp2 = c5*s1*A1c_c234c5d6 - s5*c1*A1cc234_c5d6;
     
-    invJacobian[C2][R4] = ( -c1*( C23_A4*temp0 - S5S234*C4_A4 ) - temp2*temp3 ) / detJ;
-    invJacobian[C3][R4] = ( c1*( C2A3_C23A4*temp0 - S5S234*C34A3_C4A4 ) + temp2*temp4 ) / detJ;
-    invJacobian[C4][R4] = - ( invJacobian[C2][R4] + invJacobian[C3][R4] ) - s5*invJacobian[C6][R4] - invJacobian[C1][R1]*A2c_c234c5d6;
+    invJacobian[C2][R4] = ( -c1*( C23_A3*temp0 - S5S234*C4_A3 ) - temp2*temp3 ) / detJ;
+    invJacobian[C3][R4] = ( c1*( C2A2_C23A3*temp0 - S5S234*C34A2_C4A3 ) + temp2*temp4 ) / detJ;
+    invJacobian[C4][R4] = - ( invJacobian[C2][R4] + invJacobian[C3][R4] ) - s5*invJacobian[C6][R4] - invJacobian[C1][R1]*A1c_c234c5d6;
 
-    temp2 = c5*c1*A2c_c234c5d6 + s1*s5*A2cc234_c5d6;
+    temp2 = c5*c1*A1c_c234c5d6 + s1*s5*A1cc234_c5d6;
 
-    invJacobian[C2][R5] = ( -s1*( C23_A4*temp0 - S5S234*C4_A4 ) + temp2*temp3 ) / detJ;
-    invJacobian[C3][R5] = ( s1*( C2A3_C23A4*temp0 - S5S234*C34A3_C4A4 ) - temp2*temp4 ) / detJ;
-    invJacobian[C4][R5] = - ( invJacobian[C2][R5] + invJacobian[C3][R5] ) - s5*invJacobian[C6][R5] - invJacobian[C1][R2]*A2c_c234c5d6;
+    invJacobian[C2][R5] = ( -s1*( C23_A3*temp0 - S5S234*C4_A3 ) + temp2*temp3 ) / detJ;
+    invJacobian[C3][R5] = ( s1*( C2A2_C23A3*temp0 - S5S234*C34A2_C4A3 ) - temp2*temp4 ) / detJ;
+    invJacobian[C4][R5] = - ( invJacobian[C2][R5] + invJacobian[C3][R5] ) - s5*invJacobian[C6][R5] - invJacobian[C1][R2]*A1c_c234c5d6;
 }
 
 void calculate_speed(float invJacobian[DOF][DOF], float q[DOF], float qdot[DOF], float v[DOF])
@@ -333,10 +333,10 @@ void simulate_angles(float q[DOF], float qdot[DOF])
     for(i=1 ; i<=6 ; i++)
     {
         /* Rough estimate -> d = v*t */
-        if(i==1 || i==2)
+        if(i==2)
             q[INDEX_COMPAT(i)] = DEG_TO_RAD*wmra.read_angle(i);
         else
-        q[INDEX_COMPAT(i)] += (qdot[INDEX_COMPAT(i)] * (float)simu_interval_time)/1000.0;
+            q[INDEX_COMPAT(i)] += (qdot[INDEX_COMPAT(i)] * (float)simu_interval_time)/1000.0;
     }
 
     simu_last_time = millis();
@@ -490,7 +490,7 @@ void joystick_to_speed(float q[DOF], float v[DOF])
 
 void set_speed(float qdot[DOF])
 {
-    uint8_t i = 0;
+    uint8_t i = 1;
     
     /* Update reference for all*/
     for(i=1 ; i<=DOF ; i++)
@@ -701,15 +701,15 @@ void setup()
     stepper1 = new StepperMotor(44, 40, 1, 1.8*DEG_TO_RAD);
 
     /* Steppers calibration */
-    //#if !SIMULATION
+    #if !SIMULATION
     stepper1->start(0.2, &uswitches[1], 90.0); /* Go with speed 0.2rad/s until hit uswitches[1](J1_E) and then assume 90.0 degrees */
-    //#endif
+    #endif
     
-    wmra.set_link(1,     0,     0,     0, stepper1);
-    wmra.set_link(2,  PI/2,    a2,     0,      dc1);
-    wmra.set_link(3,     0,    a3,     0);
-    wmra.set_link(4,     0,    a4,     0);
-    wmra.set_link(5,  PI/2,    a5,     0);
+    wmra.set_link(1,     0,     0,     0);
+    wmra.set_link(2,  PI/2,    a1,     0, dc1);
+    wmra.set_link(3,     0,    a2,     0);
+    wmra.set_link(4,     0,    a3,     0);
+    wmra.set_link(5,  PI/2,    a4,     0);
     wmra.set_link(6, -PI/2,     0,    d6);
 
     /************
@@ -731,7 +731,7 @@ void setup()
 void loop() 
 {
     static float invJacobian[DOF][DOF];
-    static float q[DOF] = {1.571, 0.0f, 0.0f, 0.0f, -1.571, 0.0f};
+    static float q[DOF] = {1.571f, 0.0f, 0.785f, 0.0f, -1.571, 0.0f};
     static float qdot[DOF] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
     static float v[DOF] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 

@@ -1,0 +1,31 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.42.2.1 }
+
+\bibitem{craig2009introduction}
+\abntrefinfo{Craig}{CRAIG}{2009}
+{CRAIG, J.~J. \emph{Introduction to robotics: mechanics and control}. 3rd. ed.
+  [S.l.]: Pearson Education India, 2009.}
+
+\bibitem{paul1981robot}
+\abntrefinfo{Paul}{PAUL}{1981}
+{PAUL, R.~P. \emph{Robot manipulators: mathematics, programming, and control:
+  the computer control of robot manipulators}. 1st. ed. Cambridge,
+  Massachusetts and London, England: The MIT Press, 1981.}
+
+\bibitem{spong2008robot}
+\abntrefinfo{Spong e Vidyasagar}{SPONG; VIDYASAGAR}{1989}
+{SPONG, M.~W.; VIDYASAGAR, M. \emph{Robot dynamics and control}. 1st. ed. New
+  York: John Wiley \& Sons, 1989.}
+
+\bibitem{reddy2014difference}
+\abntrefinfo{Reddy}{REDDY}{2014}
+{REDDY, A.~C. Difference between denavit-hartenberg (d-h) classical and
+  modified conventions for forward kinematics of robots with case study. In:
+  \emph{International Conference on Advanced Materials and manufacturing
+  Technologies (AMMT), 2014, India}. [S.l.: s.n.], 2014.}
+
+\end{thebibliography}

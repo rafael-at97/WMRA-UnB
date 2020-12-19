@@ -1,0 +1,432 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,oneside,brazil,11pt,a4paper,openright,titlepage,usenames,dvipsnames]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{calc}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+% Classe alternativa, apropriada para impressão frente-verso. Inclui páginas em branco
+% de forma que capítulos sempre tenham início na página à direita:
+% \documentclass[11pt,a4paper,openright,titlepage]{book}
+
+% Pacotes
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{epsfig}
+\usepackage{subfig}%\usepackage{subfigure}
+\usepackage{floatrow}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage[thmmarks,amsmath]{ntheorem}%\usepackage{amsthm}
+\usepackage{boxedminipage}
+\usepackage{geometry}
+\usepackage{theorem}
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+\usepackage{url}
+\usepackage{afterpage}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{rotating}
+\usepackage{makeidx}
+\usepackage{indentfirst}
+% Pacotes para adição de figuras do inkscape
+\usepackage{graphicx}
+\usepackage{import}
+
+% Escolher um dos seguintes formatos:
+\usepackage{template-FT-UnB/ft2unb} % segue padrão de fontes do Latex
+
+% Extras:
+\usepackage{quoting}
+\usepackage{multicol}
+\usepackage{lscape}
+
+\makeindex
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\pagestyle{empty}
+
+\grau{Engenheiro de Controle e Automação}
+
+\tipodemonografia{ADENDO AO TRABALHO DE GRADUAÇÃO}
+
+\begin{comment}
+Título
+\end{comment}
+
+
+\titulolinhai{ESCLARECIMENTO ACERCA DO MODELO PROPOSTO}
+
+\titulolinhaii{DENAVIT-HARTENBERG}
+
+\titulolinhaiii{}
+
+\titulolinhaiv{}
+
+\begin{comment}
+Autores. Basta retirar o texto totalmente caso não haja um determinado
+autor.
+\end{comment}
+
+\autori{Rafael Augusto Torres}
+
+\autorii{}
+
+\autoriii{}
+
+\begin{comment}
+Membros da banca. Basta retirar o texto totalmente caso não haja um
+determinado membro da banca.
+\end{comment}
+
+\membrodabancai{Prof. Walter de Britto Vidal Filho, ENM/UnB}
+
+\membrodabancaifuncao{Orientador}
+
+\membrodabancaii{Prof. Guilherme Caribé de Carvalho, ENM/UnB}
+
+\membrodabancaiifuncao{Examinador interno}
+
+\membrodabancaiii{Prof. José Maurício Santos Torres da Motta, ENM/UnB}
+
+\membrodabancaiiifuncao{Examinador interno}
+
+\membrodabancaiv{}
+
+\membrodabancaivfuncao{}
+
+\membrodabancav{}
+
+\membrodabancavfuncao{}
+
+\begin{comment}
+Data de defesa: mês e ano
+\end{comment}
+
+\mes{dezembro}
+\ano{2020}
+
+\begin{comment}
+Comandos para criar a capa e a página de assinaturas
+\end{comment}
+
+%\capaprincipal
+%\capaassinaturas
+
+\begin{comment}
+Ficha Catalográfica
+\end{comment}
+
+%\include{secoes/ficha_catalografica}
+
+\begin{comment}
+Dedicatória
+\end{comment}
+
+\frontmatter
+
+\begin{comment}
+Texto de dedicatória do primeiro autor.
+\end{comment}
+
+\dedicatoriaautori{Dedicatória!}
+
+\begin{comment}
+Texto de dedicatória do segundo autor. Caso não tenha um segundo autor,
+este texto não será mostrado
+\end{comment}
+
+\dedicatoriaautorii{Dedicatória do autor 2}
+
+\begin{comment}
+Texto de dedicatória do terceiro autor. Caso não tenha um terceiro
+autor, este texto não será mostrado
+\end{comment}
+
+\dedicatoriaautoriii{Dedicatória do autor 3}
+
+\begin{comment}
+Comando para criar a página de dedicatória
+\end{comment}
+
+%\dedicatoria
+
+\begin{comment}
+Agradecimentos
+\end{comment}
+
+
+\begin{comment}
+Texto de agradecimentos do primeiro autor.
+\end{comment}
+
+
+\agradecimentosautori{Obrigado!}
+
+\begin{comment}
+Texto de agradecimentos do segundo autor. Caso não tenha um segundo
+autor, este texto não será mostrado.
+\end{comment}
+
+
+\agradecimentosautorii{A inclusão desta seção de agradecimentos é
+opcional e fica à critério do(s) autor(es), que caso deseje(em) inclui-la
+deverá(ão) utilizar este espaço, seguindo esta formatação.}
+
+\begin{comment}
+Texto de agradecimentos do terceiro autor. Caso não tenha um terceiro
+autor, este texto não será mostrado.
+\end{comment}
+
+
+\agradecimentosautoriii{A inclusão desta seção de agradecimentos
+é opcional e fica à critério do(s) autor(es), que caso deseje(em)
+inclui-la deverá(ão) utilizar este espaço, seguindo esta formatação.}
+
+\begin{comment}
+Comando para criar a página de agradecimentos
+\end{comment}
+
+% Inicia caption das tables no topo
+\floatsetup[table]{capposition=top}
+
+%\agradecimentos
+
+%\resumo{resumo}{
+%
+%Este trabalho tem como finalidade apresentar o projeto de circuitos de instrumentação e acionamento, bem como de um sistema 
+%central, para controle de um braço robótico montado em uma cadeira de rodas, a ser utilizado por pessoas com deficiências motoras.
+%O projeto de circuitos conta com a escolha de todos os dispositivos relacionados a serem inseridos na estrutura do manipulador,
+%visando garantir uma boa integridade dos sinais transmistidos e boa resposta de atuação.
+%Os circuitos de acionamento, processamento e controle são em sua totalidade baseados em modelos comerciais, que já
+%possuem uma grande confiabilidade e baixo custo no mercado.
+%O sistema de controle do robô foi desenvolvido de modo a transformar velocidades informadas por um usuário através de um \textit{joystick}
+%em velocidades a serem impostas nas juntas, controlando simultanemante todos os atuadores do sistema.
+%Foi criado um ambiente de simulação para facilitar a visualização da posição e orientação do manipulador. O ambiente realiza
+%uma animação do robô na tela com base em dados obtidos pelo microcontrolador empregado, e, através deste, foi possível 
+%validar o funcionamento dos circuitos e do sistema de controle propostos.
+%
+%\medskip{}
+%
+%Palavras Chave: Braço Robótico Montado Sobre Cadeira de Rodas, Tecnologias Assistivas, Manipulador Robótico, Sensoriamento Robótico.
+%
+%}\vspace*{2cm}
+%
+%\newpage
+%
+%\resumo{Abstract}{
+%
+%This work has as purpose the presentation of instrumentation and driver circuits design, as well as the design of a central system, for
+%controlling a weelchair mounter robotic arm, to be used by people with motor impairments.
+%The circuits design takes in consideration the choice of all the related devices to be inserted in the manipulator structure,
+%aiming to guarantee a good signal integrity for the transmitted signals and a good actuation response.
+%The driver, processing and control circuits are entirely based on commercial models, which already show a great reliability and
+%low cost in the market.
+%The robot's control system was developed in a way to transform speeds informed by the user through a joystick into speeds to be
+%imposed on the joints, controlling all the system's motors simultaneously.
+%A simulation environment was created to facilitate the visualization of the manipulator position and orientation. The environment
+%performs the robot's animation based on data obtained by the microcontroller employed, and, through this mean, it was possible
+%to validate the proposed circuits and control system operations.
+%
+%\medskip{}
+%
+%
+%Keywords: Wheelchair Mounted Robotic Arm, Assitive Technologies, Robotic Manipulator, Robot Sensing.
+%
+%}
+
+\begin{comment}
+Listas de conteúdo, figuras e tabelas
+\end{comment}
+
+
+%\sumario
+%\listadefiguras
+%\listadetabelas
+
+\begin{comment}
+Lista de Símbolos
+\end{comment}
+
+%\include{secoes/simbolos}
+
+\begin{comment}
+Corpo Principal
+\end{comment}
+
+\mainmatter
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\pagestyle{plain}
+
+No uso de parâmetros Denavit-Hartenberg para descrever manipuladores robóticos, bem como para posicionar os sistemas de referência em 
+relação a sua estrutura, existem duas convenções vigentes na literatura. Embora as notações sejam semelhantes, representando uma 
+junta como duas translações, $a$ e $d$, e duas rotações $\alpha$ e $\theta$, as matrizes de transformação apresentam diferenças \cite{reddy2014difference}.
+Para a versão clássica, utilizada por Spong \cite{spong2008robot}, $\alpha_i$ e $a_i$ são definidos com base no eixo $\hat{X}$ da junta $i$, 
+já os parâmetros $d_i$ e $\theta_i$ são definidos com base no eixo $\hat{Z}$ da junta $i-1$, assim como mostra a figura \ref{fig:Spong}.
+
+\begin{figure}[ht]
+  \caption{Arranjo clássico \cite{spong2008robot}.}    
+  \begin{centering}
+
+      \includegraphics[width=0.8\columnwidth]{images/spong.png}
+  
+  \par\end{centering}
+
+  \label{fig:Spong}
+\end{figure}
+
+Já no modelo modificado, utilizado por Craig \cite{craig2009introduction}, utilizam-se os parâmetros $\alpha_{i-1}$ e $a_{i-1}$, definidos 
+em função do eixo $\hat{X}_{i-1}$, e os parâmetros $d_i$ e $\theta_i$, definidos em função de $\hat{Z}_i$, assim como mostra a figura
+\ref{fig:Craig}. 
+
+\begin{figure}[ht]
+  \caption{Arranjo modificado \cite{craig2009introduction}.}    
+  \begin{centering}
+
+      \includegraphics[width=0.65\columnwidth]{images/craig.png}
+  
+  \par\end{centering}
+
+  \label{fig:Craig}
+\end{figure}
+
+Utilizando a definição para o termo $d_i$ exposta no trabalho \cite{craig2009introduction} ($d_i$ significa a distância 
+entre $\hat{X}_{i-1}$ e $\hat{X}_i$, ao longo de $\hat{Z}_i$), nota-se na figura
+do trabalho de graduação, \ref{fig:tg}, que o parâmetro $d_6$ está ao longo do eixo $\hat{Z}_6$, seguindo a convenção proposta
+por Craig. O eixo $\hat{Z}_6$, devido à construção do manipulador, coincidirá sempre com o eixo $\hat{Y}_5$ para a convenção adotada.
+De acordo com a figura \ref{fig:Craig}, o parâmetro foi definido entre a origem do sistema da junta $i$, com $i=6$, e 
+a intersecção entre $\hat{Z}_i$ ($\hat{Z}_6$) e $\hat{X}_{i-1}$ ($\hat{X}_5$), que coincide com a origem do sistema $\{5\}$.
+
+\begin{figure}[ht]
+  \caption{Arranjo proposto.}    
+  \begin{centering}
+
+      \includegraphics[width=1\columnwidth]{images/tg.png}
+  
+  \par\end{centering}
+
+  \label{fig:tg}
+\end{figure}
+
+%\begin{comment}
+%Temp
+%\end{comment}
+%\include{secoes/temp}
+
+\begin{comment}
+Introdução
+\end{comment}
+%\include{secoes/cap_Introducao}
+
+\begin{comment}
+Fundamentos
+\end{comment}
+%\include{secoes/cap_Fundamentos}
+
+\begin{comment}
+Desenvolvimentos
+\end{comment}
+%\include{secoes/cap_Modelagem}
+
+\begin{comment}
+Continuação desenvolvimentos.
+\end{comment}
+%\include{secoes/cap_ProjetoEletroControle}
+
+\begin{comment}
+Resultados
+\end{comment}
+%\include{secoes/cap_Resultados}
+
+\begin{comment}
+Conclusões
+\end{comment}
+%\include{secoes/cap_Conclusoes}
+
+\begin{comment}
+Bibliografia
+\end{comment}
+
+\renewcommand{\bibname}{REFERÊNCIAS BIBLIOGRÁFICAS}
+\addcontentsline{toc}{chapter}{REFERÊNCIAS BIBLIOGRÁFICAS}
+
+\bibliographystyle{abnt-num}
+\bibliography{bibliography}
+
+\begin{comment}
+  Apêndice
+\end{comment}
+
+\begin{comment}
+Anexos
+\end{comment}
+
+%\anexos
+\makeatletter
+% não retirar estes comandos
+\renewcommand{\@makechapterhead}[1]{%
+  {\parindent \z@ \raggedleft \setfontarial\bfseries
+\LARGE \thechapter. \space\space
+\uppercase{#1}\par
+\vskip 40\p@
+}
+}
+\makeatother
+
+\begin{comment}
+Anexo I: Descrição do repositório.   
+\end{comment}
+
+%\include{secoes/anexo_Repositorio}
+
+%\refstepcounter{noAnexo}
+
+\begin{comment}
+  Anexo II: Catalógo de Equipamentos
+\end{comment}
+
+%\include{secoes/anexo_datasheets}
+
+%\refstepcounter{noAnexo}
+
+\begin{comment}
+Anexo III: Cinemática Inversa
+\end{comment}
+
+%\include{secoes/anexo_Cinematica}
+
+%\refstepcounter{noAnexo}
+
+\begin{comment}
+Anexo IV: Cálculos Inversão Jacobiana
+\end{comment}
+
+%\include{secoes/anexo_Jacobiana}
+
+\end{document}

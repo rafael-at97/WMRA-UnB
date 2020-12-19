@@ -10,7 +10,9 @@ A level-1 auxiliary file: secoes/cap_Resultados.aux
 A level-1 auxiliary file: secoes/cap_Conclusoes.aux
 The style file: abnt-num.bst
 A level-1 auxiliary file: secoes/anexo_Repositorio.aux
+A level-1 auxiliary file: secoes/anexo_datasheets.aux
 A level-1 auxiliary file: secoes/anexo_Cinematica.aux
+A level-1 auxiliary file: secoes/anexo_Jacobiana.aux
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -32,42 +34,42 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 +---------------------------------------------------------+
 You've used 33 entries,
             6480 wiz_defined-function locations,
-            1317 strings with 13682 characters,
-and the built_in function-call counts, 22077 in all, are:
-= -- 1898
-> -- 543
-< -- 13
-+ -- 306
-- -- 170
-* -- 1358
-:= -- 2968
-add.period$ -- 101
+            1327 strings with 14391 characters,
+and the built_in function-call counts, 21300 in all, are:
+= -- 1645
+> -- 576
+< -- 22
++ -- 254
+- -- 178
+* -- 1328
+:= -- 2885
+add.period$ -- 116
 call.type$ -- 33
-change.case$ -- 263
-chr.to.int$ -- 45
+change.case$ -- 276
+chr.to.int$ -- 78
 cite$ -- 33
-duplicate$ -- 1099
-empty$ -- 1881
-format.name$ -- 872
-if$ -- 5371
+duplicate$ -- 1199
+empty$ -- 1860
+format.name$ -- 911
+if$ -- 5109
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 577
+missing$ -- 606
 newline$ -- 152
-num.names$ -- 120
-pop$ -- 825
+num.names$ -- 132
+pop$ -- 831
 preamble$ -- 1
-purify$ -- 113
+purify$ -- 112
 quote$ -- 0
-skip$ -- 1516
+skip$ -- 1220
 stack$ -- 1
-substring$ -- 771
-swap$ -- 431
-text.length$ -- 9
+substring$ -- 644
+swap$ -- 495
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 30
+type$ -- 3
 warning$ -- 0
-while$ -- 171
+while$ -- 169
 width$ -- 0
-write$ -- 406
+write$ -- 424

@@ -108,11 +108,11 @@ determinado membro da banca.
 
 \membrodabancaifuncao{Orientador}
 
-\membrodabancaii{Prof. Guilherme Caribé, ENM/UnB}
+\membrodabancaii{Prof. Guilherme Caribé de Carvalho, ENM/UnB}
 
 \membrodabancaiifuncao{Examinador interno}
 
-\membrodabancaiii{Prof. José Maurício Motta, ENM/UnB}
+\membrodabancaiii{Prof. José Maurício Santos Torres da Motta, ENM/UnB}
 
 \membrodabancaiiifuncao{Examinador interno}
 
@@ -129,12 +129,11 @@ Data de defesa: mês e ano
 \end{comment}
 
 \mes{dezembro}
-\ano{2019}
+\ano{2020}
 
 \begin{comment}
 Comandos para criar a capa e a página de assinaturas
 \end{comment}
-
 
 \capaprincipal
 \capaassinaturas
@@ -143,13 +142,11 @@ Comandos para criar a capa e a página de assinaturas
 Ficha Catalográfica
 \end{comment}
 
-
 %\include{secoes/ficha_catalografica}
 
 \begin{comment}
 Dedicatória
 \end{comment}
-
 
 \frontmatter
 
@@ -189,7 +186,7 @@ Texto de agradecimentos do primeiro autor.
 \end{comment}
 
 
-\agradecimentosautori{Agradecimentos!}
+\agradecimentosautori{Obrigado!}
 
 \begin{comment}
 Texto de agradecimentos do segundo autor. Caso não tenha um segundo
@@ -222,40 +219,44 @@ Comando para criar a página de agradecimentos
 
 \resumo{resumo}{
 
-Este trabalho tem como finalidade o projeto de circuitos de instrumentação e acionamento, incluindo a escolha de todos os dispositivos relacionados, para inserção 
-em uma estrutura de um braço robótico a ser montado em uma cadeira de rodas para ser utilizado por pessoas tetraplégicas, bem como orientar o projeto de um 
-sistema responsável por realizar o controle de todos os componentes resultantes do projeto eletro-eletrônico. Com foco em uma aplicação de baixo custo, preciso
-e adaptável à estrutura proposta, foram selecionados motores do tipo DC com escovas e motores de passo para acionamento das juntas e sensores potênciometros e fim 
-de curso para futura realimentação de informações. Foram selecionados também sensores de corrente com o objetivo de garantir uma maior segurança ao operador do 
-braço robótico. 
+Este trabalho tem como finalidade apresentar o projeto de circuitos de instrumentação e acionamento, bem como de um sistema 
+central, para comando de um braço robótico montado em uma cadeira de rodas, a ser utilizado por pessoas com deficiências motoras.
+O projeto de circuitos conta com a escolha de todos os dispositivos relacionados a serem inseridos na estrutura do manipulador,
+visando garantir uma boa integridade dos sinais transmistidos e boa resposta de atuação.
 Os circuitos de acionamento, processamento e controle são em sua totalidade baseados em modelos comerciais, que já
-possuem uma grande confiabilidade e baixo custo no mercado. A cada parte do projeto foi verificada e garantida a adequação dos elementos propostos à especificações
-de etapas passadas e ao objetivo principal: garantir maior autonomia a pessoas com deficiência motora.
+possuem uma grande confiabilidade e baixo custo no mercado.
+O sistema de comando do robô foi desenvolvido de modo a transformar velocidades informadas por um usuário através de um \textit{joystick}
+em velocidades a serem impostas nas juntas, controlando simultanemante todos os atuadores do sistema.
+Foi criado um ambiente de simulação para facilitar a visualização da posição e orientação do manipulador, que realiza
+uma animação do robô na tela com base em dados obtidos pelo microcontrolador empregado, e, através deste, foi possível 
+validar o funcionamento dos circuitos e do sistema de controle propostos.
 
 \medskip{}
 
-
-Palavras Chave: Braço Robótico Montado Sobre Cadeira de Rodas, Tecnologias Assistivas, Manipulador Robótico.
+Palavras Chave: Braço Robótico Montado Sobre Cadeira de Rodas, Tecnologias Assistivas, Manipulador Robótico, Sensoriamento Robótico.
 
 }\vspace*{2cm}
 
+\newpage
 
 \resumo{Abstract}{
 
-This work has as purpose the design of instrumentation circuits and drivers, including the selection of all the related components, for the inclusion on an 
-robotic arm structure to be mounted on a wheelchair for the use of people with paraplegia, in conjunction with set up the premisses for the design of a system
-responsible for controlling all the devices which resulted from the electro-electronic design. Focusing on a application which should be low-cost, precise and 
-adaptable to the proposed structure, DC brushed motors and stepper motors were selected for activating the joints and potentiometers sensors, along with micro
-switches employed to provide future feedback information. Current measuring sensors were also selected with the objective of granting a higher security to the 
-operator of the robotic arm.
-The drivers, processor and controller circuits are all based on commercial models, which already have a great confiability and low cost in the market. In each
-design state the acceptability of the proposed elements to the past-stage specifications and to the main reason: allow better autonomy for people with 
-disabilities, were verified and granted
+This work has as purpose the presentation of instrumentation and driver circuits design, as well as the design of a central system, for
+controlling a weelchair mounter robotic arm, to be used by people with motor impairments.
+The circuits design takes in consideration the choice of all the related devices to be inserted in the manipulator structure,
+aiming to guarantee a good signal integrity for the transmitted signals and a good actuation response.
+The driver, processing and control circuits are entirely based on commercial models, which already show a great reliability and
+low cost in the market.
+The robot's control system was developed in a way to transform speeds informed by the user through a joystick into speeds to be
+imposed on the joints, controlling all the system's motors simultaneously.
+A simulation environment was created to facilitate the visualization of the manipulator position and orientation. The environment
+performs the robot's animation based on data obtained by the microcontroller employed, and, through this mean, it was possible
+to validate the proposed circuits and control system operations.
 
 \medskip{}
 
 
-Keywords: Wheelchair Mounted Robotic Arm, Assitive Technologies, Robotic Manipulator.
+Keywords: Wheelchair Mounted Robotic Arm, Assitive Technologies, Robotic Manipulator, Robot Sensing.
 
 }
 
@@ -362,7 +363,7 @@ Anexo I: Descrição do repositório.
   Anexo II: Catalógo de Equipamentos
 \end{comment}
 
-%\include{secoes/anexo_datasheets}
+\include{secoes/anexo_datasheets}
 
 \refstepcounter{noAnexo}
 
@@ -375,9 +376,9 @@ Anexo III: Cinemática Inversa
 \refstepcounter{noAnexo}
 
 \begin{comment}
-Anexo IV: Cálculos realizados:
+Anexo IV: Cálculos Inversão Jacobiana
 \end{comment}
 
-%\include{secoes/anexo_Jacobiana}
+\include{secoes/anexo_Jacobiana}
 
 \end{document}

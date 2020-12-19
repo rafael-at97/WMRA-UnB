@@ -45,8 +45,16 @@
 \contentsline {chapter}{\numberline {6}Conclus\IeC {\~o}es}{63}
 \contentsline {section}{\numberline {6.1}Perspectivas Futuras}{64}
 \contentsline {chapter}{REFER\IeC {\^E}NCIAS BIBLIOGR\IeC {\'A}FICAS}{65}
-\contentsline {chapter}{{Anexos}}{67}
-\contentsline {chapter}{\numberline {I}Descri\IeC {\c c}\IeC {\~a}o do Reposit\IeC {\'o}rio}{68}
-\contentsline {chapter}{\numberline {III}Cinem\IeC {\'a}tica Inversa para o Manipulador}{69}
-\contentsline {section}{\numberline {III.1}Transforma\IeC {\c c}\IeC {\~o}es}{69}
-\contentsline {section}{\numberline {III.2}Velocidades}{70}
+\contentsline {chapter}{{Anexos}}{68}
+\contentsline {chapter}{\numberline {I}Descri\IeC {\c c}\IeC {\~a}o do Reposit\IeC {\'o}rio}{69}
+\contentsline {chapter}{\numberline {II}\textit {Datasheets} de Dispositivos}{70}
+\contentsline {section}{\numberline {II.1}Mabuchi JC/LC-578VA}{70}
+\contentsline {section}{\numberline {II.2}HT23-397}{71}
+\contentsline {section}{\numberline {II.3}42HK \textit {Family Series}}{73}
+\contentsline {section}{\numberline {II.4}Bourns - 3590}{74}
+\contentsline {chapter}{\numberline {III}Cinem\IeC {\'a}tica Inversa do Manipulador}{75}
+\contentsline {chapter}{\numberline {IV}C\IeC {\'a}lculos matriz Jacobiana}{82}
+\contentsline {section}{\numberline {IV.1}Velocidades}{82}
+\contentsline {section}{\numberline {IV.2}Termos Jacobiana}{83}
+\contentsline {section}{\numberline {IV.3}Determinante Jacobiana}{84}
+\contentsline {section}{\numberline {IV.4}Cofatores}{85}

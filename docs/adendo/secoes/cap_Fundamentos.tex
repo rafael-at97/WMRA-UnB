@@ -1,0 +1,42 @@
+\chapter{Fundamentação Teórica}
+
+\label{sec:fundamentos}
+
+Como informado no texto original, foi adotada a convenção exposta em \cite{craig2009introduction}, tanto
+para o posicionamento dos sistemas de referência quanto para definição dos parâmetros de Denavit-Hartenberg.
+É importante notar que o livro utilizado como base para o trabalho emprega a forma modificada destes 
+parâmetros, com a seguinte definição para cada termo:
+
+\begin{itemize}
+    \begin{centering}
+    \item[] $a_i$ = distância entre $\hat{Z}_i$ e $\hat{Z}_{i+1}$, ao longo de $\hat{X}_i$;
+    \item[] $\alpha_i$ = ângulo entre $\hat{Z}_i$ e $\hat{Z}_{i+1}$, em relação a $\hat{X}_i$;
+    \item[] $d_i$ = distância entre $\hat{X}_{i-1}$ e $\hat{X}_i$, ao longo de $\hat{Z}_i$;
+    \item[] $\theta_i$ = ângulo entre $\hat{X}_{i-1}$ e $\hat{X}_i$, em relação a $\hat{Z}_i$.
+    \par\end{centering}
+\end{itemize}
+
+A versão modificada definida pelo autor em \cite{craig2009introduction} diferencia-se da versão 
+clássica utilizada por outros autores, como Paul \cite{paul1981robot} e Spong \cite{spong2008robot}.
+A relação entre estas versões pode ser vista em \cite{reddy2014difference}, que expõe as diferenças nas
+convenções bem como exemplos de aplicação para alguns manipuladores.
+
+A convenção utilizada no trabalho base, e portanto no trabalho de graduação, é simplificada com 
+base nos seguintes passos \cite{craig2009introduction}:
+
+\begin{enumerate}
+    \item   Identificação dos eixos de rotação das juntas e definição de linhas imaginárias
+            infinitas sobre esses eixos. Para os passos de 2 a 5 abaixo, considere duas linhas
+            consecutivas (no eixo $i$ e $i+1$).
+    \item   Identificação da perpendicular comum entre as linhas, ou ponto de intersecção.
+            No ponto de intersecção, ou no ponto onde a perpendicular comum se encontrar com 
+            o eixo da junta $i$, posicionar a origem do sistema de referências da junta $i$.
+    \item   Posicionar o eixo $\hat{Z}_i$ na mesma direção do eixo de rotação da junta $i$.
+    \item   Posicionar o eixo $\hat{X}_i$ na direção da perpendicular comum, ou, se os eixos 
+            das juntas $i$ e $i+1$ se interceptarem, posicionar $\hat{X}_i$ na direção da reta normal
+            ao plano formado pelos dois eixos.
+    \item   Posicionar o eixo $\hat{Y}_i$ para completar o sistema de coordenadas com base na regra da mão direita.
+    \item   Posicionar o sistema da base, $\{0\}$, para coincidir com o sistema da junta ${1}$ quando 
+            a variável da primeira junta é zero. Para a última junta, ${N}$, escolher a posição da origem e $\hat{X}_N$
+            livremente, mas geralmente de modo a fazer com que o máximo de parâmetros assumam valor 0. 
+\end{enumerate}

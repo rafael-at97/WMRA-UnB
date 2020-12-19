@@ -1,15 +1,53 @@
-\chapter{Cinemática Inversa para o Manipulador}
+\chapter{Cinemática Inversa do Manipulador}
 \label{Anexo-CinInv}
 
-%\chapter{Matrizes auxiliares calculadas para a análise cinemática do manipulador}
-%\label{AnexoCinematica}
-
-\section{Transformações}
-\label{AnexoJacobiana-Transformacoes}
-
-Inicialmente, agrupando as duas últimas transformações.
+A cinemática inversa possibilita obter os ângulos a serem atingidos pelas juntas de um
+manipulador robótica para que este apresente uma posição e orientação desejadas. É comum
+que estes valores desejados sejam informados para o efetuador final do sistema, denominado nestes 
+cálculos por $T$, em relação ao sistema de coordenadas da base $B$.
+A relação entre estes sistemas de coordenadas pode ser transformada em uma relação 
+entre os sistemas de coordenadas da última junta do manipulador em relação à primeira, seguindo a equação 
+\ref{eq:tbt}, onde $n$ indica a quantidade de juntas do sistema e $0$ delimita a junta fixa, do sistema.
 
 \begin{equation}
+    \label{eq:tbt}
+    ^B_TT = ^B_0\!T\;^0_nT\;^n_TT
+\end{equation}
+
+As relações $^B_0\!T$ e $^n_TT$ são fixas, representando transformações entre a base fixa do 
+robô e uma base lógica do sistema e entre a ferramenta e a última junta, respectivamente. 
+Encontrando então a transformação $^0_nT$ a transformação $^B_TT$ é obtida facilmente. 
+
+Para o manipulador deste trabalho, $n=6$, e a transformação de interesse pode ser descrita em 
+função de uma matriz de rotação e um vetor de posições, como indica a equação \ref{eq:anexo-t06}.
+
+\begin{equation}
+    \label{eq:anexo-t06}
+    ^0_6T = 
+    \begin{bmatrix}
+        r_{11} & r_{12} & r_{13} & p_x \\
+        r_{21} & r_{22} & r_{23} & p_y \\
+        r_{31} & r_{32} & r_{33} & p_z \\
+           0   &    0   &    0   &  1  \\    
+    \end{bmatrix}
+\end{equation}
+
+Para obter uma relação mais simples da geometria do robô é interessante ter uma relação 
+entre a junta 5 a junta 1, portanto, tanto a matriz acima quanto a matriz obtida pela aplicação da
+equação \ref{eq:t06} serão multiplicadas por $^0_1T^{-1}$ e $^5_6T^{-1}$ na ordem indicada em \ref{eq:t15}.
+
+\begin{equation}
+    \label{eq:t15}
+    ^1_5T = ^0_1\!T^{-1}\;^0_6T\;^5_6T^{-1}
+\end{equation}
+
+Os passos intermediários para aplicação da equação \ref{eq:t06} estão descritos nas equações de \ref{eq:t46} a
+\ref{eq:t06-calc}, cálculos realizados para obter a transformação $^0_6T$ em função dos ângulos internos das juntas.
+Multiplicando os dois últimos termos da equação \ref{eq:t06}, obtém-se a transformação descrita na
+equação \ref{eq:t46}.
+
+\begin{equation}
+    \label{eq:t46}
     ^4_6T = ^4_5T*^5_6T =   \begin{bmatrix}
                                 s\theta_5'c\theta_6 & -s\theta_5's\theta_6 & c\theta_5' & c\theta_5'd_6 + a_4 \\
                                 s\theta_6 & c\theta_6 & 0 & 0 \\
@@ -18,214 +56,272 @@ Inicialmente, agrupando as duas últimas transformações.
                             \end{bmatrix}
 \end{equation}
 
-Incluindo a transformação $^3_4T$:
+Incluindo a transformação $^3_4T$ no resultado de \ref{eq:t46}, é obtida a equação \ref{eq:t36}.
 
 \begin{equation}
+    \label{eq:t36}
     ^3_6T = ^3_4T*^4_6T =   \begin{bmatrix}
                                 c\theta_4s\theta_5'c\theta_6 - s\theta_4s\theta_6 & -c\theta_4s\theta_5's\theta_6 - s\theta_4c\theta_6 & c\theta_4c\theta_5' & c\theta_4c\theta_5'd_6 + c\theta_4a_4 + a_3 \\
-                                s\theta_4s\theta_5'c\theta_6 + c\theta_4s\theta_6 & -s\theta_4s\theta_5's\theta_6 + c\theta_4c\theta_6 & s\theta_4c\theta_5' & s\theta_4(c\theta_5'd_6 + a_4) \\
+                                s\theta_4s\theta_5'c\theta_6 + c\theta_4s\theta_6 & -s\theta_4s\theta_5's\theta_6 + c\theta_4c\theta_6 & s\theta_4c\theta_5' & s\theta_4c\theta_5'd_6 + s\theta_4a_4 \\
                                 -c\theta_5'c\theta_6 & c\theta_5's\theta_6 & s\theta_5' & s\theta_5'd_6 \\
                                 0 & 0 & 0 & 1 \\
                             \end{bmatrix}
 \end{equation}
 
-Próximo passo:
+Em \ref{eq:t26} está o resultado obtido após a inclusão de $^2_3T$ na conta.
 
 \begin{equation}
+    \label{eq:t26}
     ^2_6T = \begin{bmatrix}
-        s_5c_6c(\theta_3+\theta_4) & -s_{56}c(\theta_3+\theta_4) & c_5c(\theta_3+\theta_4) & (c_5d_6 + a_5)c(\theta_3+\theta_4) \\
-        -s_6s(\theta_3+\theta_4) & -c_6s(\theta_3+\theta_4) & &  + c_3a_4 + a_3\\
+        c(\theta_3+\theta_4)s\theta_5'c\theta_6 & -c(\theta_3+\theta_4)s\theta_5's\theta_6  & c(\theta_3+\theta_4)c\theta_5' & c(\theta_3+\theta_4)(c\theta_5'd_6 + a_4) \\
+        -s(\theta_3+\theta_4)s\theta_6          & -s(\theta_3+\theta_4)c\theta_6            &                                & +c\theta_3a_3 + a_2\\
         \\
-        s_5c_6s(\theta_3+\theta_4) & -s_{56}s(\theta_3+\theta_4) & c_5s(\theta_3+\theta_4) & (c_5d_6 + a_5)s(\theta_3+\theta_4) \\
-        +s_6c(\theta_3+\theta_4) & + c_6c(\theta_3+\theta_4) & & +s_3a_4 \\
+        s(\theta_3+\theta_4)s\theta_5'c\theta_6 & -s(\theta_3+\theta_4)s\theta_5's\theta_6  & s(\theta_3+\theta_4)c\theta_5' & s(\theta_3+\theta_4)(c\theta_5'd_6 + a_4) \\
+        +c(\theta_3+\theta_4)s\theta_6          & +c(\theta_3+\theta_4)c\theta_6            &                                & +s\theta_3a_3 \\
         \\
-        -c_{56} & c_5s_6 & s_5 & s_5d_6 + d_3 + d_4 \\
+        -c\theta_5'c\theta_6                    & c\theta_5's\theta_6                       & s\theta_5'                     & s\theta_5'd_6 \\
         \\
         0 & 0 & 0 & 1
     \end{bmatrix}
 \end{equation}
 
+Pré-multiplicando a matriz em \ref{eq:t26} por $^1_2T$, chega-se no resultado \ref{eq:t16}.
+
 \begin{equation}
+    \label{eq:t16}
     ^1_6T = \begin{bmatrix}
-        s_5c_6c(\theta_2+\theta_3+\theta_4) & -s_{56}c(\theta_2+\theta_3+\theta_4) & c_5c(\theta_2+\theta_3+\theta_4) & (c_5d_6 + a_5)c(\theta_2+\theta_3+\theta_4) \\
-        -s_6s(\theta_2+\theta_3+\theta_4) & -c_6s(\theta_2+\theta_3+\theta_4) & &  + c(\theta_2+\theta_3)a_4 + c_2a_3 + a_2\\
+        c(\sum\limits_{i=2}^4\theta_i)s\theta_5'c\theta_6 & -c(\sum\limits_{i=2}^4\theta_i)s\theta_5's\theta_6 & c(\sum\limits_{i=2}^4\theta_i)c\theta_5' & c(\sum\limits_{i=2}^4\theta_i)(c\theta_5'd_6 + a_4) \\
+        -s(\sum\limits_{i=2}^4\theta_i)s\theta_6          & -s(\sum\limits_{i=2}^4\theta_i)c\theta_6           &                                         & +c(\theta_2+\theta_3)a_3 + c\theta_2a_2 + a_1\\
         \\
-        c_{56} & -c_5s_6 & -s_5 & -(s_5d_6 + d_3 + d_4) \\
+        c\theta_5'c\theta_6                              & -c\theta_5's\theta_6                              & -s\theta_5'                             & -s\theta_5'd_6 \\
         \\
-        s_5c_6s(\theta_2+\theta_3+\theta_4) & -s_{56}s(\theta_2+\theta_3+\theta_4) & c_5s(\theta_2+\theta_3+\theta_4) & (c_5d_6 + a_5)s(\theta_2+\theta_3+\theta_4) \\
-        +s_6c(\theta_2+\theta_3+\theta_4) & + c_6c(\theta_2+\theta_3+\theta_4) & & +s(\theta_2+\theta_3)a_4 + s_2a_3 \\
+        s(\sum\limits_{i=2}^4\theta_i)s\theta_5'c\theta_6 & -s(\sum\limits_{i=2}^4\theta_i)s\theta_5's\theta_6 & s(\sum\limits_{i=2}^4\theta_i)c\theta_5' & s(\sum\limits_{i=2}^4\theta_i)(c\theta_5'd_6 + a_4) \\
+        +c(\sum\limits_{i=2}^4\theta_i)s\theta_6          & +c(\sum\limits_{i=2}^4\theta_i)c\theta_6           &                                         & +s(\theta_2+\theta_3)a_3 + s_2a_2 \\
         \\
         0 & 0 & 0 & 1
     \end{bmatrix}
 \end{equation}
 
+Por fim, ao se multiplicar todo o resultado em \ref{eq:t16} pela primeira transformação do sistema, $^0_1T$, é obtida a transformação 
+entre a última junta e a base do sistema, disposta em \ref{eq:t06-calc}.
+
 \begin{equation}
-    \label{eq:0T6}
+    \label{eq:t06-calc}
     ^0_6T = \begin{bmatrix}
-        s_5c_{16}c(\theta_2+\theta_3+\theta_4) & -s_{56}c_1c(\theta_2+\theta_3+\theta_4) & c_{15}c(\theta_2+\theta_3+\theta_4) & c_1[(c_5d_6 + a_5)c(\theta_2+\theta_3+\theta_4) \\
-        -s_6c_1s(\theta_2+\theta_3+\theta_4) & -c_{16}s(\theta_2+\theta_3+\theta_4) & +s_{15} &  + c(\theta_2+\theta_3)a_4 + c_2a_3 + a_2]\\
-        -s_1c_{56} & +s_{16}c_5 & & +s_1(s_5d_6 + d_3 + d_4)\\
+        c\theta_1c(\sum\limits_{i=2}^4\theta_i)s\theta_5'c\theta_6 & -c\theta_1c(\sum\limits_{i=2}^4\theta_i)s\theta_5's\theta_6 & c\theta_1c(\sum\limits_{i=2}^4\theta_i)c\theta_5' & c\theta_1[c(\sum\limits_{i=2}^4\theta_i)(c\theta_5'd_6 + a_4) \\
+        -c\theta_1s(\sum\limits_{i=2}^4\theta_i)s\theta_6          & -c\theta_1s(\sum\limits_{i=2}^4\theta_i)c\theta_6           & +s\theta_1s\theta_5'                             & +c(\theta_2+\theta_3)a_3 + c\theta_2a_2 + a_1]\\
+        -s\theta_1c\theta_5'c\theta_6                             & +s\theta_1c\theta_5's\theta_6                              &                                                  & +s\theta_1s\theta_5'd_6\\
         \\
-        s_{15}c_6c(\theta_2+\theta_3+\theta_4) & -s_{156}c(\theta_2+\theta_3+\theta_4) & s_1c_5c(\theta_2+\theta_3+\theta_4) & s_1[(c_5d_6 + a_5)c(\theta_2+\theta_3+\theta_4) \\
-        -s_{16}s(\theta_2+\theta_3+\theta_4) & -s_1c_6s(\theta_2+\theta_3+\theta_4) & -c_1s_5 &  + c(\theta_2+\theta_3)a_4 + c_2a_3 + a_2]\\
-        +c_{156} & -c_{15}s_6 & & -c_1(s_5d_6 + d_3 + d_4)\\
+        s\theta_1c(\sum\limits_{i=2}^4\theta_i)s\theta_5'c\theta_6 & -s\theta_1c(\sum\limits_{i=2}^4\theta_i)s\theta_5's\theta_6 & s\theta_1c(\sum\limits_{i=2}^4\theta_i)c\theta_5' & s\theta_1[c(\sum\limits_{i=2}^4\theta_i)(c\theta_5'd_6 + a_4) \\
+        -s\theta_1s(\sum\limits_{i=2}^4\theta_i)s\theta_6          & -s\theta_1s(\sum\limits_{i=2}^4\theta_i)c\theta_6           & -c\theta_1s\theta_5'                             & +c(\theta_2+\theta_3)a_3 + c\theta_2a_2 + a_1]\\
+        +c\theta_1c\theta_5'c\theta_6                             & -c\theta_1c\theta_5's\theta_6                              &                                                  & -c\theta_1s\theta_5'd_6\\
         \\
-        s_5c_6s(\theta_2+\theta_3+\theta_4) & -s_{56}s(\theta_2+\theta_3+\theta_4) & c_5s(\theta_2+\theta_3+\theta_4) & (c_5d_6 + a_5)s(\theta_2+\theta_3+\theta_4) \\
-        +s_6c(\theta_2+\theta_3+\theta_4) & + c_6c(\theta_2+\theta_3+\theta_4) & & +s(\theta_2+\theta_3)a_4 + s_2a_3 \\
+        s(\sum\limits_{i=2}^4\theta_i)s\theta_5'c\theta_6 & -s(\sum\limits_{i=2}^4\theta_i)s\theta_5's\theta_6 & s(\sum\limits_{i=2}^4\theta_i)c\theta_5' & s(\sum\limits_{i=2}^4\theta_i)(c\theta_5'd_6 + a_4) \\
+        +c(\sum\limits_{i=2}^4\theta_i)s\theta_6          & +c(\sum\limits_{i=2}^4\theta_i)c\theta_6           &                                         & +s(\theta_2+\theta_3)a_3 + s\theta_2a_2 \\
         \\
         0 & 0 & 0 & 1
     \end{bmatrix}
 \end{equation}
 
-\section{Velocidades}
+Realizando a transformação indicada em \ref{eq:t15} para a matriz da equação \ref{eq:t06-calc}, é obtido o resultado
+disposto em \ref{eq:t15-calc}.
 
 \begin{equation}
-    ^1\omega_1 = \begin{bmatrix}
-        0 \\ 0 \\ \dot{\theta}_1
-    \end{bmatrix}
-\end{equation}
-
-\begin{equation}
-    ^1v_1 = \begin{bmatrix}
-        0 \\ 0 \\ 0
-    \end{bmatrix}
-\end{equation}
-
-\begin{equation}
-    ^2\omega_2 = \begin{bmatrix}
-        s\theta_2.\dot{\theta}_1 \\ c\theta_2.\dot{\theta}_1 \\ \dot{\theta}_2
-    \end{bmatrix}
-\end{equation}
-
-\begin{equation}
-    ^2v_2 = \begin{bmatrix}
-        c\theta_2 & 0 & s\theta_2 \\
-        -s\theta_2 & 0 & c\theta_2 \\
-        0 & -1 & 0 \\
-    \end{bmatrix} 
+    \label{eq:t15-calc}
+    ^1_5T = 
     \begin{bmatrix}
-        0 \\ a_2\dot{\theta}_1 \\ 0
-    \end{bmatrix} = 
-    \begin{bmatrix}
-        0 \\ 0 \\ -a_2\dot{\theta}_1
+        s\theta_5'c(\sum\limits_{i=2}^4\theta_i) & c\theta_5'c(\sum\limits_{i=2}^4\theta_i) & s(\sum\limits_{i=2}^4\theta_i)  & c(\sum\limits_{i=2}^4\theta_i)a_4 + c(\theta_2+\theta_3)a_3 + c\theta_2a_2 + a_1 \\
+        c\theta_5'          & -s\theta_5'         & 0          & 0 \\
+        s\theta_5's(\sum\limits_{i=2}^4\theta_i) & c\theta_5's(\sum\limits_{i=2}^4\theta_i) & -c(\sum\limits_{i=2}^4\theta_i) & s(\sum\limits_{i=2}^4\theta_i)a_4 + s(\theta_2+\theta_3)a_3 + s\theta_2a_2 \\
+           0   &    0   &    0   &  1  \\    
     \end{bmatrix}
 \end{equation}
 
+Agora, para a matriz $^0_6T$ com base nos parâmetros desejados, seguindo a transformação em \ref{eq:anexo-t06}, 
+foi obtido o resultado expresso na equação \ref{eq:t15-calc2}.
+
 \begin{equation}
-    ^3\omega_3 = \begin{bmatrix}
-        c\theta_3 & s\theta_3 & 0 \\
-        -s\theta_3 & c\theta_3 & 0 \\
-        0 & 0 & 1 \\
-    \end{bmatrix} \, ^2\omega_2 + 
+    \label{eq:t15-calc2}
+    ^1_5T = 
     \begin{bmatrix}
-        0 \\ 0 \\ \dot{\theta}_3
-    \end{bmatrix} = 
-    \begin{bmatrix}
-        s(\theta_2+\theta_3).\dot{\theta}_1 \\
-        c(\theta_2+\theta_3).\dot{\theta}_1 \\ 
-        \dot{\theta}_2 + \dot{\theta}_3
+         c\theta_1(r_{11}c\theta_6-r_{12}s\theta_6) &  c\theta_1r_{13}+s\theta_1r_{23} & -c\theta_1(r_{11}s\theta_6+r_{12}c\theta_6) &  c\theta_1(p_x-r_{13}d_6) \\
+        +s\theta_1(r_{21}c\theta_6-r_{22}s\theta_6) &                      & -s\theta_1(r_{21}s\theta_6+r_{22}c\theta_6) & +s\theta_1(p_y-r_{23}d_6) \\
+        & & & & \\
+        -s\theta_1(r_{11}c\theta_6-r_{12}s\theta_6) & -s\theta_1r_{13}+c\theta_1r_{23} &  s\theta_1(r_{11}s\theta_6+r_{12}c\theta_6) & -s\theta_1(p_x-r_{13}d_6) \\
+        +c\theta_1(r_{21}c\theta_6-r_{22}s\theta_6) &                      & -c\theta_1(r_{21}s\theta_6+r_{22}c\theta_6) & +c\theta_1(p_y-r_{23}d_6) \\
+        & & & & \\        
+             r_{31}c\theta_6-r_{32}s\theta_6  &         r_{33}       &     -r_{31}s\theta_6-r_{32}c\theta_6  &      p_z-r_{33}d_6  \\
+        & & & & \\
+                    0             &            0         &              0            &           1         \\    
     \end{bmatrix}
 \end{equation}
 
+Os termos $p_x-r_{13}d_6$ e $p_y-r_{23}d_6$ da equação \ref{eq:t15-calc2} equivalem, respectivamente, 
+às posições $x$ e $y$ da quinta junta no sistema de coordenadas da primeira junta, assim, alternando esses 
+termos para suas respectivas coordenadas polares, obtém-se as relações dispostas em \ref{eq:polares}. Nestas
+equações, o termo $\rho$ se refere ao módulo do vetor conectando a base das juntas 1 e 5 projetado sobre o 
+plano horizontal $XY$, e $\phi$ o ângulo desta projeção no mesmo plano.
+
+\begin{align}
+    \label{eq:polares}
+    p_x - r_{13}d_6 &= \; ^1_5\rho_x = \; ^1_5\rho \cdot cos ^1_5\phi \nonumber\\
+    p_y - r_{23}d_6 &= \; ^1_5\rho_y = \; ^1_5\rho \cdot sen ^1_5\phi \nonumber\\
+\end{align}
+
+Substituindo os valores mais a direita das equações em \ref{eq:polares} no termo (2, 4) 
+da matriz em \ref{eq:t15-calc2}, e igualando o resultado ao termo (2, 4) da matriz em 
+\ref{eq:t15-calc}, chega-se à relação escrita em \ref{eq:anexo-angulo1}.
+
 \begin{equation}
-    ^3v_3 = \begin{bmatrix}
-        c\theta_3 & s\theta_3 & 0 \\
-        -s\theta_3 & c\theta_3 & 0 \\
-        0 & 0 & 1 \\
-    \end{bmatrix}
-    \begin{bmatrix}
-        c\theta_2.\dot{\theta}_1d_3 \\ 
-        -s\theta_2.\dot{\theta}_1d_3 + \dot{\theta}_2a_3 \\ 
-        -c\theta_2.\dot{\theta}_1a_3 - \dot{\theta}_1a_2
-    \end{bmatrix} = 
-    \begin{bmatrix}
-        c(\theta_2 + \theta_3).\dot{\theta}_1d_3 + s\theta_3.\dot{\theta}_2a_3 \\ 
-        -s(\theta_2 + \theta_3).\dot{\theta}_1d_3 + c\theta_3.\dot{\theta}_2a_3\\ 
-        -c\theta_2.\dot{\theta}_1a_3 - \dot{\theta}_1a_2
-    \end{bmatrix}
+    \label{eq:anexo-angulo1}
+    -sen\theta_1 \cdot ^1_5\rho \cdot cos^1_5\phi + cos\theta_1 \cdot ^1_5\rho \cdot sen^1_5\phi = 0
+\end{equation}
+
+Simplificando o resultado em \ref{eq:anexo-angulo1} por vias trigonométricas, chega-se ao resultado em 
+\ref{eq:anexo-angulo1-2}.
+
+\begin{equation}
+    \label{eq:anexo-angulo1-2}
+    ^1_5\rho \cdot sen(\theta_1 - ^1_5\phi) = 0
+\end{equation}
+
+Assumindo que o módulo $^1_5\rho$ será sempre positivo, e utilizando a identidade trigonométrica fundamental, 
+obtém-se também a igualdade em \ref{eq:anexo-angulo1-3}.
+
+\begin{equation}
+    \label{eq:anexo-angulo1-3}
+    cos(\theta_1 - ^1_5\phi) = \pm 1
+\end{equation}
+
+Essas duas equações, \ref{eq:anexo-angulo1-2} e \ref{eq:anexo-angulo1-3}, levam ao resultado em 
+\ref{eq:anexo-angulo1-final}, que indica o valor de $\theta_1$ para a posição desejada. Na equação
+é utilizada a função $atan2$, que utiliza o sinal das componentes para estimar corretamente o 
+ângulo nos 4 quadrantes do círculo unitário.
+
+\begin{equation}
+    \label{eq:anexo-angulo1-final}
+    \theta_1 = ^1_5\phi + atan2\left(0, \pm1\right)
+\end{equation}
+
+Para a determinação do ângulo $\theta_5'$, basta utilizar o termo (2, 2) e a soma dos quadrados 
+dos termos (1, 2) e (3, 2) para as matrizes em \ref{eq:t15-calc} e \ref{eq:t15-calc2}. 
+Ao igualar o termo (2, 2), obtém-se a igualdade em \ref{eq:anexo-angulo5}, já ao igualar 
+a soma dos quadrados citada, é obtida a equação \ref{eq:anexo-angulo5-2}. 
+
+\begin{equation}
+    \label{eq:anexo-angulo5}
+    s\theta_5' = s\theta_1r_{13} - c\theta_1r_{23}
 \end{equation}
 
 \begin{equation}
-    ^4\omega_4 = \begin{bmatrix}
-        c\theta_4 & s\theta_4 & 0 \\
-        -s\theta_4 & c\theta_4 & 0 \\
-        0 & 0 & 1 \\
-    \end{bmatrix} \, ^3\omega_3 + 
+    \label{eq:anexo-angulo5-2}
+    c\theta_5' = \pm \sqrt{(c\theta_1r_{13} + s\theta_1r_{23})^2 + r_{33}^2}
+\end{equation}
+
+Com o valor de $\theta_1$ conhecido, possíveis valores de $\theta_5'$ podem ser obtidos 
+através de uma função arco tangente que utilize os termos encontrados em \ref{eq:anexo-angulo5}
+e \ref{eq:anexo-angulo5-2}.
+
+Para encontrar o ângulo $\theta_6$, é realizada uma multiplicação entre a matriz em 
+\ref{eq:t15-calc2} e $^5_6T$, obtendo a matriz em \ref{eq:t16-calc2}.
+
+\begin{equation}
+    \label{eq:t16-calc2}
+    ^1_6T = 
     \begin{bmatrix}
-        0 \\ 0 \\ \dot{\theta}_4
-    \end{bmatrix} = 
-    \begin{bmatrix}
-        s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 \\
-        c(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 \\ 
-        \dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4
+         c\theta_1r_{11} + s\theta_1r_{21} &  c\theta_1r_{12} + s\theta_1r_{22} & c\theta_1r_{13} + s\theta_1r_{23} & c\theta_1p_x + s\theta_1p_y \\
+        -s\theta_1r_{11} + c\theta_1r_{21} & -s\theta_1r_{12} + c\theta_1r_{22} & -s\theta_1r_{13} +c\theta_1r_{23} & -s\theta_1p_x + c\theta_1p_y \\
+        r_{31}                             &         r_{32}                     &     r_{33}                        &      p_z  \\
+         0             &            0         &              0            &           1         \\    
     \end{bmatrix}
 \end{equation}
 
-\begin{equation}
-\begin{split}
-    ^4v_4 = \begin{bmatrix}
-        c(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_4a_4.\dot{\theta}_3 \\ 
-        -s(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [c(\theta_3+\theta_4)a_3 + c\theta_4a_4].\dot{\theta}_2 + c\theta_4a_4.\dot{\theta}_3 \\ 
-        [-c(\theta_2 + \theta_3)a_4 - c\theta_2a_3 - a_2].\dot{\theta}_1
-    \end{bmatrix}
-\end{split}
-\end{equation}
+Comparando os termos (2, 1) e (2, 2) de \ref{eq:t16-calc2} com os mesmos termos em \ref{eq:t16}, são obtidos valores para $\theta_6$
+em função de $\theta_1$ e $\theta_5'$, assim como demonstram as igualdades em \ref{eq:anexo-angulo6}.
+
+\begin{align}
+    \label{eq:anexo-angulo6}
+    c\theta_6 &= \frac{-s\theta_1r_{11} + c\theta_1r_{21}}{c\theta_5'} \nonumber\\
+    s\theta_6 &= \frac{s\theta_1r_{12} - c\theta_1r_{22}}{c\theta_5'} \nonumber\\
+\end{align}
+
+As equações em \ref{eq:anexo-angulo6} podem ser reagrupadas de maneira a retirar a dependência no 
+ângulo $\theta_5$, assim como mostrado na equação \ref{eq:anexo-angulo6-2}.
 
 \begin{equation}
-    ^5\omega_5 = \begin{bmatrix}
-        s\theta_5 & 0 & -c\theta_5 \\
-        c\theta_5 & 0 & s\theta_5 \\
-        0 & -1 & 0 \\
-    \end{bmatrix} \, ^4\omega_4 + 
-    \begin{bmatrix}
-        0 \\ 0 \\ \dot{\theta}_5
-    \end{bmatrix} = 
-    \begin{bmatrix}
-        s\theta_5s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 - c\theta_5(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) \\
-        c\theta_5s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + s\theta_5(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) \\ 
-        -c(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + \dot{\theta_5}
-    \end{bmatrix}
+    \label{eq:anexo-angulo6-2}
+    \theta_6 = tan^{-1}\frac{(-s\theta_1r_{11} + c\theta_1r_{21})}{(s\theta_1r_{12} - c\theta_1r_{22})}
 \end{equation}
 
-\begin{equation}
-\begin{gathered}
-    ^5v_5 = \begin{bmatrix}
-        \left\{s\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) + c\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
-        + s\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_{45}a_4.\dot{\theta}_3 \\ 
-        \\
-        \left\{c\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) - s\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
-        + c\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + c\theta_5s\theta_4a_4.\dot{\theta}_3 \\ 
-        \\
-        s(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) - [c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5].\dot{\theta}_2 - (c\theta_4a_4 + a_5).\dot{\theta}_3 - a_5.\dot{\theta_4}
-    \end{bmatrix}
-\end{gathered}
-\end{equation}
+Os ângulos de 2 a 4 foram obtidos com cálculos semelhantes aos que são realizados para a cinemática 
+inversa de um manipulador coplanar com 3 eixos. O valor da soma desses ângulos é obtido pela 
+comparação dos termos (3, 3) e (1, 3) das matrizes \ref{eq:t15-calc} e \ref{eq:t15-calc2}. 
+Essa comparação pode ser vista no conjunto de equações \ref{eq:anexo-angulo234}. Utilizando
+a função arcotangente é então possível obter um valor númerico para $\sum\limits_{i=2}^4\theta_i$.
+
+\begin{align}
+    \label{eq:anexo-angulo234}
+    c(\sum\limits_{i=2}^4\theta_i) &= s\theta_6r_{31} + c\theta_6r_{32} \nonumber\\
+    s(\sum\limits_{i=2}^4\theta_i) &= -c\theta_1(s\theta_6r_{11}+c\theta_6r_{12}) - s\theta_1(s\theta_6r_{21}+c\theta_6r_{22}) \nonumber\\
+\end{align}
+
+Comparando agora os termos (1, 4) e (3, 4) das mesmas matrizes, são obtidas as igualdades dispostas em 
+\ref{eq:anexo-angulo3}.
+
+\begin{align}
+    \label{eq:anexo-angulo3}
+    c(\sum\limits_{i=2}^4\theta_i)a_4 + c(\theta_2+\theta_3)a_3 + c\theta_2a_2& + a_1 = c\theta_1(p_x-r_{13}d_6) + s\theta_1(p_y-r_{23}d_6) \nonumber\\
+    s(\sum\limits_{i=2}^4\theta_i)a_4 + s(\theta_2+\theta_3)a_3 + s\theta_2a_2&       = p_z - r_{33}d_6 \nonumber\\
+\end{align}
+
+Projetando o vetor que liga a base das juntas 1 e 5 em um plano vertical, que contém os eixos dos 
+elos que conectam as juntas 2, 3 e 4, nota-se que é possível definir duas coordenadas, $\mathcal{X}$
+e $\mathcal{Y}$, que se relacionam com o conjunto de equações em \ref{eq:anexo-angulo3} do modo
+descrito em \ref{eq:anexo-angulo3-2}.
+
+\begin{align}
+    \label{eq:anexo-angulo3-2}
+    \mathcal{X} &= c\theta_1(p_x-r_{13}d_6) + s\theta_1(p_y-r_{23}d_6) - c(\sum\limits_{i=2}^4\theta_i)a_4 -a_1 = c(\theta_2+\theta_3)a_3 + c\theta_2a_2\nonumber\\
+    \mathcal{Y} &= p_z - r_{33}d_6 - s(\sum\limits_{i=2}^4\theta_i)a_4 = s(\theta_2+\theta_3)a_3 + s\theta_2a_2 \nonumber\\
+\end{align}
+
+Elevando ambos termos $\mathcal{X}$ e $\mathcal{Y}$ ao quadrado e realizando a soma dos resultados, 
+é possível obter um valor para o cosseno de $\theta_3$, assim como descrito em \ref{eq:anexo-angulo3-3}.
+O valor do ângulo em si pode ser obtido por uma função trigonométrica inversa.
 
 \begin{equation}
-\begin{gathered}
-    ^6\omega_6 = \begin{bmatrix}
-        [c\theta_6s\theta_5s(\theta_2+\theta_3+\theta_4) + s\theta_6c(\theta_2+\theta_3+\theta_4)].\dot{\theta}_1 - c\theta_{56}(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) - s\theta_6\dot{\theta}_5 \\
-        [-s\theta_{56}s(\theta_2+\theta_3+\theta_4) + c\theta_6c(\theta_2+\theta_3+\theta_4)].\dot{\theta}_1 + s\theta_6c\theta_5(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) - c\theta_6\dot{\theta}_5 \\ 
-        c\theta_5s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + s\theta_5(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) + \dot{\theta}_6
-    \end{bmatrix}
-\end{gathered}
+    \label{eq:anexo-angulo3-3}
+    c\theta_3 = \frac{\mathcal{X}^2 + \mathcal{Y}^2 - a_2^2 - a_3^2}{2a_2a_3}
 \end{equation}
 
+Sabendo o valor de $\theta_3$ é possível reescrever as equações de $\mathcal{X}$ e $\mathcal{Y}$ utilizando 
+duas constantes auxiliares, $k_1$ e $k_2$, onde $k_1=c\theta_3a_3 + a_2$ e $k_2=s\theta_3a_3$. Assim, as 
+variáveis são expressas no novo modo, disposto em \ref{eq:anexo-angulo2}.
+
+\begin{align}
+    \label{eq:anexo-angulo2}
+    \mathcal{X} &= k_1c\theta_2 - k_2s\theta_2 \nonumber\\
+    \mathcal{Y} &= k_1s\theta_2 + k_2c\theta_2 \nonumber\\
+\end{align}
+
+Utilizando mais outras duas variáveis auxiliares, $\mathcal{T}=\sqrt{k_1^2+k_2^2}$ e $\mathcal{K}=atan2(k_2, k_1)$,
+de tal modo que $k_1=\mathcal{T}\cdot cos(\mathcal{K})$ e $k_2=\mathcal{T}\cdot sen(\mathcal{K})$, é 
+possível escrever equações mais simples para o ângulo $\theta_2$. Estas novas equações estão dispostas em 
+\ref{eq:anexo-angulo2-2}.
+
+\begin{align}
+    \label{eq:anexo-angulo2-2}
+    \mathcal{X} &= \mathcal{T} \cdot cos(\theta_2+\mathcal{K}) \nonumber\\
+    \mathcal{Y} &= \mathcal{T} \cdot sen(\theta_2+\mathcal{K}) \nonumber\\
+\end{align}
+
+$\theta_2$ é por fim definido pela equação \ref{eq:anexo-angulo2-3}, resultado de análise das equações em 
+\ref{eq:anexo-angulo2-2}.
+
 \begin{equation}
-\begin{gathered}
-    ^6v_6 = \begin{bmatrix}
-        \{c\theta_6c(\theta_2 + \theta_3 + \theta_4)[s\theta_5(d_3+d_4) + d_6] - s\theta_6s(\theta_2 + \theta_3 + \theta_4)[(d_3+d_4) + s\theta_5d_6] + \\
-        +c\theta_{56}[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\}.\dot{\theta}_1 + \\
-        +\{c\theta_6s\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4] + s\theta_6[c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5 + c\theta_5d_6]\}.\dot{\theta}_2 + \\
-        +[c\theta_6s\theta_{45}a_4 + s\theta_6(c\theta_4a_4 + a_5 + c\theta_5d_6)].\dot{\theta}_3 + s\theta_6(a_5 + c\theta_5d_6).\dot{\theta}_4 + c\theta_6d_6\dot{\theta}_5 \\ 
-        \\
-        \{-s\theta_6c(\theta_2 + \theta_3 + \theta_4)[s\theta_5(d_3+d_4) + d_6] - c\theta_6s(\theta_2 + \theta_3 + \theta_4)[(d_3+d_4) + s\theta_5d_6] - \\
-        -s\theta_6c\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\}.\dot{\theta}_1 + \\
-        +\{-s\theta_{56}[s(\theta_3+\theta_4)a_3 + s\theta_4a_4] + c\theta_6[c(\theta_3+\theta_4)a_3 + c\theta_4a_4 + a_5 + c\theta_5d_6]\}.\dot{\theta}_2 + \\
-        +[-s\theta_{456}a_4 + c\theta_6(c\theta_4a_4 + a_5 + c\theta_5d_6)].\dot{\theta}_3 + c\theta_6(a_5 + c\theta_5d_6).\dot{\theta}_4 - s\theta_6d_6\dot{\theta}_5 \\ 
-        \\
-        \left\{c\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) - s\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
-        + c\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + c\theta_5s\theta_4a_4.\dot{\theta}_3 \\ 
-    \end{bmatrix}
-\end{gathered}
+    \label{eq:anexo-angulo2-3}
+    \theta_2 = atan2(\mathcal{Y}, \mathcal{X}) - \mathcal{K} = atan2(\mathcal{Y}, \mathcal{X}) - atan2(k_2, k_1)
 \end{equation}
+
+Tendo em mãos o valor da soma de $\theta_2, \theta_3$ e $\theta_4$, bem como os valores individuais de $\theta_2$ 
+e $\theta_3$, o valor de $\theta_4$ é facilmente obtido através de uma simples subtração.
