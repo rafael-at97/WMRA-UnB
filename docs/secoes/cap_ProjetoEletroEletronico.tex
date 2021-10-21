@@ -61,13 +61,14 @@ todos os motores sejam alimentadas simultaneamente.
 Os motores DC Mabuchi utilizados apresentam um consumo
 máximo de 24A cada, resultando em um valor total de 72A para estes 3 motores.
 
-Como os motores não serão utilizados continuamente, e em momentos onde provavelmente 
-a cadeira de rodas não estará em movimento, uma bateria comum de 45Ah pode ser
-utilizada para a finalidade desejada, que mesmo em uso contínuo e em situação de 
-estresse, com um gasto conjunto de 81.54A, o manipulador seria capaz de se mover, 
-evidenciado pelo fato de que os motores empregados são comuns em aplicações automotivas.
-No entanto, uma faixa de trabalho que garanta um consumo menor por parte dos motores é 
-interessante, ponto que será levado em consideração na análise dos atuadores escolhidos. 
+Com base no valor de gasto conjunto igual a 81.54A, e no fato de que os motores 
+Mabuchi são comumente utilizados em aplicações automotivas, uma bateria automotiva de 45Ah
+seria suficiente para a finalidade desejada, por já ser projetada para lidar com 
+atuadores semelhantes. O valor de 45Ah foi definido de modo a manter o sistema em funcionamento por aproximadamente
+meia hora, assumindo a relação básica entre Ampère-hora e Ampère.
+Uma faixa de trabalho que garanta um consumo menor por parte dos motores é 
+interessante, por permitir o funcionamento do sistema por maior tempo, 
+ponto que será levado em consideração na análise dos atuadores escolhidos. 
 
 Pelas informações apresentadas, a fonte de energia para o sistema será adotada como sendo
 uma bateria automotiva de 12V com uma capacidade de carga mínima de 45Ah. Estes valores
@@ -128,7 +129,9 @@ Para utilização correta do módulo, inicialmente é necessário descrever o
 manipulador em seus parâmetros de DH, para tal, foi utilizado um \textit{software}
 de modelagem 3D que permitiu uma montagem virtual do braço robótico e 
 verificação de suas dimensões e outras características, como massa e momento 
-de inércia das juntas. Uma renderização do modelo 3D montado está disponível
+de inércia das juntas. Uma renderização do modelo 3D montado, construída 
+com base nos arquivos originais criados durante o 
+desenvolvimento de \cite{fernando2019assistivo}, está disponível
 na figura \ref{fig:manipulador-render}.
 
 \begin{figure}[htb]
@@ -142,9 +145,10 @@ na figura \ref{fig:manipulador-render}.
     \label{fig:manipulador-render}
 \end{figure}
 
-Através da modelagem, foram vistas algumas inconsistências
-entre o modelo virtual e o arranjo de sistemas definido no projeto base, visível
-na figura \ref{fig:DH-Base}. 
+Através de comparação entre o sistema no ambiente 3D e o arranjo de sistemas definido no projeto base,
+vísivel na figura \ref{fig:DH-Base}, foi identificada a necessidade de propor um novo modelo
+lógico para o sistema, com um novo conjunto de parâmetros de Denavit-Hartenberg.
+Detalhes sobre a construção do novo modelo estão disponíveis no apêndice \ref{apendice-dh}.
 
 \begin{figure}[htb]
     \caption{Arranjo de sistemas definido no projeto base \cite{fernando2019assistivo}.}    
@@ -157,16 +161,13 @@ na figura \ref{fig:DH-Base}.
     \label{fig:DH-Base}
 \end{figure}
 
-Seguindo a metodologia para posicionamento dos sistemas de referência definido em 
-\cite{craig2009introduction}, a origem do sistema da junta 1, referente à parte
-rotativa da base, deveria estar posicionada no mesmo plano horizontal
-do eixo $\hat{Z}_1$, uma vez que os eixos $\hat{Z}_0$ e $\hat{Y}_1$ não são colineares. 
-Foi adotado também uma compensação, ou \textit{offset},
-com valor constante, para a junta 5, pois originalmente, com $\theta_5=0$, o 
+Após o posicionamento dos sistemas de referência, foi adotado para a junta 5 
+uma compensação, ou \textit{offset},
+com valor constante, pois originalmente, com $\theta_5=0$, o 
 último elo do sistema ficaria perpendicular ao elo precedente. A compensação
 foi de exatamente $-\pi/2$, para que na nova posição 0, o manipulador esteja 
 completamente alongado na horizontal, bem como na figura \ref{fig:manipulador-render}.
-O novo modelo desenvolvido pode ser visto na figura \ref{fig:DH-Novo}. 
+O novo modelo desenvolvido, após inclusão desta compensação, pode ser visto na figura \ref{fig:DH-Novo}. 
 
 \begin{figure}[htb]
     \caption{Novo arranjo de sistemas.}    
@@ -181,14 +182,16 @@ O novo modelo desenvolvido pode ser visto na figura \ref{fig:DH-Novo}.
 
 Na figura \ref{fig:DH-Novo} estão dispostos também os sistemas de referência
 para a base e para a ferramenta, representados por $0$ e $T$, respectivamente.
-Para a análise de torque, as transformações de base e ferramenta, $^0_1T$ e $^6_TT$,
+Para a análise de torque, as transformações de base e ferramenta, $^0_1\textbf{T}$ e $^6_T\textbf{T}$,
 foram assumidas como unitárias, representadas por matrizes identidade 4x4,
 sem influencia sobre os resultados obtidos.
 
 Nas imagens \ref{fig:DH-Base} e \ref{fig:DH-Novo} são visíveis os parâmetros 
 comuns $d_1$, $a_2$, $a_3$, $a_4$ e $d_6$, já o parâmetro $a_1$ é exclusivo da 
 nova versão. 
-Esses valores são os parâmetros de DH utilizados para descrever o manipulador. 
+Esses valores são os parâmetros de DH utilizados para descrever o manipulador,
+retirados do sistema montado no ambiente de modelagem 3D, como pode ser visto no
+apêndice \ref{apendice-dh}. 
 Uma comparação entre os dois modelos, bem como o valor dos parâmetros, pode 
 ser vista na tabela \ref{tab:DH-comparacao}.
 
@@ -251,8 +254,10 @@ ser vista na tabela \ref{tab:DH-comparacao}.
 parâmetros, isto ocorre pois a parte relativa ao modelo original, \ref{tab:DH-comparacao}(a),
 foi representada de acordo com o observado no trabalho original, já a
 parte do novo arranjo, \ref{tab:DH-comparacao}(b), foi realizada de acordo com 
-a representação proposta em \cite{craig2009introduction}, os valores das 
-constantes, no entanto, são similares. 
+a representação proposta em \cite{craig2009introduction}. Os valores encontrados para as 
+constantes $a_2$ e $a_3$ foram idênticos para ambos os trabalhos, já os outros parâmetros
+apresentam pequenas diferenças, inferior a 20mm, sendo estas diferenças decorrentes 
+provavelmente da lógica de conexão entre as peças no ambiente de modelagem 3D. 
 Na parte (b) da tabela nota-se também que a variável $\theta_5$ foi alterada 
 para $\theta_5'$, representando a nova variável obtida após incluir o deslocamento 
 fixo adotado nesta junta, como indica a equação \ref{eq:junta5-offset}.
@@ -263,9 +268,8 @@ fixo adotado nesta junta, como indica a equação \ref{eq:junta5-offset}.
     \label{eq:junta5-offset}
 \end{equation}
 
-Da modelagem 3D do sistema foram obtidos os valores de massa, tensor de inércia $I_T$ 
-e posição do centro de massa, $r_{CM}$, referentes ao sistema de coordenadas adotado para 
-aquela junta, os valores obtidos estão organizados na tabela \ref{tab:MrI}. 
+Através de ferramentas de medição disponíveis no ambiente da modelagem 3D, foram obtidos os valores de massa, tensor de inércia $\textbf{I}_T$ 
+e posição do centro de massa, $\textbf{r}_{CM}$, para as juntas do sistema, os valores obtidos estão organizados na tabela \ref{tab:MrI}. 
 Para melhor compreender as massas que devem ser movimentadas por 
 cada junta, os sistemas foram isolados e representados nas figuras de \ref{fig:elos}(a) a \ref{fig:elos}(e).
 
@@ -274,7 +278,7 @@ cada junta, os sistemas foram isolados e representados nas figuras de \ref{fig:e
         
     \begin{tabular}{|c|c|c|c|}
         \hline
-        Junta & $r_{CM}$ (3x1 m) & Massa (kg) & $I_T$ (3x3 kg.m$^2$) \tabularnewline
+        Junta & $\textbf{r}_{CM}$ (3x1 m) & Massa (kg) & $\textbf{I}_T$ (3x3 kg.m$^2$) \tabularnewline
         \hline
         \hline
         1 & $\begin{bmatrix}-0,035 & -0,062 &  0,009 \end{bmatrix}^T$ & 0,674 & $\begin{bmatrix}
@@ -376,14 +380,26 @@ maximiza a inércia observada pela junta 1, e também garante o efeito desejado 
 juntas de 2 a 4.
 
 O valor máximo de torque para a junta 5 pode ser observado com alguma configuração onde
-a soma dos ângulos das juntas 2, 3 e 4 seja igual a 90\textdegree, $\theta_2+\theta_3+\theta_4=\pi/2$,
+a soma dos ângulos das juntas 2, 3 e 4 seja igual a 90\textdegree \, ($\theta_2+\theta_3+\theta_4=\pi/2$),
 mantendo o eixo $\hat{Z}_5$ na horizontal, e o ângulo desta junta seja $\pm \pi/2$, ou seja, 
-com a junta agindo contra o efeito da gravidade e maior braço de alavanca possível. 
+com a junta agindo contra o efeito da gravidade e maior braço de alavanca possível. Um exemplo de
+configuração com estas características pode ser visto na figura \ref{fig:configuracao2}.
+
+\begin{figure}[ht!]
+    \caption{Posição do manipulador para maximização do efeito de gravidade sobre a junta 5.}    
+    \begin{centering}
+
+        \includegraphics[width=0.2\columnwidth]{images/arm/p90.jpg}
+    
+    \par\end{centering}
+
+    \label{fig:configuracao2}
+\end{figure}
 
 Todas estas informações foram agrupadas e inseridas no módulo desenvolvido para aplicação 
 das equações de Newton-Euler. Foram então realizadas duas execuções, uma para a configuração 0
 e outra para $\theta_2 = \pi/2$, $\theta_5 = -\pi/2$ e demais ângulos 0. Foi adotada uma 
-velocidade de 0,0 rad/s e aceleração de 0,07 rad/s$^2$ para as juntas, seguindo a proposta
+velocidade de 0,0 rad/s e aceleração de 0,07 rad/s$^2$ para todas as juntas, seguindo a proposta
 inicial do trabalho base. Os maiores valores observados foram anotados na tabela 
 \ref{tab:Torques-Novo}. 
 
@@ -416,9 +432,15 @@ inicial do trabalho base. Os maiores valores observados foram anotados na tabela
 \par\end{centering}
 \end{table}
 
-É visível uma diferença em relação à tabela original \ref{tab:Torques}, 
-decorrente possivelmente da diferença dos valores utilizados de massa e 
-afins em cada projeto.
+É visível uma diferença entre a tabela dos resultados obtidos, \ref{tab:Torques-Novo}, e a tabela original dos torques 
+\ref{tab:Torques}, decorrente possivelmente da diferença dos valores utilizados de massa e 
+afins em cada projeto. As maiores diferenças encontradas foram nas juntas 1, 2 e 5. A diferença para a 
+junta 1 pode ser explicada pelo uso da massa completa da junta 1 no trabalho base, incluindo-se no cálculo
+do torque até mesmo componentes estáticos, que não são movimentados pelo eixo da junta, fato que, somando-se à 
+diferenças no parâmetro $d_1$, resulta na diferença observada. Para a junta 2
+a diferença pode ser atribuída a diferentes valores de massa fornecidos pelo ambiente de
+modelagem 3D, já para a junta 5, o alto valor de torque provém do uso da segunda configuração de 
+execução das equações de Newton-Euler.
 
 Como algumas juntas necessitam de um torque elevado, foram utilizados pares de 
 engrenagens para reduzir o esforço de atuação necessário e permitir a utilização
@@ -465,7 +487,7 @@ tabela \ref{tab:Tabela-Alcance}.
 \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
     & $\theta_1$ & $\theta_2$ & $\theta_3$ & $\theta_4$ & $\theta_5$ & $\theta_6$ \tabularnewline
-    & (Base) & (Ombro) & (Cotovelo) & (Arfagem) & (Guinada) & (Rolagem) \tabularnewline
+    & (Base) & (Ombro) & (Cotovelo) & (\textit{Pitch}) & (\textit{Yaw}) & (\textit{Roll}) \tabularnewline
     \hline
     \hline
     Limite Angular & $\pm$90º & -45º a +135º & -135º a +160º & $\pm$160º & $\pm$90º & $\pm$360º\tabularnewline
@@ -573,9 +595,9 @@ tabela \ref{tab:Analise-Torque}.
 A compacidade apontada como vantagem do modo de atuação direto acaba
 se tornando então uma desvantagem neste projeto, pois, devido ao método
 de construção das juntas, a troca de atuadores se mostra trabalhosa,
-bem como inserção de elementos externos para compensação do alto torque.
+bem como inserção de elementos externos para compensar o baixo torque dos atuadores.
 A figura \ref{fig:mola} ilustra uma tentativa de inserção de mola na 
-estrutura, para compensar o torque excessivo na junta 2 do sistema.
+estrutura, para compensar o baixo torque do atuador na junta 2 do sistema.
 
 \begin{figure}[h!]
     \caption{Inclusão de mola para compensação de torque na junta 2.}    
@@ -594,11 +616,11 @@ implicando em mudanças na resistência mecânica desta. A mola necessitaria ain
 de um valor de constante relativamente alto para uma boa compensação, portanto 
 esta opção foi descartada.
 
-A opção mais simples encontrada para resolver o problema de falta de torque nas
-juntas foi a alteração da relação de engrenages aplicadas 
+A opção mais simples encontrada para resolver o problema de falta de torque nos
+atuadores foi a alteração da relação de engrenagens aplicadas 
 nestas juntas. As juntas 2 e 3 apresentam uma distância fixa entre os centros das 
 engrenagens, por isso, se fez necessário incluir um adaptador para a saída dos 
-motors Mabuchi, modificando a relação nestas juntas para, respectivamente, 1:4,5 e 
+motores Mabuchi, modificando a relação nestas juntas para, respectivamente, 1:4,5 e 
 1:2,5. A junta 5 é a que apresenta maior espaço para modificações, fornecendo maior 
 liberdade para aplicar uma relação de engrenages contínua, ou uma caixa de engrenagens
 planetária, sendo necessário que a redução final seja no mínimo de 1:10.
@@ -639,7 +661,7 @@ podendo ser conectados ao eixo de rotação das juntas.
 Um cuidado a ser tomado em relação a potenciômetros é que estes possuem uma 
 faixa limitada de operação, que deve ser respeitada em sua aplicação.
 
-Do ponto de vista da precisão, inicialmente foi realizado uma comparação entre o uso de 
+Do ponto de vista da precisão, inicialmente foi realizada uma comparação entre o uso de 
 um conjunto potenciômetro com conversor ADC de 10 bits, comum nas placas controladoras
 Arduino, contra um \textit{encoder}.  
 Seguindo a equação \ref{eq:res_adc}, o ADC forneceria uma resolução de $1/2^{10}$, o que para 
@@ -663,13 +685,14 @@ requisitos de angulação mínima e máxima de todas as juntas.
 
 Um potenciômetro encontrado que atende aos requisitos apresentados foi o da 
 família \textit{Bourns 3590}, que apresentou também um preço acessível e 
-uma boa precisão, na casa de 0,02\% da tensão de saída desejada. Para confirmar
-esta precisão indicada na sua ficha catalográfica, foi realizado um experimento, 
+uma boa resolução, na casa de 0,02\% da tensão de saída desejada. Para confirmar
+esta resolução indicada na sua ficha catalográfica, foi realizado um experimento, 
 que consistiu em utilizar um \textit{laser} e um espelho conectado a um sensor 
 deste tipo. O raio de luz emitido pelo \textit{laser} foi direcionado até o 
-espelho e a deflexão gerada pela alteração mínima detectada por um par 
-potenciômetro\textbackslash ADC de 10 bits foi mensurada. Uma ilustração do experimento
-pode ser vista na figura \ref{fig:teste-pot}. 
+espelho, e a distância $d$ percorrida pelo raio refletido foi medida, causada por 
+uma rotação no sensor potenciômetro conectado ao espelho. 
+Uma ilustração do experimento pode ser vista na figura \ref{fig:teste-pot}. 
+Os resultados obtidos serão discutidos na seção de resultados deste documento.
 
 \begin{figure}[h!]
     \caption{Teste para validação da resolução do potenciômetro escolhido.}    
@@ -682,11 +705,13 @@ pode ser vista na figura \ref{fig:teste-pot}.
     \label{fig:teste-pot}
 \end{figure}
 
-Na figura \ref{fig:teste-pot} o raio na cor ciano indica o raio gerado pelo \textit{laser} L, e 
+Na figura \ref{fig:teste-pot} o raio na cor ciano indica o raio gerado pelo \textit{laser} L e que
+chega ao conjunto espelho/potenciômetro, e 
 os raios azuis-escuro indicam os raios refletidos pelo espelho, inicialmente com o espelho 
-perpendicular ao raio de luz, raio tracejado, e após rotacionar o sensor o menor ângulo $\theta$
-possível detectado pelo conversor. Mensurando os valores de $d$ e $D$, é possível calcular o 
-novo ângulo do sensor através da equação \ref{eq:teste-pot}.
+perpendicular ao raio de luz, raio tracejado, e após o sensor ser rotacionado manualmente o menor ângulo $\theta$
+possível detectado por um microcontrolador Arduino. Medindo os valores de $d$ e $D$, é possível calcular a 
+rotação do sensor através da equação \ref{eq:teste-pot}. Este valor de rotação, por ser equivalente ao 
+menor valor detectável na saída, equivale à resolução do conjunto potenciômetro/ADC de 10 bits.
 
 \begin{equation}
     \label{eq:teste-pot}
@@ -712,7 +737,7 @@ que permite rotação contínua, será utilizado apenas um único sensor,
 para referenciar o ponto zero da junta.
 
 \subsection{Circuitos de potência}
-Para análise dos \textit{drivers} a serem empregados utilizou-se como 
+Para análise dos circuitos de acionamento a serem empregados, foram utilizados como 
 critérios de escolha principais a tensão e corrente de trabalho do 
 circuito, a fim de garantir que a potência elétrica demandada pelos 
 atuadores seja satisfeita, além do custo de aquisição e fatores de proteção 
@@ -728,7 +753,7 @@ No caso dos motores DC de rotação contínua optou-se pela utilização de
 circuitos do tipo ponte H, dada a sua boa capacidade de ativação deste 
 tipo de motor, disponibilidade no mercado e segurança de aplicação. Os 
 circuitos integrados VNH5019, BTS7960, MD30C e BTN7971B são exemplos de 
-\textit{drivers} comerciais utilizados para o controle de velocidade de 
+circuitos de acionamento comerciais utilizados para o controle de velocidade de 
 motores DC que fazem uso desta tecnologia. 
 Sendo um circuito de baixo custo, confiável e capaz de 
 fornecer a corrente requisitada pelos motores DC selecionados, a escolha 
@@ -737,7 +762,7 @@ ou outros modelos comerciais, logo, este circuito será o empregado no
 manipulador para o controle dos motores DC. 
 
 Em relação à ativação das bobinas dos motores de passo, os circuitos 
-comerciais L298N, DRV8825, A4988 e TB6560 são exemplos de \textit{drivers}
+comerciais L298N, DRV8825, A4988 e TB6560 são exemplos de circuitos de acionamento
 comumente empregados, e para a aplicação em questão, notou-se que o mais indicado seria 
 o DRV8825, sendo capaz de oferecer até 2.5A para a alimentação de motores 
 de passo, além de apresentar um baixo custo e possibilidade de utilizar
@@ -747,7 +772,7 @@ Desse modo, serão utilizados 3 circuitos do tipo BTS7960 e 3 circuitos do
 tipo DRV8825, caracterizando ainda uma aplicação de baixo custo, frente a 
 outras tecnologias semelhantes.
 
-\subsection{Circuitos de processamento de sinal e controle}
+\subsection{Circuitos de processamento de sinal e comando}
 
 Os quesitos a serem atendidos pelo circuito principal de processamento são: 
 capacidade de leitura de todos os sensores propostos, capacidade de 
@@ -755,7 +780,7 @@ controlar a ativação dos atuadores propostos, capacidade de controle
 embarcado, facilidade de programação e, por fim, custo.
 
 Além dos sensores de posição já citados, é necessário também preparar o 
-sistema de processamento e controle para incluir algum equipamento que realizará
+sistema de processamento e comando para incluir algum equipamento que realizará
 a tradução dos comandos do operador para comandos de movimentação da estrutura.
 Para este projeto, adotou-se que a interação com o usuário será realizada por 
 meio de um \textit{joystick}, técnica de interface comum a WMRAs.
@@ -768,11 +793,11 @@ fatores que permitiriam uma troca futura por algum outro equipamento semelhante.
 Levando em consideração então os 3 sensores potenciômetros, os 11 sensores 
 fim-de-curso e o \textit{joystick}, seriam necessárias no controlador subjacente 
 5 entradas analógicas e 12 entradas digitais. 
-Em relação aos circuitos de potência, cada \textit{driver} BTS7960 necessita de um 
+Em relação aos circuitos de potência, cada dispositivo BTS7960 necessita de um 
 mínimo de 2 pinos digitais que permitam funcionalidade PWM, 
-já o \textit{driver} DRV8825 necessita de no mínimo 2 pinos digitais, onde estes pinos 
+já o dispositivo DRV8825 necessita de no mínimo 2 pinos digitais, onde estes pinos 
 representam os sinais de direção e avanço do motor controlado. 
-Optou-se também por utilizar um pino extra nestes \textit{drivers} que permite 
+Optou-se também por utilizar um pino extra nestes circuitos integrados que permite 
 desligar o circuito quando este não estiver demandando um alto torque, poupando energia do sistema. 
 Desse modo, ao total serão necessários no mínimo 5 entradas 
 analógicas, 12 entradas digitais e 15 saídas digitais,
@@ -992,7 +1017,7 @@ fim-de-curso.
     \caption{Esquemático de leitura dos sensores fim-de-curso}    
     \begin{centering}
 
-        \includegraphics[width=0.7\columnwidth]{images/pcbs/SensorPCB-Switch.png}
+        \includegraphics[width=0.65\columnwidth]{images/pcbs/SensorPCB-Switch.png}
     
     \par\end{centering}
 
@@ -1002,28 +1027,47 @@ fim-de-curso.
 % Referencia para boas práticas de projeto?
 
 Para o roteamento de trilhas na placa, a organização foi realizada
+em duas camadas,
 agrupando componentes parte do mesmo circuito de maneira próxima, 
 tentando seguir boas práticas no projeto de placas de circuito impresso.
 Uma visão geral da placa, com todos os componentes montados está 
-disponível na figura \ref{fig:Placa-sensoriamento}.
-
+disponível na figura \ref{fig:Placa-sensoriamento}. Para a geração dos circuitos
+e placas, foi utilizado o \textit{software Altium Designer}.
+ 
 \begin{figure}[ht]
-    \caption{Placa de sensoriamento com todos os componentes}    
-    \begin{centering}
 
-        \includegraphics[width=0.45\columnwidth]{images/pcbs/SensorPCB-Board.png}
+    \caption{Placa de sensoriamento.}    
     
+    \begin{centering}
+    \begin{floatrow}
+
+    \subfloat[Visão 3D com componentes]{
+        \begin{minipage}{.5\textwidth}
+            \centering
+            \includegraphics[width=0.9\columnwidth]{images/pcbs/SensorPCB-Board.png}
+        \end{minipage}
+    }
+    
+    \subfloat[Visão das trilhas]{
+        \begin{minipage}{.5\textwidth}
+            \centering
+            \includegraphics[width=0.9\columnwidth]{images/pcbs/SensorPCB-Board2.png}
+        \end{minipage}
+    }
+    
+    \end{floatrow}
+
     \par\end{centering}
 
     \label{fig:Placa-sensoriamento}
 \end{figure}
 
-\section{Placa de controle}
+\section{Placa de comando}
 
-A placa de controle será aquela responsável por conectar todos os 
+A placa de comando será aquela responsável por conectar todos os 
 componentes do sistema elétrico, de modo a permitir que o 
 microcontrolador empregado tenha acesso a todos os periféricos.
-Optou-se por posicionar esta placa na base do componentes, facilitando 
+Optou-se por posicionar esta placa na base do manipulador, facilitando 
 o acesso a esta e sua posição relativa à bateria do sistema.
 Para o tamanho da placa, adotou-se que esta poderia ter dimensões semelhantes
 às da base, disponíveis na figura \ref{fig:TamanhoPCB-Junta1}.
@@ -1050,7 +1094,7 @@ sinal 12V na entrada, fornecerão a alimentação para os equipamentos de
 baixa potência. 
 O segundo ponto de alimentação servirá para alimentar os motores de 
 passo, onde o envio do sinal ao motor é comandado por seu respectivo 
-\textit{driver}.
+circuito de acionamento integrado.
 
 Os sinais advindos dos sensores fim-de-curso são inicialmente enviados
 a um optoacoplador, desse modo, evita-se a propagação de erros resultantes 
@@ -1062,7 +1106,8 @@ Na figura \ref{fig:MainPCB-Optoacopladores} é possível ver o circuito
 utilizado para transporte do sinal via optoacoplador. O resistor de entrada 
 para o diodo emissor de radiação infravermelho foi escolhido atentando-se 
 ao valor máximo para a corrente contínua direta de passagem, definida
-pelo fabricante no valor de 50mA. Com uma queda de tensão típica de 1.2V,
+pelo fabricante no valor de 50mA, valor disposto no \textit{datasheet} do dispositivo PC817C. 
+Com uma queda de tensão típica de 1.2V,
 e um valor limite de 12V recebido através do conector, o valor mínimo
 da resistência pode ser definido como $216\Omega$, seguindo a equação \ref{eq:opto1}.
 Buscando uma proteção maior ainda, o valor do resistor foi definido como $2,7k\Omega$, 
@@ -1072,7 +1117,7 @@ normal, a corrente direta seria mantida em níveis seguros de utilização,
 próximo a 1.4mA.
 
 \begin{figure}[h]
-    \caption{Circuito de tratamento dos sinais de fim-de-curso na placa de controle.}    
+    \caption{Circuito de tratamento dos sinais de fim-de-curso na placa de comando.}    
     \begin{centering}
 
         \includegraphics[width=0.65\columnwidth]{images/pcbs/MainPCB-Opto.png}
@@ -1083,7 +1128,7 @@ próximo a 1.4mA.
 \end{figure}
 
 O valor do resistor na saída do circuito deve ser 
-escolhido de modo que seja observado uma queda de tensão suficiente 
+escolhido de modo que seja observada uma queda de tensão suficiente 
 para que o valor lido na saída seja pequeno o suficiente para garantir
 um nível de leitura correto pelo controlador, assim, foi definido que a 
 queda de tensão deve ser igual a 5V. A corrente de entrada mantém-se 
@@ -1107,10 +1152,10 @@ para atribuir maior confiabilidade ao circuito.
     \label{fig:opto-CTR}
 \end{figure}
 
-Para a leitura dos dados analógicos dos potenciômetros
+Para a leitura dos dados analógicos dos potenciômetros,
 inicialmente foi pensado em utilizar amplificadores de instrumentação,
 a fim de, assim como no caso dos sensores fim-de-curso, garantir uma 
-robustez em relação à interferências de modo comum e isolar os dois 
+robustez em relação a interferências de modo comum e isolar os dois 
 pontos do sinal. Contudo, observou-se que amplificadores de 
 instrumentação poderiam encarecer razoavelmente o projeto, logo, esta alternativa foi 
 descartada.
@@ -1136,7 +1181,7 @@ como possibilidade de operação em \textit{single-supply} e baixa corrente
 de \textit{bias}.
 
 \begin{figure}[h]
-    \caption{Circuito de tratamento dos sinais de potenciômetros na placa de controle}    
+    \caption{Circuito de tratamento dos sinais de potenciômetros na placa de comando.}    
     \begin{centering}
 
         \includegraphics[width=0.6\columnwidth]{images/pcbs/MainPCB-Pot.png}
@@ -1146,13 +1191,13 @@ de \textit{bias}.
     \label{fig:MainPCB-Pot}
 \end{figure}
 
-Para controle dos motores DC, os únicos dispositivos empregados foram
+Para acionamento dos motores DC, os únicos dispositivos empregados foram
 resistores de terminação para os sinais PWM a serem enviados, na tentativa de igualar
 a impedância do emissor do sinal com a impedância da linha, 
 evitando efeitos indesejados, como reflexão de sinal e redução
-da integridade do sinal de controle. Os \textit{drivers} escolhidos para
+da integridade do sinal de acionamento. Os dispositivos escolhidos para
 comandar os motores DC possuem na entrada um \textit{buffer/line driver},
-evitando perda excessiva de potência do sinal de controle e inserindo uma 
+evitando perda excessiva de potência do sinal de comando e inserindo uma 
 proteção nos circuitos envolvidos, referente ao isolamento dos sinais.
 
 Em relação aos motores de passo foram também empregados resistores de 
@@ -1161,10 +1206,10 @@ maior integridade do sinal na própria placa. Os sinais de \textit{reset}
 e \textit{sleep} foram conectados entre si e à trilha de 5V por um 
 resistor do tipo \textit{jumper}. O sinal de \textit{fault} também 
 foi conectado à trilha de 5V por um resistor de $0\Omega$. Essas conexões
-permitem que outros tipos de \textit{drivers} sejam conectados à placa,
+permitem que outros tipos de dispositivos de acionamento integrado sejam conectados à placa,
 como por exemplo o A4988, evitando dependências do circuito a um tipo específico de
 controlador. 
-Seguindo a recomendação do fabricante, exposta na ficha catalográfica do \textit{driver}, 
+Seguindo a recomendação do fabricante, exposta na ficha catalográfica do dispositivo, 
 foi adicionado, para cada CI, um capacitor eletrolítico no valor
 de 100uF entre o pino de alimentação do motor e o sinal de referência
 do circuito.   
@@ -1174,11 +1219,11 @@ sendo que uma vez que a manufatura das placas e barramentos de comunicação
 estejam finalizados, o correto valor deverá ser definido através de 
 testes da impedância da trilha e do cabo equivalentes.
 
-Os circuitos de controle dos motores estão dispostos na figura \ref{fig:MainPCB-Motors}.
+Os circuitos de acionamento dos motores estão dispostos na figura \ref{fig:MainPCB-Motors}.
 
 \begin{figure}[h]
 
-    \caption{Circuito de controle para os diferentes tipos de motores}    
+    \caption{Circuito de acionamento para os diferentes tipos de motores}    
     
     \begin{centering}
     \begin{floatrow}
@@ -1204,8 +1249,8 @@ Os circuitos de controle dos motores estão dispostos na figura \ref{fig:MainPCB
     \label{fig:MainPCB-Motors}
 \end{figure}
 
-Pela figura \ref{fig:MainPCB-Motors} nota-se também um resistor com a 
-função de \textit{pull-up} no pino de \textit{enable} dos \textit{drivers}
+Pela figura \ref{fig:MainPCB-Motors} nota-se um resistor com a 
+função de \textit{pull-up} no pino de \textit{enable} dos circuitos integrados de acionamento
 dos motores de passo, para garantir que estes não serão ativados a menos que devidamente 
 configurados pelo microcontrolador. Nota-se também uma conexão entre 
 os pinos de definição da resolução do passo dos motores de passo e o 
@@ -1264,7 +1309,7 @@ Seguindo estas heurísticas, chegou-se à organização descrita na tabela
             Funcionalidade & I/O Arduino \tabularnewline
             \hline
             \hline
-            Junta 1 - EN/DIR/STP & D?30/D32/D45 \tabularnewline
+            Junta 1 - EN/DIR/STP & D30/D32/D45 \tabularnewline
             \hline
             Junta 2 - PWM L/R & D8 / D9 \tabularnewline
             \hline
@@ -1320,7 +1365,7 @@ circuitos com funcionalidades semelhantes e/ou relacionadas agrupados
 entre si.
 
 A figura \ref{fig:Placa-controle} demonstra o estado final da placa 
-após o roteamento de todas as trilhas necessárias para o controle.
+após o roteamento de todas as trilhas necessárias para o comando.
 Nota-se que os sinais dos motores e sinais de leitura dos potenciômetros
 estão agrupados de forma simples e intuitiva, no entanto, os sinais de 
 leitura dos sensores fim-de-curso foram dividos em 3 locais da placa, 
@@ -1330,12 +1375,26 @@ relação ao conector do \textit{joystick}, pelo fato das entradas análogicas e
 pino de interrupção selecionado estarem em lados distintos da placa, o
 sinal do eixo-z foi separado e aproximado de sua entrada digital.
 
-\begin{figure}[h]
-    \caption{Placa de controle com todos os componentes}    
+\begin{figure}[ht]
+
+    \caption{Placa de comando.}    
+    
     \begin{centering}
 
-        \includegraphics[width=0.8\columnwidth]{images/pcbs/MainPCB-Board.png}
+    \subfloat[Visão 3D com componentes]{
+        \begin{minipage}{1\textwidth}
+            \centering
+            \includegraphics[width=0.9\columnwidth]{images/pcbs/MainPCB-Board.png}
+        \end{minipage}
+    }
     
+    \subfloat[Visão das trilhas]{
+        \begin{minipage}{1\textwidth}
+            \centering
+            \includegraphics[width=0.9\columnwidth]{images/pcbs/MainPCB-Board2.png}
+        \end{minipage}
+    }
+
     \par\end{centering}
 
     \label{fig:Placa-controle}

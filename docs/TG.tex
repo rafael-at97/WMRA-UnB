@@ -60,6 +60,7 @@
 \usepackage{quoting}
 \usepackage{multicol}
 \usepackage{lscape}
+\usepackage{notoccite}
 
 \makeindex
 
@@ -142,7 +143,7 @@ Comandos para criar a capa e a página de assinaturas
 Ficha Catalográfica
 \end{comment}
 
-%\include{secoes/ficha_catalografica}
+\include{secoes/ficha_catalografica}
 
 \begin{comment}
 Dedicatória
@@ -154,7 +155,8 @@ Dedicatória
 Texto de dedicatória do primeiro autor.
 \end{comment}
 
-\dedicatoriaautori{Dedicatória!}
+\dedicatoriaautori{Dedico este trabalho aos meus avós, que me ensinaram, 
+cada um de sua maneira, a tentar ser uma pessoa melhor do que fui ontem.}
 
 \begin{comment}
 Texto de dedicatória do segundo autor. Caso não tenha um segundo autor,
@@ -174,7 +176,7 @@ autor, este texto não será mostrado
 Comando para criar a página de dedicatória
 \end{comment}
 
-%\dedicatoria
+\dedicatoria
 
 \begin{comment}
 Agradecimentos
@@ -186,7 +188,20 @@ Texto de agradecimentos do primeiro autor.
 \end{comment}
 
 
-\agradecimentosautori{Obrigado!}
+\agradecimentosautori{Agradeço inicialmente à minha tia Aline e ao meu tio Kiko, pela sua paciência e por 
+me fornecerem um local em Brasília para que eu pudesse trilhar todo este caminho que me trouxe até aqui.
+Agradeço eternamente à minha mãe, por sempre me deixar claro a importância da família e ao meu pai, 
+que me mostrou como dar o meu melhor em tudo. À toda a minha família, deixo aqui meus agradecimentos, 
+pelos diversos ensinamentos e convivência. 
+Agradeço aos meus amigos, pelas conversas sinceras que me ajudaram a atravessar todos os semestres desta graduação.
+Agradeço à Mecajun, por me dar a primeira oportunidade de crescimento pessoal na faculdade, e à Equipe Apuama Racing,
+pela oportunidade de participar dessa equipe que me incentivou muito a aprender sobre diversas áreas.
+À Equipe Droid, fica aqui meu eterno ``Obrigado!'', por ter me fornecido um ambiente de desenvolvimento pessoal, 
+tanto técnico quanto nas minhas relações interpessoais, com certeza foi uma experiência marcante para mim nesta universidade. 
+Obrigado ainda por ter me emprestado equipamentos de imensa importância neste trabalho :).
+Por fim, agradeço à minha namorada Rosana, que teve uma paciência gigante comigo e me auxiliou a manter a calma nos dias
+mais difíceis neste último passo da graduação, beijos!  
+}
 
 \begin{comment}
 Texto de agradecimentos do segundo autor. Caso não tenha um segundo
@@ -215,7 +230,7 @@ Comando para criar a página de agradecimentos
 % Inicia caption das tables no topo
 \floatsetup[table]{capposition=top}
 
-%\agradecimentos
+\agradecimentos
 
 \resumo{resumo}{
 
@@ -337,6 +352,48 @@ Bibliografia
 Anexos
 \end{comment}
 
+\apendices
+\makeatletter
+% não retirar estes comandos
+\renewcommand{\@makechapterhead}[1]{%
+  {\parindent \z@ \raggedleft \setfontarial\bfseries
+\LARGE \thechapter. \space\space
+\uppercase{#1}\par
+\vskip 40\p@
+}
+}
+\makeatother
+
+\begin{comment}
+  Apendice I: Modelo D-H.   
+\end{comment}
+
+\include{secoes/apendice_dh}
+
+\refstepcounter{noApendice}
+
+\begin{comment}
+  Apendice II: Descrição do repositório.   
+\end{comment}
+
+\include{secoes/anexo_Repositorio}
+
+\refstepcounter{noApendice}
+
+\begin{comment}
+Apendice III: Cinemática Inversa
+\end{comment}
+
+\include{secoes/anexo_Cinematica}
+
+\refstepcounter{noApendice}
+
+\begin{comment}
+Apendice IV: Cálculos Inversão Matriz Jacobiana
+\end{comment}
+
+\include{secoes/anexo_Jacobiana}
+
 \anexos
 \makeatletter
 % não retirar estes comandos
@@ -350,33 +407,12 @@ Anexos
 \makeatother
 
 \begin{comment}
-Anexo I: Descrição do repositório.   
-\end{comment}
-
-\include{secoes/anexo_Repositorio}
-
-\refstepcounter{noAnexo}
-
-\begin{comment}
-  Anexo II: Catalógo de Equipamentos
+  Anexo I: Catalógo de Equipamentos
 \end{comment}
 
 \include{secoes/anexo_datasheets}
 
 \refstepcounter{noAnexo}
 
-\begin{comment}
-Anexo III: Cinemática Inversa
-\end{comment}
-
-\include{secoes/anexo_Cinematica}
-
-\refstepcounter{noAnexo}
-
-\begin{comment}
-Anexo IV: Cálculos Inversão Jacobiana
-\end{comment}
-
-\include{secoes/anexo_Jacobiana}
 
 \end{document}

@@ -1,6 +1,7 @@
 This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: TG.aux
+A level-1 auxiliary file: secoes/ficha_catalografica.aux
 A level-1 auxiliary file: secoes/simbolos.aux
 A level-1 auxiliary file: secoes/cap_Introducao.aux
 A level-1 auxiliary file: secoes/cap_Fundamentos.aux
@@ -9,10 +10,11 @@ A level-1 auxiliary file: secoes/cap_ProjetoEletroControle.aux
 A level-1 auxiliary file: secoes/cap_Resultados.aux
 A level-1 auxiliary file: secoes/cap_Conclusoes.aux
 The style file: abnt-num.bst
+A level-1 auxiliary file: secoes/apendice_dh.aux
 A level-1 auxiliary file: secoes/anexo_Repositorio.aux
-A level-1 auxiliary file: secoes/anexo_datasheets.aux
 A level-1 auxiliary file: secoes/anexo_Cinematica.aux
 A level-1 auxiliary file: secoes/anexo_Jacobiana.aux
+A level-1 auxiliary file: secoes/anexo_datasheets.aux
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -34,7 +36,7 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 +---------------------------------------------------------+
 You've used 33 entries,
             6480 wiz_defined-function locations,
-            1327 strings with 14391 characters,
+            1329 strings with 14443 characters,
 and the built_in function-call counts, 21300 in all, are:
 = -- 1645
 > -- 576

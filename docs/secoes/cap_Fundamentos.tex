@@ -24,7 +24,7 @@ proposto. Foi apresentado, em conjunto com a Universidade Federal de Pernambuco 
 \cite{vidal2010desenvolvimento}, sendo este de extrema importância por já demonstrar as dimensões e limitações básicas de uma cadeira de rodas convencional, 
 o tipo e posicionamento do circuito de alimentação e componentes eletro-eletrônicos comumente empregados neste tipo de projeto.
 O trabalho apresentado em \cite{francisco2019interface} foca no desenvolvimento de uma interface para que o operador possa controlar a cadeira de rodas
-de forma satisfatória, fornecendo ideias para uma interface viável também para o controle do braço robótico a ser acoplado neste tipo de cadeira de rodas.
+de forma satisfatória, fornecendo ideias para uma interface viável também para o comando do braço robótico a ser acoplado neste tipo de cadeira de rodas.
 
 Os projetos citados demonstram que é comum a utilização de baterias 
 automotivas como fonte de energia ao sistema de locomação, podendo esta mesma bateria
@@ -39,7 +39,7 @@ construídos para outros fins, sendo uma análise desses imprescindível para se
 braços robóticos no geral.
 
 %\subsection{Manipulador robótico didático}
-Um manipulador didático, desenvolvido em \cite{wattylas2015didatico} e aprimorado em \cite{marconi2016didatico}, apresenta uma estrutura semelhante a do trabalho base
+Um manipulador didático, desenvolvido em \cite{wattylas2015didatico} e aprimorado em \cite{marconi2016didatico}, apresenta uma estrutura semelhante à do trabalho base
 deste projeto, em relação ao posicionamento relativo das juntas iniciais, como pode ser visto na figura \ref{fig:manipulador-didatico}.
 
 \begin{figure}[ht]
@@ -61,15 +61,15 @@ em sequência, em convergência com o modelo base para este projeto, desse modo,
 pontos de desenvolvimento acerca da cinemática inversa podem ser comparados
 e reutilizados.
 
-Neste trabalho são expostas também a escolha por motores de passo em 
-algumas juntas e uma ideia de \textit{driver} para controle destes, 
+Neste trabalho é exposta também a opção de utilizar motores de passo em 
+algumas juntas e uma ideia de circuito de acionamento para controle destes, 
 levantando a possibilidade de uso desse tipo de motores em projetos 
 de manipuladores robóticos.
 
 %\subsection{WMRA - USF}
 Foi desenvolvido na \textit{Universisty of South Florida} um robô com motivações semelhantes à deste projeto \cite{kevin2005WMRA}, buscando atender às 
 necessidade de pessoas com mobilidade reduzida e redução de custos deste tipo de tecnologia. O manipulador final apresenta 7 graus de liberdade, onde todas as
-juntas são acionadas por motores DC escovados servo-controlados e controladas em conjunto através de placas 
+juntas são acionadas por motores DC escovados servo-controlados e controladas em conjunto por meio de placas 
 controladoras baseadas na arquitetura PIC.
 Uma foto do braço construído pode ser vista na figura \ref{fig:wmra-usf}.
 
@@ -142,20 +142,20 @@ Em um sistema de medição, geralmente são identificados quatro tipos de elemen
 em conjunto com sensores elementos de condicionamento, processamento e de apresentação de dados, para garantir que a leitura desejada será devidademente medida
 e tratada \cite{bentley2005principles}.
 
-Na categoria de sensores que podem ser utilizados para se monitorar posicionamento as principais escolhas seriam os potênciometros, \textit{encoders} ópticos, 
-sensores indutivos e de efeito \textit{hall}. Entre estes sensores de posicionamento, há aqueles que fornecem informações relativas à uma posição inicial e aqueles
+Na categoria de sensores que podem ser utilizados para se monitorar posicionamento, as principais escolhas seriam os potênciometros, \textit{encoders} ópticos, 
+sensores indutivos e de efeito \textit{hall}. Entre estes sensores de posicionamento, há aqueles que fornecem informações relativas a uma posição inicial e aqueles
 capazes de fornecer uma informação acerca de um posicionamento absoluto mensurado \cite{bentley2005principles}. Sensores de toque, ou fim-de-curso, podem ser utilizados
 a fim de se ter conhecimento do estado das juntas de um robô em determinada posição, auxiliando em um posicionamento correto no espaço.
 
 Para se ter uma ideia do torque interno das juntas de um robô podem ser empregados também sensores do tipo \textit{hall}, no caso de juntas com motores elétricos, 
-com o objetivo de se mensurar e auxiliar no controle da corrente que chega nos atuadores, diretamente relacionada com o torque resultante. A fim de mensurar ações de forças 
+com o objetivo de se medir e auxiliar no controle da corrente que chega nos atuadores, diretamente relacionada com o torque resultante. A fim de medir ações de forças 
 externas são comumente empregadas células de carga, que constituem um sistema de medição com extensômetros e condicionadores de sinal. O uso de extensômetros nos 
 elos de um manipulador permite obter informações sobre ações externas e deformação que agem sobre estes, podendo estas serem usadas de modo a garantir uma maior
 segurança durante a operação do manipulador.
 
 Alguns fatores importantes na escolha de elementos sensores são a 
 resolução, histerese, limiar de medição e zona morta dos mesmos, 
-fatores estes que influenciam a acurácia e precisão da leitura. 
+fatores estes que influenciam a precisão da leitura. 
 Instrumentos de medição do tipo \textit{encoder} e potenciômetros 
 estão sujeitos a uma certa resolução, que é definida em \cite{doebelin2007measurement} 
 como a menor quantidade possível de variação na entrada que resulta 
@@ -216,12 +216,13 @@ considerados como em série, apresentando-se como uma fonte de
 diferencial de potencial entre o sistema emissor e receptor do sinal, 
 ou de modo comum, onde os potenciais de ambos emissor e receptor estão
 sujeitos a uma variação de potencial referente ao ruído que age sobre o sistema \cite{bentley2005principles}.
+Exemplos de interferência podem ser vistos na figura \ref{fig:interferencia}.
 
 \begin{figure}[h]
     \caption{Interferência causada por múltiplos terras.}    
     
     \begin{centering}
-        \includegraphics[width=0.7\columnwidth]{images/fundamentos/Interferencia.png}
+        \includegraphics[width=0.65\columnwidth]{images/fundamentos/Interferencia.png}
     \par\end{centering}
 
     \label{fig:interferencia}
@@ -268,16 +269,6 @@ Este tipo de filtro é utilizado largamente quando há a necessidade de
 filtrar sinais resultantes da mudança de estados de botões, removendo
 em grande parte os efeitos de seus transientes mecânicos \cite{ganssle2004guide}.
 
-\begin{figure}[h]
-    \caption{Filtro RC.}    
-    
-    \begin{centering}
-        \includegraphics[width=0.3\columnwidth]{images/fundamentos/RCFilter.png}
-    \par\end{centering}
-
-    \label{fig:filtrorc}
-\end{figure}
-
 Normalmente assumindo o formato representado na figura \ref{fig:filtrorc},
 um filtro RC garante uma variação mais bem definida para a saída do 
 circuito através do descarregamento e carregamento do capacitor. 
@@ -302,6 +293,16 @@ Nota-se que para o carregamento do capacitor a resistência total do
 circuito equivale à soma das resistências de $R_1$ e $R_2$, já no 
 descarregamento, somente $R_2$ influencia a constante de tempo. 
 
+\begin{figure}[h]
+    \caption{Filtro RC.}    
+    
+    \begin{centering}
+        \includegraphics[width=0.3\columnwidth]{images/fundamentos/RCFilter.png}
+    \par\end{centering}
+
+    \label{fig:filtrorc}
+\end{figure}
+
 Amplificadores operacionais podem também ser usados no condicionamento
 de sinais elétricos, sua impedância de entrada idealmente infinita 
 evita pertubar o sinal nos terminais de entrada, por demandar pouca 
@@ -316,7 +317,7 @@ comportamentos não ideais deste, ou imperfeições,
 como tensão e corrente de \textit{offset} \cite{sedra1998microelectronic}.
 A rejeição de modo comum, ou CMRR, do inglês \textit{Common-Mode Rejection Ratio},
 é uma característica que deve ser observada na aplicação deste tipo de 
-CI, onde geralmente é desejado que seja amplificado unicamente a 
+CI, onde geralmente é desejado que seja amplificada unicamente a 
 diferença de tensão entre os terminais de entrada, e o fator comum
 seja desprezível.
 
@@ -390,7 +391,7 @@ mecânico intrínsico ao funcionamento de relés \cite{temis1996optocouplers}.
     \label{fig:opto}
 \end{figure}
 
-A figura \ref{fig:opto} ilustra o modelo de um optoacoplador, onde o 
+Na figura \ref{fig:opto} pode ser visto o modelo de um optoacoplador, onde o 
 sinal de entrada, constituido por $V_{I1}$ e $V_{I2}$ ativa o LED, que
 por sua vez causa um sinal luminoso que permita o chaveamento do 
 fototransistor \cite{bishop2001understand}. Uma característica importante
@@ -398,8 +399,8 @@ sobre o funcionamento de optoacopladores diz respeito à sua taxa de
 transmissão de corrente, isto é, quanto da corrente de entrada o 
 dispositivo permite que seja transportado na saída. Denominado como 
 CTR, do inglês \textit{Current Transfer Ratio}, esta taxa afeta
-diretamente o valor das resistências $R_1$ do circuito, 
-pois esta resistência devem ser projetadas de modo que a corrente de 
+diretamente o valor da resistência $R_1$ do circuito, 
+pois esta resistência deve ser projetada de modo que a corrente de 
 saída, $I_O$, atinja o valor esperado, e que a corrente de entrada 
 esteja sempre no valor de segurança definido pelo fabricante. Caso a 
 variável de interesse seja tensão, $V_0$, $R_2$ deve ser inserida no 
@@ -420,6 +421,11 @@ Tendo conhecimento da corrente de entrada e do gráfico de CTR para
 determinado positivo, define-se a máxima corrente de saída como
 $I_f \cdot CTR$. 
 
+Vale a pena notar que o uso de optoacopladores no transporte de sinais digitais,
+seguindo o circuito da figura \ref{fig:opto}, insere uma 
+inversão lógica no sinal original, que deve ser levada em conta no
+sistema de processamento central.
+
 \section{Controle de velocidade}
 Uma típica malha de controle pode ser representada em duas formas, denominadas malha aberta ou malha fechada, assim como representado na figura \ref{fig:excontrole},
 onde a entrada, ou referência, com interferência ou não da saída, ou variável controlada, alimenta o circuito de controle e este regula o sinal enviado ao processo
@@ -428,7 +434,7 @@ para obter assim um valor de acordo com a referência indicada \cite{nise2011con
 \begin{figure}[h]
 \caption{Formas de representação para controle em malha aberta e malha fechada}    
 \begin{centering}
-\includegraphics[width=0.8\columnwidth]{images/fundamentos/excontrole.png}
+\includegraphics[width=0.85\columnwidth]{images/fundamentos/excontrole.png}
 \par\end{centering}
 
 \label{fig:excontrole}
@@ -436,6 +442,8 @@ para obter assim um valor de acordo com a referência indicada \cite{nise2011con
 
 Em um sistema robótico é comum utilizar alguma malha de controle, como as da figura \ref{fig:excontrole}, para se controlar a posição e/ou velocidade
 das juntas do robô, resultando em alguma configuração desejada para este no espaço. 
+
+\newpage
 
 Para realizar o controle de um manipulador robótico, garantindo
 o correto processamento dos dados dos diversos sensores utilizados e o 
@@ -466,7 +474,7 @@ apresentado na figura \ref{fig:motordc} \cite{krishnan2001electric} \cite{maheri
 A figura \ref{fig:motordc} fornece um modelo para o sistema eletromecânico
 da armadura de um motor DC, onde uma tensão de entrada, $V$, resulta 
 em um torque e velocidade de saída, denominados respectivamente por 
-$T$ e $\omega$. A equação elétrica que dita o funcionamento do motor
+$M$ e $\omega$. A equação elétrica que dita o funcionamento do motor
 é expressa em \ref{eq:motordc-eletrico} \cite{krishnan2001electric}.
 
 \begin{equation}
@@ -474,19 +482,23 @@ $T$ e $\omega$. A equação elétrica que dita o funcionamento do motor
     V = e + RI + L \frac{dI}{dt}
 \end{equation}
 
-Sabendo que o torque de saída se relaciona com a corrente de entrada
-por meio da equação \ref{eq:motordc-torque}, e simplificando a carga
-do sistema como um momento de inércia $\mathcal{I}$ e um atrito viscoso, $B$,
-obtém-se a equação \ref{eq:motordc-tw} \cite{krishnan2001electric}.
+O torque de saída pode ser definido em função das variáveis elétricas ou mecânicas
+do sistema. Para a parte elétrica, o torque pode ser relacionado com a corrente
+de entrada através de uma constante $K_b$, como indicado na equação \ref{eq:motordc-torque}.
+Já em relação à carga mecânica do sistema, é possível indicar o torque como resultado 
+de uma relação entre a variação da velocidade de saída, $\dot{\omega}$, e um momento de 
+inércia $\mathcal{I}$, em conjunto com outro termo referente à multiplicação entre a velocidade e  
+um atrito viscoso, $B$, como mostrado na equação \ref{eq:motordc-tw}, onde a variação temporal
+foi convertida para o domínio de Laplace \cite{krishnan2001electric}.
 
 \begin{equation}
     \label{eq:motordc-torque}
-    T = K_b I
+    M = K_b I
 \end{equation}
 
 \begin{equation}
     \label{eq:motordc-tw}
-    T = \mathcal{I}s\omega + B\omega
+    M = \mathcal{I}s\omega + B\omega
 \end{equation}
 
 Reagrupando as equações de \ref{eq:motordc-eletrico} a \ref{eq:motordc-tw},
@@ -502,7 +514,12 @@ de Laplace.
 A equação em \ref{eq:motordc-tf} fornece um modelo de segunda ordem para
 o controle de velocidades de motores DC, entretanto, caso a indutância
 do circuito de armadura, $L$, seja desprezível, é possível aproximar 
-o modelo proposto como um sistema de primeira ordem.
+o modelo proposto como um sistema de primeira ordem. Tanto o modelo de primeira
+ordem ou segunda ordem podem ainda ser simplificados para incluir somente os 
+termos referentes ao regime permanente de operação, representando a relação
+entre a velocidade de saída e tensão de entrada somente através de uma 
+constante, esta simplificação pode então ser utilizada para realizar 
+um controle de malha aberta para motores DC.
 
 A fim de controlar a tensão de entrada nestes motores, e consequentemente 
 a velocidade de saída, pode-se utilizar um circuito que converta uma tensão
@@ -518,7 +535,7 @@ circuitos análogicos \cite{barr2001pulse}, neste caso, a velocidade, e direçã
 Motores de passo são, por sua vez, considerados como uma categoria de
 motor síncrono, onde a frequência da alimentação que comanda a sua 
 velocidade de rotação. Estes motores são utilizados em diversos sistemas
-de controle, por oferecem um controle preciso, mesmo em malha 
+de controle, por oferecerem um controle preciso, mesmo em malha 
 aberta \cite{chapman2005electric}.  
 
 Embora considerados como máquinas síncronas, os motores de passo são
@@ -579,6 +596,8 @@ Um exemplo de perfil de aceleração pode ser visto na figura \ref{fig:steppersp
 %\subsection{Controle complacente}
 
 \section{Cinemática de manipuladores}
+\label{sec:fundamentos-dh}
+
 Um manipulador pode ser analisado como um conjunto de elos conectados
 entre si por juntas, e para descrever a relação entre estes elos, 
 são definidos sistemas de coordenadas para diferentes partes do 
@@ -589,12 +608,26 @@ preciso seguir alguma convenção, como aquela definida em \cite{craig2009introd
 A convenção apresentada, e que será utilizada ao longo deste trabalho,
 define que um sistema de coordenadas será atribuído a cada elo do sistema,
 e estes serão numerados de acordo com o elo, onde a base imóvel do robô
-é definida como o elo de índice 0. O eixo unitário $\hat{Z}_i$ deve ter a mesma
-direção do eixo de rotação do respectivo elo $i$, a origem do sistema 
-será posicionada no ponto de intersecção entre o eixo de rotação do elo
-um eixo perpendicular a este eixo e o eixo de rotação do próximo elo e o 
-eixo $\hat{X}_i$ fica ao longo deste mesmo eixo perpendicular. Por fim, 
-o eixo $\hat{Y}_i$ é estabelecido através da regra da mão direita.
+é definida como o elo de índice 0. 
+Para a definição dos sistemas de coordenadas do manipulador, a convenção é simplificada
+com base nos seguintes passos \cite{craig2009introduction}:
+
+\begin{enumerate}
+    \item   Identificação dos eixos de rotação das juntas e definição de linhas imaginárias
+            infinitas sobre esses eixos. Para os passos de 2 a 5 abaixo, considere duas linhas
+            consecutivas (no eixo $i$ e $i+1$).
+    \item   Identificação da perpendicular comum entre as linhas, ou ponto de intersecção.
+            No ponto de intersecção, ou no ponto onde a perpendicular comum se encontrar com 
+            o eixo da junta $i$, posicionar a origem do sistema de referências da junta $i$.
+    \item   Posicionar o eixo $\hat{Z}_i$ na mesma direção do eixo de rotação da junta $i$.
+    \item   Posicionar o eixo $\hat{X}_i$ na direção da perpendicular comum, ou, se os eixos 
+            das juntas $i$ e $i+1$ se interceptarem, posicionar $\hat{X}_i$ na direção da reta normal
+            ao plano formado pelos dois eixos.
+    \item   Posicionar o eixo $\hat{Y}_i$ para completar o sistema de coordenadas com base na regra da mão direita.
+    \item   Posicionar o sistema da base, $\{0\}$, para coincidir com o sistema da junta ${1}$ quando 
+            a variável da primeira junta é zero. Para a última junta, ${N}$, escolher a posição da origem e $\hat{X}_N$
+            livremente, mas geralmente de modo a fazer com que o máximo de parâmetros assumam valor 0. 
+\end{enumerate}
 
 Para relacionar matemáticamente os diversos sistemas atribuídos ao 
 manipulador, são extraídos parâmetros capazes de relacionar a rotação
@@ -613,7 +646,21 @@ modo:
     \par\end{centering}
 \end{itemize}
 
-Percebe-se que para representar a posição e orientação do sistema de 
+A figura \ref{fig:Craig} ilustra tanto o posicionamento dos sistemas de coordenadas, em relação
+a $i-1$ e $i$, quanto os parâmetros de DH utilizados na convenção.
+
+\begin{figure}[ht]
+    \caption{Arranjo Denavit-Hartenberg modificado \cite{craig2009introduction}.}    
+    \begin{centering}
+  
+        \includegraphics[width=0.8\columnwidth]{adendo/images/craig.png}
+    
+    \par\end{centering}
+  
+    \label{fig:Craig}
+\end{figure}
+
+Nesta convenção, para representar a posição e orientação do sistema de 
 índice $i$ em relação ao sistema $i-1$, são necessários os parâmetros 
 $\alpha_{i-1}$, $a_{i-1}$, $d_i$ e $\theta_i$. 
 A equação \ref{eq:transform} ilustra a transformação necessária
@@ -622,7 +669,7 @@ sistema de coordenadas $i$, em relação ao sistema $i-1$.
 
 \begin{equation}
     \label{eq:transform}
-    ^{i-1}_iT = 
+    ^{i-1}_i \textbf{T} = 
     \begin{bmatrix}
         cos\theta_i                 & -sen\theta_i                  & 0                 & a_{i-1}               \\
         sen\theta_icos\alpha_{i-1}  & cos\theta_icos\alpha_{i-1}    & -sen\alpha_{i-1}  & -sen\alpha_{i-1}d_i   \\
@@ -639,7 +686,7 @@ a inversão da transformação, como indicado na equação \ref{eq:transform2}.
 
 \begin{equation}
     \label{eq:transform2}
-    ^{i-1}_iT = 
+    ^{i-1}_i \textbf{T} = 
     \begin{bmatrix}
         ^{i-1}_iRot & ^{i-1}Pos_i   \\
         0 \;\; 0 \;\; 0       & 1   \\
@@ -662,25 +709,25 @@ nas equações \ref{eq:speed1} e \ref{eq:speed2}.
 
 \begin{equation}
     \label{eq:speed1}
-    ^{i+1}\omega_{i+1} = \; ^{i+1}_iRot\,^i\omega_i + \dot{\theta}_{i+1}\,^{i+1}\hat{Z}_{i+1}
+    ^{i+1}\boldsymbol{\omega}_{i+1} = \; ^{i+1}_iRot\,^i\boldsymbol{\omega}_i + \dot{\theta}_{i+1}\,^{i+1}\hat{Z}_{i+1}
 \end{equation}
 
 \begin{equation}
     \label{eq:speed2}
-    ^{i+1}v_{i+1} = \; ^{i+1}_iRot\left(^iv_i+^i\omega_i\times ^iPos_{i+1}\right)
+    ^{i+1}\textbf{v}_{i+1} = \; ^{i+1}_iRot\left(^i\textbf{v}_i+^i\boldsymbol{\omega}_i\times ^iPos_{i+1}\right)
 \end{equation}
 
 As equações \ref{eq:speed1} e \ref{eq:speed2} dizem respeito à velocidades
 geradas por juntas de rotação. A velocidade angular pode ser vista 
 como uma soma entre a velocidade angular da junta precedente, 
-termo $^{i+1}_iRot\,^i\omega_i$, e a rotação gerada pelo próprio eixo,
+termo $^{i+1}_iRot\,^i\boldsymbol{\omega}_i$, e a rotação gerada pelo próprio eixo,
 $\dot{\theta}_{i+1}\,^{i+1}\hat{Z}_{i+1}$. 
 A velocidade linear, por sua vez, é a soma da velocidade linear da 
 junta precedente com a resultante linear da multiplicação vetorial
 entre a velocidade angular da junta precedente com o deslocamento, 
 ambos representados no novo sistema de coordenadas, $i+1$.
 
-\subsection{Jacobiana}
+\subsection{Matriz Jacobiana}
 \label{sec:jacobiana}
 
 Aplicando-se as equações \ref{eq:speed1} e \ref{eq:speed2} para as juntas
@@ -690,11 +737,11 @@ gera-se uma representação entre as velocidades das juntas e as velocidades
 lineares e angulares de diversos elos. À matriz resultante deste 
 agrupamento, que relaciona variações temporais na entrada com 
 a saída, relação visível na equação \ref{eq:mjacobiana}, atribui-se o 
-nome de Jacobiana \cite{craig2009introduction}.
+nome de Matriz Jacobiana \cite{craig2009introduction}.
 
 \begin{equation}
     \label{eq:mjacobiana}
-    \dot{Y} = J(X)\dot{X}
+    \dot{\textbf{Y}} = \textbf{J}(\textbf{X})\dot{\textbf{X}}
 \end{equation}
 
 Em certos casos, a matriz Jacobiana pode ser organizada com a sua 

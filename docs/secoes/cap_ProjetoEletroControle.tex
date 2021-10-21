@@ -1,4 +1,4 @@
-\chapter{Projeto Sistema de Controle}
+\chapter{Projeto Sistema de Comando}
 
 % Notas:
 %   Eixos x, y e z utilizados como equações. ex: $x$, $y$ e $z$.
@@ -9,13 +9,13 @@
 %\resumodocapitulo{Resumo opcional}
 
 \section{Modelagem}
-Para o desenvolvimento de um sistema de controle é interessante inicialmente
+Para o desenvolvimento de um sistema de comando é interessante inicialmente
 definir o modelo deste, identificando variáveis importantes para o sistema,
 como variáveis de entrada, de saída, e variáveis controladas.
 
 O manipulador em questão será controlado por um \textit{joystick}, 
-que implementa a interface entre o sistema de controle e o usuário. 
-Consequentemente, define-se como variáveis de entrada os valores 
+que implementa a interface entre o sistema de comando e o usuário. 
+Consequentemente, definem-se como variáveis de entrada os valores 
 dos eixos $x$, $y$ e $z$ lidos através do \textit{joystick}.
 
 O efetuador final do braço robótico é o que realizará de fato a
@@ -31,30 +31,44 @@ fazem referência ao sistema de coordenadas global, afixado à base do
 manipulador. Já os planos de rotação foram afixados à quinta junta do manipulador, 
 adotando-se que o ser humano consegue interpretar mais facilmente a rotação 
 de um objeto em torno do seu próprio eixo do que em termos de rotação nos 
-eixos do sistema de coordenadas global, facilitando o controle do pulso do manipulador. 
+eixos do sistema de coordenadas global, facilitando o comando do pulso do manipulador. 
 
 Esta organização de sub-planos de trabalho foi realizada de modo a facilitar 
 o entendimento pelo usuário. Para cada plano de ação, 2 das variáveis de entrada 
 serão relacionadas com as variáveis pertinentes a cada plano, alternando-se entre 
-os planos de ação por meio da terceira entrada do \textit{joystick}. As variáveis dos
-planos de translação estão indicas no nome do próprio plano, $XY$ ou $XZ$. Para os planos
-de rotação, foram utilizados como base os eixos $\hat{Y}_5$ e $\hat{Z}_5$ para o plano
-$R1$ e os eixos $\hat{Y}_5$ e $\hat{X}_5$ para o plano $R2$. Uma rotação em torno do eixo 
-$\hat{Y}_5$ gera a mesma rotação em torno do eixo $\hat{Z}_6$, controlando diretamente 
-a rotação do punho. Já o eixo $\hat{Z}_5$ controla a guinada, e por fim, o eixo $\hat{X}_5$
-se relaciona com a arfagem, finalizando as 3 movimentações possíveis para o punho.
+os planos de ação por meio da terceira entrada do \textit{joystick}. 
+Para os planos de translação, os 2 eixos do \textit{joystick} de entrada 
+são relacionados com as velocidades cartesianas $v_x$ e $v_y$ (Plano XY), ou 
+$v_x$ e $v_z$ (Plano XZ) para o efetuador final. Já para os planos de rotação, foram utilizadas 
+como variáveis as velocidades angulares nos eixos $\hat{Y}_5$ e $\hat{Z}_5$ para o plano
+$R1$ e velocidades nos eixos $\hat{Y}_5$ e $\hat{X}_5$ para o plano $R2$. Uma velocidade em torno
+do eixo $\hat{Y}_5$ controla diretamente a rotação do pulso, e velocidades nos eixos
+$\hat{Z}_5$ e $\hat{X}_5$ controlam os outros dois movimentos do pulso.
+A figura \ref{fig:joystick} indica as diferentes variáveis que podem ser controladas
+com cada eixo do \textit{joystick}, a depender do plano de ação em uso.
+
+\begin{figure}[h]
+    \caption{Variáveis possíveis de serem controladas com cada eixo do \textit{joystick}.}
+
+    \begin{centering}
+        \includegraphics[width=0.4\columnwidth]{images/controle/joystick.png} 
+    \par\end{centering}
+
+    \label{fig:joystick}
+\end{figure}
 
 É necessário definir também a interação entre os dados de entrada do usuário e 
-as variáveis internas do robô. Pela imensa quantidade de posições e orientações possíveis, 
-adotou-se que os \textit{inputs} do usuário, limitados a dois eixos, não poderiam ser diretamente relacionados
-com posições, mas sim com um desejo de movimento do robô controlado. Portanto, 
-os dados lidos pelo \textit{joystick} serão transformados em velocidades a serem impostas
-no efetuador final, sejam estas de translação ou rotação, a depender do plano de ação.
+as variáveis internas do robô. 
+Os \textit{inputs} do usuário serão tratados como desejo de movimento, ou seja, velocidades a 
+serem impostas no efetuador final do manipulador. 
+As duas velocidades em uso, a depender do plano de ação ativo pelo usuário, serão
+transformadas em velocidades para todas as juntas, através de uma relação obtida por
+análise cinemática do robô.
 
 \section{Análise Cinemática}
 \label{sec:analise-cinematica}
 
-Como informado na seção \ref{sec:jacobiana} deste documento, a jacobiana
+Como informado na seção \ref{sec:jacobiana} deste documento, a matriz jacobiana
 é uma matriz que relaciona as diversas velocidades em um manipulador 
 robótico, podendo ser utilizada para representar a velocidade do efetuador final
 em função da velocidade de variação dos ângulos das juntas.
@@ -65,7 +79,7 @@ juntas, que podem ser encontradas utilizando as regras dispostas nas
 equações \ref{eq:transform} e \ref{eq:transform2}.
 
 Utilizando os parâmetros de DH do novo modelo, dispostos na tabela \ref{tab:DH-comparacao},
-e a equação \ref{eq:transform}, foram obtidas as matrizes $^{i-1}_iT$, para $i$ de 1 a 6. 
+e a equação \ref{eq:transform}, foram obtidas as matrizes $^{i-1}_i\textbf{T}$, para $i$ de 1 a 6. 
 Os resultados obtidos estão dispostos nas equações de \ref{eq:t01} a \ref{eq:t56}.
 Para facilitar o entendimento, as funções trigonométricas seno e cosseno serão abreviadas pelas
 letras $s$ e $c$, respectivamente.
@@ -74,7 +88,7 @@ letras $s$ e $c$, respectivamente.
     \noindent
     \begin{equation}
         \label{eq:t01}
-        ^0_1T = \begin{bmatrix}
+        ^0_1\textbf{T} = \begin{bmatrix}
                     c\theta_1 & -s\theta_1 & 0 & 0 \\
                     s\theta_1 & c\theta_1 & 0 & 0 \\
                     0 & 0 & 1 & d_1 \\
@@ -82,7 +96,7 @@ letras $s$ e $c$, respectivamente.
                 \end{bmatrix}
     \end{equation}
     \begin{equation}
-        ^1_2T = \begin{bmatrix}
+        ^1_2\textbf{T} = \begin{bmatrix}
                     c\theta_2 & -s\theta_2 & 0 & a_1 \\
                     0 & 0 & -1 & 0 \\
                     s\theta_2 & c\theta_2 & 0 & 0 \\
@@ -94,7 +108,7 @@ letras $s$ e $c$, respectivamente.
 \begin{multicols}{2}
     \noindent
     \begin{equation}
-        ^2_3T = \begin{bmatrix}
+        ^2_3\textbf{T} = \begin{bmatrix}
                     c\theta_3 & -s\theta_3 & 0 & a_2 \\
                     s\theta_3 & c\theta_3 & 0 & 0 \\
                     0 & 0 & 1 & 0 \\
@@ -102,7 +116,7 @@ letras $s$ e $c$, respectivamente.
                 \end{bmatrix}
     \end{equation}
     \begin{equation}
-        ^3_4T = \begin{bmatrix}
+        ^3_4\textbf{T} = \begin{bmatrix}
                     c\theta_4 & -s\theta_4 & 0 & a_3 \\
                     s\theta_4 & c\theta_4 & 0 & 0 \\
                     0 & 0 & 1 & 0 \\
@@ -115,7 +129,7 @@ letras $s$ e $c$, respectivamente.
     \noindent
     \begin{equation}
         \label{eq:t45}
-        ^4_5T = \begin{bmatrix}
+        ^4_5\textbf{T} = \begin{bmatrix}
                     s\theta_5' & c\theta_5' & 0 & a_4 \\
                     0 & 0 & -1 & 0 \\
                     -c\theta_5' & s\theta_5' & 0 & 0 \\
@@ -124,7 +138,7 @@ letras $s$ e $c$, respectivamente.
     \end{equation}
     \begin{equation}
         \label{eq:t56}
-        ^5_6T = \begin{bmatrix}
+        ^5_6\textbf{T} = \begin{bmatrix}
                     c\theta_6 & -s\theta_6 & 0 & 0 \\
                     0 & 0 & 1 & d_6 \\
                     -s\theta_6 & -c\theta_6 & 0 & 0 \\
@@ -136,7 +150,7 @@ letras $s$ e $c$, respectivamente.
 Nota-se que para a transformação da equação \ref{eq:t45} utilizou-se a nova variável
 $\theta_5'$, de acordo com a equação \ref{eq:junta5-offset}.
 
-A transformação de um vetor expresso no sistema da última junta do punho para coordenadas
+A transformação de um vetor expresso no sistema da última junta do pulso para coordenadas
 globais, ou seja, para o sistema de coordenadas da base, foi obtida através 
 da multiplicação de todas as transformações, de maneira consecutiva, como indicado na
 equação \ref{eq:t06}.
@@ -146,23 +160,23 @@ por parte de usuários.
 
 \begin{equation}
     \label{eq:t06}
-    ^0_6T = ^B_6T = ^0_1T*^1_2T*^2_3T*^3_4T*^4_5T*^5_6T
+    ^0_6\textbf{T} = ^B_6\textbf{T} = ^0_1\textbf{T}*^1_2\textbf{T}*^2_3\textbf{T}*^3_4\textbf{T}*^4_5\textbf{T}*^5_6\textbf{T}
 \end{equation}
 
-Aplicando-se então as equações \ref{eq:speed1} e \ref{eq:speed2}, e utilizando para a 
-base vetores nulos de velocidades, isto é, $^0\omega_0 = \, ^0v_0 = \left[0 \; 0 \; 0 \right]^T$,
+Aplicando-se então as equações \ref{eq:speed1} e \ref{eq:speed2} repetidamente, para as juntas de 1 a 6, e utilizando para a 
+base vetores nulos de velocidades, isto é, $^0\boldsymbol{\omega}_0 = \, ^0\textbf{v}_0 = \left[0 \; 0 \; 0 \right]^T$,
 foram obtidas as velocidades lineares e angulares de todas as juntas, expressas nos seus devidos 
 sistemas de coordenadas. As velocidades de interesse a serem controladas pelo usuário, ou seja,
-as velocidades do final do manipulador, $\omega_6$ e $v_6$, foram remetidas ao sistema de 
-coordenadas da base pré-multiplicando os vetores $^6\omega_6$ e $^6v_6$ pela matrix $^0_6Rot$,
-que compõe parte da matriz $^0_6T$, previamente calculada.
+as velocidades do final do manipulador, $\boldsymbol{\omega}_6$ e $\textbf{v}_6$, foram remetidas ao sistema de 
+coordenadas da base pré-multiplicando os vetores $^6\boldsymbol{\omega}_6$ e $^6\textbf{v}_6$ pela matrix $^0_6Rot$,
+que compõe parte da matriz $^0_6\textbf{T}$, previamente calculada.
 Os resultados obtidos para esses dois vetores de velocidade estão dispostos nas equações 
-\ref{eq:0w6} e \ref{eq:0v6}.
+\ref{eq:0w6} e \ref{eq:0v6}. Todas as velocidades intermediárias calculadas estão dispostas no apêndice \ref{AnexoJacobiana-velocidades}.
 
 \begin{equation}
     \label{eq:0w6}
 \begin{gathered}
-    ^0\omega_6 = \begin{bmatrix}
+    ^0\boldsymbol{\omega}_6 = \begin{bmatrix}
         s\theta_1(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) + c\theta_1s(\theta_2+\theta_3+\theta_4)\dot{\theta}_5 + \\
         + [c\theta_1c\theta_5'c(\theta_2+\theta_3+\theta_4) +s\theta_1s\theta_5']\dot{\theta}_6\\
         \\
@@ -178,7 +192,7 @@ Os resultados obtidos para esses dois vetores de velocidade estão dispostos nas
 \begin{equation}
     \label{eq:0v6}
 \begin{gathered}
-    ^0v_6 = 
+    ^0\textbf{v}_6 = 
     \begin{bmatrix}
         % First line
         \{c\theta_1s\theta_5'd_6 - s\theta_1[a_1 + c\theta_2a_2 + c(\theta_2 + \theta_3)a_3 + c(\theta_2+\theta_3+\theta_4)(a_4 + c\theta_5'd_6)]\}.\dot{\theta}_1 - \\
@@ -206,7 +220,7 @@ Os resultados obtidos para esses dois vetores de velocidade estão dispostos nas
 \end{equation}
 
 Analisando a equação \ref{eq:mjacobiana} e sabendo que o vetor de velocidade das juntas
-é um vetor coluna 6x1, $\dot{\Theta} = [\dot{\theta}_1 \; \dot{\theta}_2 \; \dot{\theta}_3 \; \dot{\theta}_4 \; \dot{\theta}_5 \; \dot{\theta}_6]^T$,
+é um vetor coluna 6x1, $\dot{\boldsymbol{\Theta}} = [\dot{\theta}_1 \; \dot{\theta}_2 \; \dot{\theta}_3 \; \dot{\theta}_4 \; \dot{\theta}_5 \; \dot{\theta}_6]^T$,
 é possível escrever um vetor de velocidades do efetuador final como a junção dos vetores de velocidade linear
 e angular, para obter uma matriz jacobiana quadrada, passível de ser invertida para que as velocidades das juntas
 sejam representadas em função da velocidade desejada do manipulador final. Estas relações estão dispostas nas equações 
@@ -216,46 +230,48 @@ sejam representadas em função da velocidade desejada do manipulador final. Est
     \noindent
     \begin{equation}
         \label{eq:jac1}
-        ^0\nu = \begin{bmatrix}
-                    ^0v_6 \\
-                    ^0\omega_6
+        ^0\boldsymbol{\nu} = \begin{bmatrix}
+                    ^0\textbf{v}_6 \\
+                    ^0\boldsymbol{\omega}_6
                 \end{bmatrix}
-              = \,^0\!J(\Theta)\dot{\Theta}
+              = \,^0\!\textbf{J}(\boldsymbol{\Theta})\dot{\boldsymbol{\Theta}}
     \end{equation}
     \noindent
     \begin{equation}
         \label{eq:jac2}
-        \dot{\Theta} = \,^0\!J^{-1}(\Theta)^0\nu = \,^0\!J^{-1}(\Theta)\begin{bmatrix}
-                                                                            ^0v_6 \\
-                                                                            ^0\omega_6
+        \dot{\boldsymbol{\Theta}} = \,^0\!\textbf{J}^{-1}(\boldsymbol{\Theta})^0\boldsymbol{\nu} = \,^0\!\textbf{J}^{-1}(\boldsymbol{\Theta})\begin{bmatrix}
+                                                                            ^0\textbf{v}_6 \\
+                                                                            ^0\boldsymbol{\omega}_6
                                                                         \end{bmatrix}
     \end{equation}
 \end{multicols}
 
-Os termos da jacobiana podem ser obtidos através de análise das equações \ref{eq:0w6} e \ref{eq:0v6},
-sendo os termos que multiplicam as derivadas dos ângulos das juntas.
+Os termos da matriz jacobiana podem ser obtidos através de análise das equações \ref{eq:0w6} e \ref{eq:0v6},
+sendo os termos que multiplicam as derivadas dos ângulos das juntas. Estes termos estão melhor definidos
+no apêndice \ref{AnexoJacobiana-SecTermos}, para análise individual de cada termo.
 
 Buscando-se evitar gasto excessivo de processamento na inversão desta matriz jacobiana 6x6 para cada
-novo valor do vetor $\Theta$, foi realizada uma inversão simbólica da matriz, isto é, mantendo os 
-valores de $\theta_1$ a $\theta_6$ como variáveis. Para inverter a matriz jacobiana foi utilizado o 
+novo valor do vetor $\boldsymbol{\Theta}$, foi realizada uma inversão simbólica da matriz, isto é, mantendo os 
+valores de $\theta_1$ a $\theta_6$ como variáveis. Para inverter a matriz jacobiana simbolicamente foi utilizado o 
 método de inversão por matriz adjunta. A equação base que rege este método está disposta em \ref{eq:inv_adjunta}.
 
 \begin{equation}
     \label{eq:inv_adjunta}
-    J^{-1}  = \frac{1}{|J|}.adj(J)
+    \textbf{J}^{-1}  = \frac{1}{|\textbf{J}|}.adj(\textbf{J})
 \end{equation}
 
 Nota-se pela equação \ref{eq:inv_adjunta} que para a inversão são necessários o determinante da matriz,
-identificado por $|J|$, e sua matriz adjunta. O determinante da matriz foi calculado e o resultado obtido
-está definido na equação \ref{eq:det}.
+identificado por $|\textbf{J}|$, e sua matriz adjunta. O determinante da matriz foi calculado e o resultado obtido
+está definido na equação \ref{eq:det}. Os passos utilizados para calcular o determinante estão dispostos no apêndice
+\ref{AnexoJacobiana-SecDeterminante}.
 
 \begin{equation}
     \label{eq:det}
-    |J| = -c\theta_5's\theta_3a_2a_3[a_1+c\theta_2a_2+c(\theta_2+\theta_3)a_3+c(\theta_2+\theta_3+\theta_4)(a_4+2c\theta_5'd_6)]  
+    |\textbf{J}| = -c\theta_5's\theta_3a_2a_3[a_1+c\theta_2a_2+c(\theta_2+\theta_3)a_3+c(\theta_2+\theta_3+\theta_4)(a_4+2c\theta_5'd_6)]  
 \end{equation}
 
 A matriz adjunta foi então calculada a partir dos cofatores da matriz, finalizando o 
-processo de inversão. 
+processo de inversão. Todos os cofatores calculados estão agrupados no apêndice \ref{AnexoJacobiana-Cofatores}.
 A matriz resultante obtida foi comparada com a matriz invertida a partir dos \textit{softwares}
 \textit{MATLAB} e \textit{Maple}, próprios para cálculos algébricos, verificado-se que o 
 resultado obtido a partir dos cálculos manuais estava correto.
@@ -268,7 +284,9 @@ Para verificar a rotina criada, foi escrito um \textit{script} em \textit{python
 que realizava as equações \ref{eq:jac1} e \ref{eq:jac2} em sequência, para uma 
 determinada configuração de ângulos e suas velocidades, obtendo uma velocidade para 
 a última junta e então realizando o processo inverso pelo uso da rotina criada, esperando-se 
-obter os mesmos valores iniciais.
+obter os mesmos valores iniciais. Os resultados obtidos com o teste indicado estão
+dispostos na seção \ref{sec:resultados-rotina} deste documento, onde serão analisados
+de maneira mais adequada.
 
 \section{Tratamento das variáveis de entrada}
 As variáveis de entrada do sistema serão dois valores de ângulos impostos pelo
@@ -328,9 +346,9 @@ impossível de ser atribuído a um contador.
 Como informado na seção do controlador empregado, e seguindo a tabela \ref{tab:Pinout}, os 
 pinos que geram os passos destes motores estão conectados a pinos no controlador capazes de 
 gerar ondas na saída através de contadores. Dessa maneira, ao se definir uma nova 
-velocidade para este tipo de motor, atribuí-se um novo valor para o registrador utilizado 
+velocidade para este tipo de motor, atribui-se um novo valor para o registrador utilizado 
 como comparador na geração destas ondas, seguindo a equação \ref{eq:stepper5}, quando for
-detectado uma combinação entre um contador do sistema e o valor configurado, uma sub-rotina
+detectada uma combinação entre um contador do sistema e o valor configurado, uma sub-rotina
 será chamada que alterará o valor do pino definido como saída.
 
 Como os motores de passo não possuem sensores para conhecimento da posição absoluta,
@@ -353,7 +371,7 @@ semelhante aos pulsos gerados nos motores de passo, para atualizar o valor de te
 ao motor. 
 
 Inicialmente, adotou-se uma relação direta entre o ciclo de trabalho de sinais PWM enviados 
-ao \textit{driver} do motor e a velocidade de saída, baseando-se no regime permanente 
+ao circuito de acionamento do motor e a velocidade de saída, baseando-se no regime permanente 
 que seria obtido seguindo a equação \ref{eq:motordc-tf}. Desse modo, para cada motor
 DC do sistema, quando a interrupção é gerada, o valor de PWM enviado ao motor é atualizado
 multiplicando a velocidade desejada por uma constante, definida empiricamente para cada motor.
@@ -369,15 +387,15 @@ motores.
 
 \section{Fluxograma de operação}
 
-O código principal do sistema de controle foi dividido em sub-rotinas bem definidas, que
+O código principal do sistema de comando foi dividido em sub-rotinas bem definidas, que
 em conjunto promovem a movimentação e/ou simulação do sistema robótico. Uma ilustração das
-etapas do sistema de controle pode ser vista na figura \ref{fig:fluxograma}.
+etapas do sistema de comando pode ser vista na figura \ref{fig:fluxograma}.
 
 \begin{figure}[h]
-    \caption{Fluxograma do sistema de controle.}
+    \caption{Fluxograma do sistema de comando.}
 
     \begin{centering}
-        \includegraphics[width=0.7\columnwidth]{images/controle/fluxo.png} 
+        \includegraphics[width=0.8\columnwidth]{images/controle/fluxo.png} 
     \par\end{centering}
 
     \label{fig:fluxograma}
@@ -410,14 +428,14 @@ Na etapa de cálculo da velocidade nas juntas o vetor de velocidades gerado na e
 transformado para velocidades a serem impressas nos atuadores do sistema, através de chamada
 à sub-rotina que implementa a matriz jacobiana inversa do sistema.
 
-A etapa de atualização das velocidades nos motores realizará de fato chamadas à métodos
+A etapa de atualização das velocidades nos motores realizará de fato chamadas a métodos
 dos objetos que representam os atuadores do sistema para configurar a estes uma nova referência 
 para sua velocidade de rotação. A manutenção desta velocidade será função das sub-rotinas 
 chamadas pelas interrupções.
 
 \section{Simulação}
 
-Para verificar o correto funcionamento do sistema de controle, independente dos circuitos de
+Para verificar o correto funcionamento do sistema de comando, independente dos circuitos de
 sensoriamento e acionamento, foi implementada uma função que simula os ângulos de leitura do sistema. 
 Para utilização desta função é suficiente alterar no código fonte do programa uma diretiva
 definitada como ``\textit{SIMULATION}'' para o valor 1.
@@ -433,13 +451,13 @@ na tela de um computador. Foi então codificada uma interface que realiza a comu
 sistema na placa controladora Arduino e o módulo em \textit{python} modificado.
 
 Com a possibilidade de simulação e função de comunicação com módulo de simulação, o 
-novo fluxograma de controle pode ser visto na figura \ref{fig:fluxograma2}. 
+novo fluxograma de comando pode ser visto na figura \ref{fig:fluxograma2}. 
 
 \begin{figure}[h]
-    \caption{Fluxograma do sistema de controle com simulação.}
+    \caption{Fluxograma do sistema de comando com simulação.}
 
     \begin{centering}
-        \includegraphics[width=0.7\columnwidth]{images/controle/fluxo2.png} 
+        \includegraphics[width=0.8\columnwidth]{images/controle/fluxo2.png} 
     \par\end{centering}
 
     \label{fig:fluxograma2}
@@ -451,7 +469,7 @@ foi possível utilizar a estrutura mecânica real deste para testes e validaçã
 O módulo responsável pela animação foi projetado e codificado de maneira responsiva a mudanças, 
 modificando automaticamente as escalas dos três eixos para otimizar o espaço de visualização do robô.
 
-Um exemplo de simulação utilizando o ambiente pode ser visto em \ref{fig:exemplo}, onde foi montado 
+Um exemplo de simulação utilizando o ambiente pode ser visto na figura \ref{fig:exemplo}, onde foi montado 
 um robô genérico com 6 graus de liberdade. As linhas em preto indicam uma conexão direta entre os sistemas 
 de referência, e não necessariamente os elos do manipulador.
 
@@ -459,7 +477,7 @@ de referência, e não necessariamente os elos do manipulador.
     \caption{Exemplo de robô criado no \textit{software} simulador.}
 
     \begin{centering}
-        \includegraphics[width=0.8\columnwidth]{images/controle/simu-puma.png} 
+        \includegraphics[width=0.7\columnwidth]{images/controle/simu-puma.png} 
     \par\end{centering}
 
     \label{fig:exemplo}

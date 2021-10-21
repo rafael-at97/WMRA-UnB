@@ -5,30 +5,6 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{1.42.2.1 }
 
-\bibitem{fernando2019assistivo}
-\abntrefinfo{{SILVA NÉTO, Luiz Fernando Monteiro de Barros da}}{{SILVA NÉTO,
-  Luiz Fernando Monteiro de Barros da}}{2019}
-{{SILVA NÉTO, Luiz Fernando Monteiro de Barros da}. Desenvolvimento de um
-  manipulador robótico para aplicações assistivas. 2019. xi, 171f., il.
-  {Trabalho de Conclusão de Curso (Bacharelado em Engenharia Mecânica)}.
-Universidade de Brasília, Brasília, 2019.}
-
-\bibitem{wattylas2015didatico}
-\abntrefinfo{{REIS, Wattyllas Ferreira dos}}{{REIS, Wattyllas Ferreira
-  dos}}{2015}
-{{REIS, Wattyllas Ferreira dos}. Desenvolvimento de um robô manipulador
-  didático. 2015. xi, 88 f., il. {Monografia (Bacharelado em Engenharia
-  Mecatrônica)}.
-Universidade de Brasília, Brasília, 2015.}
-
-\bibitem{kevin2005WMRA}
-\abntrefinfo{Edwards}{EDWARDS}{}
-{EDWARDS, K.~D. Design, construction and testing of a wheelchair-mounted
-  robotic arm. 2005. 80f., {Thesis (Master of Science of Mechanical
-  Engineering)}.
-Department of Mechanical Engineering, College of Engineering, University of
-  South Florida.}
-
 \bibitem{constituicao}
 \abntrefinfo{BRASIL}{BRASIL}{}
 {BRASIL. \emph{\em{Constituição (1988). Constituição da República
@@ -67,6 +43,14 @@ Department of Mechanical Engineering, College of Engineering, University of
   General Assembly on 25 September 2015}}.
 A/RES/70/1.}
 
+\bibitem{fernando2019assistivo}
+\abntrefinfo{{SILVA NÉTO, Luiz Fernando Monteiro de Barros da}}{{SILVA NÉTO,
+  Luiz Fernando Monteiro de Barros da}}{2019}
+{{SILVA NÉTO, Luiz Fernando Monteiro de Barros da}. Desenvolvimento de um
+  manipulador robótico para aplicações assistivas. 2019. xi, 171f., il.
+  {Trabalho de Conclusão de Curso (Bacharelado em Engenharia Mecânica)}.
+Universidade de Brasília, Brasília, 2019.}
+
 \bibitem{vidal2010desenvolvimento}
 \abntrefinfo{Filho et al.}{FILHO et al.}{2010}
 {FILHO, W. de B.~V. et al. Desenvolvimento de kit para automação de cadeira
@@ -82,6 +66,14 @@ A/RES/70/1.}
   Engenharia Mecatrônica)}.
 Univesidade de Brasília, Brasília, 2019.}
 
+\bibitem{wattylas2015didatico}
+\abntrefinfo{{REIS, Wattyllas Ferreira dos}}{{REIS, Wattyllas Ferreira
+  dos}}{2015}
+{{REIS, Wattyllas Ferreira dos}. Desenvolvimento de um robô manipulador
+  didático. 2015. xi, 88 f., il. {Monografia (Bacharelado em Engenharia
+  Mecatrônica)}.
+Universidade de Brasília, Brasília, 2015.}
+
 \bibitem{marconi2016didatico}
 \abntrefinfo{{MELLO, Marconi Silva Vaz de}}{{MELLO, Marconi Silva Vaz
   de}}{2016}
@@ -89,6 +81,14 @@ Univesidade de Brasília, Brasília, 2019.}
   manipulador. 2016. xv, 101f., il. {Monografia (Bacharelado em Engenharia
   Mecatrônica)}.
 Univesidade de Brasília, Brasília, 2016.}
+
+\bibitem{kevin2005WMRA}
+\abntrefinfo{Edwards}{EDWARDS}{}
+{EDWARDS, K.~D. Design, construction and testing of a wheelchair-mounted
+  robotic arm. 2005. 80f., {Thesis (Master of Science of Mechanical
+  Engineering)}.
+Department of Mechanical Engineering, College of Engineering, University of
+  South Florida.}
 
 \bibitem{ktistakis2015survey}
 \abntrefinfo{Ktistakis e Bourbakis}{KTISTAKIS; BOURBAKIS}{2016}

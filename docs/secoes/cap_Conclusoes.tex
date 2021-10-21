@@ -5,7 +5,7 @@
 Foram demonstrados durante o trabalho uma análise do projeto que serviu como base para este e os projetos
 de circuitos de atuação e sensoriamento para o manipulador robótico em questão. As diversas decisões de 
 projeto foram orientadas pelo custo de manufatura e montagem dos dispositivos, segurança aos equipamentos e ao 
-usuário e pela confiabilidade geral do circuito elétrico e sistema de controle, buscando desenvolver uma 
+usuário e pela confiabilidade geral do circuito elétrico e sistema de comando, buscando desenvolver uma 
 solução que se mostrasse capaz de ser uma interface entre o usuário e seu ambiente.
 
 A análise do conjunto de atuadores pré-selecionado para o braço robótico e suas respectivas transmissões 
@@ -15,15 +15,15 @@ propor modificações em algumas juntas para que as necessidades de torque pudes
 Os circuitos projetados e escolhidos para o sistema demonstraram bons resultados no uso com sensores e atuadores reais. 
 A escolha dos equipamentos levou em consideração um equilíbrio entre o custo e integridade 
 dos sinais envolvidos, fornecendo dados de leitura corretos mesmo para um protótipo construído com dispositivos e 
-condições não ideais. 
+condições não ideais, em ambiente de testes sem ferramental próprio para execução no manipulador real.
 
-Em relação ao sistema de controle, foram criados módulos generalizados e intuitivos, para permitir reúso em 
-outros projetos. A organização geral e uso de interrupções permitiu uma resposta rápida do sistema a modificações
-das variáveis lidas por sensores e uma simplicidade no fluxograma principal do código, resultando em um uso
-otimizado das funcionalidades oferecidas pelo controlador empregado. Esta decisão facilitou ainda a operação
-dos atuadores em paralelo, essencial no controle de um manipulador robótico.
+Em relação ao sistema de comando, foram criados módulos generalizados e intuitivos, para permitir reaproveitamento de código em 
+outros projetos. A organização geral e uso de interrupções em \textit{software} permitiu uma resposta rápida do sistema a modificações
+das variáveis lidas por sensores e uma simplicidade no fluxograma principal do código, resultando em um aproveitamento
+das diversas funcionalidades oferecidas pelo controlador empregado. Esta decisão facilitou ainda a operação
+dos atuadores em paralelo, essencial no acionamento de um manipulador robótico.
 
-A técnica de obtenção das velocidades do robô através da jacobiana inversa facilitou a atualização das
+A técnica de obtenção das velocidades do robô através da matriz jacobiana inversa facilitou a atualização das
 referências das velocidades dos motores com base nos dados do usuário. A otimização desta matriz 
 em sua forma de função ofereceu resultados satisfatórios, permitindo a operação de inversão desta matriz
 relativamente trabalhosa em um ambiente embarcado.
@@ -37,7 +37,7 @@ atuadores.
 
 Todo o material desenvolvido durante este trabalho, inclusive aqueles utilizados na construção deste 
 relatório, está agrupado em um repositório \textit{online}, para consultas e confirmação do que foi 
-dito e afirmado neste documento. Uma descrição do repositório pode ser vista no anexo \ref{Anexo-Repositorio}.
+dito e afirmado neste documento. Uma descrição do repositório pode ser vista no apêndice \ref{Anexo-Repositorio}.
 
 \section{Perspectivas Futuras}
 
@@ -46,7 +46,7 @@ A atuação do manipulador foi comandada completamente pelo uso da geração de 
 jacobiana inversa. Para facilitar o uso pelo usuário, pensou-se na possibilidade de utilizar um meio de 
 salvar posições de maior uso pelo usuário, como posições de alimentação e captura de objetos em determinada 
 posição. Tendo em mente esta capacidade, foi realizada a cinemática inversa do manipulador, para direcionar
-trabalhos futuros na inclusão desta funcionalidade ao manipulador. A cinemática inversa pode ser vista no anexo
+trabalhos futuros na inclusão desta funcionalidade ao manipulador. A cinemática inversa pode ser vista no apêndice
 \ref{Anexo-CinInv}.
 
 % Controle mais avançado

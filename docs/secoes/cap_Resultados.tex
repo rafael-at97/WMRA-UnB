@@ -21,17 +21,22 @@ maneira bruta, o que para um ADC de 10 bits corresponde a valores entre 0 e 1024
 
 O espelho atrelado ao potenciômetro foi então rotacionado manualmente até
 que fosse vista uma mudança na leitura pelo Arduino. A distância percorrida
-pelo \textit{laser} foi então mensurada com o auxílio de uma fita métrica.
+pelo \textit{laser} foi então medida com o auxílio de uma fita métrica, com
+precisão milimétrica. Devido ao diâmetro observado do ponto de luz refletido 
+sobre a parede, assumiu-se para o valor de $d$ uma incerteza associada de $\pm 10$mm.
+Para a distância $D$, devido às limitações do ambiente de teste, e do instrumento de 
+medição, uma trena com precisão milimétrica, adotou-se também uma incerteza de $10$mm.
 
-A distância percorrida para esta variação mínima encontrada foi de aproximadamente
-3cm, e com uma distância entre o sensor e a parede, mensurada com uma treta,
-de aproximadamente 215cm. Com estes valores de $d$ e $D$, foi verificado que a angulação 
-capaz de ser detectada pelo sensor foi próximo a 0,4\textdegree, segundo a 
+A distância percorrida para uma variação angular mínima detectável pelo sensor 
+foi de $32\pm 10$mm, com uma distância entre o sensor e a parede, de $2150\pm 10$mm. 
+Com estes valores de $d$ e $D$, verifica-se que a angulação 
+capaz de ser detectada pelo sensor é igual a $0,\!43\pm 0,\!14$\textdegree, segundo a 
 equação \ref{eq:teste-pot}.
 
 Embora o ambiente e os equipamentos de medição utilizados não fossem os mais adequados
-para medições precisas, o teste demonstrou que o sensor possui uma resolução próxima 
-ao esperado, capaz de fornecer boas informações sobre o posicionamento das juntas.
+para medições precisas, o teste demonstrou uma resolução próxima 
+ao indicado no \textit{datasheet} do potenciômetro, disposto no anexo \ref{anexo-datasheets}, 
+capaz de fornecer boas informações sobre o posicionamento das juntas.
 
 \section{Circuitos de sensoriamento}
 
@@ -60,7 +65,7 @@ figura \ref{fig:proto-sensor}.
 Na figura \ref{fig:proto-sensor} pode ser vista uma divisão espacial dos dispositivos
 na placa de prototipagem de acordo com a sua funcionalidade. A área marcada pela
 borda na cor vermelha indica os dispositivos sensores e os filtros iniciais de tratamento.
-A área verde delimita principalmente a parte dos circuitos ligada a amplificação e à
+A área verde delimita principalmente a parte dos circuitos ligada à amplificação e à
 preparação dos sinais para envio. Por fim, a área azul indica o circuito de alimentação,
 com capacitores e regulador de tensão. Os 7 \textit{jumpers} que são vistos saindo da
 placa são os que transmitem de fato os sinais para a placa central.
@@ -76,12 +81,15 @@ Foi verificado que para posições do eixo do potenciômetro próximo ao início
 ocorriam variações indesejadas no valor de leitura, fruto das limitações do sensor.
 Para contornar este problema foi definido que o valor mínimo para o qual estas 
 variações não ocorrem seria posicionado como valor 0 da junta, limitando o movimento
-do atuador para após esta posição por meio do uso dos sensores fim-de-curso.
+do atuador para após esta posição por meio do uso dos sensores fim-de-curso. Esta posição
+deve ser então definida com base em testes no ambiente real de aplicação do sensor, bem como
+realizado no ambiente de testes.
 
 Os circuitos se comportaram como esperado quando alimentados através de uma fonte de 
 12V, com a tensão regulada através do circuito montado.
 
-\section{Jacobiana inversa}
+\section{Matriz Jacobiana inversa}
+\label{sec:resultados-rotina}
 
 Para validar a sub-rotina que implementa a transformação de velocidades do efetuador final
 em velocidades das juntas, foi criado um \textit{script}, assim como já explicado na seção
@@ -99,9 +107,9 @@ em velocidades das juntas, foi criado um \textit{script}, assim como já explica
 
 Os valores das posições e velocidades das juntas, $q$ e $\dot{q}$, são definidos no início do programa
 e utilizados para calcular a velocidade do efetuador final, tomando-se como caminho de execução uma 
-cinemática direta do manipulador. O vetor de velocidades obtido, $\nu$, é então repassado à função
-que implementa a inversa da jacobiana, juntamente com o vetor original de posições, para se obter um 
-novo vetor de velocidade das juntas, a ser comparado com o vetor original de velocidades.
+cinemática direta do manipulador. O vetor de velocidades obtido, $\boldsymbol{\nu}$, é então repassado à função
+que implementa a inversa da matriz, juntamente com o vetor original de posições, para se obter um 
+novo vetor de velocidade das juntas $\dot{\textbf{q}}_1$, a ser comparado com o vetor original de velocidades $\dot{\textbf{q}}_0$.
 
 Foi verificado que para determinados valores das juntas o resultado final obtido era diferente do resultado
 inicial configurado. Uma dessas configurações, e o seu valor final obtido, pode ser visto na tabela 
@@ -114,7 +122,7 @@ inicial configurado. Uma dessas configurações, e o seu valor final obtido, pod
     
     \begin{tabular}{|c|c|c|c|}
         \hline
-        $q$ & $\dot{q}_0$ & $\nu$ = $J(q).\dot{q}_0$ & $\dot{q}_1$ = $J^{-1}(q).\nu$ \tabularnewline
+        $\textbf{q}$ & $\dot{\textbf{q}}_0$ & $\boldsymbol{\nu}$ = $\textbf{J}(\textbf{q}).\dot{\textbf{q}}_0$ & $\dot{\textbf{q}}_1$ = $\textbf{J}^{-1}(\textbf{q}).\boldsymbol{\nu}$ \tabularnewline
         \hline
         \hline
         $\pi/2$ & 0,21 & -0,08 & 0,21  \tabularnewline
@@ -137,14 +145,18 @@ inicial configurado. Uma dessas configurações, e o seu valor final obtido, pod
 \end{table}
 
 Foi constatado que estas discrepâncias eram resultado de um fator já esperado no uso
-da jacobiana inversa, os pontos de singularidade. Com o valor da junta 5 na tabela
+da matriz jacobiana inversa, os pontos de singularidade. Com o valor da junta 5 na tabela
 \ref{tab:res-jacobiana}, o determinante da equação \ref{eq:det} seria igual a 0, o que 
 acarretaria em uma matriz inversa com termos tendendo a $\pm\infty$, ou indeterminações.
-Pelo método em que o cálculo da matriz foi organizado, foi possível arranjar alguns termos de 
+Pelo método em que o cálculo da matriz foi organizado, cancelando termos comuns aos cofatores com termos
+no determinante, foi possível arranjar alguns termos de 
 modo que estas singularidades matemáticas não afetassem todas as juntas, o que é indicado pelo
-fato que os termos 1 e 5 apresentaram valores iguais aos originais.
+fato que os resultados das juntas 1 e 5 apresentaram valores iguais aos originais.
 Para demais valores de ângulos, que não resultam em singularidades, os valores obtidos após
-a multiplicação por $J^{-1}$ foram iguais ao valores iniciais.
+a multiplicação por $\textbf{J}^{-1}$ foram iguais ao valores iniciais. Uma análise da equação
+\ref{eq:det} fornece os pontos de singularidade do sistema, sendo estes pontos indicados pelos 
+valores dos ângulos das juntas que fazem com que o determinante da matriz jacobiana seja nulo, a exemplo de algum
+dos fatores $c\theta'_5$ ou $s\theta_3$ igual a 0, que forneceria o valor 0 para o determinante. 
 
 A tentativa de otimizar os cálculos da matriz inversa, evitando o processamento gerado
 por um código com diversos laços de repetição, resultou em uma função linear com 126
@@ -171,11 +183,11 @@ e tratamento dos sinais de uma única placa de sensoriamento e de acionamento de
 \end{figure}
 
 Nas áres indicadas pela cor verde, na figura \ref{fig:proto-main}, são vistos os 
-dispositivos \textit{drivers} e seus respectivos atuadores, bem como a fonte de 
+dispositivos de acionamento e seus respectivos atuadores, bem como a fonte de 
 alimentação utilizada nos testes para a potência destes.
 A área em vermelho indica os dispositivos que realizam o tratamento dos sinais 
-provindos da outro placa de prototipagem, como optoacopladores e amplificador operacional.
-Na figura podem ser vistos também o \textit{joystick} KY-023 utilizado e um Arduino Mega,
+provindos da outra placa de prototipagem, como optoacopladores e amplificador operacional.
+Na figura, podem ser vistos também o \textit{joystick} KY-023 utilizado e um Arduino Mega,
 utilizados para interfaceamento com o usuário e processamento geral dos dados, respectivamente.
 
 Nota-se que os atuadores empregados não são de fato iguais aos atuadores escolhidos para o 
@@ -183,16 +195,16 @@ sistema. Para os testes e prototipagem preferiu-se utilizar dispositivos genéri
 de verificar a funcionalidade do circuito independente do modelo de atuador utilizado.
 
 Foram realizados testes tanto para a simulação do sistema quanto para dados reais resultantes
-da ativação dos atuadores, verificando e validando a relação e os diversos circuitos
-que compõem o sistema. Como não haviam atuadores de teste suficientes para simular completamente
+da ativação dos atuadores, verificando e validando a comunicação entre as placas e os diversos circuitos
+que compõem o sistema. Como não havia atuadores de teste suficientes para simular completamente
 o circuito, foram realizadas combinações entre leitura real e simulação das juntas.
 
-\section{Controle}
+\section{Sistema de Comando}
 
 \subsection{Tempo de execução do laço de repetição}
 
 Foi verificado o tempo de execução para cada iteração do laço de repetição principal do
-programa de controle, com as funções indicadas no fluxograma \ref{fig:fluxograma}.
+programa de comando, com as funções indicadas no fluxograma \ref{fig:fluxograma}.
 Os tempos de execução observados ficaram entre 4 e 5ms, com a inclusão da rotina 
 de envio dos dados ao computador, um tempo máximo de 7ms foi observado.
 
@@ -210,7 +222,7 @@ em \textit{python} que se comunica com o circuito, é montada uma representaçã
 manipulador utilizando os dados recebidos. A posição inicial foi definida para a simulação
 como valores zero para as juntas com motores DC e os valores pós-calibração para as juntas 
 com motores de passo. A figura \ref{fig:pos-inicial} ilustra o modelo gerado pelo simulador
-assim que a aplicação é iniciada.
+assim que a aplicação é iniciada, com os eixos $\hat{X}$, $\hat{Y}$ e $\hat{Z}$ para cada junta.
 
 \begin{figure}[h]
     \caption{Ambiente de simulação com posição inicial.}
@@ -236,17 +248,19 @@ O resultado obtido pode ser visto na figura \ref{fig:pos-zero}.
     \label{fig:pos-zero}
 \end{figure}
 
-Esta movimentação poderia ser realizada de vários modos, optou-se por agir sobre o eixo
-da junta 5 para deixar o elo seguinte alinhado com o eixo $x$, utilizando o plano $R1$, e em 
-seguindo rotacionar o braço em torno da base utilizando o plano $XY$ e informando uma velocidade
-desejada na diagonal. Como o plano inicial definido no programa é o plano de translação $XY$,
+Esta movimentação poderia ser realizada de vários modos, optou-se por agir inicialmente sobre a 
+velocidade angular do eixo $\hat{Z}$ da junta 5 para deixar o último elo alinhado com o eixo $x$, utilizando o plano $R1$, e em 
+seguida rotacionar o braço em torno da base utilizando o plano $XY$ e impondo uma velocidade
+diagonal ao efetuador final ($v_x$ = $v_y$) através do joystick. 
+Como o plano inicial definido no programa é o plano de translação $XY$,
 foi necessário pressionar o botão do \textit{joystick} 2 vezes, alternando para o eixo $R1$ e depois mais
 2 vezes, para retornar ao eixo $XY$. Ao final foi necessário modificar o plano de ação para o $XZ$, 
 a fim de realizar um ajuste mais fino sobre a altura da posição desejada.
 
 Nota-se na figura \ref{fig:pos-zero} uma indicação do trajeto percorrido pelo ponto final do 
-manipulador. Esta trajetória é gerada com base nas velocidades impostas sobre as juntas, que 
-se movem de acordo a tentar respeitar a velocidade desejada pelo usuário.
+manipulador. Esta trajetória é gerada com base nas velocidades impostas sobre o efetuador
+final do sistema, que são transformadas em velocidades simultâneas das juntas, para movimentar corretamente
+todo o manipulador, de acordo com o desejo de movimento do usuário.
 
 O processo foi repetido tentando atingir outras posições e orientações para o robô, algumas dessas
 configurações estão dispostas nas imagens \ref{fig:pos-varias}(a)-(e).
@@ -293,7 +307,7 @@ que haja a perda de um dos graus de liberdade do manipulador. A figura \ref{fig:
 ilustra este fato, onde o ângulo de $\theta_5 = -\pi/2$ gera uma singularidade apontada previamente.
 Neste ponto específico, os eixos $\hat{Z}_4$ e $\hat{Z}_6$ se tornam coplanares, portanto uma 
 rotação em torno de $\hat{Y}_5$ acaba gerando uma indefinição sobre qual dos ângulos deve ser
-atuado. Nota-se pelo resultado obtido que a geração de velocidades pela jacobiana favorece a atuação
+atuado. Nota-se pelo resultado obtido que a geração de velocidades pela matriz jacobiana favorece a atuação
 na junta 4.
 
 \subsection{Atuadores reais}
@@ -342,14 +356,14 @@ Experimentos semelhantes foram realizados para as juntas 5 e 6, que também util
 de passo. Os resultados reais de posicionamento foram comparados visualmente com os resultados
 obtidos com a animação no ambiente de simulação. Em especial, foram utilizados os planos de ação
 $R1$ e $R2$, que permitem atuar diretamente sobre os motores destas juntas, por estarem
-relacionados com a rolagem e guinada do punho.
+relacionados com o movimento de \textit{roll} e \textit{yaw} do pulso.
 Visualmente, o atuador de teste acompanhou de fato o movimento imposto para o manipulador através das 
 velocidades definidas no \textit{joystick}.
 
 Para as outras juntas, que utilizam motores DC, foi preparado um ambiente de testes que consistia
 no acoplamento direto entre o eixo de saída de um motor DC de teste e um potenciômetro, assim
 como demonstra a figura \ref{fig:teste-dc}. Ambos motor e sensor foram fixados de modo a fornecer
-uma resistência contra rotação que não fosse do eixo próprio.
+uma resistência mecânica, através do uso de fita adesiva, contra rotação que não fosse do próprio eixo.
 
 \begin{figure}[h!]
     \begin{centering}
@@ -404,8 +418,10 @@ angular próxima a 45\textdegree, mas o sistema real aponta algo mais próximo d
 \par\end{centering}
 \end{figure}
 
-As respostas para ambos os motores foram satisfatórias, indicando a controlabilidade dos 
-atuadores via \textit{input} do \textit{joystick} e a correta transmissão dos sinais de leitura. 
+As respostas para ambos os motores foram satisfatórias, observando-se que a variação angular real alcançada
+por estes estava de acordo com o desejado pelo usuário para um posicionamento final do manipulador. 
+Este fato indica a controlabilidade dos atuadores via \textit{input} do \textit{joystick} e a correta 
+transmissão dos sinais de leitura. 
 Os testes com os sensores potenciômetros de precisão demonstraram que a leitura de posição, 
 e consequentemente a resposta de todo o sistema, é favorecida através do uso de toda ou grande
 parte da área de trabalho do sensor, utilizando uma transmissão entre o eixo de saída e o eixo
@@ -416,7 +432,7 @@ complexidades no ajuste fino para o posicionamento final. Acredita-se que este p
 no sistema real, pelo uso das relações de transmissão, resultando em uma velocidade mínima menor do que 
 a de saída do atuador.
 
-Foi verificado por fim a resposta do sistema com os dados reais dos dois motores, DC e de passo, e complementando
+Foi verificada por fim a resposta do sistema com os dados reais dos dois motores, DC e de passo, e complementando
 o sistema com a simulação das outras 4 juntas. Uma das posições finais desejadas está disposta na figura 
 \ref{fig:pos-dois}, simulando o desejado de obtenção de algum objeto à frente do usuário.
 

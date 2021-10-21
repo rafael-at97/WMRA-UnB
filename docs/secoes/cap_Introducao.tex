@@ -38,7 +38,7 @@ de uso público ou privados de uso coletivo, tanto na zona urbana como na rural,
 
 Assim, pessoas com deficiência motora, que têm em sua condição uma autonomia reduzida, possuem também uma menor acessibilidade geral, sendo necessário fornecer
 meios de ampliar sua independência, respeitando os seus direitos fundamentais. A autonomia em questão é afetada diretamente pelo tipo de lesão ou 
-má-formação observada: a paraplegia, ou ausência de membros inferiores, dificulta a a locomoção, já a tetraplegia chega a restringir quase toda a movimentação do deficiente.
+má-formação observada: a paraplegia, ou ausência de membros inferiores, dificulta  locomoção, já a tetraplegia chega a restringir quase toda a movimentação do deficiente.
 Na pesquisa por novas Tecnologias Assistivas para incrementar a autonomia nestes casos, há o ramo de desenvolvimento de braços mecânicos assistivos, podendo 
 estes serem fixos em determinado local, ou móveis, como quando são acoplados em cadeiras de rodas. Enquadrando-se na categoria de TA de auxílio para vida
 diária e vida prática, os braços robóticos montados sobre cadeiras de rodas (\textit{WMRA - Wheelchair Mounted Robotic Arm}), assim como outras tecnologias 
@@ -57,19 +57,19 @@ a estrutura mecânica de um braço robótico a ser montado em uma cadeira de rod
 uma solução barata e suficiente para aprimorar a acessibilidade de pessoas que sofreram lesão medular completa do tipo tetraplegia \cite{fernando2019assistivo}. 
 O projeto base conta com uma seleção inicial de atuadores para as juntas deste, no entanto, para garantir uma adequação real do braço construído como 
 tecnologia assistiva, faz-se necessário que o braço possa ser controlado pelo usuário final, sendo essencial para isto a verificação dos atuadores selecionados, 
-inserção de elementos sensoriais no manipulador, projeto de uma plataforma de controle e junção eletro-eletrônica desta com os atuadores e sensores propostos.
+inserção de elementos sensoriais no manipulador, projeto de uma plataforma de comando e junção eletro-eletrônica desta com os atuadores e sensores propostos.
 
 \subsection{Estrutura do manipulador robótico base}
 \label{sec:EstruturaBase}
 
-O braço robótico em questão é do tipo articulado, possui 3 juntas principais e um punho implementado como 3 juntas rotativas com eixos que não se cruzam em um
-mesmo ponto. A primeira junta constitui a rotação do robô em torno de sua base, a segunda é denominada como ombro, a terceira como cotovelo e as juntas do 
-punho são divididas com base no tipo de movimento de rotação que causam, sendo estes denominados como rolagem, arfagem e guinada. As juntas do robô são 
-construídas majoritariamente de chapas de alumínio conformado, os elos por sua vez foram projetados com material PVC e \textit{Nylon (TechNyl)}. 
+O braço robótico em questão é do tipo articulado, possui 3 juntas principais e um pulso implementado como 3 juntas rotativas com eixos que não se cruzam em um
+mesmo ponto. A primeira junta constitui a rotação do robô em torno de sua base, sendo considerada como a junta do quadril, a segunda é denominada como ombro, a terceira como cotovelo e as juntas do 
+pulso são divididas com base no tipo de movimento de rotação que causam, sendo estes denominados como \textit{yaw}, \textit{pitch} e \textit{roll}. As juntas do robô são 
+construídas majoritariamente de chapas de alumínio cortadas e dobradas, os elos por sua vez foram projetados com material PVC e \textit{Nylon (TechNyl)}. 
 
 Foram selecionados para o acionamento do manipulador 3 motores do tipo Mabuchi JC/LC-578VA, 1 motor de passo HT23-397/NEMA 23 e 2 motores de passo 
 42HS48-1684/NEMA 17. Para a transmissão do torque de saída dos atuadores propostos até o ponto de atuação foi idealizada uma transmissão por engrenagens,
-sendo as engrenagens fabricadas com tecnologia de manufatura aditiva e materiais PLA e ABS. Para o controle do robô foi proposto inicialmente um Arduino, 
+sendo as engrenagens fabricadas com tecnologia de manufatura aditiva e materiais PLA e ABS. Para o comando do robô foi proposto inicialmente um Arduino, 
 no entanto, esta escolha deve ser revista após a revisão dos atuadores e seleção de sensores e circuitos de ativação e processamento. 
 
 A modelagem gráfica do manipulador pode ser vista na figura \ref{fig:manipulador-base}.
@@ -77,7 +77,7 @@ A modelagem gráfica do manipulador pode ser vista na figura \ref{fig:manipulado
 \begin{figure}[h]
 \caption{Modelagem do robô montado \cite{fernando2019assistivo}.}    
 \begin{centering}
-\includegraphics[width=0.9\columnwidth]{images/intro/manipulador-base.png}
+\includegraphics[width=0.8\columnwidth]{images/intro/manipulador-base.png}
 \par\end{centering}
 
 \label{fig:manipulador-base}
@@ -85,7 +85,10 @@ A modelagem gráfica do manipulador pode ser vista na figura \ref{fig:manipulado
 
 Nota-se pela figura o local de aplicação dos atuadores selecionados, assim como descrito na tabela \ref{tab:AtuadoresPre}. A figura demonstra também como
 foram empregados os tubos de material PVC e acopladores de \textit{Nylon} na construção dos elos, bem como o formato das juntas com uma separação para inserção
-das engrenagens que compõem a relaçãos calculadas no projeto base \cite{fernando2019assistivo}.
+das engrenagens que compõem as reduções calculadas no projeto base \cite{fernando2019assistivo}. Maiores dados sobre os motores serão
+fornecidos ao longo do desenvolvimento do texto, como na tabela \ref{tab:Motores}, que indica suas condições elétricas de funcionamento
+e tabela \ref{tab:Analise-Torque}, que indica os torques fornecidos pelos motores. Todos os dados sobre os atuadores foram retirados
+de seus \textit{datasheets}, incluídos no anexo \ref{anexo-datasheets} deste documento.
 
 \begin{table}[h]
 \begin{centering}  
@@ -95,21 +98,21 @@ das engrenagens que compõem a relaçãos calculadas no projeto base \cite{ferna
     Junta & Atuador selecionado \tabularnewline
     \hline
     \hline
-    1 (Base) & HT23-397/NEMA 23 \tabularnewline
+    1 (Base) & Motor de passo HT23-397/NEMA 23 \tabularnewline
     \hline
-    2 (Ombro) & Mabuchi JC/LC-578VA \tabularnewline
+    2 (Ombro) & Motor DC Mabuchi JC/LC-578VA \tabularnewline
     \hline
-    3 (Cotovelo) & Mabuchi JC/LC-578VA \tabularnewline
+    3 (Cotovelo) & Motor DC Mabuchi JC/LC-578VA \tabularnewline
     \hline
-    4 (Arfagem) & Mabuchi JC/LC-578VA \tabularnewline
+    4 (\textit{Pitch}) & Motor DC Mabuchi JC/LC-578VA \tabularnewline
     \hline
-    5 (Guinada) & 42HS48-1684/NEMA 17 \tabularnewline
+    5 (\textit{Yaw}) & Motor de passo 42HS48-1684/NEMA 17 \tabularnewline
     \hline
-    6 (Rolagem) & 42HS48-1684/NEMA 17 \tabularnewline
+    6 (\textit{Roll}) & Motor de passo 42HS48-1684/NEMA 17 \tabularnewline
     \hline
 \end{tabular}
 
-\caption{Atuadores pré-selecionados para as juntas.}
+\caption{Atuadores pré-selecionados para as juntas \cite{fernando2019assistivo}.}
 \label{tab:AtuadoresPre}
 
 \par\end{centering}
@@ -120,15 +123,15 @@ das engrenagens que compõem a relaçãos calculadas no projeto base \cite{ferna
 O objetivo principal deste trabalho é analisar o braço robótico apresentado na seção \ref{sec:EstruturaBase} a fim de revisar os atuadores existentes neste e
 propor instrumentos de medição e circuitos de acionamento e processamento para serem inseridos em sua estrutura, bem como idealizar um controlador para reger 
 os movimentos deste manipulador robótico. 
-Os circuitos eletro-eletrônicos e o sistema de controle propostos devem
+Os circuitos eletro-eletrônicos e o sistema de acionamento propostos devem
 ser capazes de receber comandos do usuário e acionar os atuadores de 
 maneira a permitir que a estrutura mecânica subjacente e o efetuador 
-final do manipulador sejam posicionados de acordo a auxiliar o operador 
+final do manipulador sejam posicionados de modo a auxiliar o operador 
 na interação com o espaço ao seu redor para a realização de atividades
 diárias básicas.
 
 Pautando-se em um dos objetivos do trabalho base, o manipulador, com 
-todo o sistema de sensoriamento, ativação e controle, deve apresentar 
+todo o sistema de sensoriamento, ativação e comando, deve apresentar 
 um baixo custo, para que possa ser considerado um protótipo acessível
 para auxílio de pessoas com deficiência motora dos membros inferiores 
 e superiores.

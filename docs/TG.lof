@@ -5,69 +5,83 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Modelagem do rob\IeC {\^o} did\IeC {\'a}tico \cite {wattylas2015didatico}.\relax }}{6}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Bra\IeC {\c c}o rob\IeC {\'o}tico completo constru\IeC {\'\i }do na USF \cite {kevin2005WMRA}.\relax }}{7}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Interfer\IeC {\^e}ncia causada por m\IeC {\'u}ltiplos terras.\relax }}{10}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Filtro RC.\relax }}{11}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Filtro RC.\relax }}{12}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Configura\IeC {\c c}\IeC {\~o}es de amplificadores operacionais.\relax }}{13}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Circuito usual no emprego de optoacoplador.\relax }}{14}
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Formas de representa\IeC {\c c}\IeC {\~a}o para controle em malha aberta e malha fechada\relax }}{15}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Modelo eletromec\IeC {\^a}nico para armadura de motores DC.\relax }}{15}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Exemplo de controle de velocidade para motor de passo.\relax }}{17}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Modelo eletromec\IeC {\^a}nico para armadura de motores DC.\relax }}{16}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Exemplo de controle de velocidade para motor de passo.\relax }}{18}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Arranjo Denavit-Hartenberg modificado \cite {craig2009introduction}.\relax }}{19}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Renderiza\IeC {\c c}\IeC {\~a}o do modelo 3D do manipulador.\relax }}{22}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Arranjo de sistemas definido no projeto base \cite {fernando2019assistivo}.\relax }}{22}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Novo arranjo de sistemas.\relax }}{23}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Elos isolados do manipulador.\relax }}{25}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Conjunto movimentado pela junta 1: Elo 1.}}}{25}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Conjunto movimentado pela junta 2: Elo 2.}}}{25}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Conjunto movimentado pela junta 3: Elo 3.}}}{25}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Conjunto movimentado pela junta 4: Elo 4.}}}{25}
-\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Conjunto movimentado pela junta 5: Elo 5.}}}{25}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Inclus\IeC {\~a}o de mola para compensa\IeC {\c c}\IeC {\~a}o de torque na junta 2.\relax }}{28}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Teste para valida\IeC {\c c}\IeC {\~a}o da resolu\IeC {\c c}\IeC {\~a}o do potenci\IeC {\^o}metro escolhido.\relax }}{30}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Dimens\IeC {\~o}es para inser\IeC {\c c}\IeC {\~a}o de placa nas juntas.\relax }}{33}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Dimens\IeC {\~o}es dispon\IeC {\'\i }veis nas juntas 3 e 4.}}}{33}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Dimens\IeC {\~o}es dispon\IeC {\'\i }veis nas juntas 5 e 6.}}}{33}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Dimens\IeC {\~o}es dispon\IeC {\'\i }veis na junta 2.}}}{33}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Esquem\IeC {\'a}tico de regula\IeC {\c c}\IeC {\~a}o de tens\IeC {\~a}o das placas de sensoriamento\relax }}{34}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Esquem\IeC {\'a}tico de leitura do potenci\IeC {\^o}metro\relax }}{34}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Esquem\IeC {\'a}tico de leitura dos sensores fim-de-curso\relax }}{36}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Placa de sensoriamento com todos os componentes\relax }}{36}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Espa\IeC {\c c}o dispon\IeC {\'\i }vel para inclus\IeC {\~a}o de placa na junta 1\relax }}{37}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Circuito de tratamento dos sinais de fim-de-curso na placa de controle.\relax }}{38}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Gr\IeC {\'a}fico relacionando CTR com corrente de entrada para dispostiivos PC817C.\relax }}{38}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Circuito de tratamento dos sinais de potenci\IeC {\^o}metros na placa de controle\relax }}{39}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Circuito de controle para os diferentes tipos de motores\relax }}{40}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Placa de controle com todos os componentes\relax }}{42}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Renderiza\IeC {\c c}\IeC {\~a}o do modelo 3D do manipulador.\relax }}{24}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Arranjo de sistemas definido no projeto base \cite {fernando2019assistivo}.\relax }}{24}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Novo arranjo de sistemas.\relax }}{25}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Elos isolados do manipulador.\relax }}{27}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Conjunto movimentado pela junta 1: Elo 1.}}}{27}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Conjunto movimentado pela junta 2: Elo 2.}}}{27}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Conjunto movimentado pela junta 3: Elo 3.}}}{27}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Conjunto movimentado pela junta 4: Elo 4.}}}{27}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Conjunto movimentado pela junta 5: Elo 5.}}}{27}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Posi\IeC {\c c}\IeC {\~a}o do manipulador para maximiza\IeC {\c c}\IeC {\~a}o do efeito de gravidade sobre a junta 5.\relax }}{28}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Inclus\IeC {\~a}o de mola para compensa\IeC {\c c}\IeC {\~a}o de torque na junta 2.\relax }}{31}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Teste para valida\IeC {\c c}\IeC {\~a}o da resolu\IeC {\c c}\IeC {\~a}o do potenci\IeC {\^o}metro escolhido.\relax }}{33}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Dimens\IeC {\~o}es para inser\IeC {\c c}\IeC {\~a}o de placa nas juntas.\relax }}{36}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Dimens\IeC {\~o}es dispon\IeC {\'\i }veis nas juntas 3 e 4.}}}{36}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Dimens\IeC {\~o}es dispon\IeC {\'\i }veis nas juntas 5 e 6.}}}{36}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Dimens\IeC {\~o}es dispon\IeC {\'\i }veis na junta 2.}}}{36}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Esquem\IeC {\'a}tico de regula\IeC {\c c}\IeC {\~a}o de tens\IeC {\~a}o das placas de sensoriamento\relax }}{37}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Esquem\IeC {\'a}tico de leitura do potenci\IeC {\^o}metro\relax }}{37}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Esquem\IeC {\'a}tico de leitura dos sensores fim-de-curso\relax }}{39}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Placa de sensoriamento.\relax }}{39}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Vis\IeC {\~a}o 3D com componentes}}}{39}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Vis\IeC {\~a}o das trilhas}}}{39}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Espa\IeC {\c c}o dispon\IeC {\'\i }vel para inclus\IeC {\~a}o de placa na junta 1\relax }}{40}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Circuito de tratamento dos sinais de fim-de-curso na placa de comando.\relax }}{41}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Gr\IeC {\'a}fico relacionando CTR com corrente de entrada para dispostiivos PC817C.\relax }}{41}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Circuito de tratamento dos sinais de potenci\IeC {\^o}metros na placa de comando.\relax }}{42}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Circuito de acionamento para os diferentes tipos de motores\relax }}{43}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Placa de comando.\relax }}{45}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Vis\IeC {\~a}o 3D com componentes}}}{45}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Vis\IeC {\~a}o das trilhas}}}{45}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Fluxograma do sistema de controle.\relax }}{49}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Fluxograma do sistema de controle com simula\IeC {\c c}\IeC {\~a}o.\relax }}{50}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Exemplo de rob\IeC {\^o} criado no \textit {software} simulador.\relax }}{51}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Vari\IeC {\'a}veis poss\IeC {\'\i }veis de serem controladas com cada eixo do \textit {joystick}.\relax }}{47}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Fluxograma do sistema de comando.\relax }}{53}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Fluxograma do sistema de comando com simula\IeC {\c c}\IeC {\~a}o.\relax }}{54}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Exemplo de rob\IeC {\^o} criado no \textit {software} simulador.\relax }}{55}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Ambiente de testes para medida de resolu\IeC {\c c}\IeC {\~a}o do sensor.\relax }}{52}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Circuito de prototipagem do sensoriamento.\relax }}{53}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Fluxograma programa de valida\IeC {\c c}\IeC {\~a}o da jacobiana inversa.\relax }}{54}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Circuito de prototipagem da placa central.\relax }}{56}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Ambiente de simula\IeC {\c c}\IeC {\~a}o com posi\IeC {\c c}\IeC {\~a}o inicial.\relax }}{57}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Ambiente de simula\IeC {\c c}\IeC {\~a}o com posi\IeC {\c c}\IeC {\~a}o zero.\relax }}{58}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Diversas configura\IeC {\c c}\IeC {\~o}es do manipulador simulado.\relax }}{59}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bra\IeC {\c c}o posicionado no alto.}}}{59}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bra\IeC {\c c}o na posi\IeC {\c c}\IeC {\~a}o de alimenta\IeC {\c c}\IeC {\~a}o.}}}{59}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bra\IeC {\c c}o para pegar objetos na frente do usu\IeC {\'a}rio - alto.}}}{59}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Bra\IeC {\c c}o para pegar objetos na frente do usu\IeC {\'a}rio - baixo.}}}{59}
-\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Bra\IeC {\c c}o na posi\IeC {\c c}\IeC {\~a}o de singularidade.}}}{59}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Resultado com atua\IeC {\c c}\IeC {\~a}o de motor de passo.\relax }}{60}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Motor de passo na posi\IeC {\c c}\IeC {\~a}o p\IeC {\'o}s-calibra\IeC {\c c}\IeC {\~a}o.}}}{60}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Motor de passo ap\IeC {\'o}s atingir posi\IeC {\c c}\IeC {\~a}o desejada.}}}{60}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Posi\IeC {\c c}\IeC {\~a}o final obtida.}}}{60}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Montagem de teste para motores DC.\relax }}{61}
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Resultado com atua\IeC {\c c}\IeC {\~a}o de motor de passo.\relax }}{61}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Motor DC na posi\IeC {\c c}\IeC {\~a}o inicial.}}}{61}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Motor DC na posi\IeC {\c c}\IeC {\~a}o final.}}}{61}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Simula\IeC {\c c}\IeC {\~a}o com valor real de motor DC - inicial.}}}{61}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Simula\IeC {\c c}\IeC {\~a}o com valor real de motor DC - final.}}}{61}
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Simula\IeC {\c c}\IeC {\~a}o com dados reais de 2 motores.\relax }}{62}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Ambiente de testes para medida de resolu\IeC {\c c}\IeC {\~a}o do sensor.\relax }}{56}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Circuito de prototipagem do sensoriamento.\relax }}{58}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Fluxograma programa de valida\IeC {\c c}\IeC {\~a}o da jacobiana inversa.\relax }}{58}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Circuito de prototipagem da placa central.\relax }}{60}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Ambiente de simula\IeC {\c c}\IeC {\~a}o com posi\IeC {\c c}\IeC {\~a}o inicial.\relax }}{61}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Ambiente de simula\IeC {\c c}\IeC {\~a}o com posi\IeC {\c c}\IeC {\~a}o zero.\relax }}{62}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Diversas configura\IeC {\c c}\IeC {\~o}es do manipulador simulado.\relax }}{63}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Bra\IeC {\c c}o posicionado no alto.}}}{63}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Bra\IeC {\c c}o na posi\IeC {\c c}\IeC {\~a}o de alimenta\IeC {\c c}\IeC {\~a}o.}}}{63}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Bra\IeC {\c c}o para pegar objetos na frente do usu\IeC {\'a}rio - alto.}}}{63}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Bra\IeC {\c c}o para pegar objetos na frente do usu\IeC {\'a}rio - baixo.}}}{63}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Bra\IeC {\c c}o na posi\IeC {\c c}\IeC {\~a}o de singularidade.}}}{63}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Resultado com atua\IeC {\c c}\IeC {\~a}o de motor de passo.\relax }}{64}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Motor de passo na posi\IeC {\c c}\IeC {\~a}o p\IeC {\'o}s-calibra\IeC {\c c}\IeC {\~a}o.}}}{64}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Motor de passo ap\IeC {\'o}s atingir posi\IeC {\c c}\IeC {\~a}o desejada.}}}{64}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Posi\IeC {\c c}\IeC {\~a}o final obtida.}}}{64}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Montagem de teste para motores DC.\relax }}{65}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Resultado com atua\IeC {\c c}\IeC {\~a}o de motor de passo.\relax }}{66}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Motor DC na posi\IeC {\c c}\IeC {\~a}o inicial.}}}{66}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Motor DC na posi\IeC {\c c}\IeC {\~a}o final.}}}{66}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Simula\IeC {\c c}\IeC {\~a}o com valor real de motor DC - inicial.}}}{66}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Simula\IeC {\c c}\IeC {\~a}o com valor real de motor DC - final.}}}{66}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Simula\IeC {\c c}\IeC {\~a}o com dados reais de 2 motores.\relax }}{67}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {I.1}{\ignorespaces Organiza\IeC {\c c}\IeC {\~a}o do resposit\IeC {\'o}rio.\relax }}{69}
+\contentsline {figure}{\numberline {I.1}{\ignorespaces Dist\IeC {\^a}ncia entre os eixos das juntas 1 e 2.\relax }}{74}
+\contentsline {figure}{\numberline {I.2}{\ignorespaces Dist\IeC {\^a}ncia entre os eixos das juntas 2 e 3.\relax }}{75}
+\contentsline {figure}{\numberline {I.3}{\ignorespaces Dist\IeC {\^a}ncia entre os eixos das juntas 3 e 4.\relax }}{75}
+\contentsline {figure}{\numberline {I.4}{\ignorespaces Dist\IeC {\^a}ncia entre os eixos das juntas 4 e 5.\relax }}{76}
+\contentsline {figure}{\numberline {I.5}{\ignorespaces Dist\IeC {\^a}ncia entre o eixo da junta 5 e a origem do sistema da junta 6.\relax }}{76}
+\contentsline {figure}{\numberline {I.6}{\ignorespaces Novo modelo Denavit-Hartenberg.\relax }}{77}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {II.1}{\ignorespaces Organiza\IeC {\c c}\IeC {\~a}o do resposit\IeC {\'o}rio.\relax }}{78}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

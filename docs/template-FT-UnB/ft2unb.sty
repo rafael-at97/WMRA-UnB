@@ -281,6 +281,17 @@
 %%% Estilo dos capítulos, seções, sub-seções:
 \makeatletter
 
+\newcommand{\apendices}{
+%    \chapter*{\mdseries ANEXOS}
+    \chapter*{APENDICES}
+    \addcontentsline{toc}{chapter}{{Apendices}}
+    \renewcommand{\appendixname}{APENDICE}
+    \appendix
+    \newcounter{noApendice}
+    \renewcommand{\thechapter}{\Roman{noApendice}}
+    \setcounter{noApendice}{1}
+}
+
 \newcommand{\anexos}{
 %    \chapter*{\mdseries ANEXOS}
     \chapter*{ANEXOS}

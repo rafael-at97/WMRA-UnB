@@ -5,20 +5,20 @@
 \section{Velocidades}
 \label{AnexoJacobiana-velocidades}
 
-Para se obter os vetores de velocidades $^0v_6$ e $^0\omega_6$ foi inicialmente necessário 
+Para se obter os vetores de velocidades $^0\textbf{v}_6$ e $^0\boldsymbol{\omega}_6$ foi inicialmente necessário 
 calcular todas as velocidades intermediárias. Os valores obtidos estão descritos nas equações
-de \ref{eq:1w1} a \ref{eq:6v6}.
+de \ref{eq:1w1} a \ref{eq:6v6}, resultantes da aplicação das equações \ref{eq:speed1} e \ref{eq:speed2}.
 
 \begin{multicols}{2}
     \noindent
     \begin{equation}
         \label{eq:1w1}
-        ^1\omega_1 =    \begin{bmatrix}
+        ^1\boldsymbol{\omega}_1 =    \begin{bmatrix}
                             0 \\ 0 \\ \dot{\theta}_1
                         \end{bmatrix}
     \end{equation}
     \begin{equation}
-        ^1v_1 =     \begin{bmatrix}
+        ^1\textbf{v}_1 =     \begin{bmatrix}
                         0 \\ 0 \\ 0
                     \end{bmatrix}
     \end{equation}
@@ -27,12 +27,12 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 \begin{multicols}{2}
     \noindent
     \begin{equation}
-        ^2\omega_2 =    \begin{bmatrix}
+        ^2\boldsymbol{\omega}_2 =    \begin{bmatrix}
                             s\theta_2.\dot{\theta}_1 \\ c\theta_2.\dot{\theta}_1 \\ \dot{\theta}_2
                         \end{bmatrix}
     \end{equation}
     \begin{equation}
-        ^2v_2 = \begin{bmatrix}
+        ^2\textbf{v}_2 = \begin{bmatrix}
                     0 \\ 0 \\ -a_1\dot{\theta}_1
                 \end{bmatrix}
     \end{equation}
@@ -41,14 +41,14 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 \begin{multicols}{2}
     \noindent
     \begin{equation}
-        ^3\omega_3 = \begin{bmatrix}
+        ^3\boldsymbol{\omega}_3 = \begin{bmatrix}
                         s(\theta_2+\theta_3).\dot{\theta}_1 \\
                         c(\theta_2+\theta_3).\dot{\theta}_1 \\ 
                         \dot{\theta}_2 + \dot{\theta}_3
                     \end{bmatrix}
     \end{equation}
     \begin{equation}
-        ^3v_3 = \begin{bmatrix}
+        ^3\textbf{v}_3 = \begin{bmatrix}
                     s\theta_3.\dot{\theta}_2a_2 \\ 
                     c\theta_3.\dot{\theta}_2a_2\\ 
                     -c\theta_2.\dot{\theta}_1a_2 - \dot{\theta}_1a_1
@@ -59,7 +59,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 \begin{multicols}{2}
     \noindent
     \begin{equation}
-        ^4\omega_4 = \begin{bmatrix}
+        ^4\boldsymbol{\omega}_4 = \begin{bmatrix}
                         s(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 \\
                         c(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 \\ 
                         \dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4
@@ -67,7 +67,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
     \end{equation}
     \begin{equation}
         \begin{split}
-            ^4v_4 = \begin{bmatrix}
+            ^4\textbf{v}_4 = \begin{bmatrix}
                     [s(\theta_3+\theta_4)a_2 + s\theta_4a_3].\dot{\theta}_2 + s\theta_4a_3.\dot{\theta}_3 \\ 
                     [c(\theta_3+\theta_4)a_2 + c\theta_4a_3].\dot{\theta}_2 + c\theta_4a_3.\dot{\theta}_3 \\ 
                     [-c(\theta_2 + \theta_3)a_3 - c\theta_2a_2 - a_1].\dot{\theta}_1
@@ -77,7 +77,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 \end{multicols}
 
 \begin{equation}
-    ^5\omega_5 = \begin{bmatrix}
+    ^5\boldsymbol{\omega}_5 = \begin{bmatrix}
                     s\theta_5's(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 - c\theta_5'(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) \\
                     c\theta_5's(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + s\theta_5'(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) \\ 
                     -c(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + \dot{\theta_5}
@@ -86,7 +86,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 
 \begin{equation}
     \begin{gathered}
-        ^5v_5 = \begin{bmatrix}
+        ^5\textbf{v}_5 = \begin{bmatrix}
             \left\{c\theta_5'[c(\theta_2 + \theta_3 + \theta_4)a_4 + c(\theta_2 + \theta_3)a_3 + c\theta_2a_2 + a_1]\right\}.\dot{\theta}_1 + \\
             + s\theta_5'[s(\theta_3+\theta_4)a_2 + s\theta_4a_3].\dot{\theta}_2 + s\theta_4s\theta_5'a_3.\dot{\theta}_3 \\ 
             \\
@@ -101,7 +101,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 % O que esta comentado contem tambem calculos intermediarios
 
 %\begin{equation}
-%    ^2v_2 = \begin{bmatrix}
+%    ^2\textbf{v}_2 = \begin{bmatrix}
 %        c\theta_2 & 0 & s\theta_2 \\
 %        -s\theta_2 & 0 & c\theta_2 \\
 %        0 & -1 & 0 \\
@@ -115,11 +115,11 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 %\end{equation}
 %
 %\begin{equation}
-%    ^3\omega_3 = \begin{bmatrix}
+%    ^3\boldsymbol{\omega}_3 = \begin{bmatrix}
 %        c\theta_3 & s\theta_3 & 0 \\
 %        -s\theta_3 & c\theta_3 & 0 \\
 %        0 & 0 & 1 \\
-%    \end{bmatrix} \, ^2\omega_2 + 
+%    \end{bmatrix} \, ^2\boldsymbol{\omega}_2 + 
 %    \begin{bmatrix}
 %        0 \\ 0 \\ \dot{\theta}_3
 %    \end{bmatrix} = 
@@ -131,7 +131,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 %\end{equation}
 %
 %\begin{equation}
-%    ^3v_3 = \begin{bmatrix}
+%    ^3\textbf{v}_3 = \begin{bmatrix}
 %        c\theta_3 & s\theta_3 & 0 \\
 %        -s\theta_3 & c\theta_3 & 0 \\
 %        0 & 0 & 1 \\
@@ -149,11 +149,11 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 %\end{equation}
 %
 %\begin{equation}
-%    ^4\omega_4 = \begin{bmatrix}
+%    ^4\boldsymbol{\omega}_4 = \begin{bmatrix}
 %        c\theta_4 & s\theta_4 & 0 \\
 %        -s\theta_4 & c\theta_4 & 0 \\
 %        0 & 0 & 1 \\
-%    \end{bmatrix} \, ^3\omega_3 + 
+%    \end{bmatrix} \, ^3\boldsymbol{\omega}_3 + 
 %    \begin{bmatrix}
 %        0 \\ 0 \\ \dot{\theta}_4
 %    \end{bmatrix} = 
@@ -166,7 +166,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 %
 %\begin{equation}
 %\begin{split}
-%    ^4v_4 = \begin{bmatrix}
+%    ^4\textbf{v}_4 = \begin{bmatrix}
 %        c(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_4a_4.\dot{\theta}_3 \\ 
 %        -s(\theta_2 + \theta_3 + \theta_4).\dot{\theta}_1(d_3+d_4) + [c(\theta_3+\theta_4)a_3 + c\theta_4a_4].\dot{\theta}_2 + c\theta_4a_4.\dot{\theta}_3 \\ 
 %        [-c(\theta_2 + \theta_3)a_4 - c\theta_2a_3 - a_2].\dot{\theta}_1
@@ -175,11 +175,11 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 %\end{equation}
 %
 %\begin{equation}
-%    ^5\omega_5 = \begin{bmatrix}
+%    ^5\boldsymbol{\omega}_5 = \begin{bmatrix}
 %        s\theta_5 & 0 & -c\theta_5 \\
 %        c\theta_5 & 0 & s\theta_5 \\
 %        0 & -1 & 0 \\
-%    \end{bmatrix} \, ^4\omega_4 + 
+%    \end{bmatrix} \, ^4\boldsymbol{\omega}_4 + 
 %    \begin{bmatrix}
 %        0 \\ 0 \\ \dot{\theta}_5
 %    \end{bmatrix} = 
@@ -192,7 +192,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 %
 %\begin{equation}
 %\begin{gathered}
-%    ^5v_5 = \begin{bmatrix}
+%    ^5\textbf{v}_5 = \begin{bmatrix}
 %        \left\{s\theta_5c(\theta_2 + \theta_3 + \theta_4)(d_3+d_4) + c\theta_5[c(\theta_2 + \theta_3 + \theta_4)a_5 + c(\theta_2 + \theta_3)a_4 + c\theta_2a_3 + a_2]\right\}.\dot{\theta}_1 + \\
 %        + s\theta_5[s(\theta_3+\theta_4)a_3 + s\theta_4a_4].\dot{\theta}_2 + s\theta_{45}a_4.\dot{\theta}_3 \\ 
 %        \\
@@ -206,7 +206,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 
 \begin{equation}
 \begin{gathered}
-    ^6\omega_6 = \begin{bmatrix}
+    ^6\boldsymbol{\omega}_6 = \begin{bmatrix}
         [s\theta_5'c\theta_6s(\theta_2+\theta_3+\theta_4) + s\theta_6c(\theta_2+\theta_3+\theta_4)].\dot{\theta}_1 - c\theta_5'c\theta_6(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) - s\theta_6\dot{\theta}_5 \\
         [-s\theta_5's\theta_6s(\theta_2+\theta_3+\theta_4) + c\theta_6c(\theta_2+\theta_3+\theta_4)].\dot{\theta}_1 + c\theta_5's\theta_6(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) - c\theta_6\dot{\theta}_5 \\ 
         c\theta_5's(\theta_2+\theta_3+\theta_4).\dot{\theta}_1 + s\theta_5'(\dot{\theta}_2 + \dot{\theta}_3 + \dot{\theta}_4) + \dot{\theta}_6
@@ -217,7 +217,7 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 \begin{equation}
     \label{eq:6v6}
 \begin{gathered}
-    ^6v_6 = \begin{bmatrix}
+    ^6\textbf{v}_6 = \begin{bmatrix}
         \{c\theta_6c(\theta_2 + \theta_3 + \theta_4)d_6 - s\theta_5's\theta_6s(\theta_2 + \theta_3 + \theta_4)d_6 + \\
         +c\theta_5'c\theta_6[c(\theta_2 + \theta_3 + \theta_4)a_4 + c(\theta_2 + \theta_3)a_3 + c\theta_2a_2 + a_1]\}.\dot{\theta}_1 + \\
         +\{s\theta_5'c\theta_6[s(\theta_3+\theta_4)a_2 + s\theta_4a_3] + s\theta_6[c(\theta_3+\theta_4)a_2 + c\theta_4a_3 + a_4 + c\theta_5'd_6]\}.\dot{\theta}_2 + \\
@@ -325,15 +325,15 @@ de \ref{eq:1w1} a \ref{eq:6v6}.
 %\end{gathered}
 %\end{equation}
 
-\section{Termos Jacobiana}
+\section{Termos Matriz Jacobiana}
 \label{AnexoJacobiana-SecTermos}
 
-Através de análise das equações \ref{eq:0v6} e \ref{eq:0w6}, percebe-se que a jacobiana pode ser definida 
+Através de análise das equações \ref{eq:0v6} e \ref{eq:0w6}, percebe-se que a matriz jacobiana pode ser definida 
 pelos termos em \ref{eq:jacobiana-termos}.
 
 \begin{equation}
     \label{eq:jacobiana-termos}
-    ^0J(\Theta) = 
+    ^0\textbf{J}(\boldsymbol{\Theta}) = 
     \begin{bmatrix}
         j_{11} & j_{12} & j_{13} & j_{14} & j_{15} & 0 \\
         j_{21} & j_{22} & j_{23} & j_{24} & j_{25} & 0 \\
@@ -374,18 +374,18 @@ Os termos $j_{ik}$ da matriz estão delineados em \ref{eq:jacobiana-termos-ik1} 
     j_{66} &= c\theta_5's(\theta_2+\theta_3+\theta_4) \nonumber \\
 \end{align}
 
-\section{Determinante Jacobiana}
+\section{Determinante Matriz Jacobiana}
 \label{AnexoJacobiana-SecDeterminante}
 
 Para o cálculo do determinante, utilizou-se a última linha da matriz para aplicação
 do teorema de Laplace, resultando no exposto em \ref{eq:det1}. Nesta equação, os termos
-$D_{ik}$ indicam o determinante da matriz obtida retirando de $J$ a $i$-ésima linha e a 
+$D_{ik}$ indicam o determinante da matriz obtida retirando de $\textbf{J}$ a $i$-ésima linha e a 
 $k$-ésima coluna.
 
 \begin{equation}
 \label{eq:det1}
 \begin{gathered}
-    |J| = (-1)^{6+1}.D_{61} + (-1)^{6+5}j_{65}.D_{65} + (-1)^{6+6}j_{66}.D_{66} \\
+    |\textbf{J}| = (-1)^{6+1}.D_{61} + (-1)^{6+5}j_{65}.D_{65} + (-1)^{6+6}j_{66}.D_{66} \\
     = -D_{61} - j_{65}.D_{65} + j_{66}.D_{66}
 \end{gathered}
 \end{equation}
@@ -399,7 +399,7 @@ pode ser vista em \ref{eq:det2}, após expansão dos termos $D_{ik}$.
 \vspace{-1em}
 
 \begin{align}
-    |J| = -\Bigg(-j_{46}&.\begin{vmatrix}
+    |\textbf{J}| = -\Bigg(-j_{46}&.\begin{vmatrix}
                         j_{12} & j_{13} & j_{14} & j_{15} \\
                         j_{22} & j_{23} & j_{24} & j_{25} \\
                         j_{32} & j_{33} & j_{34} & j_{35} \\
